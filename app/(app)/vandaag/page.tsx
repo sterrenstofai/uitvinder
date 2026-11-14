@@ -55,8 +55,11 @@ export default function Vandaag() {
           <div className="empty" style={{ marginTop: 10 }}>De markt is nog niet overgezet.</div>
           {data.profile?.ondernemer && (
             <>
-              <div className="grp"><span>Je administratie</span></div>
-              <div className="empty" style={{ marginTop: 10 }}>Hulp bij je boekhouding, je potjes voor de belasting en je facturen volgt.</div>
+              <div className="grp"><span>Je administratie</span><Link href="/administratie" className="hint">Naar je administratie</Link></div>
+              <Link className="row" href="/administratie" style={{ textDecoration: "none" }}>
+                <span className="nm">{data.adm.stappen_af.length} van 3 stappen ingericht</span>
+                <span className="why">Opzetlijst, potjes voor de belasting en hulp bij je factuur.</span>
+              </Link>
             </>
           )}
           <div className="grp"><span>Je verschuiving</span><Link href="/reis" className="hint">Metingen</Link></div>

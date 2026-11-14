@@ -36,6 +36,10 @@ export type Exp = {
 };
 export type ExpVeld = keyof Omit<Exp, "id">;
 
+export type Bedrijf = { naam?: string; adres?: string; kvk?: string; btwid?: string; iban?: string };
+export type Administratie = { btw_tarief: number; belasting_pct: number | null; stappen_af: number[]; bedrijf: Bedrijf };
+export const leegAdm = (): Administratie => ({ btw_tarief: 21, belasting_pct: null, stappen_af: [], bedrijf: {} });
+
 export type Data = {
   profile: Profile | null;
   scans: Scan[];
@@ -43,6 +47,7 @@ export type Data = {
   versies: Versie[];
   exps: Exp[];
   teamIds: string[];
+  adm: Administratie;
 };
 
 export type Sessie = { id: string; email: string };
@@ -54,5 +59,5 @@ export const leegExp = (): Omit<Exp, "id"> => ({
   datum: new Date().toISOString().slice(0, 10),
 });
 export const leegData = (): Data => ({
-  profile: null, scans: [], inv: { vak: "", buiten: "", voorwie: "", zin: "" }, versies: [], exps: [], teamIds: [],
+  profile: null, scans: [], inv: { vak: "", buiten: "", voorwie: "", zin: "" }, versies: [], exps: [], teamIds: [], adm: leegAdm(),
 });

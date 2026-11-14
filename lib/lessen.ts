@@ -48,3 +48,26 @@ export function leesLes(stap: number): Les {
   }
   return les;
 }
+
+// Inhoud van het scherm Administratie (voor ondernemers), uit content/administratie.md.
+export type AdmInhoud = { inleiding: string; stappen: { titel: string; html: string }[]; potjes: string };
+
+export function leesAdministratie(): AdmInhoud {
+  const leeg: AdmInhoud = { inleiding: "<p>[INHOUD VOLGT]</p>", stappen: [], potjes: "<p>[INHOUD VOLGT]</p>" };
+  let md: string;
+  try {
+    md = readFileSync(join(process.cwd(), "content", "administratie.md"), "utf8");
+  } catch {
+    return leeg;
+  }
+  const deel = (naam: string) => md.split(/^## /m).find((d) => d.toLowerCase().startsWith(naam))?.replace(/^.*\n/, "") ?? "";
+  const stappen = [...deel("opzetlijst").matchAll(/^- \*\*(.+?)\*\*\s*(.*)$/gm)].map((m) => ({
+    titel: m[1].replace(/\.$/, ""),
+    html: html(m[2] || "[INHOUD VOLGT]"),
+  }));
+  return {
+    inleiding: deel("inleiding").trim() ? html(deel("inleiding")) : leeg.inleiding,
+    stappen,
+    potjes: deel("bij de potjes").trim() ? html(deel("bij de potjes")) : leeg.potjes,
+  };
+}

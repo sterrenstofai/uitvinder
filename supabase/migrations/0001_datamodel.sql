@@ -81,6 +81,18 @@ create table public.invalshoek_versies (
 );
 create index on public.invalshoek_versies (user_id, datum);
 
+-- Ontzorging voor ondernemers: instellingen van de rekenhulp, de opzetlijst en
+-- de eigen bedrijfsgegevens voor facturen. Alleen voor de gebruiker zelf.
+create table public.administratie (
+  user_id uuid primary key default auth.uid() references auth.users (id) on delete cascade,
+  btw_tarief numeric(4, 1) not null default 21 check (btw_tarief in (0, 9, 21)),
+  -- Door de gebruiker zelf gekozen. Het platform geeft geen belastingadvies.
+  belasting_pct numeric(4, 1) check (belasting_pct between 0 and 100),
+  stappen_af int[] not null default '{}',
+  bedrijf jsonb not null default '{}'::jsonb,
+  bijgewerkt_op timestamptz not null default now()
+);
+
 create table public.klanten (
   id uuid primary key default gen_random_uuid(),
   user_id uuid not null default auth.uid() references auth.users (id) on delete cascade,
@@ -364,6 +376,7 @@ alter table public.beheerders enable row level security;
 alter table public.scans enable row level security;
 alter table public.invalshoeken enable row level security;
 alter table public.invalshoek_versies enable row level security;
+alter table public.administratie enable row level security;
 alter table public.klanten enable row level security;
 alter table public.experiments enable row level security;
 alter table public.metingen enable row level security;
@@ -416,6 +429,9 @@ create policy invalshoek_publiek on public.invalshoeken for select
   using (exists (select 1 from public.profiles p
     where p.id = user_id and p.publiek and (p.toon ->> 'inv')::boolean));
 create policy versie_eigen on public.invalshoek_versies for all to authenticated
+  using (user_id = auth.uid()) with check (user_id = auth.uid());
+
+create policy administratie_eigen on public.administratie for all to authenticated
   using (user_id = auth.uid()) with check (user_id = auth.uid());
 
 -- experiments: volgens zichtbaarheid. Privé blijft privé, ook voor de eigenaar.

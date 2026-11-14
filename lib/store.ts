@@ -3,7 +3,7 @@
 // - Lokaal: voorbeeldmodus zolang er geen Supabase-project gekoppeld is.
 //   Gegevens blijven dan op dit apparaat, net als in het prototype.
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
-import { leegData, leegExp, type Data, type Exp, type Invalshoek, type Profile, type Scan, type Sessie, type Versie } from "./types";
+import { leegAdm, leegData, leegExp, type Administratie, type Data, type Exp, type Invalshoek, type Profile, type Scan, type Sessie, type Versie } from "./types";
 
 export interface Store {
   modus: "supabase" | "lokaal";
@@ -14,6 +14,7 @@ export interface Store {
   laad(uid: string): Promise<Data>;
   bewaarProfiel(p: Profile): Promise<void>;
   bewaarInvalshoek(uid: string, inv: Invalshoek): Promise<void>;
+  bewaarAdm(uid: string, adm: Administratie): Promise<void>;
   nieuweVersie(v: Omit<Versie, "id">): Promise<Versie>;
   nieuweScan(s: Omit<Scan, "id">): Promise<Scan>;
   nieuwExp(e: Omit<Exp, "id">): Promise<Exp>;
@@ -51,15 +52,16 @@ function supabaseStore(sb: SupabaseClient): Store {
       await sb.auth.signOut();
     },
     async laad(uid) {
-      const [p, s, i, v, e, m] = await Promise.all([
+      const [p, s, i, v, e, m, a] = await Promise.all([
         sb.from("profiles").select("id,naam,rol,agency,ondernemer,slug").eq("id", uid).maybeSingle(),
         sb.from("scans").select("id,datum,rol,uitkomst,pct_uitvindend").eq("user_id", uid).order("datum").order("aangemaakt_op"),
         sb.from("invalshoeken").select("vak,buiten,voorwie,zin").eq("user_id", uid).maybeSingle(),
         sb.from("invalshoek_versies").select("id,zin,datum,week").eq("user_id", uid).order("datum"),
         sb.from("experiments").select(EXP_KOLOMMEN).eq("user_id", uid).order("aangemaakt_op"),
         sb.from("memberships").select("team_id").eq("user_id", uid),
+        sb.from("administratie").select("btw_tarief,belasting_pct,stappen_af,bedrijf").eq("user_id", uid).maybeSingle(),
       ]);
-      [p, s, i, v, e, m].forEach((r) => fout(r.error));
+      [p, s, i, v, e, m, a].forEach((r) => fout(r.error));
       return {
         profile: (p.data as Profile) ?? null,
         scans: ((s.data as Scan[]) ?? []).map((x) => ({ ...x, pct_uitvindend: Number(x.pct_uitvindend) })),
@@ -67,6 +69,9 @@ function supabaseStore(sb: SupabaseClient): Store {
         versies: (v.data as Versie[]) ?? [],
         exps: (e.data as unknown as Exp[]) ?? [],
         teamIds: (m.data ?? []).map((x) => x.team_id as string),
+        adm: a.data
+          ? { ...(a.data as Administratie), btw_tarief: Number(a.data.btw_tarief), belasting_pct: a.data.belasting_pct === null ? null : Number(a.data.belasting_pct) }
+          : leegAdm(),
       };
     },
     async bewaarProfiel(p) {
@@ -74,6 +79,9 @@ function supabaseStore(sb: SupabaseClient): Store {
     },
     async bewaarInvalshoek(uid, inv) {
       fout((await sb.from("invalshoeken").upsert({ user_id: uid, ...inv, bijgewerkt_op: new Date().toISOString() })).error);
+    },
+    async bewaarAdm(uid, adm) {
+      fout((await sb.from("administratie").upsert({ user_id: uid, ...adm, bijgewerkt_op: new Date().toISOString() })).error);
     },
     async nieuweVersie(v) {
       const r = await sb.from("invalshoek_versies").insert(v).select("id,zin,datum,week").single();
@@ -138,13 +146,17 @@ function lokaalStore(): Store {
       schrijf(s);
     },
     async laad() {
-      return { ...leegData(), ...lees().data };
+      const d = lees().data;
+      return { ...leegData(), ...d, adm: { ...leegAdm(), ...d.adm } };
     },
     async bewaarProfiel(p) {
       muteer((d) => void (d.profile = p));
     },
     async bewaarInvalshoek(_uid, inv) {
       muteer((d) => void (d.inv = inv));
+    },
+    async bewaarAdm(_uid, adm) {
+      muteer((d) => void (d.adm = adm));
     },
     async nieuweVersie(v) {
       const n = { id: id(), ...v };

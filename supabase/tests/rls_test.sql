@@ -54,6 +54,7 @@ insert into experiments (id, titel, zichtbaarheid) values
   ('e0000000-0000-0000-0000-000000000004', 'Privé, maar in portfolio', 'prive');
 insert into portfolio (experiment_ids) values ('{e0000000-0000-0000-0000-000000000004}');
 insert into metingen (week, scores) values (1, '{"gen": 2.3}');
+insert into administratie (belasting_pct, bedrijf) values (35, '{"iban": "NL00TEST"}');
 select tst.verwacht((select count(*) from experiments) = 4, 'Anna ziet haar vier kaarten');
 
 -- De eigenaar: nooit antwoorden, invalshoek of privékaarten. Wel percentages en teamkaarten.
@@ -64,6 +65,7 @@ select tst.verwacht((select count(*) from invalshoek_versies) = 0, 'eigenaar zie
 select tst.verwacht((select array_agg(titel order by titel) from experiments) = '{"Publieke kaart",Teamkaart}',
   'eigenaar ziet alleen de teamkaart en de publieke kaart');
 select tst.verwacht((select count(*) from metingen) = 0, 'eigenaar ziet geen metingen');
+select tst.verwacht((select count(*) from administratie) = 0, 'eigenaar ziet geen administratie van een lid');
 select tst.verwacht((select count(*) from portfolio) = 0, 'eigenaar ziet geen portfolio');
 select tst.verwacht(
   (select (nulmeting, laatste) = (18::numeric, 31::numeric) from team_percentages('aaaaaaaa-0000-0000-0000-000000000000') where user_id = :anna),
@@ -93,6 +95,7 @@ select tst.verwacht(exists (select 1 from experiments where titel = 'Privé, maa
 select tst.verwacht(not exists (select 1 from experiments where titel = 'Privékaart'),
   'beoordelaar ziet de andere privékaart niet');
 select tst.verwacht((select count(*) from scans) = 0, 'beoordelaar ziet geen rolscan-antwoorden');
+select tst.verwacht((select count(*) from administratie) = 0, 'beoordelaar ziet geen administratie');
 insert into beoordelingen (deelnemer_id, scores, cijfer) values (:anna, '{"signaal": 3}', 7.5);
 set request.jwt.claim.sub = :anna;
 select tst.verwacht((select count(*) from beoordelingen) = 0, 'deelnemer ziet de beoordeling niet voor vaststelling');

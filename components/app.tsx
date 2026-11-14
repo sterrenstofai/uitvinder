@@ -1,7 +1,7 @@
 "use client";
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { getStore, type Store } from "@/lib/store";
-import { leegData, leegExp, ROLLEN, type Data, type Exp, type Invalshoek, type Profile, type Rol, type Sessie } from "@/lib/types";
+import { leegData, leegExp, ROLLEN, type Administratie, type Data, type Exp, type Invalshoek, type Profile, type Rol, type Sessie } from "@/lib/types";
 import { slugify, vandaagISO, weekNr } from "@/lib/afgeleid";
 
 type App = {
@@ -15,6 +15,8 @@ type App = {
   herlaad(): Promise<void>;
   bewaarProfiel(naam: string, rol: Rol, ondernemer: boolean): Promise<void>;
   setInv(veld: keyof Invalshoek, waarde: string): void;
+  setAdm(patch: Partial<Administratie>): void;
+  setOndernemer(aan: boolean): Promise<void>;
   legInvalshoekVast(): Promise<boolean>;
   nieuwExp(pre?: Partial<Exp>): Promise<Exp>;
   setExp(id: string, patch: Partial<Exp>): void;
@@ -131,6 +133,16 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setInv(veld, waarde) {
       setData((d) => ({ ...d, inv: { ...d.inv, [veld]: waarde } }));
       if (sessie) plan("inv", () => store!.bewaarInvalshoek(sessie.id, dataRef.current.inv));
+    },
+    setAdm(patch) {
+      setData((d) => ({ ...d, adm: { ...d.adm, ...patch } }));
+      if (sessie) plan("adm", () => store!.bewaarAdm(sessie.id, dataRef.current.adm));
+    },
+    async setOndernemer(aan) {
+      if (!data.profile) return;
+      const p = { ...data.profile, ondernemer: aan };
+      await store!.bewaarProfiel(p);
+      setData((d) => ({ ...d, profile: p }));
     },
     async legInvalshoekVast() {
       const zin = data.inv.zin.trim();

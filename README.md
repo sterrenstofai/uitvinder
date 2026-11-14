@@ -15,6 +15,7 @@ Live: https://uitvinder-platform.netlify.app (Netlify-project `uitvinder-platfor
 | Schermen Vandaag, Reis, Invalshoek, Ronde (stap 3 tot en met 5) | Overgezet, met de proeftuinen en de coach. In de browser doorlopen in voorbeeldmodus. |
 | Lessen | Komen uit `content/*.md`. Het `LES`-object uit het prototype is niet overgenomen. |
 | Gegevens uit het prototype overnemen | Bij de eerste keer inloggen, als er prototype-gegevens op het apparaat staan. |
+| Administratie voor ondernemers (eerste versie) | Opzetlijst, potjes-rekenhulp en factuurhulp op `/administratie`. Teksten in `content/administratie.md` zijn nog placeholders. |
 | AI-functies `scan` en `coach` | Ongewijzigd in `netlify/functions`. |
 
 Zonder Supabase-sleutels draait het platform in **voorbeeldmodus**: je gaat zonder mail verder en de gegevens blijven op het apparaat, zoals in het prototype. Zo is elke deploy te bekijken.
@@ -49,7 +50,15 @@ Gevolgen in wat er nu staat:
 
 ## Ontzorging voor ondernemers (inzicht van 14 november 2026)
 
-Het inzicht staat in `spec.md`. De keuze bij de start is gebouwd, de ontzorging zelf nog niet. Wat het raakt:
+Het inzicht staat in `spec.md`. Gebouwd: de keuze bij de start en een eerste versie op `/administratie`, alleen zichtbaar voor ondernemers.
+
+- **Opzetlijst.** Drie stappen, afvinkbaar. De uitleg per stap komt uit `content/administratie.md` en is nu `[INHOUD VOLGT]`.
+- **Potjes-rekenhulp.** Factuurbedrag in, btw-potje en belastingpotje uit. Het percentage voor het belastingpotje kiest de ondernemer zelf; er is bewust geen startwaarde.
+- **Factuurhulp.** Eigen gegevens (bewaard), klant en regels invullen, voorbeeld met totalen, controle of alle onderdelen erop staan, kopiëren of printen. De factuur zelf wordt niet bewaard en niet verstuurd.
+
+Nog niet gebouwd: de koppeling met Moneybird, waarbij een agent de factuur klaarzet in de cockpit en de ondernemer goedkeurt. Dat vraagt Supabase, om de toegang veilig te bewaren.
+
+Wat het raakt:
 
 - **Doelgroep.** Besloten: ondernemers komen erbij. Bij de start kies je of je in een team werkt of als ondernemer; dat staat op het profiel en verandert een deel van de inhoud. Welke inhoud precies, moet Thijs nog aanleveren.
 - **Doeltoets.** Administratie draagt niet zelf bij aan de mindsetswitch (vraag 1) en hangt aan geen van de vijf leeruitkomsten (vraag 2). Het neemt wel een drempel weg. Voorstel: bouw het als dienst naast de reis, buiten de 56 uur en buiten de toetsing, en niet als les.
