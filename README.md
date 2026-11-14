@@ -2,6 +2,8 @@
 
 Het platform van Thijs Mensink. Lees eerst `CLAUDE.md`, dan `BOUWEN-IN-CODE.md` en `spec.md`.
 
+Live: https://uitvinder-platform.netlify.app (Netlify-project `uitvinder-platform`, nu in voorbeeldmodus). Het project is nog niet aan deze repo gekoppeld: de eerste deploy is geüpload. Koppel de repo in Netlify bij Project configuration, Build & deploy, zodat elke push naar `main` vanzelf live gaat.
+
 ## Wat er staat (stap 1 van de bouwvolgorde)
 
 | Onderdeel | Stand |
@@ -21,7 +23,7 @@ Zonder Supabase-sleutels draait het platform in **voorbeeldmodus**: je gaat zond
 
 1. **Supabase.** Maak een project in de regio Frankfurt (EU). Open de SQL-editor, plak `supabase/migrations/0001_datamodel.sql` en voer uit.
 2. **Supabase, Authentication, URL Configuration.** Zet de Site URL op het adres van de Netlify-site en voeg `https://<site>/auth/callback` toe bij Redirect URLs.
-3. **Netlify.** Maak een project op basis van deze repo. Zet bij Environment variables `NEXT_PUBLIC_SUPABASE_URL` en `NEXT_PUBLIC_SUPABASE_ANON_KEY` (Supabase, Project Settings, API). De AI Gateway van Netlify regelt de sleutel voor de AI-functies.
+3. **Netlify.** Zet in het project `uitvinder-platform` bij Environment variables `NEXT_PUBLIC_SUPABASE_URL` en `NEXT_PUBLIC_SUPABASE_ANON_KEY` (Supabase, Project Settings, API) en deploy opnieuw. De AI Gateway van Netlify regelt de sleutel voor de AI-functies.
 4. **Beheer.** Log één keer in en voeg jezelf dan toe als beheerder in de SQL-editor: `insert into beheerders (user_id) select id from auth.users where email = '<jouw adres>';`
 
 De magic links van Supabase zijn zonder eigen mailserver beperkt tot een paar per uur. Voor de lancering is een eigen SMTP-dienst nodig.
@@ -41,6 +43,7 @@ Gevolgen in wat er nu staat:
 
 - **Lettertype.** Neue Montreal laadt niet: thijsmensink.nl stuurt geen CORS-header mee, dus de browser valt terug op Inter. Oplossing: één header op thijsmensink.nl, of de fontbestanden in deze repo (let op de licentie).
 - **Rate limit en login op de AI-functies.** `/api/coach` en `/api/scan` zijn nog open voor iedereen die het adres kent, net als in het prototype.
+- **Regio van de functies.** De Netlify-functies (coach en scan) draaien nu in de VS. Voor "data in de EU" moet de regio in Netlify op Frankfurt.
 - **Oefenmateriaal van de proeftuinen** staat in `lib/proeftuin.ts`, overgenomen uit het prototype. Hoort in stap 2 naar `content/`.
 - **Beoordelaar.** Besloten: een team-eigenaar mag ook beoordelaar zijn. Een beoordelaar ziet de drie portfoliokaarten en de metingen van een deelnemer, ook als die kaarten privé zijn. Rolscan-antwoorden en invalshoek blijven ook dan dicht.
 

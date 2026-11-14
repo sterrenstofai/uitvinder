@@ -5,3 +5,8 @@
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"
+
+# De Next.js-runtime van Netlify. Staat hier uitdrukkelijk, zodat ook een
+# deploy buiten de GitHub-koppeling om de serverkant meekrijgt.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
