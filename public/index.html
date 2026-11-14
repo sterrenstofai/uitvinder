@@ -1,0 +1,1846 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Van uitvoerder naar uitvinder — Thijs Mensink</title>
+<meta name="description" content="AI neemt het uitvoerende werk in marketing over. Van uitvoerder naar uitvinder is de reis naar een rol die blijft: zelf de brief meebrengen, bouwen, meten.">
+<meta property="og:title" content="Van uitvoerder naar uitvinder">
+<meta property="og:description" content="Ben jij uitvoerder of uitvinder? Scan je werkweek en zie waar jij staat.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="nl_NL">
+<meta name="theme-color" content="#f7f5f2">
+<meta name="color-scheme" content="light only">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 79 94'%3E%3Cpath fill='%23ff8a5c' d='M79 29.5V0H0v29.5S-1.2 80.2 39.3 94h.4C80.2 80.2 79 29.5 79 29.5z'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://thijsmensink.nl" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600&display=swap">
+<style>
+@font-face{font-family:"Neue Montreal";src:url("https://thijsmensink.nl/fonts/NeueMontreal-Light.woff2") format("woff2");font-weight:300;font-style:normal;font-display:swap}
+@font-face{font-family:"Neue Montreal";src:url("https://thijsmensink.nl/fonts/NeueMontreal-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Neue Montreal";src:url("https://thijsmensink.nl/fonts/NeueMontreal-Medium.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"Neue Montreal";src:url("https://thijsmensink.nl/fonts/NeueMontreal-Bold.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+:root{
+  --bg:#f7f5f2;--card:#ffffff;--ink:#141413;--mid:#6e6b66;--line:#e7e3dd;--pill:#efebe5;--acc:#ff8a5c;--dark:#141413;--on-dark:#ffffff;
+  --c1:#ff8a5c;--c2:#a98bff;--c3:#7fcfb0;--c4:#8ab8ff;--c5:#f59ac0;
+  --f:"Neue Montreal","Inter",system-ui,-apple-system,"Segoe UI",sans-serif;--fd:"Neue Montreal","Inter Tight","Inter",system-ui,sans-serif;
+  --r:20px;color-scheme:light;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 clamp(16px,.3vw + 14.5px,17px)/1.55 var(--f);overflow-x:clip;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+[hidden]{display:none!important}
+.wrap{max-width:940px;margin:0 auto;padding:0 20px}
+.wide{max-width:1180px}
+.mono{font:400 .9rem/1.5 var(--f);color:var(--mid)}
+.lbl,.eyebrow{font:600 .95rem var(--f);color:var(--ink);margin:0 0 12px;display:block}
+h1,h2,h3{font-family:var(--fd);font-weight:500;margin:0;letter-spacing:-.035em}
+p{margin:0}
+
+/* kop */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:14px;padding-top:14px;padding-bottom:14px}
+.top a{text-decoration:none}
+.brand{display:inline-flex;align-items:center;gap:10px}
+.brand .wm{font:600 1.2rem/1 var(--fd);letter-spacing:-.04em}
+.brand .dotm{width:18px;height:18px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff 0,#ffd2bd 30%,var(--c1) 70%,var(--c2) 100%)}
+.brand .by{color:var(--mid);font-size:.88rem}
+.who{display:inline-flex;align-items:center;gap:10px;font-weight:500;font-size:.95rem}
+.who .av-s{width:36px;height:36px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ffe3d6,var(--c1) 60%,var(--c2));color:#fff;display:grid;place-items:center;font:600 .82rem var(--f)}
+.proto{padding:4px 10px;border-radius:999px;background:var(--pill);font-size:.8rem;font-weight:500;color:var(--mid)}
+.nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding:2px 0 12px}
+.nav::-webkit-scrollbar{display:none}
+.nav a{flex:none;text-decoration:none;font:500 .95rem var(--f);padding:8px 15px;border-radius:999px;color:var(--mid)}
+.nav a:hover{color:var(--ink)}
+.nav a[aria-current=page]{color:var(--ink);background:var(--card);box-shadow:0 1px 2px rgba(20,20,19,.08)}
+
+/* knoppen en velden */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 22px;border-radius:999px;border:1px solid var(--dark);background:var(--dark);color:var(--on-dark);font:500 .98rem var(--f);text-decoration:none;cursor:pointer}
+.btn:hover{background:#2c2b29}
+.btn[disabled]{opacity:.5;cursor:progress}
+.btn.ghost{background:var(--card);color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--ink)}
+.btn.light{background:#fff;color:var(--ink);border-color:#fff}
+.btn.sm{padding:9px 16px;font-size:.9rem}
+.btns{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg button{font:500 .92rem var(--f);padding:9px 16px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.seg button:hover{border-color:var(--ink)}
+.seg button[aria-pressed=true]{background:var(--dark);color:var(--on-dark);border-color:var(--dark)}
+.f{display:grid;gap:7px;margin:0 0 20px}
+.f:last-child{margin-bottom:0}
+.f>span{font:600 .95rem var(--f)}
+.f small{font:400 .88rem/1.45 var(--f);color:var(--mid)}
+input[type=text],input[type=email],input[type=url],textarea,select{width:100%;font:400 1rem/1.45 var(--f);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:13px 15px}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ink);background:var(--card)}
+textarea{min-height:110px;resize:vertical}
+textarea.big{min-height:220px}
+::placeholder{color:var(--mid);opacity:.85}
+.hint{font:400 .88rem/1.5 var(--f);color:var(--mid)}
+.err{padding:13px 16px;border-radius:14px;background:#ffe5d9;font-size:.95rem}
+
+/* stapnummer als lichtpunt */
+.shp{display:inline-grid;place-items:center;width:30px;height:30px;flex:none;border-radius:50%;font:600 .82rem var(--f);font-style:normal;color:#fff;background:var(--ink)}
+.shp[data-s="1"]{background:radial-gradient(circle at 35% 30%,#ffd9c8,var(--c1))}
+.shp[data-s="2"]{background:radial-gradient(circle at 35% 30%,#e3d8ff,var(--c2))}
+.shp[data-s="3"]{background:radial-gradient(circle at 35% 30%,#d6f3e8,var(--c3));color:var(--ink)}
+.shp[data-s="4"]{background:radial-gradient(circle at 35% 30%,#dde9ff,var(--c4))}
+.shp[data-s="5"]{background:radial-gradient(circle at 35% 30%,#ffdcea,var(--c5))}
+.shp[data-s="?"]{background:var(--pill);color:var(--ink)}
+
+/* lichtverloop */
+.glow{position:relative;overflow:hidden;border-radius:28px;isolation:isolate;background:#f3e6dc}
+.glow>svg.lg{position:absolute;inset:0;width:100%;height:100%;z-index:-1}
+
+/* landing */
+.hero{margin:clamp(40px,8vw,90px) auto 0;text-align:center;max-width:820px}
+.hero h1{font-size:clamp(2.9rem,8vw,5.6rem);line-height:.98;letter-spacing:-.05em}
+.hero .q{margin:22px auto 0;font-size:clamp(1.08rem,2.1vw,1.28rem);line-height:1.5;max-width:46ch;color:var(--mid)}
+.hero .btns{margin-top:30px;justify-content:center}
+.stage{margin:clamp(40px,7vw,64px) 0 0;padding:clamp(24px,6vw,72px) clamp(14px,5vw,72px) 0;min-height:320px}
+.stage>.ui{background:#fff;border-radius:22px 22px 0 0;box-shadow:0 30px 80px rgba(80,40,20,.18);padding:clamp(16px,3vw,26px);max-width:860px;margin:0 auto;display:grid;grid-template-columns:180px 1fr;gap:24px;font-size:.92rem}
+.ui .side{display:grid;gap:4px;align-content:start;color:var(--mid)}
+.ui .side b{color:var(--ink);font:600 1rem var(--fd);margin-bottom:10px;display:flex;gap:8px;align-items:center}
+.ui .side span{padding:8px 12px;border-radius:999px}
+.ui .side span.on{background:var(--bg);color:var(--ink);font-weight:500}
+.ui h4{margin:0;font:500 1.6rem/1.1 var(--fd);letter-spacing:-.035em}
+.ui .uc{margin-top:14px;padding:18px;border-radius:16px;background:var(--dark);color:#fff;position:relative;overflow:hidden}
+.ui .uc small{opacity:.7}
+.ui .uc div{font:500 1.15rem var(--fd);margin-top:4px;letter-spacing:-.02em}
+.ui .uc i{position:absolute;right:-30px;top:-30px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,var(--c2) 45%,var(--c1))}
+.ui .nums{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.ui .nums div{background:var(--bg);border-radius:14px;padding:14px}
+.ui .nums b{display:block;font:500 2rem/1 var(--fd);letter-spacing:-.05em;margin-top:4px}
+.stat{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin:clamp(48px,8vw,80px) 0 0;text-align:left}
+.stat b{display:block;font:500 clamp(2.4rem,5vw,3.4rem)/1 var(--fd);letter-spacing:-.05em}
+.stat p{margin-top:10px;color:var(--mid);line-height:1.5}
+.stat+.hint{margin-top:18px}
+.sec{margin:clamp(80px,12vw,140px) 0 0}
+.sec h2{font-size:clamp(2.1rem,5.2vw,3.5rem);line-height:1.02;letter-spacing:-.045em;max-width:18ch}
+.sec .lead{margin:18px 0 0;font-size:1.12rem;line-height:1.6;max-width:58ch;color:var(--mid)}
+.sec.c{text-align:center}.sec.c h2,.sec.c .lead{margin-left:auto;margin-right:auto}
+.feat{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,4vw,40px) clamp(20px,3vw,32px);margin:clamp(36px,6vw,56px) 0 0}
+.feat div{display:grid;gap:12px;align-content:start}
+.feat p{line-height:1.5;color:var(--mid)}
+.feat p b{color:var(--ink);font-weight:600}
+.cmpt{margin:clamp(32px,5vw,48px) 0 0;background:var(--card);border-radius:var(--r);overflow:hidden}
+.cmpt .tr{display:grid;grid-template-columns:minmax(110px,.8fr) 1fr 1fr;border-top:1px solid var(--line)}
+.cmpt .tr:first-child{border-top:0}
+.cmpt .tr>*{padding:16px clamp(14px,3vw,24px);line-height:1.45}
+.cmpt .th{font-weight:600}
+.cmpt .tr>:nth-child(2){color:var(--mid)}
+.cmpt .tr>:nth-child(3){background:linear-gradient(90deg,#fff4ee,#f6efff)}
+.cmpt .hd>*{font:600 1.05rem var(--fd);letter-spacing:-.02em;padding-top:20px;padding-bottom:20px}
+.cmpt .hd>:nth-child(3){color:var(--ink)}
+.prices{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:36px 0 0;text-align:left}
+.prices>div{background:var(--card);border-radius:var(--r);padding:24px 22px;display:flex;flex-direction:column;gap:10px}
+.prices>div:first-child{position:relative;overflow:hidden;color:var(--ink);isolation:isolate}
+.prices>div:first-child svg{position:absolute;inset:0;width:100%;height:100%;z-index:-1}
+.prices .k{font:500 .95rem var(--f);color:var(--mid)}
+.prices>div:first-child .k{color:var(--ink)}
+.prices b{font:500 2.6rem/1 var(--fd);letter-spacing:-.05em}
+.prices p{font-size:.94rem;line-height:1.45;color:var(--mid)}
+.prices>div:first-child p{color:#3d3a36}
+.join{margin:clamp(80px,12vw,140px) 0 0;padding:clamp(48px,9vw,96px) 24px;text-align:center}
+.join h2{font-size:clamp(2.2rem,5.5vw,3.8rem);line-height:1;letter-spacing:-.05em;max-width:16ch;margin:0 auto}
+.join p{margin:16px auto 0;max-width:46ch;color:#3d3a36}
+.join .btns{justify-content:center;margin-top:26px}
+.wl{margin:22px auto 0;display:flex;gap:8px;flex-wrap:wrap;max-width:520px;justify-content:center}
+.wl input{flex:1 1 220px;width:auto;background:#fff;border-color:#fff}
+.faq{margin:30px 0 0;border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{display:flex;justify-content:space-between;gap:16px;padding:20px 0;cursor:pointer;list-style:none;font:500 1.12rem var(--fd);letter-spacing:-.02em}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font:400 1.4rem/1 var(--f);color:var(--mid)}
+.faq details[open] summary::after{content:"–"}
+.faq p{padding:0 0 22px;color:var(--mid);line-height:1.6;max-width:64ch}
+.foot{margin:clamp(80px,12vw,130px) 0 0;padding:34px 0 46px;border-top:1px solid var(--line)}
+.foot .wrap{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap}
+.foot .motto{font:500 clamp(1.5rem,4vw,2.2rem)/1.05 var(--fd);letter-spacing:-.045em}
+
+/* stappen als kaarten */
+.step{margin:clamp(14px,3vw,18px) 0 0;background:var(--card);border-radius:var(--r);overflow:hidden}
+.step-h{display:flex;align-items:center;gap:14px;padding:22px clamp(18px,4vw,28px) 0}
+.step-h h2{font-size:1.35rem;letter-spacing:-.03em}
+.step-h span{margin-left:auto;font:400 .9rem var(--f);color:var(--mid);text-align:right}
+.step-b{padding:18px clamp(18px,4vw,28px) clamp(22px,4vw,28px)}
+
+/* pagina-kop */
+.ph{margin:clamp(30px,6vw,56px) 0 0}
+.ph .lbl{color:var(--mid);font-weight:500}
+.ph h1{font-size:clamp(2.3rem,6.5vw,3.9rem);line-height:1.02;letter-spacing:-.05em}
+.ph p{margin:14px 0 0;max-width:60ch;line-height:1.6;color:var(--mid)}
+
+/* verhouding */
+.total{padding:clamp(26px,5vw,38px);border-radius:var(--r) var(--r) 0 0;position:relative;overflow:hidden;isolation:isolate;background:#f3e6dc}
+.total svg.lg{position:absolute;inset:0;width:100%;height:100%;z-index:-1}
+.total .k{font:500 .95rem var(--f)}
+.total b{display:block;margin:10px 0 0;font:500 clamp(3.4rem,14vw,6.6rem)/.95 var(--fd);letter-spacing:-.06em}
+.total p{margin:16px 0 0;font-size:1.06rem;line-height:1.5;max-width:46ch}
+.ratio{position:relative;height:8px;border-radius:999px;background:rgba(255,255,255,.6);margin:22px 0 0;overflow:hidden}
+.ratio i{position:absolute;inset:0 auto 0 0;background:var(--ink);border-radius:999px}
+.subs{display:grid;grid-template-columns:1fr 1fr 1fr;background:var(--card);border-radius:0 0 var(--r) var(--r)}
+.subs div{padding:16px clamp(16px,3vw,26px);border-right:1px solid var(--line)}
+.subs div:last-child{border-right:0}
+.subs span{display:block;font:500 .9rem var(--f);color:var(--mid)}
+.subs b{display:block;margin-top:4px;font:500 clamp(1.5rem,4.5vw,2rem)/1.1 var(--fd);letter-spacing:-.04em}
+.grp{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:44px 0 0;padding:0 0 12px;font:500 1.2rem var(--fd);letter-spacing:-.025em}
+.grp a,.grp span+span{font:400 .92rem var(--f);color:var(--mid);letter-spacing:0}
+.list{list-style:none;margin:0;padding:0;background:var(--card);border-radius:var(--r)}
+.list .row{padding:16px 24px}
+.list .row:last-child{border-bottom:0}
+.row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 14px;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--line)}
+.row .nm{font-weight:600;line-height:1.35}
+.row .why{grid-column:1/-1;font-size:.94rem;line-height:1.45;color:var(--mid)}
+a.row{background:var(--card);border-radius:16px;padding:16px 22px;margin-top:10px;border-bottom:0}
+.tag{display:inline-flex;align-items:center;padding:4px 11px;border-radius:999px;font:500 .8rem var(--f);white-space:nowrap;background:var(--pill)}
+.tag.ui{background:#ffe1d3}
+.tag.ov{background:transparent;border:1px solid var(--line)}
+.tag.dk{background:var(--dark);color:var(--on-dark)}
+.exp{margin:14px 0 0;background:var(--card);border-radius:var(--r);padding:clamp(22px,4vw,30px)}
+.exp .k{font:500 1.25rem var(--fd);letter-spacing:-.025em}
+.exp dl{margin:10px 0 0;display:grid}
+.exp dl>div{display:grid;grid-template-columns:minmax(110px,170px) 1fr;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+.exp dl>div:last-child{border-bottom:0}
+.exp dt{font:600 .95rem var(--f)}
+.exp dd{margin:0;line-height:1.5}
+
+/* coach */
+.coach{margin:20px 0 0;background:var(--bg);border-radius:16px;padding:16px 18px}
+.coach .hd{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.coach .hd span{font:500 1.05rem var(--fd);display:inline-flex;gap:8px;align-items:center}
+.coach .hd span::before{content:"";width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,var(--c2) 50%,var(--c1))}
+.coach .ask{display:flex;gap:8px;margin:10px 0 0;flex-wrap:wrap}
+.coach .ask input{flex:1 1 200px;width:auto;background:var(--card)}
+.coach .out{margin:14px 0 0;line-height:1.6;white-space:pre-wrap}
+.coach .out:empty{display:none}
+
+/* kaarten */
+.card{background:var(--card);border-radius:var(--r);margin:0 0 12px;overflow:hidden}
+.card summary{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:8px 16px;padding:18px;cursor:pointer;list-style:none;align-items:start}
+.card summary::-webkit-details-marker{display:none}
+.card summary::before{content:"Experiment";grid-column:2/-1;grid-row:1;font:400 .92rem var(--f);color:var(--mid)}
+.card .th{grid-column:1;grid-row:1/4;width:clamp(96px,22vw,190px)}
+.card .th svg{display:block;width:100%;height:auto;border-radius:14px;aspect-ratio:16/10}
+.card .t{grid-column:2;grid-row:2;font:500 clamp(1.15rem,3.6vw,1.4rem)/1.2 var(--fd);letter-spacing:-.03em;overflow-wrap:break-word;hyphens:auto}
+.card summary>.tag{grid-column:3;grid-row:2}
+.card .m{grid-column:2/-1;grid-row:3;display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;font:400 .9rem var(--f);color:var(--mid)}
+.card .body{padding:0 24px 24px;display:grid}
+.card .body>div{display:grid;grid-template-columns:minmax(100px,160px) 1fr;gap:16px;padding:14px 0;border-top:1px solid var(--line)}
+.card .body div span{display:block;font:600 .95rem var(--f)}
+.card .body div p{line-height:1.5}
+.card .body .btns{display:flex;padding-top:16px}
+pre{margin:0;white-space:pre-wrap;font:400 .86rem/1.55 ui-monospace,Menlo,monospace;background:var(--bg);padding:14px;border-radius:12px}
+.tabs{margin:26px 0 16px}
+
+/* overige app-blokken */
+.next{margin:24px 0 0;padding:clamp(26px,4vw,36px);border-radius:var(--r);position:relative;overflow:hidden;isolation:isolate;background:#f3e6dc}
+.next svg.lg{position:absolute;inset:0;width:100%;height:100%;z-index:-1}
+.next .k{font:500 .95rem var(--f)}
+.next h2{margin:8px 0 0;font-size:clamp(1.7rem,4.2vw,2.5rem);line-height:1.06;letter-spacing:-.04em;max-width:20ch}
+.next p{margin:12px 0 0;max-width:52ch;line-height:1.55;color:#3d3a36}
+.next .btns{margin-top:22px}
+.next input{background:#fff;border-color:#fff}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0}
+.cmp div{padding:22px 24px;background:var(--card);border-radius:var(--r)}
+.cmp span{display:block;font:400 .92rem var(--f);color:var(--mid)}
+.cmp b{display:block;margin:8px 0 2px;font:500 clamp(2.4rem,7vw,3.4rem)/1 var(--fd);letter-spacing:-.06em}
+.cmp div+div b{background:linear-gradient(90deg,var(--c1),var(--c2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.chk{display:flex;gap:12px;align-items:flex-start;cursor:pointer}
+.chk input{width:22px;height:22px;margin:1px 0 0;accent-color:#141413;flex:none}
+.tmw{background:var(--card);border-radius:var(--r);padding:4px 24px}
+.tm{display:grid;grid-template-columns:minmax(0,1fr) minmax(120px,1.4fr) auto;gap:6px 18px;align-items:center;padding:16px 0;border-bottom:1px solid var(--line)}
+.tm:last-child{border-bottom:0}
+.tm .nm{font-weight:600}
+.tm .nm a{text-decoration:none}
+.tm .nm a:hover{text-decoration:underline}
+.tm .nm small{display:block;font:400 .88rem var(--f);color:var(--mid)}
+.tm .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px;vertical-align:1px}
+.shift{position:relative;height:8px;border-radius:999px;background:var(--pill)}
+.shift i{position:absolute;top:0;bottom:0;left:0;background:linear-gradient(90deg,var(--c1),var(--c2));border-radius:999px}
+.shift u{position:absolute;top:-5px;bottom:-5px;width:2px;background:var(--ink);text-decoration:none}
+.tm .pc{font:500 .92rem var(--f);white-space:nowrap;text-align:right}
+.pcv{margin:clamp(24px,5vw,40px) 0 0;border-radius:var(--r);overflow:hidden;aspect-ratio:16/5}
+.pcv svg{width:100%;height:100%;display:block}
+.prof{margin:clamp(30px,6vw,56px) 0 0;display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:start}
+.pcv+.prof{margin-top:14px;padding-left:22px}
+.av{width:clamp(76px,16vw,108px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ffe3d6,var(--c1) 55%,var(--c2));color:#fff;display:grid;place-items:center;font:500 clamp(1.6rem,5vw,2.3rem) var(--fd);letter-spacing:-.04em}
+.pcv+.prof .av{margin-top:-58px;border:5px solid var(--bg)}
+.prof h1{font-size:clamp(2.2rem,6vw,3.4rem);line-height:1.02;letter-spacing:-.05em}
+.prof p{margin:8px 0 0;color:var(--mid)}
+.quote{margin:26px 0 0;padding:clamp(24px,4vw,32px);background:var(--card);border-radius:var(--r);font:500 clamp(1.35rem,3.5vw,1.9rem)/1.25 var(--fd);letter-spacing:-.03em}
+.quote small{display:block;margin-bottom:10px;font:400 .95rem var(--f);color:var(--mid);letter-spacing:0}
+.spark{margin:0;width:100%;height:auto;display:block;background:var(--card);border-radius:var(--r)}
+.empty{padding:24px;background:var(--card);border-radius:var(--r);color:var(--mid);line-height:1.5}
+.empty .btns{margin-top:14px}
+.excv{margin:20px 0 0;border-radius:var(--r);overflow:hidden;aspect-ratio:16/6}
+.excv svg{width:100%;height:100%;display:block}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--dark);color:var(--on-dark);padding:12px 20px;border-radius:999px;font:500 .92rem var(--f);z-index:40;opacity:0;transition:opacity .2s}
+.toast.on{opacity:1}
+.busy{display:inline-block;width:12px;height:12px;border-radius:50%;border:2px solid currentColor;border-right-color:transparent;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.busy{animation:none}.toast{transition:none}}
+
+@media (max-width:820px){
+  .prices{grid-template-columns:1fr 1fr}
+  .feat{grid-template-columns:1fr 1fr}
+  .stage>.ui{grid-template-columns:1fr}
+  .ui .side{display:none}
+}
+@media (max-width:560px){
+  .brand .by{display:none}
+  .stat{grid-template-columns:1fr;gap:20px}
+  .feat{grid-template-columns:1fr}
+  .prices{grid-template-columns:1fr}
+  .cmpt .tr{grid-template-columns:1fr 1fr}
+  .cmpt .tr>.th{grid-column:1/-1;padding-bottom:0}
+  .cmpt .hd>.th{display:none}
+  .subs{grid-template-columns:1fr 1fr}
+  .subs .x{grid-column:1/-1;border-top:1px solid var(--line)}
+  .subs .o{border-right:0}
+  .tm{grid-template-columns:1fr auto}
+  .tm .shift{grid-column:1/-1;grid-row:2}
+  .cmp{grid-template-columns:1fr}
+  .step-h span{display:none}
+  .exp dl>div,.card .body>div{grid-template-columns:1fr;gap:4px}
+  .card summary{grid-template-columns:minmax(0,1fr) auto}
+  .card summary::before{grid-column:1/-1;grid-row:2}
+  .card .th{grid-column:1/-1;grid-row:1;width:100%;margin-bottom:6px}
+  .card .t{grid-column:1;grid-row:3}
+  .card summary>.tag{grid-column:2;grid-row:3}
+  .card .m{grid-column:1/-1;grid-row:4}
+  .excv{aspect-ratio:16/8}.pcv{aspect-ratio:16/7}
+  .card .th svg{aspect-ratio:16/7}
+}
+
+/* les, video en proeftuin */
+.les,.oef{margin:0 0 14px;background:var(--bg);border-radius:16px}
+.les>summary,.oef>summary{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;list-style:none;font-weight:600}
+.les>summary::-webkit-details-marker,.oef>summary::-webkit-details-marker{display:none}
+.les>summary small,.oef>summary small{display:block;font-weight:400;color:var(--mid);font-size:.86rem}
+.les>summary::after,.oef>summary::after{content:"+";margin-left:auto;font:400 1.3rem/1 var(--f);color:var(--mid)}
+.les[open]>summary::after,.oef[open]>summary::after{content:"–"}
+.pl{width:34px;height:34px;flex:none;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#fff,var(--c1) 60%,var(--c2))}
+.pl::before{content:"";margin-left:3px;border-left:10px solid #fff;border-top:6px solid transparent;border-bottom:6px solid transparent}
+.pt{width:34px;height:34px;flex:none;border-radius:10px;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#e9fff5,var(--c3) 60%,var(--c4));font-size:1rem}
+.lb{padding:0 16px 18px;display:grid;gap:14px}
+.lb p{line-height:1.6}
+.lb h4{margin:6px 0 0;font:600 .95rem var(--f)}
+.lb ul{margin:0;padding-left:20px;display:grid;gap:4px;line-height:1.5}
+.vid{position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;isolation:isolate;display:grid;place-items:center;text-align:center;color:var(--ink)}
+.vid>svg.lg{position:absolute;inset:0;width:100%;height:100%;z-index:-1}
+.vid .pl{width:58px;height:58px;margin:0 auto 10px;background:rgba(255,255,255,.85)}
+.vid .pl::before{border-left-color:var(--ink);border-left-width:16px;border-top-width:10px;border-bottom-width:10px}
+.vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.rolx{background:var(--card);border-radius:12px;padding:14px 16px;line-height:1.55}
+.rolx b{display:block;font-size:.86rem;color:var(--mid);font-weight:500;margin-bottom:4px}
+.case{background:var(--card);border-radius:14px;padding:18px}
+.case .cm{font:400 .88rem var(--f);color:var(--mid)}
+.case .cs{margin:6px 0 14px;font:500 1.15rem/1.35 var(--fd);letter-spacing:-.02em}
+.fb{margin-top:12px;padding:12px 14px;border-radius:12px;line-height:1.5}
+.fb.ok{background:#dff5ea}.fb.no{background:#ffe5d9}
+.prog{display:flex;gap:4px;margin-bottom:12px}
+.prog i{flex:1;height:4px;border-radius:9px;background:var(--line)}
+.prog i.on{background:var(--ink)}
+.prev{background:var(--card);border-radius:14px;padding:16px;line-height:1.55;white-space:pre-wrap}
+.chks{display:grid;gap:6px;font-size:.92rem}
+.chks span::before{content:"○ ";color:var(--mid)}
+.chks span.y::before{content:"● ";color:#2f9e6f}
+.qrow{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.qrow:first-child{border-top:0}
+.minis{display:flex;gap:6px}
+.minis button{padding:7px 13px;border-radius:999px;border:1px solid var(--line);background:var(--card);cursor:pointer;font:500 .88rem var(--f)}
+.minis button[aria-pressed=true]{background:var(--dark);color:#fff;border-color:var(--dark)}
+@media (max-width:560px){.qrow{grid-template-columns:1fr}}
+
+/* tools */
+.tools{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:20px 0 0}
+.tool{position:relative;overflow:hidden;isolation:isolate;border-radius:var(--r);padding:22px;min-height:170px;display:flex;flex-direction:column;justify-content:space-between;text-decoration:none;color:var(--ink);background:#f3e6dc}
+.tool svg.lg{position:absolute;inset:0;width:100%;height:100%;z-index:-1}
+.tool h3{font-size:1.4rem;letter-spacing:-.035em}
+.tool p{margin-top:6px;color:#3d3a36;line-height:1.45;max-width:36ch}
+.tool .tag{align-self:flex-start;background:rgba(255,255,255,.75)}
+.tool.off{opacity:.6;pointer-events:none}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.kpis div{background:var(--bg);border-radius:14px;padding:14px}
+.kpis span{display:block;font-size:.84rem;color:var(--mid)}
+.kpis b{display:block;margin-top:4px;font:500 1.5rem/1.1 var(--fd);letter-spacing:-.04em}
+.ins{display:grid;gap:10px}
+.in{background:var(--bg);border-radius:14px;padding:16px 18px;display:grid;grid-template-columns:auto 1fr;gap:4px 14px;cursor:pointer;border:1.5px solid transparent}
+.in input{margin:4px 0 0;width:18px;height:18px;accent-color:#141413;grid-row:1/4}
+.in b{font:500 1.08rem var(--fd);letter-spacing:-.02em}
+.in p{color:var(--mid);line-height:1.5;font-size:.95rem}
+.in p.v{color:var(--ink)}
+.in:has(input:checked){border-color:var(--ink);background:var(--card)}
+.adt{width:100%;border-collapse:collapse;font-size:.9rem}
+.adt th{text-align:left;font-weight:500;color:var(--mid);padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+.adt td{padding:10px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+.adt td:not(:first-child),.adt th:not(:first-child){text-align:right}
+.scroll{overflow-x:auto}
+.maps{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.maps label{display:grid;gap:4px;font-size:.88rem;color:var(--mid)}
+.drop{display:grid;place-items:center;text-align:center;padding:26px;border:1.5px dashed var(--line);border-radius:16px;background:var(--bg);cursor:pointer}
+.drop:hover{border-color:var(--ink)}
+@media (max-width:560px){.tools{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.maps{grid-template-columns:1fr}}
+
+/* twaalf weken, metingen, portfolio, beoordeling */
+.weeks{display:grid;grid-template-columns:repeat(12,1fr);gap:4px;margin:18px 0 0}
+.wk{border-radius:10px;background:var(--card);padding:8px 4px;text-align:center;font-size:.72rem;color:var(--mid);min-height:58px;display:flex;flex-direction:column;justify-content:space-between;align-items:center;border:1.5px solid transparent}
+.wk strong{font:500 .95rem var(--fd);color:var(--ink)}
+.wk.done{background:linear-gradient(160deg,#ffe2d4,#efe6ff)}
+.wk.now{border-color:var(--ink)}
+.wk i{font-style:normal;width:7px;height:7px;border-radius:50%;background:var(--c2)}
+.wkl{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;font-size:.84rem;color:var(--mid)}
+.wkl span.nd::before{display:none}
+.wkl span::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--c2);margin-right:6px;vertical-align:1px}
+.mq{display:grid;grid-template-columns:1fr auto;gap:10px 16px;align-items:center;padding:12px 0;border-top:1px solid var(--line)}
+.mq:first-of-type{border-top:0}
+.sc{display:flex;gap:4px}
+.sc button{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--card);cursor:pointer;font:500 .9rem var(--f)}
+.sc button[aria-pressed=true]{background:var(--dark);color:#fff;border-color:var(--dark)}
+.mtab{width:100%;border-collapse:collapse;font-size:.92rem;background:var(--card);border-radius:var(--r);overflow:hidden}
+.mtab th,.mtab td{padding:12px 14px;border-bottom:1px solid var(--line);text-align:right}
+.mtab th:first-child,.mtab td:first-child{text-align:left}
+.mtab th{color:var(--mid);font-weight:500}
+.mtab tr:last-child td{border-bottom:0}
+.pk{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;padding:14px 16px;background:var(--card);border-radius:14px;margin-top:8px;cursor:pointer;border:1.5px solid transparent}
+.pk input{width:20px;height:20px;accent-color:#141413;grid-row:1/3;margin-top:2px}
+.pk:has(input:checked){border-color:var(--ink)}
+.need{display:grid;gap:6px;font-size:.92rem}
+.need span::before{content:"○ ";color:var(--mid)}
+.need span.y::before{content:"● ";color:#2f9e6f}
+.rb{display:grid;gap:4px;padding:14px 0;border-top:1px solid var(--line)}
+.rb:first-child{border-top:0}
+.rb b{font-weight:600}
+.cijfer{font:500 clamp(3rem,10vw,4.6rem)/1 var(--fd);letter-spacing:-.05em}
+@media (max-width:560px){.weeks{grid-template-columns:repeat(6,1fr)}.mq{grid-template-columns:1fr}}
+
+/* toolregister en concept-machine */
+.eisen{display:grid;gap:8px;margin-top:6px}
+.eisen div{display:grid;grid-template-columns:22px 1fr;gap:8px;line-height:1.5;font-size:.94rem}
+.eisen div::before{content:"✓";width:22px;height:22px;border-radius:50%;background:#dff5ea;display:grid;place-items:center;font-size:.75rem}
+.meta-l{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.routes{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.route{background:var(--bg);border-radius:14px;padding:14px;display:grid;grid-template-columns:auto 1fr;gap:4px 10px;cursor:pointer;border:1.5px solid transparent}
+.route input{width:18px;height:18px;margin:2px 0 0;accent-color:#141413;grid-row:1/4}
+.route b{font:500 1rem var(--fd);letter-spacing:-.02em}
+.route p{color:var(--mid);font-size:.92rem;line-height:1.45}
+.route:has(input:checked){border-color:var(--ink);background:var(--card)}
+.route .tag{grid-column:2;justify-self:start;margin-top:4px}
+@media (max-width:560px){.routes{grid-template-columns:1fr}}
+
+/* markt: trends plus de zetten van Thijs */
+.mkt{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:20px;align-items:start;margin-top:20px}
+.side{position:sticky;top:120px;display:grid;gap:10px}
+.mv{background:var(--card);border-radius:16px;padding:16px 18px;display:grid;gap:6px}
+.mv .tp{justify-self:start}
+.mv b{font:500 1.05rem var(--fd);letter-spacing:-.02em}
+.mv p{color:var(--mid);font-size:.92rem;line-height:1.45}
+.tag.go{background:#dff5ea}.tag.up{background:#dde9ff}.tag.st{background:var(--pill)}
+.trend{background:var(--card);border-radius:var(--r);padding:20px 22px;display:grid;gap:10px;margin-bottom:12px}
+.trend h3{font-size:1.25rem;letter-spacing:-.03em;line-height:1.2}
+.trend .meta-l{margin:0}
+.trend p{line-height:1.5}
+.toets3{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.toets3 div{background:var(--bg);border-radius:10px;padding:8px 10px;font-size:.84rem;line-height:1.35}
+.toets3 b{display:block;font-weight:600}
+.toets3 .ja b{color:#2f9e6f}.toets3 .tw b{color:#b7791f}
+.mom{font:500 .8rem var(--f);padding:3px 9px;border-radius:999px;background:linear-gradient(90deg,#ffe2d4,#efe6ff)}
+.link-thijs{display:flex;gap:10px;align-items:center;background:var(--bg);border-radius:12px;padding:10px 12px;font-size:.9rem}
+.link-thijs .av-s{width:30px;height:30px;border-radius:50%;flex:none;background:radial-gradient(circle at 35% 30%,#ffe3d6,var(--c1) 55%,var(--c2));color:#fff;display:grid;place-items:center;font:600 .72rem var(--f)}
+@media (max-width:820px){.mkt{grid-template-columns:1fr}.side{position:static;order:-1}}
+@media (max-width:560px){.toets3{grid-template-columns:1fr}}
+
+/* visueel sterker */
+h1,h2,h3{font-weight:500}
+.grad{background:linear-gradient(100deg,var(--c1) 0%,var(--c5) 45%,var(--c2) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.btn{transition:transform .15s ease,background .15s ease,border-color .15s ease}
+.btn:active{transform:scale(.98)}
+.card,.trend,.mv,.tool,.stp,.prices>div,.facts div,.step,a.row{transition:transform .2s ease,box-shadow .2s ease}
+.tool:hover,.trend:hover,.card:hover,a.row:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(80,40,20,.10)}
+@media (prefers-reduced-motion:reduce){.btn,.card,.trend,.mv,.tool,.stp,.step,a.row{transition:none}.tool:hover,.trend:hover,.card:hover,a.row:hover{transform:none}}
+.hero h1{font-size:clamp(3rem,8.6vw,6.2rem);letter-spacing:-.045em}
+/* stage met zwevende kaarten */
+.stage{position:relative}
+.float{position:absolute;background:#fff;border-radius:18px;box-shadow:0 20px 50px rgba(80,40,20,.18);padding:14px 16px;width:250px;font-size:.88rem;line-height:1.4;display:grid;gap:6px}
+.float b{font:500 1rem/1.25 var(--fd)}
+.float .hint{font-size:.8rem}
+.float.f1{left:2%;bottom:12%}
+.float.f2{right:2%;top:16%}
+@media (max-width:980px){.float{display:none}}
+/* toolshowcase op de voorkant */
+.tools.lg{grid-template-columns:repeat(3,1fr);margin-top:32px}
+.tools.lg .tool{min-height:240px;cursor:pointer;border:0;text-align:left;font:inherit;color:var(--ink)}
+.mini{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:12px;margin-top:32px}
+.mini .trend,.mini .mv{margin:0}
+@media (max-width:820px){.tools.lg{grid-template-columns:1fr}.mini{grid-template-columns:1fr}}
+/* vandaag als dashboard */
+.dash-h{margin:clamp(24px,5vw,40px) 0 0;padding:clamp(24px,5vw,40px);border-radius:28px;position:relative;overflow:hidden;isolation:isolate;background:#f3e6dc}
+.dash-h svg.lg{position:absolute;inset:0;width:100%;height:100%;z-index:-1}
+.dash-h .lbl{color:#3d3a36;font-weight:500}
+.dash-h h1{font-size:clamp(2.2rem,6vw,3.6rem);line-height:1.02;letter-spacing:-.045em}
+.wkbar{display:grid;grid-template-columns:repeat(12,1fr);gap:4px;margin-top:22px}
+.wkbar i{height:8px;border-radius:9px;background:rgba(255,255,255,.6)}
+.wkbar i.d{background:var(--ink)}
+.wkbar i.n{background:linear-gradient(90deg,var(--c1),var(--c2))}
+.kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}
+.kpi div{background:rgba(255,255,255,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:16px;padding:14px 16px}
+.kpi span{display:block;font-size:.84rem;color:#3d3a36}
+.kpi b{display:block;margin-top:4px;font:500 clamp(1.8rem,5vw,2.6rem)/1 var(--fd);letter-spacing:-.05em}
+.dash{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:20px;align-items:start}
+.dash .next{margin-top:20px}
+.tmini{background:var(--card);border-radius:16px;padding:14px 16px;display:grid;gap:6px;margin-top:10px}
+.tmini b{font:500 1rem/1.3 var(--fd);letter-spacing:-.015em}
+@media (max-width:820px){.dash{grid-template-columns:1fr}.kpi{grid-template-columns:1fr 1fr 1fr}}
+@media (max-width:420px){.kpi b{font-size:1.6rem}.kpi{gap:6px}.kpi div{padding:12px}}
+
+/* cockpit */
+.ck-h{margin:clamp(24px,5vw,40px) 0 0;padding:clamp(24px,5vw,40px);border-radius:28px;position:relative;overflow:hidden;isolation:isolate;background:#1b1a19;color:#fff}
+.ck-h svg.lg{position:absolute;inset:0;width:100%;height:100%;z-index:-1;opacity:.55}
+.ck-h h1{font-size:clamp(2.4rem,6.5vw,4rem);letter-spacing:-.05em;line-height:1}
+.ck-h p{margin-top:10px;max-width:56ch;opacity:.8;line-height:1.5}
+.ck-h .kpi div{background:rgba(255,255,255,.1);color:#fff}
+.ck-h .kpi span{color:rgba(255,255,255,.72)}
+.ck-h .kpi{grid-template-columns:repeat(4,1fr)}
+.ck{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:20px;align-items:start}
+.ap{background:var(--card);border-radius:var(--r);padding:20px 22px;margin-top:12px;display:grid;gap:12px}
+.ap .meta-l{display:flex;justify-content:flex-start;align-items:center;gap:6px;flex-wrap:wrap}
+.ap h3{font-size:1.25rem;letter-spacing:-.03em;line-height:1.2}
+.ap .why{color:var(--mid);line-height:1.5}
+.opt{display:grid;gap:6px}
+.opt label{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:12px;background:var(--bg);cursor:pointer;border:1.5px solid transparent;line-height:1.4}
+.opt label:has(input:checked){border-color:var(--ink);background:var(--card)}
+.opt input{margin-top:3px;accent-color:#141413}
+.btn.stop{background:transparent;color:#b42318;border-color:#f2c4bf}
+.agents{display:grid;gap:8px;margin-top:10px}
+.ag{background:var(--card);border-radius:14px;padding:12px 14px;display:grid;grid-template-columns:auto 1fr auto;gap:4px 12px;align-items:center}
+.ag .dot{width:10px;height:10px;border-radius:50%}
+.ag b{font:500 1rem var(--fd)}
+.ag small{grid-column:2/-1;color:var(--mid);font-size:.86rem}
+.kop{background:var(--card);border-radius:14px;padding:4px 14px;margin-top:10px}
+.kop div{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.kop div:last-child{border-bottom:0}
+.tag.on{background:#dff5ea}.tag.off{background:var(--pill);color:var(--mid)}
+.hist{font-size:.88rem;color:var(--mid);display:grid;gap:4px}
+@media (max-width:820px){.ck{grid-template-columns:1fr}.ck-h .kpi{grid-template-columns:1fr 1fr}}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
+</head>
+<body>
+<!-- Netlify Forms: statisch formulier zodat Netlify het herkent -->
+<form hidden method='POST' name='wachtlijst'><input type='hidden' name='form-name' value='wachtlijst' />
+  <input type="email" name="email"><input name="bot">
+</form>
+<div id="app"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ---------- basis ---------- */
+const SHIELD='<svg viewBox="0 0 79 94" aria-hidden="true"><path fill="currentColor" d="M79 29.5V0H0v29.5S-1.2 80.2 39.3 94h.4C80.2 80.2 79 29.5 79 29.5z"/></svg>';
+const K='uitvinder-v1';
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const uid=()=>Math.random().toString(36).slice(2,10);
+const today=()=>new Date().toISOString().slice(0,10);
+const fmtD=d=>new Date(d).toLocaleDateString('nl-NL',{day:'numeric',month:'short',year:'numeric'});
+const slugify=s=>String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'profiel';
+const initials=n=>String(n||'?').trim().split(/\s+/).map(w=>w[0]).filter(Boolean).slice(0,2).join('').toUpperCase();
+function fresh(){return{watch:[],metingen:[],portfolio:[],eind:{pitch:'',reflectie:'',ingediend:null},user:null,scans:[],inv:{vak:'',buiten:'',voorwie:'',zin:''},exps:[],prof:{publiek:false,toon:{inv:true,shift:true,exps:true}},bouw:{done:[],f:{},spec:''}}}
+function load(){try{const s=JSON.parse(localStorage.getItem(K));return s&&s.scans?s:null}catch{return null}}
+let S=load()||fresh();
+S.metingen??=[];S.portfolio??=[];S.eind??={pitch:'',reflectie:'',ingediend:null};
+function save(){try{localStorage.setItem(K,JSON.stringify(S))}catch{}}
+function toast(t){const el=document.getElementById('toast');el.textContent=t;el.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove('on'),2200)}
+const ROLES=['designer','copywriter','marketeer','strateeg','anders'];
+
+/* ---------- voorbeeldteam (demo) ---------- */
+const TEAM={naam:'Studio Voorbeeld',members:[
+ {slug:'lotte-de-vries',naam:'Lotte de Vries',rol:'designer',nul:22,nu:41,inv:'Ik ontwerp merken als systemen die zichzelf uitleggen, omdat ik jaren UX deed voor een zorgverzekeraar.'},
+ {slug:'joris-bakker',naam:'Joris Bakker',rol:'copywriter',nul:15,nu:28,inv:'Ik schrijf voor merken alsof ik de krant van morgen al gelezen heb: snel, op het nieuws, in hun stem.'},
+ {slug:'samira-el-amrani',naam:'Samira El Amrani',rol:'marketeer',nul:30,nu:52,inv:'Ik combineer performance-data met wat ik als oud-horecaondernemer weet over gasten die terugkomen.'},
+ {slug:'bas-hendriks',naam:'Bas Hendriks',rol:'strateeg',nul:35,nu:38,inv:'Ik vertaal wat bestuurders willen naar wat klanten merken.'}],
+ cards:[
+ {id:'t1',auteur:'Lotte de Vries',klant:'Fietsmerk Velo',titel:'Bandenspanningscheck voor forensen',signaal:'Eerste koude week: veel vragen over fietsen in de winter.',hypothese:'Als we een tool maken die je bandenspanning en route-advies geeft op basis van het weer, dan delen forensen die in hun teamapp.',bouw:'Eén HTML-pagina: postcode en fietstype erin, advies eruit.',tool:'Claude, Netlify',spec:'Doel: forensen in één minuut klaar voor de winter.\nVoor wie: woon-werkfietsers.\nWat het doet: 1. Postcode en fietstype invullen. 2. Advies over bandenspanning, licht en kleding. 3. Deelknop.\nKlaar als: werkt op mobiel en laadt binnen 1 seconde.',uitkomst:'1.900 bezoekers in 5 dagen, 14% deelde de link.',geleerd:'Een concreet getal (bandenspanning) deed het beter dan algemeen advies.',zicht:'team',status:'af',datum:'2026-10-14'},
+ {id:'t2',auteur:'Joris Bakker',klant:'Bakkerij Ter Horst',titel:'Reactie op de broodprijsstijging',signaal:'Nieuws: brood wordt in 2027 duurder door hogere graanprijzen.',hypothese:'Als de bakker binnen een dag uitlegt waar de prijs van één brood heen gaat, dan reageren klanten begripvol in plaats van boos.',bouw:'Een visual met de opbouw van de prijs plus een korte tekst.',tool:'Claude, Figma',spec:'',uitkomst:'Drie keer zoveel reacties als een gemiddelde post, vrijwel allemaal positief.',geleerd:'Transparantie werkt alleen als je het binnen een dag doet. Een week later was het oud nieuws.',zicht:'team',status:'af',datum:'2026-10-21'},
+ {id:'t3',auteur:'Samira El Amrani',klant:'Hotel Aan de Dijk',titel:'Wachtlijst voor een winterarrangement',signaal:'Zoekvolume op ‘weekendje weg winter’ verdubbelt in oktober.',hypothese:'Als we een wachtlijst openen voordat het arrangement bestaat, dan weten we binnen een week of het verkoopt.',bouw:'Landingspagina met wachtlijst via Netlify Forms.',tool:'Claude, Netlify',spec:'',uitkomst:'212 aanmeldingen in 6 dagen. Arrangement wordt gemaakt.',geleerd:'Testen voordat je maakt scheelt een fotoshoot voor iets wat niemand wil.',zicht:'team',status:'af',datum:'2026-10-09'},
+ {id:'t4',auteur:'Bas Hendriks',klant:'Installatiebedrijf Wolters',titel:'Subsidiecheck warmtepomp',signaal:'Nieuwe subsidieregels per 1 januari, klanten bellen met vragen.',hypothese:'Als we een check bouwen die in drie vragen zegt of je in aanmerking komt, dan daalt het aantal telefoontjes met een kwart.',bouw:'Vragenlijst met uitkomst en doorverwijzing.',tool:'Claude',spec:'',uitkomst:'Loopt nog.',geleerd:'',zicht:'team',status:'bezig',datum:'2026-10-28'}]};
+
+
+/* ---------- beeld: zachte lichtverlopen ---------- */
+const PAL=[['#ff8a5c','#ffc4a3','#f59ac0','#f6e6da'],['#a98bff','#f59ac0','#ffd2bd','#f1eaf7'],['#8ab8ff','#c3b2ff','#ffe0cc','#eef0f8'],['#ff8a5c','#ffb07a','#ffe3a6','#f8ece0'],['#7fcfb0','#8ab8ff','#f3e0cc','#ecf3ef'],['#f59ac0','#ffb38a','#c3b2ff','#f8eaef']];
+const hsh=t=>{let h=2166136261;for(const c of String(t))h=Math.imul(h^c.charCodeAt(0),16777619);return h>>>0};
+const palOf=t=>PAL[hsh(t)%PAL.length];
+function cover(seed,w=320,h=200,cls=''){
+  const n=hsh(seed),[c1,c2,c3,base]=PAL[n%PAL.length],id='g'+n.toString(36),r=k=>((n>>>k)&255)/255;
+  const D=Math.max(w,h);
+  return `<svg ${cls?`class="${cls}"`:''} viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs>
+   <filter id="${id}" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="${(D/9).toFixed(1)}"/></filter></defs>
+   <rect width="${w}" height="${h}" fill="${base}"/>
+   <g filter="url(#${id})">
+    <circle cx="${w*(.15+r(3)*.3)}" cy="${h*(.85+r(5)*.3)}" r="${D*.42}" fill="${c1}"/>
+    <circle cx="${w*(.6+r(9)*.3)}" cy="${h*(.2+r(13)*.4)}" r="${D*.34}" fill="${c2}"/>
+    <circle cx="${w*(.45+r(17)*.2)}" cy="${h*(.45+r(21)*.2)}" r="${D*.2}" fill="${c3}" opacity=".85"/>
+    <ellipse cx="${w*.5}" cy="${-h*.05}" rx="${w*.5}" ry="${h*.28}" fill="#fff" opacity=".7"/>
+   </g></svg>`;
+}
+/* ---------- afgeleiden ---------- */
+const nul=()=>S.scans[0]?.res;
+const laatste=()=>S.scans[S.scans.length-1]?.res;
+const weekNr=()=>S.scans[0]?Math.floor((Date.now()-new Date(S.scans[0].datum))/6048e5)+1:1;
+const expTitel=e=>e.titel||(e.hypothese?e.hypothese.slice(0,70)+(e.hypothese.length>70?'…':''):(e.signaal?e.signaal.slice(0,70):'Nieuw experiment'));
+const curExp=()=>S.exps.find(e=>e.status==='bezig');
+
+/* ---------- kop en voet ---------- */
+const APPNAV=[['vandaag','Vandaag'],['cockpit','Cockpit'],['markt','Markt'],['reis','Reis'],['bouwen','Bouwen'],['library','Library'],['portfolio','Portfolio'],['profiel','Profiel'],['team','Team']];
+function topBar(route){
+  const inApp=S.user&&APPNAV.some(n=>n[0]===route||(route==='exp'||route==='invalshoek'||route==='tool'||route==='meting'||route==='beoordeling'||route==='klant'));
+  return `<header class="top"><div class="wrap ${inApp||route===''?'wide':''}">
+    <a class="brand" href="#/"><span class="dotm" aria-hidden="true"></span><span class="wm">Uitvinder</span><span class="by">door Thijs Mensink</span></a>
+    <span class="who"><span class="proto">Prototype</span>${S.user?`<a href="#/profiel" class="av-s" aria-label="Profiel van ${esc(S.user.naam)}">${esc(initials(S.user.naam))}</a>`:`<a class="btn sm" href="#/scan">Start</a>`}</span>
+  </div>${inApp?`<nav class="wrap wide nav" aria-label="Platform">${APPNAV.map(([r,t])=>`<a href="#/${r}" ${r===route||(route==='exp'&&r==='reis')||(route==='invalshoek'&&r==='reis')||(route==='tool'&&r==='library')||(route==='meting'&&r==='reis')||(route==='beoordeling'&&r==='portfolio')||(route==='klant'&&r==='cockpit')?'aria-current="page"':''}>${t}</a>`).join('')}</nav>`:''}</header>`;
+}
+const foot=()=>`<footer class="foot"><div class="wrap wide"><div><div class="motto">Kan niet, bestaat niet!</div><p class="hint" style="margin-top:10px">Thijs Mensink, The Netherlands</p></div><p class="hint">Prototype. Gegevens blijven op dit apparaat.</p></div></footer>`;
+
+/* ---------- landing ---------- */
+const FAQ=[
+ ['Moet ik kunnen programmeren?','Nee. Je leert bouwen met AI-tools zoals Claude. Jij schrijft op wat het moet doen, de AI schrijft de code.'],
+ ['Hoeveel tijd kost het?','Reken op een middag per week voor een ronde. Het fundament kost eenmalig een uur of twee.'],
+ ['Wat ziet mijn werkgever?','Alleen je verhouding uitvoerend en uitvindend, en de kaarten die jij met je team deelt. Je rolscan-antwoorden, je invalshoek en je privékaarten niet.'],
+ ['Is dit een cursus?','Nee. Je kijkt geen video’s. Je maakt elke week iets voor een echte klant, en de coach helpt je scherp te blijven.'],
+ ['Wat als de AI-tools veranderen?','Dan verandert je gereedschap, niet je methode. Je leert het patroon dat blijft: vraag, spec, bouwen, testen, live.'],
+ ['Voor wie is het?','Voor designers, copywriters, marketeers en strategen in agencies en marketingteams. Junior of senior.']];
+function landing(){
+  return topBar('')+`<main class="wrap wide">
+  <section class="hero">
+    <span class="eyebrow">Uitvinder</span>
+    <h1>Van uitvoerder naar <span class="grad">uitvinder.</span></h1>
+    <p class="q">Het platform voor designers, copywriters en marketeers die relevant willen blijven nu AI het uitvoerende werk overneemt. Niet door meer te leren, maar door te maken.</p>
+    <div class="btns"><a class="btn" href="#/scan">Doe de gratis Rolscan</a><button class="btn ghost" data-act="demo">Bekijk de demo</button></div>
+  </section>
+
+  <div class="glow stage">${cover('stage-hero-3',1200,700,'lg')}
+    <div class="ui" aria-hidden="true">
+      <div class="side"><b><span class="dotm" style="width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,var(--c1) 60%,var(--c2))"></span>Uitvinder</b><span class="on">Vandaag</span><span>Reis</span><span>Bouwen</span><span>Library</span><span>Profiel</span><span>Team</span></div>
+      <div><span class="hint">Vandaag</span><h4>Week 7 van je reis.</h4>
+        <div class="uc"><i></i><small>Lopende ronde</small><div>Kerstbestellingen zonder telefoon</div></div>
+        <div class="nums"><div><span class="hint">Nulmeting</span><b>18%</b></div><div><span class="hint">Nu</span><b>31%</b></div></div>
+      </div>
+    </div>
+    <div class="float f1" aria-hidden="true"><span class="mom" style="justify-self:start">Piek nu</span><b>Zorgpremies 2027 bekend</b><span class="hint">Past bij zorg en consument. Maak er een signaal van.</span></div>
+    <div class="float f2" aria-hidden="true"><span class="tag go" style="justify-self:start">Gestart door Thijs</span><b>Zorgkosten 2027</b><span class="hint">Iedereen heeft dezelfde vraag. Ik bouwde het antwoord.</span></div>
+  </div>
+
+  <div class="stat">
+    <div><b>19%</b><p>minder werkende 22- tot 25-jarigen in de beroepen die het meest blootstaan aan AI, waaronder marketing, dan verwacht.</p></div>
+    <div><b>Stabiel</b><p>blijft het werk van ervaren mensen met oordeel en ervaring in dezelfde beroepen.</p></div>
+    <div><b>Groei</b><p>in beroepen waar AI mensen aanvult in plaats van vervangt. Daar zit de toekomst van je vak.</p></div>
+  </div>
+  <p class="hint">Bron: Stanford Digital Economy Lab, Canaries in the Coal Mine (VS, update augustus 2026)</p>
+
+  <section class="sec">
+    <span class="eyebrow">De reis</span>
+    <h2>Eén keer het fundament. Daarna elke week een ronde.</h2>
+    <div class="feat">
+      <div><i class="shp" data-s="1">1</i><p><b>Rolscan.</b> Zie in vijf minuten hoeveel van je werk uitvoerend is. Dat is je nulmeting.</p></div>
+      <div><i class="shp" data-s="2">2</i><p><b>Jouw invalshoek.</b> Wat combineer jij dat schaars is? Eén zin die niemand kan namaken.</p></div>
+      <div><i class="shp" data-s="3">3</i><p><b>Relevantie zoeken.</b> Elke week een signaal waar het merk van je klant iets over te zeggen heeft.</p></div>
+      <div><i class="shp" data-s="4">4</i><p><b>Uitvinden.</b> Eén experiment met een hypothese, gebouwd in een middag en gemeten.</p></div>
+      <div><i class="shp" data-s="5">5</i><p><b>Zichtbaar maken.</b> Deel wat je maakte, met je team of met iedereen.</p></div>
+      <div><i class="shp" data-s="?">AI</i><p><b>Een coach bij elke stap.</b> Denkt mee en vraagt door, maar schrijft niets voor je.</p></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <span class="eyebrow">De tools</span>
+    <h2>Tools die het uitvoerende werk doen. Jij houdt het oordeel.</h2>
+    <p class="lead">Analyseer advertenties, maak dertig conceptroutes, lees Ads Manager met Claude. Elke tool levert opties, jij kiest en verdedigt. Straks koppelen ze aan Figma en Canva in één regiedashboard.</p>
+    <div class="tools lg">${TOOLS.map(t=>`<button class="tool" data-act="demotool" data-id="${t.id}">${cover(t.seed,600,340,'lg')}<span class="tag">${t.type}</span><div><h3>${t.titel}</h3><p>${t.kort}</p></div></button>`).join('')}</div>
+  </section>
+
+  <section class="sec">
+    <span class="eyebrow">De markt</span>
+    <h2>Elke week: wat er speelt, en wat ik ermee doe.</h2>
+    <p class="lead">Trends per sector, getoetst op de drie vragen. Daarnaast mijn eigen zetten: wat ik bouw, waarom, en wat het opleverde. Ook als het tegenviel.</p>
+    <div class="mini">
+     <article class="trend"><div class="meta-l"><span class="mom">Stijgend</span><span class="tag ov">Kalender</span><span class="tag">Alle sectoren</span></div><h3>Wat verandert er per 1 januari 2027?</h3><p>Nieuwe regels, tarieven en toeslagen. Mensen en ondernemers zoeken wat het voor hen betekent.</p><div class="link-thijs"><span class="av-s">TM</span><span>Ik deed hier iets mee: <b>Wat kost 2027</b></span></div></article>
+     <div class="mv"><span class="tag tp go">Gestart</span><b>Wat kost 2027</b><p>Eén overzicht van alle huishoudkosten die in 2027 veranderen door besluiten van de overheid.</p><p><span style="color:var(--ink);font-weight:600">Waarom:</span> Per 1 januari verandert van alles tegelijk. Niemand ziet wat het bij elkaar opgeteld betekent.</p></div>
+    </div>
+    <div class="btns" style="margin-top:20px"><button class="btn ghost" data-act="demomarkt">Bekijk de markt</button></div>
+  </section>
+
+  <section class="sec">
+    <span class="eyebrow">Het verschil</span>
+    <h2>AI is geen extra vak. Het is je gereedschap.</h2>
+    <div class="cmpt">
+      <div class="tr hd"><span class="th"></span><span>Uitvoerder</span><span>Uitvinder</span></div>
+      <div class="tr"><span class="th">Werk</span><span>Wacht op de brief</span><span>Brengt de brief mee</span></div>
+      <div class="tr"><span class="th">Oplevering</span><span>Klaar na livegang</span><span>Blijft draaien en wordt gemeten</span></div>
+      <div class="tr"><span class="th">AI</span><span>Sneller hetzelfde maken</span><span>Dingen maken die eerst niet konden</span></div>
+      <div class="tr"><span class="th">Leren</span><span>Cursussen kijken</span><span>Elke week iets bouwen</span></div>
+      <div class="tr"><span class="th">Bewijs</span><span>Een cv</span><span>Een library met wat je maakte</span></div>
+      <div class="tr"><span class="th">Waarde</span><span>Uren</span><span>Ideeën en oordeel</span></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <span class="eyebrow">Voor agencies</span>
+    <h2>Zie je team verschuiven.</h2>
+    <p class="lead">Eén overzicht van hoe je team beweegt van uitvoerend naar uitvindend, en een gedeelde library met geteste ideeën per klant. Reflecties blijven privé. Jij ziet alleen wat je mensen delen.</p>
+    <div class="btns" style="margin-top:24px"><button class="btn ghost" data-act="demo">Bekijk het teamdashboard</button></div>
+  </section>
+
+  <section class="sec" id="prijzen">
+    <span class="eyebrow">Prijzen</span>
+    <h2>Eén keer betalen of per jaar.</h2>
+    <div class="prices">
+      <div>${cover('prijs-founding',400,400)}<span class="k">Founding member</span><b>€799</b><p>Levenslang toegang. Maximaal 100 plekken, alleen bij de lancering.</p></div>
+      <div><span class="k">Half jaar</span><b>€279</b><p>Het fundament en een flink aantal rondes.</p></div>
+      <div><span class="k">Jaar</span><b>€449</b><p>Een jaar lang elke week een ronde.</p></div>
+      <div><span class="k">Team</span><b>€450</b><p>Per plek per jaar, excl. btw, vanaf 5 plekken. Met dashboard en gedeelde library.</p></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <span class="eyebrow">Vragen</span>
+    <h2>Wat je waarschijnlijk wilt weten.</h2>
+    <div class="faq">${FAQ.map(([q,a])=>`<details><summary>${q}</summary><p>${a}</p></details>`).join('')}</div>
+  </section>
+
+  <section class="glow join">${cover('join-band-2',1200,600,'lg')}
+    <span class="eyebrow">Doe je mee?</span>
+    <h2>De toekomst van je vak begint met één week.</h2>
+    <p>Doe de Rolscan of zet je op de lijst voor de lancering.</p>
+    <div class="btns"><a class="btn" href="#/scan">Doe de gratis Rolscan</a></div>
+    <div class="wl"><input type="email" id="wl-mail" placeholder="jij@agency.nl" autocomplete="email" aria-label="E-mailadres"><button class="btn ghost" data-act="wl">Zet me op de lijst</button></div>
+    <p class="hint" style="margin-top:12px">Ik gebruik je adres alleen om je te laten weten wanneer het platform live is.</p>
+  </section>
+  </main>`+foot();
+}
+
+/* ---------- rolscan ---------- */
+const SC={rol:'designer',week:'',res:null,busy:false,err:'',demo:false};
+const VOORBEELD={taken:[{taak:'Social posts voor Fietsmerk Velo volgens de contentkalender',uren:8,label:'uitvoerend',waarom:'De kalender en het format lagen vast.'},{taak:'Banners in zes formaten voor de najaarscampagne',uren:6,label:'uitvoerend',waarom:'Ontwerp was goedgekeurd, dit is uitwerken.'},{taak:'Zelf een idee uitgewerkt voor een winterchecklist op de site',uren:3,label:'uitvindend',waarom:'Niemand vroeg erom; jij zag de kans.'},{taak:'Weekstart en klantoverleg',uren:4,label:'overig',waarom:'Afstemming.'}],uitvoerend:82,uitvindend:18,overig_uren:4,geschat:false,experiment:{signaal:'Eerste koude week; forensen twijfelen of ze blijven fietsen.',hypothese:'Als ik de winterchecklist als kleine tool bouw, dan delen meer volgers hem dan een gewone post.',bouw:'Eén pagina: fietstype kiezen, checklist eruit, deelknop.',meten:'Aantal keer gedeeld in vijf dagen, vergeleken met de best gedeelde post van de maand.'},kort:'Een wintercheck als tool in plaats van een post',afsluiting:'Het idee had je al. Volgende week bouw je het zelf.'};
+
+function scan(){
+  const r=SC.res;
+  return topBar('scan')+`<main class="wrap">
+  <div class="ph"><div class="lbl">Rolscan</div><h1>Ben jij uitvoerder of uitvinder?</h1>
+  <p>Beschrijf je afgelopen werkweek en zie waar jij staat. Je krijgt er één experiment bij voor volgende week.</p></div>
+  <section class="step"><div class="step-h"><b>1</b><h2>Je rol</h2></div><div class="step-b">
+    <div class="seg" role="group" aria-label="Rol">${ROLES.map(x=>`<button data-act="rol" data-v="${x}" aria-pressed="${SC.rol===x}">${x}</button>`).join('')}</div>
+  </div></section>
+  <section class="step"><div class="step-h"><b>2</b><h2>Je afgelopen werkweek</h2></div><div class="step-b">
+    <label class="f"><span>Wat deed je, ongeveer hoeveel tijd ging erin, en voor wie?</span>
+    <textarea class="big" id="week" placeholder="Maandag 4 uur social posts gemaakt voor klant X op basis van de contentkalender. Dinsdag 2 uur overleg over een nieuwe campagne...">${esc(SC.week)}</textarea></label>
+    <div class="btns"><button class="btn" data-act="scan" ${SC.busy?'disabled':''}>${SC.busy?'<span class="busy"></span> De AI leest je week':'Scan mijn week'}</button>
+    <button class="btn ghost sm" data-act="voorbeeld">Bekijk een voorbeelduitkomst</button></div>
+    <p class="hint" style="margin-top:12px">Je week gaat alleen naar de AI en wordt nergens opgeslagen.</p>
+    ${SC.err?`<p class="err" style="margin-top:14px">${esc(SC.err)}</p>`:''}
+  </div></section>
+  ${r&&r.vraag?`<section class="step"><div class="step-h"><b>?</b><h2>Nog één vraag</h2></div><div class="step-b"><p style="font-size:1.1rem">${esc(r.vraag)}</p><p class="hint" style="margin-top:8px">Vul je beschrijving hierboven aan en scan opnieuw.</p></div></section>`:''}
+  ${r&&!r.vraag?resultaat(r):''}
+  </main>`+foot();
+}
+function resultaat(r){
+  const pct=Math.round(r.uitvindend);
+  return `<section id="uitkomst" style="margin-top:clamp(40px,7vw,64px)">
+  ${SC.demo?'<p class="hint" style="margin:0 0 10px">Voorbeelduitkomst van een fictieve designer.</p>':''}
+  <div class="total">${cover('total'+r.uitvindend,800,360,'lg')}<span class="k">Jouw nulmeting${r.geschat?' (tijd geschat)':''}</span><b>${pct}% uitvinder</b>
+  <div class="ratio" aria-hidden="true"><i style="width:${pct}%"></i></div>
+  <p>${esc(r.afsluiting||'')}</p></div>
+  <div class="subs"><div class="v"><span>Uitvoerend</span><b>${Math.round(r.uitvoerend)}%</b></div><div class="o"><span>Uitvindend</span><b>${pct}%</b></div><div class="x"><span>Overig</span><b>${r.overig_uren??0} u</b></div></div>
+  <div class="grp"><span>Je week</span><span>${(r.taken||[]).length} taken</span></div>
+  <ul class="list">${(r.taken||[]).map(t=>`<li class="row"><span class="nm">${esc(t.taak)}${t.uren?` <span class="hint">${esc(t.uren)} u</span>`:''}</span><span class="tag ${t.label==='uitvindend'?'ui':t.label==='overig'?'ov':'uv'}">${esc(t.label)}</span><span class="why">${esc(t.waarom)}</span></li>`).join('')}</ul>
+  <div class="exp"><span class="k">Je experiment voor volgende week</span><dl>
+    <div><dt>Signaal</dt><dd>${esc(r.experiment?.signaal)}</dd></div>
+    <div><dt>Hypothese</dt><dd>${esc(r.experiment?.hypothese)}</dd></div>
+    <div><dt>Wat je bouwt</dt><dd>${esc(r.experiment?.bouw)}</dd></div>
+    <div><dt>Hoe je meet</dt><dd>${esc(r.experiment?.meten)}</dd></div></dl></div>
+  <div class="btns" style="margin-top:20px"><button class="btn ghost" data-act="deel">Download deelbeeld</button></div>
+  <section class="next">${cover('stap1',800,360,'lg')}<span class="k">Dit is stap 1</span>
+    ${S.user?`<h2>Bewaar dit als ${S.scans.length?'nieuwe meting':'je nulmeting'}.</h2><p>Je experiment komt klaar te staan als eerste ronde.</p><div class="btns"><button class="btn" data-act="bewaar">Bewaar en ga verder</button></div>`
+    :`<h2>Maak je profiel en begin je reis.</h2><p>Je nulmeting wordt het startpunt. Het experiment hierboven wordt je eerste ronde.</p>
+    <div style="display:grid;gap:10px;margin-top:16px;max-width:420px">
+      <input type="text" id="nw-naam" placeholder="Je naam" autocomplete="name" aria-label="Naam">
+      <input type="text" id="nw-agency" placeholder="Agency of team (optioneel)" aria-label="Agency">
+    </div>
+    <div class="btns"><button class="btn" data-act="bewaar">Start mijn reis</button></div>`}
+  </section></section>`;
+}
+
+
+/* ---------- lesstof, video en proeftuin ---------- */
+const VIDEO={2:'',3:'',4:'',5:'',bouw:''}; // vul hier later een YouTube- of Vimeo-link in per stap
+const LES={
+ bouw:{titel:'Bouwen met AI',tekst:['Je hoeft niet te leren programmeren. Je leert opschrijven wat iets moet doen, zo precies dat een AI het kan bouwen. Dat is een vak op zich: hoe scherper je spec, hoe beter het resultaat.','Tools veranderen elke maand, het patroon niet: een scherpe vraag, een spec, bouwen, testen met echte mensen en live zetten. Wie dat patroon beheerst, kan met elke nieuwe tool overweg.','Bouw klein. Eén vraag, één antwoord, in een middag. Een tool die werkt en gebruikt wordt, is meer waard dan een groot plan.'],
+  lijst:['Het doel in één zin','Voor wie','Wat het doet, in stappen','Wat het niet doet','Klaar als: wanneer is het goed genoeg'],lijstKop:'Een goede spec bevat',
+  goed:['Je spec past op één scherm','Een collega leest hem en snapt wat er gebouwd wordt','Drie mensen uit de doelgroep hebben het getest','Het staat live en je kunt de link delen'],
+  val:['Te veel tegelijk willen','Schaven voordat iemand het gebruikt heeft','De AI laten raden wat je bedoelt'],
+  rol:{designer:'Je bouwt de wintercheck als één pagina en zet hem meteen in de stijl van het merk.',copywriter:'Je schrijft de vragen en de uitkomsten van een check. De AI bouwt eromheen.',marketeer:'Je bouwt een wachtlijstpagina en koppelt hem aan je meting.',strateeg:'Je bouwt een check van drie vragen die een veelgestelde klantvraag beantwoordt.'}},
+ 2:{titel:'Jouw invalshoek',tekst:['AI maakt alles wat al bestaat even goed voor iedereen. Een post, een banner, een tekst op de brief: dat onderscheidt je niet meer. Wat niet te kopiëren is, is de combinatie die alleen jij hebt.','De Britse onderzoeker Margaret Boden noemt dat combinatorische creativiteit: nieuwe ideeën ontstaan door bekende dingen op een onverwachte manier te verbinden. Een designer die in de horeca werkte, ziet bij een restaurant wat een ander mist.','Je invalshoek is die combinatie, in één zin: je vak, plus iets van daarbuiten, voor mensen die je wilt helpen. Je gebruikt hem elke week bij het kiezen van signalen, en je scherpt hem aan in week 6 en 12.'],
+  lijst:['Ik [wat je doet] voor [wie], omdat ik [iets van buiten je vak].'],lijstKop:'De vorm',
+  goed:['Een collega kan hem niet zomaar overnemen','Hij is waar: je kunt het bewijzen met je eigen geschiedenis','Hij helpt je kiezen: welke klanten, signalen en experimenten','Hij telt hooguit 25 woorden'],
+  val:['Je functietitel herhalen: ik ben een creatieve designer','Bijvoeglijke naamwoorden in plaats van feiten: passievol, creatief, innovatief','Te breed: voor iedereen, voor bedrijven','Beschrijven wie je wilt zijn in plaats van wat je hebt'],
+  rol:{designer:'Ik ontwerp voor familiebedrijven zoals een goede gastvrouw ontvangt, omdat ik vier jaar in de horeca werkte.',copywriter:'Ik schrijf voor zorgmerken alsof ik nog aan het bed sta, omdat ik zes jaar verpleegkundige was.',marketeer:'Ik maak campagnes voor bouwbedrijven die vakmensen serieus nemen, omdat ik zelf vijf jaar timmerman was.',strateeg:'Ik vertaal wat bestuurders willen naar wat klanten merken, omdat ik tien jaar aan de klantkant van een verzekeraar zat.'}},
+ 3:{titel:'Relevantie zoeken',tekst:['Een uitvoerder wacht tot de klant zegt wat er moet gebeuren. Een uitvinder ziet het eerder.','Relevantie is geen gevoel. Het is een moment waarop mensen een vraag hebben en een merk het antwoord kan geven. Het Ehrenberg-Bass Institute noemt die momenten category entry points: situaties waarin iemand aan een categorie gaat denken. Wie daar op dat moment iets nuttigs neerzet, wordt onthouden.','Je zoekt dus niet naar iets om over te posten. Je zoekt naar een vraag die deze week ontstaat, bij mensen die de klant wil bereiken. Neem er elke week twintig minuten voor.'],
+  lijst:['Het nieuws, landelijk en regionaal','De kalender: feestdagen, vakanties, seizoenen, wat er per 1 januari verandert','Zoekgedrag: Google Trends en de zoekbalk','De klant zelf: wat vragen hun klanten aan de telefoon, in de winkel, in de mail?','Reacties en reviews, ook bij concurrenten','De branche: vakbladen, beurzen, LinkedIn'],lijstKop:'Waar je signalen vindt',
+  goed:['Je kunt het signaal in één zin opschrijven, met een datum of bron','Je kunt uitleggen waarom juist dit merk er iets over mag zeggen','Er is een vraag van mensen, niet alleen een kans voor het merk','Het signaal wijst al richting iets wat je kunt bouwen'],
+  val:['Groot nieuws zonder verband met het merk','Evergreen vermomd als signaal: tips voor de winter is geen signaal, de eerste nachtvorst wel','Te lang zoeken: twintig minuten is genoeg'],
+  rol:{designer:'Bij een fietsmerk: de eerste nachtvorst staat in de weersverwachting. Forensen twijfelen of ze blijven fietsen. Het merk verkoopt winterbanden en verlichting, dus het kan helpen met een check.',copywriter:'Bij een bakkerij: brood wordt volgend jaar duurder door hogere graanprijzen. De bakker kan eerlijker dan de supermarkt uitleggen waar de prijs van één brood heen gaat.',marketeer:'Bij een hotel: het zoekvolume op weekendje weg in de winter loopt op in oktober. Het hotel kan testen of er vraag is voordat het een arrangement maakt.',strateeg:'Bij een installateur: per 1 januari veranderen de subsidieregels voor warmtepompen. Het bedrijf kan in drie vragen laten zien of iemand in aanmerking komt.'}},
+ 4:{titel:'Uitvinden',tekst:['Een experiment is geen campagne. Een campagne moet werken. Een experiment moet iets leren.','Je bouwt het kleinste ding dat een vraag beantwoordt. Eric Ries noemde dat bouwen, meten, leren. Met AI is dat kleinste ding in een middag te maken: een pagina, een rekentool, een checklist, een quiz.','Het belangrijkste werk gebeurt voordat je begint: je schrijft op wat je verwacht en hoe je het meet. Doe je dat achteraf, dan vind je altijd een cijfer dat je gelijk geeft.','Je werkt voor echte merken. Iets wat in naam van een klant naar buiten gaat, gaat pas live met akkoord van die klant. Lukt dat niet op tijd, test het dan op een kanaal van je agency.'],
+  lijst:['Eén vraag, één antwoord: een pagina','Een check of quiz van drie tot vijf vragen','Een rekentool','Een wachtlijst voor iets wat nog niet bestaat','Een klikbaar prototype'],lijstKop:'Wat past in een middag, van klein naar groter',
+  goed:['De hypothese heeft een getal, en je schreef het op voordat je begon','Het is in maximaal een middag te bouwen','Je meet gedrag, niet alleen of mensen het leuk vinden','De spec staat op de kaart, zodat een collega kan remixen','Er is akkoord van de klant, of het draait op een eigen kanaal'],
+  val:['Te groot beginnen: een hele website is geen experiment','Meten wat makkelijk is: likes zeggen weinig','De hypothese achteraf bijstellen','Polijsten: het moet werken, niet mooi zijn'],
+  rol:{designer:'Bouwt de wintercheck als één pagina: fietstype kiezen, checklist eruit, deelknop. Meet het aantal keer gedeeld.',copywriter:'Schrijft de uitleg over de broodprijs met één visual van de prijsopbouw. Meet de reacties en de toon ervan.',marketeer:'Zet een wachtlijst live voor een winterarrangement dat nog niet bestaat. Meet de aanmeldingen in een week.',strateeg:'Bouwt een subsidiecheck van drie vragen. Meet of het aantal telefoontjes over subsidie daalt.'}},
+ 5:{titel:'Zichtbaar maken',tekst:['Een experiment dat niemand ziet, telt voor de helft. Niet omdat je erkenning nodig hebt, maar omdat iemand anders er iets mee kan: een collega die het remixt, een klant die ziet dat je verder denkt dan de brief.','Austin Kleon schreef er een heel boek over: laat je werk zien, ook het onaffe. Mislukte experimenten zijn hier net zo waardevol als geslaagde. Een team dat alleen successen deelt, leert niets van elkaar.','Een geslaagd experiment is ook het sterkste verkoopgesprek: je komt niet met een idee, maar met een uitkomst.'],
+  lijst:['Alleen ik: onaf of vertrouwelijk','Mijn team: de standaard, deel hem in twee minuten in de weekstart','Iedereen: je profiel en LinkedIn, alleen met akkoord van de klant of zonder herkenbare klantgegevens'],lijstKop:'Drie ringen van delen',
+  goed:['De uitkomst staat er als getal, ook als het tegenviel','Wat je leerde past in één zin: ik dacht ..., het bleek ...','De spec staat op de kaart','Je hebt bewust gekozen wie de kaart ziet'],
+  val:['Alleen successen delen','Vertrouwelijke informatie van de klant op LinkedIn','Over jezelf schrijven in plaats van over wat de lezer eraan heeft'],
+  rol:{designer:'Ik dacht dat mensen de wintercheck zouden lezen, het bleek dat ze hem vooral doorstuurden naar collega’s.',copywriter:'Ik dacht dat mensen boos zouden reageren op de prijsstijging, het bleek dat uitleg binnen een dag begrip opleverde.',marketeer:'Ik dacht dat een arrangement eerst moest bestaan, het bleek dat een wachtlijst sneller liet zien of er vraag was.',strateeg:'Ik dacht dat de klant de doelgroep was, het bleek dat de binnendienst er het meeste aan had.'}}};
+const OPEN=new Set();
+function vidEmbed(u){
+  let m=u.match(/(?:youtu\.be\/|v=)([\w-]{6,})/);if(m)return `https://www.youtube-nocookie.com/embed/${m[1]}`;
+  m=u.match(/vimeo\.com\/(\d+)/);if(m)return `https://player.vimeo.com/video/${m[1]}`;return '';
+}
+function videoBox(n){
+  const src=VIDEO[n]?vidEmbed(VIDEO[n]):'';
+  return `<div class="vid">${src?`<iframe src="${src}" title="Uitlegvideo ${LES[n].titel}" allow="fullscreen; picture-in-picture" loading="lazy"></iframe>`:`${cover('video'+n,640,360,'lg')}<div><div class="pl"></div><b>Uitlegvideo volgt</b><div class="hint">Thijs legt ${LES[n].titel.toLowerCase()} uit</div></div>`}</div>`;
+}
+function lesBox(n){
+  const L=LES[n],rol=(S.user&&L.rol[S.user.rol])?S.user.rol:'designer';
+  return `<details class="les" data-k="les${n}" ${OPEN.has('les'+n)?'open':''}><summary><span class="pl" aria-hidden="true"></span><span>Les: ${L.titel}<small>Video en 2 minuten lezen</small></span></summary>
+  <div class="lb">${videoBox(n)}${L.tekst.map(t=>`<p>${t}</p>`).join('')}
+   <h4>${L.lijstKop}</h4><ul>${L.lijst.map(x=>`<li>${x}</li>`).join('')}</ul>
+   <div class="rolx"><b>Voorbeeld voor een ${rol}</b>${L.rol[rol]}</div>
+   <h4>Goed als</h4><ul>${L.goed.map(x=>`<li>${x}</li>`).join('')}</ul>
+   <h4>Valkuilen</h4><ul>${L.val.map(x=>`<li>${x}</li>`).join('')}</ul></div></details>`;
+}
+/* proeftuin: oefenstaat, niet bewaard */
+const PT={s3:{i:0,ant:[],eig:[null,null,null]},s4:{q:[null,null,null],f:{},lad:null},s5:{f:{}}};
+const CASES=[
+ {merk:'Fietsmerk',sig:'De eerste nachtvorst staat in de weersverwachting voor volgende week.',ok:'signaal',uit:'Van nu, het merk verkoopt winterbanden en verlichting, en het kan forensen helpen met een check.'},
+ {merk:'Bakkerij',sig:'Tips voor een gezond ontbijt.',ok:'ruis',uit:'Niet van nu. Dit is altijd waar, dus het is evergreen en geen signaal.'},
+ {merk:'Installateur',sig:'Per 1 januari veranderen de subsidieregels voor warmtepompen.',ok:'signaal',uit:'Van nu, raakt precies aan wat het bedrijf doet, en het kan iets doen: een check van drie vragen.'},
+ {merk:'Kledingmerk',sig:'De uitslag van de verkiezingen is bekend.',ok:'ruis',uit:'Van nu, maar het merk heeft er geen recht van spreken. Groot nieuws zonder verband is ruis.'},
+ {merk:'Hotel',sig:'Het zoekvolume op weekendje weg in de winter verdubbelt deze maand.',ok:'signaal',uit:'Van nu, past bij het hotel, en het kan testen met een wachtlijst voor een arrangement.'},
+ {merk:'Accountantskantoor',sig:'Vandaag is het de Dag van de Koffie.',ok:'ruis',uit:'Van nu, maar zonder verband met het kantoor en zonder iets wat het kan doen. Alleen iets zeggen is geen experiment.'}];
+const TOETS=['Is het van nu?','Heeft dit merk er recht van spreken?','Kan het merk iets doen in plaats van alleen iets zeggen?'];
+const WAT=[
+ {h:'Als ik een mooie campagne maak, dan gaat het goed.',opt:['Een getal en meetbaar gedrag','Een doelgroep','Niets'],ok:0,uit:'Goed gaan is niet te meten. Wat doen mensen, en hoeveel?'},
+ {h:'Als ik een rekentool maak voor zzp’ers, dan krijgen we meer likes.',opt:['Een betere tool','Gedrag dat ertoe doet','Een langere looptijd'],ok:1,uit:'Likes zeggen weinig. Meet of mensen de tool invullen, delen of contact opnemen.'},
+ {h:'Als ik een nieuwe website bouw voor de klant, dan stijgt de omzet met 10%.',opt:['Het is te groot voor een middag','Er mist een doelgroep','Het getal is te laag'],ok:0,uit:'Een hele website is geen experiment. Kies het kleinste ding dat de vraag beantwoordt.'}];
+const LADDER=['Eén vraag, één antwoord','Een check of quiz','Een rekentool','Een wachtlijst','Een klikbaar prototype'];
+const GEDRAG=['keer gedeeld','aanmeldingen','keer ingevuld','minder telefoontjes','aanvragen of contactmomenten','anders'];
+
+
+const ZINNEN=[
+ {z:'Ik ben een creatieve designer met passie voor merken.',ok:'inwisselbaar',uit:'Functietitel en bijvoeglijke naamwoorden. Elke designer kan deze zin gebruiken.'},
+ {z:'Ik schrijf voor zorgmerken alsof ik nog aan het bed sta, omdat ik zes jaar verpleegkundige was.',ok:'eigen',uit:'Concreet, waar en te bewijzen. Weinig copywriters kunnen dit zeggen.'},
+ {z:'Ik help bedrijven groeien met slimme marketing.',ok:'inwisselbaar',uit:'Te breed: voor wie, en wat is slim? Niets van buiten het vak.'},
+ {z:'Ik maak campagnes voor bouwbedrijven die vakmensen serieus nemen, omdat ik zelf vijf jaar timmerman was.',ok:'eigen',uit:'Duidelijke doelgroep en een geschiedenis die anderen niet hebben.'},
+ {z:'Ik ben een verbinder die out of the box denkt.',ok:'inwisselbaar',uit:'Alleen vage woorden. Niemand kan controleren of het klopt.'}];
+const VAAG=/\b(creatie\w*|passie\w*|gepassioneerd\w*|innovatie\w*|uniek\w*|verbinder|out of the box|enthousiast\w*|holistisch\w*|gedreven|slim\w*)\b/i;
+PT.s2={i:0,ant:[],f:{}};
+function chk2(){const z=(PT.s2.f.zin||'').trim(),w=words(z);return [[!!z&&w<=25,`Hooguit 25 woorden (nu ${w})`],[/\bvoor\b/i.test(z),'Er staat in voor wie'],[/\bomdat\b/i.test(z),'Er staat in wat je van buiten je vak meeneemt'],[!!z&&!VAAG.test(z),'Geen vage woorden zoals creatief, passie of innovatief'],[!!z&&!/^\s*ik ben (een )?/i.test(z),'Begint niet met een functietitel']].map(([y,t])=>`<span class="${y?'y':''}">${t}</span>`).join('')}
+function oef2(){
+  const p=PT.s2,f=p.f;if(f.zin===undefined)f.zin=S.inv.zin||'';if(f.vak===undefined)f.vak=S.inv.vak||'';if(f.wie===undefined)f.wie=S.inv.voorwie||'';
+  let top;
+  if(p.i<ZINNEN.length){const c=ZINNEN[p.i],a=p.ant[p.i];
+    top=`<div class="case"><div class="prog">${ZINNEN.map((_,j)=>`<i class="${j<=p.i?'on':''}"></i>`).join('')}</div><div class="cm">Voorbeeld ${p.i+1} van ${ZINNEN.length}: eigen of inwisselbaar?</div><div class="cs">${c.z}</div>
+    ${a?`<div class="fb ${a===c.ok?'ok':'no'}"><b>${a===c.ok?'Goed.':'Niet helemaal.'}</b> Deze is ${c.ok}. ${c.uit}</div><div class="btns" style="margin-top:12px"><button class="btn sm" data-act="pt2next">${p.i+1<ZINNEN.length?'Volgende':'Bekijk je score'}</button></div>`
+    :`<div class="btns"><button class="btn sm" data-act="pt2" data-v="eigen">Eigen</button><button class="btn ghost sm" data-act="pt2" data-v="inwisselbaar">Inwisselbaar</button></div>`}</div>`}
+  else{const sc=ZINNEN.filter((c,j)=>p.ant[j]===c.ok).length;top=`<div class="case"><div class="cs">${sc} van ${ZINNEN.length} goed.</div><p class="hint">Een eigen zin is concreet, waar en niet door een collega over te nemen.</p><div class="btns" style="margin-top:12px"><button class="btn ghost sm" data-act="pt2reset">Opnieuw</button></div></div>`}
+  return top+`<h4>Zoek je combinatie</h4>
+   <label class="f"><span>Waar heb je gewerkt buiten dit vak?</span><small>Ook bijbaantjes en zijpaden tellen.</small><input type="text" data-pt="s2.werk" value="${esc(f.werk||'')}" placeholder="vier jaar in de horeca"></label>
+   <label class="f"><span>Waar zit je diep in buiten je werk?</span><input type="text" data-pt="s2.diep" value="${esc(f.diep||'')}" placeholder="wielrennen, ik rijd al tien jaar competitie"></label>
+   <label class="f"><span>Waar vragen mensen jou om advies, los van je werk?</span><input type="text" data-pt="s2.advies" value="${esc(f.advies||'')}" placeholder="hoe je een verbouwing plant"></label>
+   <label class="f"><span>Voor wie wil je relevant zijn?</span><input type="text" data-pt="s2.wie" value="${esc(f.wie)}" placeholder="familiebedrijven in de regio"></label>
+   <p class="hint">Kies één van je antwoorden en schrijf je zin in deze vorm: Ik [wat je doet] voor [wie], omdat ik [iets van buiten je vak].</p>
+   <label class="f" style="margin-top:12px"><span>Jouw zin</span><textarea data-pt="s2.zin" placeholder="Ik ... voor ..., omdat ik ...">${esc(f.zin)}</textarea></label>
+   <div class="chks" id="p2chk">${chk2()}</div>
+   <div class="btns"><button class="btn sm" data-act="pt2neem">Neem over als je invalshoek</button></div>`;
+}
+
+function oefBox(n){
+  const titels={bouw:'Wat mist er in deze spec?',2:'Eigen of inwisselbaar?',3:'Signaal of ruis?',4:'Hypothesebouwer',5:'Postmaker'},sub={bouw:'Drie specs. Herken wat een goede spec nodig heeft',2:'Herken een eigen invalshoek, schrijf daarna de jouwe',3:'Oefen met zes voorbeelden, toets daarna je eigen signaal',4:'Wat ontbreekt er? Bouw daarna je eigen hypothese',5:'Maak van je kaart een post voor je team of LinkedIn'};
+  const body=n==='bouw'?oefB():n===2?oef2():n===3?oef3():n===4?oef4():oef5();
+  return `<details class="oef" data-k="oef${n}" ${OPEN.has('oef'+n)?'open':''}><summary><span class="pt" aria-hidden="true">✦</span><span>Proeftuin: ${titels[n]}<small>${sub[n]}</small></span></summary><div class="lb">${body}</div></details>`;
+}
+function oef3(){
+  const p=PT.s3,e=S.exps.find(x=>x.id===CUR)||{};
+  let top;
+  if(p.i<CASES.length){
+    const c=CASES[p.i],a=p.ant[p.i];
+    top=`<div class="case"><div class="prog">${CASES.map((_,j)=>`<i class="${j<=p.i?'on':''}"></i>`).join('')}</div>
+     <div class="cm">${c.merk}, voorbeeld ${p.i+1} van ${CASES.length}</div><div class="cs">${c.sig}</div>
+     ${a?`<div class="fb ${a===c.ok?'ok':'no'}"><b>${a===c.ok?'Goed.':'Niet helemaal.'}</b> Dit is ${c.ok}. ${c.uit}</div><div class="btns" style="margin-top:12px"><button class="btn sm" data-act="pt3next">${p.i+1<CASES.length?'Volgende':'Bekijk je score'}</button></div>`
+     :`<div class="btns"><button class="btn sm" data-act="pt3" data-v="signaal">Signaal</button><button class="btn ghost sm" data-act="pt3" data-v="ruis">Ruis</button></div>`}</div>`;
+  } else {
+    const sc=CASES.filter((c,j)=>p.ant[j]===c.ok).length;
+    top=`<div class="case"><div class="cs">${sc} van ${CASES.length} goed.</div><p class="hint">${sc===CASES.length?'Je ziet het verschil. Toets nu je eigen signaal.':'Kijk bij de fouten welke van de drie vragen je oversloeg.'}</p><div class="btns" style="margin-top:12px"><button class="btn ghost sm" data-act="pt3reset">Opnieuw</button></div></div>`;
+  }
+  const all=p.eig.every(x=>x==='ja'),miss=p.eig.findIndex(x=>x==='nee');
+  return top+`<h4>Toets je eigen signaal</h4>
+   <div class="rolx"><b>Jouw signaal</b>${e.signaal?esc(e.signaal):'Vul eerst hieronder je signaal in.'}</div>
+   <div>${TOETS.map((q,j)=>`<div class="qrow"><span>${q}</span><span class="minis">${['ja','nee'].map(v=>`<button data-act="pt3eig" data-j="${j}" data-v="${v}" aria-pressed="${p.eig[j]===v}">${v}</button>`).join('')}</span></div>`).join('')}</div>
+   ${p.eig.every(x=>x)?`<div class="fb ${all?'ok':'no'}">${all?'Drie keer ja. Dit is je signaal.':`Vraag ${miss+1} is nee. ${['Zoek iets wat deze week of maand speelt.','Kies een signaal dat raakt aan wat het merk maakt of weet.','Bedenk wat het merk kan doen: een antwoord, een berekening, een oplossing. Lukt dat niet, kies dan een ander signaal.'][miss]}`}</div>`:''}`;
+}
+function zin4(){const f=PT.s4.f;return `Als ik ${f.maak||'[wat je maakt]'} maak voor ${f.wie||'[wie]'}, dan verwacht ik ${f.getal||'[getal]'} ${f.gedrag&&f.gedrag!=='anders'?f.gedrag:(f.gedrag2||'[gedrag]')}, omdat ${f.omdat||'[je aanname]'}.`}
+function chk4(){const f=PT.s4.f;return [[!!(f.getal&&/\d/.test(f.getal)),'Er staat een getal in'],[!!(f.gedrag&&(f.gedrag!=='anders'||f.gedrag2)),'Je meet gedrag'],[!!f.wie,'Je weet voor wie'],[PT.s4.lad!==null,'Het past op de ladder, dus in een middag'],[!!f.omdat,'Je aanname staat erbij']].map(([y,t])=>`<span class="${y?'y':''}">${t}</span>`).join('')}
+function oef4(){
+  const p=PT.s4,f=p.f;
+  return `<h4>Wat ontbreekt er?</h4>${WAT.map((w,j)=>`<div class="case" style="margin-top:8px"><div class="cs" style="font-size:1.02rem">${w.h}</div><div class="minis" style="flex-wrap:wrap">${w.opt.map((o,k)=>`<button data-act="pt4q" data-j="${j}" data-k="${k}" aria-pressed="${p.q[j]===k}">${o}</button>`).join('')}</div>${p.q[j]!==null?`<div class="fb ${p.q[j]===w.ok?'ok':'no'}"><b>${p.q[j]===w.ok?'Goed.':'Niet helemaal.'}</b> ${w.uit}</div>`:''}</div>`).join('')}
+   <h4>Bouw je hypothese</h4>
+   <label class="f"><span>Wat maak je?</span><input type="text" data-pt="s4.maak" value="${esc(f.maak||'')}" placeholder="een wintercheck"></label>
+   <label class="f"><span>Voor wie?</span><input type="text" data-pt="s4.wie" value="${esc(f.wie||'')}" placeholder="forensen die twijfelen of ze blijven fietsen"></label>
+   <div class="f"><span>Wat doen mensen, en hoeveel?</span><div style="display:grid;grid-template-columns:110px 1fr;gap:8px"><input type="text" data-pt="s4.getal" value="${esc(f.getal||'')}" placeholder="200" inputmode="numeric"><select data-pt="s4.gedrag"><option value="">Kies gedrag</option>${GEDRAG.map(g=>`<option ${f.gedrag===g?'selected':''}>${g}</option>`).join('')}</select></div>
+    ${f.gedrag==='anders'?`<input type="text" data-pt="s4.gedrag2" value="${esc(f.gedrag2||'')}" placeholder="Beschrijf het gedrag" style="margin-top:8px">`:''}</div>
+   <label class="f"><span>Omdat</span><input type="text" data-pt="s4.omdat" value="${esc(f.omdat||'')}" placeholder="mensen iets bruikbaars eerder delen dan iets om te lezen"></label>
+   <div class="f"><span>Wat bouw je?</span><div class="seg">${LADDER.map((l,k)=>`<button data-act="pt4lad" data-k="${k}" aria-pressed="${p.lad===k}">${l}</button>`).join('')}</div></div>
+   <div class="prev" id="p4prev">${esc(zin4())}</div>
+   <div class="chks" id="p4chk">${chk4()}</div>
+   <div class="btns"><button class="btn sm" data-act="pt4neem">Neem over in je ronde</button></div>`;
+}
+function post5(){const f=PT.s5.f;return `${f.getal||'[getal]'}${f.vergelijk?'. '+f.vergelijk:''}.\n${f.bouw||'[wat je zag en bouwde]'}.\nWat ik leerde: ik dacht ${f.dacht||'...'}, het bleek ${f.bleek||'...'}.${f.link?'\n'+f.link:''}`}
+const GEHEIM=/omzet|marge|winst|€|euro|intern|vertrouwelijk|budget/i;
+function chk5(){const f=PT.s5.f,t=post5();return [[/\d/.test(f.getal||''),'De uitkomst is een getal'],[!!(f.dacht&&f.bleek),'Je schreef op wat je dacht en wat bleek'],[!!f.bouw,'Je vertelt wat je bouwde'],[!GEHEIM.test(t),'Geen vertrouwelijke cijfers van de klant']].map(([y,x])=>`<span class="${y?'y':''}">${x}</span>`).join('')}
+function oef5(){
+  const e=S.exps.find(x=>x.id===CUR)||{},f=PT.s5.f;
+  if(f.bouw===undefined&&e.bouw)f.bouw=e.bouw.replace(/\.$/,'');
+  return `<p class="hint">Een post in vier stappen: begin met het getal, vertel wat je zag en bouwde, wat je leerde, en de link.</p>
+   <label class="f"><span>De uitkomst, als getal</span><input type="text" data-pt="s5.getal" value="${esc(f.getal||'')}" placeholder="412 keer gedeeld in vijf dagen"></label>
+   <label class="f"><span>Vergelijk het met</span><input type="text" data-pt="s5.vergelijk" value="${esc(f.vergelijk||'')}" placeholder="Onze best gedeelde post van de maand kwam op 37"></label>
+   <label class="f"><span>Wat je zag en bouwde</span><input type="text" data-pt="s5.bouw" value="${esc(f.bouw||'')}" placeholder="Bij de eerste nachtvorst bouwde ik een wintercheck voor forensen"></label>
+   <label class="f"><span>Ik dacht</span><input type="text" data-pt="s5.dacht" value="${esc(f.dacht||'')}" placeholder="dat mensen hem zouden lezen"></label>
+   <label class="f"><span>Het bleek</span><input type="text" data-pt="s5.bleek" value="${esc(f.bleek||'')}" placeholder="dat ze hem vooral doorstuurden"></label>
+   <label class="f"><span>Link (optioneel)</span><input type="url" data-pt="s5.link" value="${esc(f.link||e.link||'')}" placeholder="https://"></label>
+   <div class="prev" id="p5prev">${esc(post5())}</div>
+   <div class="chks" id="p5chk">${chk5()}</div>
+   <div class="btns"><button class="btn ghost sm" data-act="pt5kopie">Kopieer post</button><button class="btn sm" data-act="pt5neem">Neem over in je ronde</button></div>`;
+}
+
+
+/* ---------- tool: Meta Ads-analyse ---------- */
+const MA={klant:'',file:'',head:[],rows:null,map:{},ai:'',aiBusy:false,pick:null,waarom:'',hyp:''};
+const MCOL={
+ ad:['advertentienaam','ad name','naam advertentie','advertentie'],
+ campaign:['campagnenaam','campaign name','campagne'],
+ day:['dag','day','begin rapportage','reporting starts','datum','date'],
+ spend:['besteed bedrag','amount spent','uitgegeven bedrag','spend'],
+ impr:['weergaven','impressions','vertoningen'],
+ reach:['bereik','reach'],
+ freq:['frequentie','frequency'],
+ clicks:['linkklikken','link clicks','klikken (alle)','clicks (all)','klikken','clicks'],
+ results:['resultaten','results','aankopen','purchases','leads'],
+ value:['conversiewaarde','conversion value','purchase value','aankoopwaarde']};
+const MLAB={ad:'Advertentie',campaign:'Campagne',day:'Dag',spend:'Besteed bedrag',impr:'Weergaven',reach:'Bereik',freq:'Frequentie',clicks:'Klikken',results:'Resultaten',value:'Conversiewaarde'};
+function autoMap(head){const m={},low=head.map(h=>String(h).toLowerCase().trim());
+  for(const [k,syn] of Object.entries(MCOL)){for(const sy of syn){const i=low.findIndex(h=>h===sy||h.startsWith(sy));if(i>=0&&!Object.values(m).includes(head[i])){m[k]=head[i];break}}}return m}
+function pNum(v){if(typeof v==='number')return v;if(v==null)return NaN;let t=String(v).replace(/[€\s%]/g,'').replace(/[^\d,.\-]/g,'');if(!t)return NaN;
+  if(t.includes(',')&&t.includes('.'))t=t.lastIndexOf(',')>t.lastIndexOf('.')?t.replace(/\./g,'').replace(',','.'):t.replace(/,/g,'');else if(t.includes(','))t=t.replace(',','.');return parseFloat(t)}
+function pDay(v){if(typeof v==='number'&&v>20000)return new Date(Math.round((v-25569)*864e5)).toISOString().slice(0,10);const t=String(v||'').trim();
+  let m=t.match(/^(\d{4})-(\d{2})-(\d{2})/);if(m)return m[0];m=t.match(/^(\d{1,2})[-\/.](\d{1,2})[-\/.](\d{4})/);if(m)return `${m[3]}-${m[2].padStart(2,'0')}-${m[1].padStart(2,'0')}`;return t}
+function parseCSV(text){const first=text.split(/\r?\n/)[0],d=(first.match(/;/g)||[]).length>(first.match(/,/g)||[]).length?';':(first.includes('\t')?'\t':',');
+  const rows=[];let row=[],cur='',q=false;for(let i=0;i<text.length;i++){const c=text[i];
+   if(q){if(c==='"'){if(text[i+1]==='"'){cur+='"';i++}else q=false}else cur+=c}
+   else if(c==='"')q=true;else if(c===d){row.push(cur);cur=''}else if(c==='\n'||c==='\r'){if(c==='\r'&&text[i+1]==='\n')i++;row.push(cur);cur='';if(row.some(x=>x!==''))rows.push(row);row=[]}else cur+=c}
+  row.push(cur);if(row.some(x=>x!==''))rows.push(row);return rows}
+function setTable(rows,name){const head=rows[0].map(h=>String(h).trim());MA.head=head;MA.rows=rows.slice(1).map(r=>Object.fromEntries(head.map((h,i)=>[h,r[i]])));MA.map=autoMap(head);MA.file=name;MA.ai='';MA.pick=null}
+function voorbeeldMeta(){
+  const ads=[['Winterbanden video 15s',.40,.021,-.55,6.2,.05],['Carrousel verlichting',.06,.019,0,5.1,.11],['Statisch beeld korting',.25,.009,0,7.4,.03],['UGC review forens',.21,.016,-.1,6.0,.06],['Story nachtvorst',.08,.007,0,6.8,0]];
+  const head=['Dag','Campagnenaam','Advertentienaam','Besteed bedrag (EUR)','Weergaven','Bereik','Frequentie','Linkklikken','Resultaten'],rows=[head];
+  const start=new Date(Date.now()-21*864e5);let seed=7;const rnd=()=>{seed=(seed*16807)%2147483647;return seed/2147483647};
+  for(let d=0;d<21;d++){const day=new Date(start.getTime()+d*864e5).toISOString().slice(0,10);
+   for(const [n,share,ctr,decay,cpm,cvr] of ads){const sp=150*share*(0.85+rnd()*.3),im=Math.round(sp/cpm*1000),c=ctr*(1+decay*d/20)*(0.9+rnd()*.2),cl=Math.round(im*c),fq=n.startsWith('Winter')?1.4+d*.12:1.3+d*.04;
+    rows.push([day,'Winter 2026',n,sp.toFixed(2).replace('.',','),im,Math.round(im/fq),fq.toFixed(2).replace('.',','),cl,Math.round(cl*cvr*(0.8+rnd()*.4))])}}
+  return rows}
+const eur=v=>isFinite(v)?v.toLocaleString('nl-NL',{style:'currency',currency:'EUR',maximumFractionDigits:v<10?2:0}):'–';
+const pct=v=>isFinite(v)?(v*100).toLocaleString('nl-NL',{maximumFractionDigits:2})+'%':'–';
+const num=v=>isFinite(v)?Math.round(v).toLocaleString('nl-NL'):'–';
+function metaCalc(){
+  const m=MA.map,g=(r,k)=>m[k]?pNum(r[m[k]]):NaN;if(!MA.rows||!m.spend||!m.impr)return null;
+  const by={};let T={spend:0,impr:0,clicks:0,results:0,value:0,fw:0};
+  for(const r of MA.rows){const sp=g(r,'spend'),im=g(r,'impr');if(!isFinite(sp)||!isFinite(im))continue;
+   const key=m.ad?(r[m.ad]||'(zonder naam)'):m.campaign?(r[m.campaign]||'(zonder naam)'):'Alle advertenties';
+   const a=by[key]||(by[key]={naam:key,spend:0,impr:0,clicks:0,results:0,value:0,fw:0,days:{}});
+   const cl=g(r,'clicks')||0,rs=g(r,'results')||0,vl=g(r,'value')||0,fq=g(r,'freq');
+   a.spend+=sp;a.impr+=im;a.clicks+=cl;a.results+=rs;a.value+=vl;if(isFinite(fq))a.fw+=fq*im;
+   T.spend+=sp;T.impr+=im;T.clicks+=cl;T.results+=rs;T.value+=vl;if(isFinite(fq))T.fw+=fq*im;
+   if(m.day){const d=pDay(r[m.day]);const x=a.days[d]||(a.days[d]={impr:0,clicks:0});x.impr+=im;x.clicks+=cl}}
+  const useRes=!!m.results&&T.results>0,ads=Object.values(by).map(a=>Object.assign(a,{share:a.spend/T.spend,ctr:a.impr?a.clicks/a.impr:NaN,cpc:a.clicks?a.spend/a.clicks:NaN,cpr:a.results?a.spend/a.results:Infinity,freq:a.fw&&a.impr?a.fw/a.impr:NaN})).sort((x,y)=>y.spend-x.spend);
+  const kost=a=>useRes?a.cpr:a.cpc,kn=useRes?'kosten per resultaat':'kosten per klik';
+  const ok=ads.filter(a=>a.impr>=1000&&isFinite(kost(a))),med=ok.length?ok.map(kost).sort((x,y)=>x-y)[Math.floor(ok.length/2)]:NaN;
+  const I=[];
+  ok.filter(a=>kost(a)>1.5*med&&a.share>.1).forEach(a=>I.push({t:`${a.naam} kost veel en levert relatief weinig op`,b:`${pct(a.share)} van het budget, ${kn} ${eur(kost(a))} tegen een mediaan van ${eur(med)}.`,v:'Komt dit door het beeld, de boodschap of de doelgroep?'}));
+  ok.filter(a=>kost(a)<.7*med&&a.share<.08&&(!useRes||a.results>=3)).forEach(a=>I.push({t:`${a.naam} presteert goed met weinig budget`,b:`${kn} ${eur(kost(a))}, ${Math.round((1-kost(a)/med)*100)}% onder de mediaan, maar slechts ${pct(a.share)} van het budget.`,v:'Blijft dit zo als het meer budget krijgt, of is het een kleine groep die al overtuigd was?'}));
+  if(m.day)ads.filter(a=>Object.keys(a.days).length>=6).forEach(a=>{const ds=Object.keys(a.days).sort(),h=Math.floor(ds.length/2),c=arr=>{const s=arr.reduce((t,d)=>({i:t.i+a.days[d].impr,c:t.c+a.days[d].clicks}),{i:0,c:0});return s.i?s.c/s.i:NaN};
+   const c1=c(ds.slice(0,h)),c2=c(ds.slice(h));if(c1&&c2/c1<.75)I.push({t:`${a.naam} slijt`,b:`De CTR zakte van ${pct(c1)} naar ${pct(c2)} tussen de eerste en tweede helft van de periode${isFinite(a.freq)?`, bij een frequentie van ${a.freq.toLocaleString('nl-NL',{maximumFractionDigits:1})}`:''}.`,v:'Is het beeld uitgekeken, of verandert de doelgroep die het ziet?'})});
+  if(useRes)ads.filter(a=>a.results===0&&a.share>.05).forEach(a=>I.push({t:`${a.naam} levert niets op`,b:`${eur(a.spend)} besteed (${pct(a.share)} van het budget), nul resultaten.`,v:'Klopt het doel van deze advertentie met wat je meet?'}));
+  const F=T.fw&&T.impr?T.fw/T.impr:NaN;if(F>3.5)I.push({t:'Dezelfde mensen zien je advertenties vaak',b:`Gemiddelde frequentie ${F.toLocaleString('nl-NL',{maximumFractionDigits:1})}.`,v:'Is de doelgroep te klein voor dit budget, of is dat juist de bedoeling?'});
+  if(ads[0]&&ads[0].share>.5&&ads.length>2)I.push({t:'Eén advertentie krijgt het meeste budget',b:`${ads[0].naam} krijgt ${pct(ads[0].share)} van het budget.`,v:'Is dat een bewuste keuze, of heeft het algoritme het zo verdeeld?'});
+  return {T,ads,useRes,kn,med,F,I,weinig:ads.filter(a=>a.impr<1000).length};
+}
+function metaPage(){
+  const R=metaCalc();
+  const mapUI=MA.rows?`<section class="step"><div class="step-h"><b>2</b><h2>Kolommen</h2><span>${esc(MA.file)}, ${MA.rows.length} rijen</span></div><div class="step-b">
+   <details class="les" ${(!MA.map.spend||!MA.map.impr)?'open':''}><summary><span class="pt" aria-hidden="true">✓</span><span>${Object.keys(MA.map).length} van ${Object.keys(MCOL).length} kolommen herkend<small>${(!MA.map.spend||!MA.map.impr)?'Kies besteed bedrag en weergaven, die zijn nodig':'Klopt er een niet? Pas hem hier aan'}</small></span></summary>
+   <div class="lb"><div class="maps">${Object.keys(MCOL).map(k=>`<label>${MLAB[k]}<select data-ma="${k}"><option value="">Niet gebruiken</option>${MA.head.map(h=>`<option ${MA.map[k]===h?'selected':''}>${esc(h)}</option>`).join('')}</select></label>`).join('')}</div></div></details></div></section>`:'';
+  let res='';
+  if(MA.rows&&!R)res=`<section class="step"><div class="step-b"><p class="err">Ik mis het besteed bedrag of de weergaven. Kies die kolommen hierboven.</p></div></section>`;
+  if(R){const T=R.T;
+   res=`<section class="step"><div class="step-h"><b>3</b><h2>Wat de data laat zien</h2></div><div class="step-b">
+    <div class="kpis"><div><span>Besteed</span><b>${eur(T.spend)}</b></div><div><span>CTR</span><b>${pct(T.clicks/T.impr)}</b></div><div><span>${R.useRes?'Kosten per resultaat':'Kosten per klik'}</span><b>${eur(R.useRes?T.spend/T.results:T.spend/T.clicks)}</b></div><div><span>${T.value?'ROAS':'Resultaten'}</span><b>${T.value?(T.value/T.spend).toLocaleString('nl-NL',{maximumFractionDigits:2}):num(T.results)}</b></div></div>
+    <div class="grp" style="margin-top:26px"><span>Wat opvalt</span><span>Kies er straks één</span></div>
+    ${R.I.length?`<div class="ins">${R.I.map((x,i)=>`<label class="in"><input type="radio" name="mapick" data-act="mapick" data-i="${i}" ${MA.pick===i?'checked':''}><b>${esc(x.t)}</b><p>${esc(x.b)}</p><p class="v">${esc(x.v)}</p></label>`).join('')}</div>`:`<div class="empty">Niets springt eruit. Dat is ook een uitkomst: kijk naar de tabel hieronder, of kies een langere periode.</div>`}
+    ${R.weinig?`<p class="hint" style="margin-top:10px">${R.weinig} advertentie${R.weinig>1?'s hebben':' heeft'} minder dan 1.000 weergaven en ${R.weinig>1?'tellen':'telt'} niet mee in de vergelijking. Te weinig data om iets over te zeggen.</p>`:''}
+    <div class="grp" style="margin-top:26px"><span>Per advertentie</span><span>Op budget</span></div>
+    <div class="scroll"><table class="adt"><thead><tr><th>Advertentie</th><th>Budget</th><th>CTR</th><th>${R.useRes?'Per resultaat':'Per klik'}</th><th>Freq.</th></tr></thead><tbody>
+    ${R.ads.slice(0,10).map(a=>`<tr><td>${esc(a.naam)}</td><td>${pct(a.share)}</td><td>${pct(a.ctr)}</td><td>${R.useRes?(isFinite(a.cpr)?eur(a.cpr):'geen'):eur(a.cpc)}</td><td>${isFinite(a.freq)?a.freq.toLocaleString('nl-NL',{maximumFractionDigits:1}):'–'}</td></tr>`).join('')}</tbody></table></div>
+   </div></section>
+   <section class="step"><div class="step-h"><b>4</b><h2>AI-duiding</h2><span>Optioneel</span></div><div class="step-b">
+    <p class="hint">De AI krijgt alleen de samenvatting hierboven, geen ruwe export. Hij doet geen voorstel om budget te verschuiven, maar zet mogelijke verklaringen naast elkaar en vraagt wat jij zou testen.</p>
+    <div class="btns" style="margin-top:14px"><button class="btn ghost sm" data-act="maai" ${MA.aiBusy?'disabled':''}>${MA.aiBusy?'<span class="busy"></span> Leest de data':'Laat de AI meekijken'}</button></div>
+    ${MA.ai?`<div class="coach" style="white-space:pre-wrap">${esc(MA.ai)}</div>`:''}
+   </div></section>
+   <section class="step"><div class="step-h"><b>5</b><h2>Jouw oordeel</h2><span>Hier word je uitvinder</span></div><div class="step-b">
+    <p>${MA.pick!==null&&R.I[MA.pick]?`Je koos: <b>${esc(R.I[MA.pick].t)}</b>`:'Kies hierboven wat je wilt testen.'}</p>
+    <label class="f" style="margin-top:14px"><span>Waarom deze, en niet een van de andere?</span><textarea data-mf="waarom" placeholder="Wat maakt dit belangrijker voor de klant?">${esc(MA.waarom)}</textarea></label>
+    <label class="f"><span>Je hypothese</span><textarea data-mf="hyp" placeholder="Als ik ..., dan verwacht ik ..., omdat ...">${esc(MA.hyp)}</textarea></label>
+    <div class="btns"><button class="btn" data-act="maronde">Maak er een ronde van</button></div>
+   </div></section>`}
+  return topBar('library')+`<main class="wrap">
+  <div class="ph"><div class="lbl">Library, tool</div><h1>Meta Ads-analyse.</h1><p>Zie in een paar minuten waar je advertenties lekken en waar kansen liggen. De tool laat zien wat er gebeurt. Jij kiest wat je test, en waarom.</p></div>
+  ${toolUitleg('meta')}
+  <section class="step"><div class="step-h"><b>1</b><h2>Je data</h2></div><div class="step-b">
+   <label class="f"><span>Voor welke klant?</span><input type="text" data-mf="klant" value="${esc(MA.klant)}" placeholder="Klantnaam"></label>
+   <label class="drop"><input type="file" accept=".csv,.xlsx,.xls,.txt" data-act="mafile" hidden><span><b>${MA.file?esc(MA.file):'Kies een export uit Ads Manager'}</b><br><span class="hint">CSV of Excel. De data blijft in je browser.</span></span></label>
+   <div class="btns" style="margin-top:12px"><button class="btn ghost sm" data-act="mavb">Probeer met voorbeelddata</button></div>
+   <details class="les" style="margin-top:14px"><summary><span class="pl" aria-hidden="true"></span><span>Zo maak je de export<small>Een minuut werk</small></span></summary><div class="lb"><ul>
+    <li>Open Ads Manager en kies het niveau Advertenties.</li><li>Kies een periode van minstens 14 dagen.</li><li>Zet bij Verdeling de optie per dag aan, dan ziet de tool ook of een advertentie slijt.</li><li>Kies Exporteren, tabelgegevens, als CSV of Excel.</li></ul>
+    <p class="hint">Live koppelen met Meta komt in een volgende versie. Daarvoor moet Meta de koppeling eerst goedkeuren.</p></div></details>
+  </div></section>${mapUI}${res}</main>`+foot();
+}
+
+
+/* ---------- twaalf weken, metingen, portfolio, beoordeling ---------- */
+const afgerond=()=>S.exps.filter(e=>e.status==='af');
+const MEET={
+ gen:{n:'Ideeën bedenken',q:['Ik bedenk nieuwe ideeën voor merken waar ik aan werk, zonder dat iemand erom vraagt.','Ik zoek actief naar nieuwe manieren om een probleem van een klant aan te pakken.','Ik kom met oplossingen die nog niet eerder zijn geprobeerd.']},
+ prom:{n:'Ideeën inbrengen',q:['Ik zorg dat collega’s of klanten enthousiast raken over een nieuw idee.','Ik zoek steun bij anderen om een idee uit te voeren.','Ik breng mijn ideeën in bij overleg met klant of team.']},
+ real:{n:'Ideeën uitvoeren',q:['Ik maak van een idee iets wat mensen echt kunnen gebruiken.','Ik test nieuwe ideeën in de praktijk voordat ik ze groter maak.','Ik maak zelf iets werkends met AI, zonder op een ontwikkelaar te wachten.']},
+ cse:{n:'Creatief zelfvertrouwen',q:['Ik vertrouw erop dat ik creatieve oplossingen kan bedenken.','Ik kan een vaag probleem omzetten in een idee dat te testen is.','Ik durf iets uit te proberen waarvan ik de uitkomst niet weet.']}};
+const MW=[1,6,12];
+let MA2={};
+const gem=a=>a.reduce((x,y)=>x+y,0)/a.length;
+function metingTabel(list){
+  if(!list.length)return `<div class="empty">Nog geen metingen.</div>`;
+  const rij=(lab,f)=>`<tr><td>${lab}</td>${MW.map(w=>{const m=list.find(x=>x.week===w);return `<td>${m?f(m):'–'}</td>`}).join('')}</tr>`;
+  return `<div class="scroll"><table class="mtab"><thead><tr><th></th>${MW.map(w=>`<th>Week ${w}</th>`).join('')}</tr></thead><tbody>
+   ${rij('Innovatief werkgedrag (1–5)',m=>((m.gen+m.prom+m.real)/3).toLocaleString('nl-NL',{maximumFractionDigits:1}))}
+   ${rij('Creatief zelfvertrouwen (1–5)',m=>m.cse.toLocaleString('nl-NL',{maximumFractionDigits:1}))}
+   ${rij('Uitvindend werk (Rolscan)',m=>isFinite(m.rol)?m.rol+'%':'–')}</tbody></table></div>`;
+}
+function metingPage(w){
+  w=+w;if(!MW.includes(w))w=1;const done=S.metingen.find(m=>m.week===w);
+  return topBar('meting')+`<main class="wrap">
+  <div class="ph"><div class="lbl">Meting, week ${w}</div><h1>${w===1?'Je startmeting.':w===6?'Je tussenmeting.':'Je eindmeting.'}</h1>
+  <p>Twaalf uitspraken over hoe je nu werkt. Er is geen goed of fout antwoord: deze meting laat straks zien hoe je verschoven bent. Daarna doe je de Rolscan opnieuw.</p>
+  <p class="hint">Voorlopige vragen in eigen woorden, op de dimensies van innovatief werkgedrag (Janssen, 2000) en creatieve self-efficacy (Tierney & Farmer, 2002). Ze worden vervangen door de gevalideerde vragenlijsten zodra vertaling en rechten geregeld zijn.</p></div>
+  ${done?`<section class="next">${cover('meting'+w,800,360,'lg')}<span class="k">Ingevuld op ${fmtD(done.datum)}</span><h2>Deze meting is klaar.</h2><div class="btns"><a class="btn" href="#/vandaag">Naar vandaag</a><button class="btn ghost" data-act="mredo" data-w="${w}">Opnieuw invullen</button></div></section>`
+  :Object.entries(MEET).map(([k,d],di)=>`<section class="step"><div class="step-h"><b>${di+1}</b><h2>${d.n}</h2><span>1 = nooit of helemaal niet, 5 = altijd of helemaal</span></div><div class="step-b">
+    ${d.q.map((q,i)=>`<div class="mq"><span>${q}</span><span class="sc">${[1,2,3,4,5].map(v=>`<button data-act="mset" data-k="${k}${i}" data-v="${v}" aria-pressed="${MA2[k+i]===v}">${v}</button>`).join('')}</span></div>`).join('')}</div></section>`).join('')+`
+  <div class="btns" style="margin-top:22px"><button class="btn" data-act="msave" data-w="${w}">Sla meting op en doe de Rolscan</button></div>`}
+  <div class="grp"><span>Je metingen</span></div>${metingTabel(S.metingen)}
+  </main>`+foot();
+}
+const RUBRIC=[['Signaal','Signaal met bron of datum, verband met het merk benoemd','Signaal dat de klant zelf nog niet zag, met een concreet aanknopingspunt om te bouwen'],
+ ['Hypothese en meting','Hypothese als, dan, omdat, met een getal; meting vooraf vastgelegd','Meting op gedrag dat ertoe doet; de hypothese is echt weerlegbaar'],
+ ['Bouw en oordeel over AI','Werkend experiment, spec op de kaart','Keuzes tussen AI-opties verantwoord; door een collega te remixen'],
+ ['Uitkomst en inzicht','Uitkomst als getal, inzicht als ik dacht, het bleek','Inzicht dat de volgende ronde aantoonbaar verandert'],
+ ['Delen','Bewust gekozen zichtbaarheid, geen vertrouwelijke informatie','Gedeeld werk dat anderen in het team hergebruiken']];
+const EINDR=[['Pitch','Het experiment, de uitkomst en een voorstel zijn helder','Overtuigt de klant met bewijs en een concreet vervolg'],
+ ['Reflectie op de verschuiving','Verschuiving beschreven, met verwijzing naar de metingen','Verschuiving onderbouwd met metingen, kaarten en eerlijke tegenvallers'],
+ ['Eigen ontwikkeling','Benoemt een vervolgstap','Een vervolgplan vanuit de eigen invalshoek, met wat hij anders gaat doen']];
+const words=t=>(String(t).trim().match(/\S+/g)||[]).length;
+function portfolio(){
+  const af=afgerond(),pf=S.portfolio.filter(id=>af.some(e=>e.id===id)),wc=words(S.eind.reflectie);
+  const need=[[af.length>=8,`Minimaal 8 rondes afgerond (nu ${af.length})`],[pf.length===3,`Drie sterkste kaarten gekozen (nu ${pf.length})`],[!!S.eind.pitch.trim(),'Link naar je pitch'],[wc>=1000&&wc<=1500,`Reflectie van 1.000 tot 1.500 woorden (nu ${wc})`],[S.metingen.some(m=>m.week===12),'Eindmeting in week 12']];
+  const klaar=need.every(n=>n[0]);
+  return topBar('portfolio')+`<main class="wrap">
+  <div class="ph"><div class="lbl">Portfolio en eindopdracht</div><h1>Laat zien dat je uitvinder bent.</h1>
+  <p>Je eindbeoordeling bestaat uit je portfolio (60%) en je eindopdracht (40%). Een beoordelaar kijkt ernaar, niet de AI.</p></div>
+  ${S.eind.ingediend?`<section class="next">${cover('ingediend',800,360,'lg')}<span class="k">Ingediend op ${fmtD(S.eind.ingediend)}</span><h2>Je inzending ligt bij de beoordelaar.</h2><p>Je hoort binnen tien werkdagen de uitslag.</p></section>`:''}
+  <section class="step"><div class="step-h"><b>1</b><h2>Kies je drie sterkste kaarten</h2><span>${pf.length} van 3</span></div><div class="step-b">
+   <p class="hint">Kies de kaarten die het best laten zien hoe je werkt. Ze worden beoordeeld met de rubric hieronder.</p>
+   ${af.length?af.map(e=>`<label class="pk"><input type="checkbox" data-act="pfpick" data-id="${e.id}" ${pf.includes(e.id)?'checked':''}><b>${esc(expTitel(e))}</b><span class="hint">${esc(e.klant||'')}${e.uitkomst?', '+esc(e.uitkomst):''}</span></label>`).join(''):`<div class="empty">Nog geen afgeronde rondes.</div>`}
+  </div></section>
+  <section class="step"><div class="step-h"><b>2</b><h2>Zo wordt het beoordeeld</h2></div><div class="step-b">
+   ${RUBRIC.map(([c,v,x],i)=>`<div class="rb"><b>${i+1}. ${c}</b><span><span class="hint">Voldoende:</span> ${v}</span><span><span class="hint">Excellent:</span> ${x}</span></div>`).join('')}
+  </div></section>
+  <section class="step"><div class="step-h"><b>3</b><h2>Eindopdracht</h2><span>Week 12</span></div><div class="step-b">
+   <label class="f"><span>Link naar je pitch</span><small>Tien minuten voor een klant, echt of gesimuleerd. Een video of slides met opname.</small><input type="url" data-pf="pitch" value="${esc(S.eind.pitch)}" placeholder="https://"></label>
+   <label class="f"><span>Reflectieverslag</span><small>Laat met je metingen en kaarten zien hoe je werk en denken verschoven zijn. Waar zat je in week 1? Wat bleek anders dan je dacht? Wat ging tegen? Wat ga je nu anders doen, vanuit je invalshoek?</small><textarea class="big" data-pf="reflectie" style="min-height:300px">${esc(S.eind.reflectie)}</textarea><small id="wc">${wc} woorden</small></label>
+  </div></section>
+  <div class="grp"><span>Indienen</span></div>
+  <div class="need" id="need">${need.map(([y,t])=>`<span class="${y?'y':''}">${t}</span>`).join('')}</div>
+  <div class="btns" style="margin-top:16px"><button class="btn" data-act="indienen" ${klaar&&!S.eind.ingediend?'':'disabled'}>Dien in bij de beoordelaar</button><a class="btn ghost sm" href="#/beoordeling">Zo ziet een beoordelaar het</a></div>
+  </main>`+foot();
+}
+let BE={};
+const LEV=['Onvoldoende','Voldoende','Goed','Excellent'],PUNT=[4,6,8,10];
+const VB={naam:'Voorbeeldinzending (fictief)',reflectie:'In week 1 was 18% van mijn werk uitvindend. Ik wachtte op de contentkalender en maakte wat erin stond. De eerste ronde, een wintercheck voor een fietsmerk, liet me zien dat iets bruikbaars vaker gedeeld wordt dan iets om te lezen. Ik dacht dat mijn waarde in de afwerking zat, het bleek dat die in het eerste idee zat...',metingen:[{week:1,gen:2.3,prom:2.0,real:1.7,cse:2.7,rol:18},{week:6,gen:3.3,prom:2.7,real:3.0,cse:3.3,rol:27},{week:12,gen:4.0,prom:3.3,real:3.7,cse:4.0,rol:38}]};
+function beoordeling(){
+  const kaarten=TEAM.cards.slice(0,3),pS=RUBRIC.map((_,i)=>BE['p'+i]),eS=EINDR.map((_,i)=>BE['e'+i]);
+  const alles=pS.every(x=>x!==undefined)&&eS.every(x=>x!==undefined);
+  const cijfer=alles?(.6*gem(pS.map(i=>PUNT[i]))+.4*gem(eS.map(i=>PUNT[i]))):NaN;
+  const blok=(lijst,pre)=>lijst.map(([c],i)=>`<div class="mq"><span><b>${c}</b></span><span class="minis" style="flex-wrap:wrap">${LEV.map((l,k)=>`<button data-act="beset" data-k="${pre}${i}" data-v="${k}" aria-pressed="${BE[pre+i]===k}">${l}</button>`).join('')}</span></div>`).join('');
+  return topBar('beoordeling')+`<main class="wrap">
+  <div class="ph"><div class="lbl">Weergave voor de beoordelaar</div><h1>${VB.naam}</h1>
+  <p>De beoordelaar scoort met de rubric. De AI beoordeelt niet. Bij een cijfer tussen 5 en 6, en bij een steekproef van 10%, kijkt een tweede beoordelaar mee.</p></div>
+  <div class="grp"><span>Metingen</span></div>${metingTabel(VB.metingen)}
+  <div class="grp"><span>Drie sterkste kaarten</span></div>${kaarten.map(e=>kaart(e,false)).join('')}
+  <section class="step"><div class="step-h"><b>1</b><h2>Portfolio, 60%</h2></div><div class="step-b">${blok(RUBRIC,'p')}</div></section>
+  <section class="step"><div class="step-h"><b>2</b><h2>Eindopdracht, 40%</h2></div><div class="step-b">
+   <div class="rolx"><b>Uit het reflectieverslag</b>${esc(VB.reflectie)}</div>${blok(EINDR,'e')}</div></section>
+  <section class="next">${cover('cijfer',800,360,'lg')}<span class="k">Eindcijfer</span><div class="cijfer">${alles?cijfer.toLocaleString('nl-NL',{maximumFractionDigits:1}):'–'}</div>
+   <p>${alles?(cijfer>=5.5?'Voldoende. De mindsetswitch is aangetoond als ook de metingen verschuiven.':'Onvoldoende. Een herkansing richt zich op de criteria die onder voldoende bleven.')+(cijfer>=5&&cijfer<6?' Tweede beoordelaar nodig.':''):'Scoor alle criteria om het cijfer te zien.'}</p></section>
+  </main>`+foot();
+}
+
+
+/* ---------- tutorial: Meta Ads lezen met Claude in Chrome ---------- */
+const CHROME_PROMPT=`Je kijkt mee in Meta Ads Manager. Alleen lezen: wijzig niets, klik niet op knoppen die iets aanpassen en publiceer niets.
+
+1. Lees voor de zichtbare periode per advertentie: besteed bedrag, weergaven, CTR, kosten per resultaat en frequentie.
+2. Noem maximaal vier dingen die opvallen, elk met de cijfers als bewijs. Laat advertenties met minder dan 1.000 weergaven buiten de vergelijking.
+3. Geef bij elk punt twee verklaringen die elkaar uitsluiten, en wat ik zou moeten zien om ertussen te kiezen.
+4. Geef geen advies om budget te verschuiven of advertenties aan of uit te zetten. Die keuze maak ik.
+5. Sluit af per punt met: Opvallend, Bewijs, Vraag.`;
+const CT={klant:'',keuze:'',waarom:'',hyp:''};
+function chromePage(){
+  return topBar('library')+`<main class="wrap">
+  <div class="ph"><div class="lbl">Library, tutorial</div><h1>Meta Ads lezen met Claude in Chrome.</h1>
+  <p>Claude leest Ads Manager in je eigen browser, met de actuele cijfers. Geen export, geen koppeling die Meta moet goedkeuren. Claude laat zien wat opvalt, jij kiest wat je test.</p></div>
+  ${toolUitleg('chrome')}
+  <section class="step"><div class="step-h"><b>1</b><h2>Voor je begint</h2></div><div class="step-b"><ul style="margin:0;padding-left:20px;display:grid;gap:6px;line-height:1.5">
+   <li>Je hebt Claude in Chrome nodig, en toegang tot het advertentieaccount van de klant.</li>
+   <li>Claude werkt in jouw ingelogde sessie. Kijk mee terwijl hij leest, en stop hem als hij iets wil aanpassen.</li>
+   <li>Werk je voor een klant, check dan of die akkoord is dat een AI-assistent meekijkt in het account.</li></ul></div></section>
+  <section class="step"><div class="step-h"><b>2</b><h2>Zo doe je het</h2></div><div class="step-b"><ol style="margin:0;padding-left:20px;display:grid;gap:6px;line-height:1.5">
+   <li>Open Ads Manager in Chrome. Kies het account, het niveau Advertenties en een periode van minstens 14 dagen.</li>
+   <li>Zet de kolommen besteed bedrag, weergaven, CTR, kosten per resultaat en frequentie aan.</li>
+   <li>Open Claude in Chrome en plak de prompt hieronder.</li>
+   <li>Lees de punten die Claude noemt. Kies er één en vul hieronder in waarom.</li></ol>
+   <div class="f" style="margin-top:18px"><span>De prompt</span><pre>${esc(CHROME_PROMPT)}</pre></div>
+   <div class="btns"><button class="btn ghost sm" data-act="ctcopy">Kopieer prompt</button></div></div></section>
+  <section class="step"><div class="step-h"><b>3</b><h2>Jouw oordeel</h2><span>Hier word je uitvinder</span></div><div class="step-b">
+   <label class="f"><span>Voor welke klant?</span><input type="text" data-ct="klant" value="${esc(CT.klant)}"></label>
+   <label class="f"><span>Welk punt kies je?</span><small>Plak het punt van Claude, met het bewijs.</small><textarea data-ct="keuze">${esc(CT.keuze)}</textarea></label>
+   <label class="f"><span>Waarom dit punt, en niet een ander?</span><textarea data-ct="waarom">${esc(CT.waarom)}</textarea></label>
+   <label class="f"><span>Je hypothese</span><textarea data-ct="hyp" placeholder="Als ik ..., dan verwacht ik ..., omdat ...">${esc(CT.hyp)}</textarea></label>
+   <div class="btns"><button class="btn" data-act="ctronde">Maak er een ronde van</button></div></div></section>
+  </main>`+foot();
+}
+
+
+/* ---------- toolregister: elke tool en tutorial meldt stap, leeruitkomst en de zes eisen ---------- */
+const EISEN=['Hangt aan een stap en een leeruitkomst','Levert opties of patronen, geen kant-en-klaar eindresultaat','Vraagt jouw keuze en een verantwoording, die op de kaart komt','Is open: je ziet hoe hij werkt','Uitkomst gaat naar stap 4 als hypothese of naar stap 5 als uitkomst','Gebruikt geen klantgegevens buiten wat met de klant is afgesproken'];
+const TOOLS=[
+ {id:'meta',type:'Tool',titel:'Meta Ads-analyse',stap:[3,4],lu:['LU2','LU3'],kort:'Upload een export en zie waar je advertenties lekken en waar kansen liggen.',seed:'tool-meta-1',
+  werking:['Leest een export uit Ads Manager in je browser; de data gaat niet naar een server.','Rekent per advertentie budgetaandeel, CTR, kosten per resultaat en frequentie uit.','Zoekt vijf patronen: dure advertenties met veel budget, goedkope winnaars met weinig budget, slijtage, uitgaven zonder resultaat en hoge frequentie.','Advertenties onder 1.000 weergaven tellen niet mee.','De AI krijgt alleen de samenvatting en geeft verklaringen, nooit budgetadvies.'],
+  eisen:['Stap 3 en 4, LU2 en LU3','Laat patronen met bewijs zien, beslist niets','Je kiest één punt en schrijft op waarom','Werking staat in dit blok','Wordt een ronde met signaal, keuze en hypothese','Export blijft in je browser']},
+ {id:'chrome',type:'Tutorial',titel:'Meta Ads lezen met Claude in Chrome',stap:[3,4],lu:['LU2','LU3'],kort:'Actuele cijfers, direct in je browser. Met een prompt die alleen leest.',seed:'tool-chrome-5',
+  werking:['Claude in Chrome leest Ads Manager in jouw ingelogde sessie.','De prompt verbiedt wijzigen en publiceren, en vraagt om bewijs en twee verklaringen per punt.'],
+  eisen:['Stap 3 en 4, LU2 en LU3','Claude noemt wat opvalt, met bewijs en verklaringen','Je plakt het punt dat je kiest en schrijft op waarom','De volledige prompt staat in de tutorial, de werking in dit blok','Wordt een ronde met signaal, keuze en hypothese','Alleen met akkoord van de klant']},
+ {id:'concept',type:'Tool',titel:'Concept-machine',stap:[4],lu:['LU3'],kort:'Dertig conceptroutes als ruw materiaal. Jij kiest, combineert en verdedigt er één.',seed:'tool-concept-2',
+  werking:['Je geeft een korte briefing: merk, doelgroep, de vraag en je randvoorwaarden. Je invalshoek gaat automatisch mee.','De AI maakt dertig routes, verdeeld over tool, format, campagne, actie, product en samenwerking. Minstens vijf vertrekken vanuit je invalshoek.','Jij zet er maximaal drie op een shortlist en maakt er één concept van.','Zonder verantwoording en zonder eigen toevoeging wordt het geen ronde.'],
+  eisen:['Stap 4, LU3','Dertig routes als ruw materiaal, geen eindconcept','Je kiest, combineert en schrijft op waarom en wat je zelf toevoegde','Werking staat in dit blok','Wordt een ronde met jouw concept als wat je bouwt','Alleen wat je zelf in de briefing zet']}];
+function toolKaart(t){return `<a class="tool" href="#/tool/${t.id}">${cover(t.seed,600,340,'lg')}<span class="tag">${t.type}, stap ${t.stap.join(' en ')}</span><div><h3>${t.titel}</h3><p>${t.kort}</p></div></a>`}
+function toolUitleg(id){const t=TOOLS.find(x=>x.id===id);return `<details class="les" data-k="werk-${id}" ${OPEN.has('werk-'+id)?'open':''}><summary><span class="pt" aria-hidden="true">✓</span><span>Zo werkt deze ${t.type.toLowerCase()}<small>${t.lu.join(' en ')}, en hoe hij aan de zes eisen voldoet</small></span></summary>
+ <div class="lb"><ul>${t.werking.map(w=>`<li>${w}</li>`).join('')}</ul><h4>De zes eisen uit het kader</h4><div class="eisen">${EISEN.map((e,i)=>`<div><span><b>${e}.</b> ${t.eisen[i]}</span></div>`).join('')}</div></div></details>`}
+
+/* ---------- tool: concept-machine ---------- */
+const CM={f:{},routes:null,busy:false,err:'',demo:false,type:'alle',pick:[],concept:'',waarom:'',eigen:''};
+const CM_VB=[
+ ['Winterklaar-check','Forensen kiezen hun fietstype en krijgen een checklist voor banden, licht en kleding.','tool',false],
+ ['Nachtvorstalarm','De avond voor de eerste nachtvorst een bericht met wat je morgen anders moet doen.','format',false],
+ ['Gratis lichtcheck','In de eerste donkere week controleert de dealer gratis je verlichting.','actie',false],
+ ['De doorfietsers','Portretten van forensen die de hele winter blijven fietsen, in hun eigen woorden.','campagne',false],
+ ['Koffie voor wie fietst','Met een koffiezaak: warme koffie voor wie in de eerste vorstweek op de fiets komt.','samenwerking',false],
+ ['Bandenspanning van de week','Elke maandag één getal: de juiste bandenspanning bij het weer van die week.','format',false],
+ ['Winterpakket als abonnement','Banden en verlichting voor de winter, in het voorjaar terug in te ruilen.','product',false],
+ ['Hoe zichtbaar ben jij?','Een korte quiz die laat zien hoe zichtbaar je bent in het donker, met tips.','tool',false],
+ ['Wachten zoals de gastvrouw','De dealer ontvangt winterfietsers zoals een restaurant gasten: drinken, en klaar terwijl je wacht.','actie',true],
+ ['Het eerste kopje bij de deur','Een warm welkom in de werkplaats, gebaseerd op hoe horeca de eerste indruk regelt.','samenwerking',true],
+ ['Menukaart voor je fiets','Onderhoud als menukaart: drie gangen, vaste prijs, geen verrassingen.','product',true],
+ ['Winterdagenteller','Forensen tellen hun winterdagen op de fiets en zien die van hun collega’s.','tool',false]].map(([titel,idee,type,invalshoek])=>({titel,idee,type,invalshoek}));
+function conceptPage(){
+  const f=CM.f,lopend=curExp();
+  if(f.inv===undefined)f.inv=S.inv.zin||'';
+  const lijst=(CM.routes||[]).map((r,i)=>Object.assign({i},r)).filter(r=>CM.type==='alle'||(CM.type==='invalshoek'?r.invalshoek:r.type===CM.type));
+  const typen=['alle','invalshoek',...new Set((CM.routes||[]).map(r=>r.type))];
+  return topBar('library')+`<main class="wrap">
+  <div class="ph"><div class="lbl">Library, tool</div><h1>Concept-machine.</h1><p>Dertig routes als ruw materiaal. De machine bedenkt veel, jij kiest wat goed is. Daar zit het verschil tussen een uitvoerder met een AI-tool en een uitvinder.</p></div>
+  ${toolUitleg('concept')}
+  <section class="step"><div class="step-h"><b>1</b><h2>Briefing</h2></div><div class="step-b">
+   ${lopend&&lopend.signaal?`<div class="btns" style="margin-bottom:14px"><button class="btn ghost sm" data-act="cmlopend">Gebruik het signaal van je lopende ronde</button></div>`:''}
+   <label class="f"><span>Voor welke klant of welk merk?</span><input type="text" data-cm="klant" value="${esc(f.klant||'')}" placeholder="Fietsmerk Velo"></label>
+   <label class="f"><span>Het merk in één zin</span><input type="text" data-cm="merk" value="${esc(f.merk||'')}" placeholder="Fietsen en onderdelen voor forensen, met eigen dealers"></label>
+   <label class="f"><span>Voor wie?</span><input type="text" data-cm="wie" value="${esc(f.wie||'')}" placeholder="Forensen die twijfelen of ze in de winter blijven fietsen"></label>
+   <label class="f"><span>De vraag of het signaal</span><textarea data-cm="vraag" placeholder="De eerste nachtvorst staat in de weersverwachting">${esc(f.vraag||'')}</textarea></label>
+   <label class="f"><span>Randvoorwaarden</span><input type="text" data-cm="rand" value="${esc(f.rand||'')}" placeholder="Binnen een middag te maken, geen kortingsacties"></label>
+   <label class="f"><span>Jouw invalshoek</span><small>Gaat mee in de briefing. Minstens vijf routes vertrekken hiervandaan.</small><textarea data-cm="inv">${esc(f.inv)}</textarea></label>
+   <div class="btns"><button class="btn" data-act="cmgo" ${CM.busy?'disabled':''}>${CM.busy?'<span class="busy"></span> Dertig routes worden gemaakt':'Maak dertig routes'}</button><button class="btn ghost sm" data-act="cmvb">Bekijk voorbeeldroutes</button></div>
+   ${CM.err?`<p class="err" style="margin-top:14px">${esc(CM.err)}</p>`:''}
+   <p class="hint" style="margin-top:12px">Alleen wat je hier invult gaat naar de AI. Zet er geen vertrouwelijke klantinformatie in.</p>
+  </div></section>
+  ${CM.routes?`<section class="step"><div class="step-h"><b>2</b><h2>Kies maximaal drie</h2><span>${CM.pick.length} van 3</span></div><div class="step-b">
+   ${CM.demo?'<p class="hint" style="margin-bottom:12px">Voorbeeldroutes voor een fietsmerk, vanuit de invalshoek van een designer die in de horeca werkte.</p>':''}
+   <div class="seg" style="margin-bottom:14px">${typen.map(t=>`<button data-act="cmtype" data-v="${t}" aria-pressed="${CM.type===t}">${t==='invalshoek'?'Vanuit je invalshoek':t}</button>`).join('')}</div>
+   <div class="routes">${lijst.map(r=>`<label class="route"><input type="checkbox" data-act="cmpick" data-i="${r.i}" ${CM.pick.includes(r.i)?'checked':''}><b>${esc(r.titel)}</b><p>${esc(r.idee)}</p><span class="tag ${r.invalshoek?'ui':''}">${esc(r.type)}${r.invalshoek?', invalshoek':''}</span></label>`).join('')}</div>
+  </div></section>
+  <section class="step"><div class="step-h"><b>3</b><h2>Combineer en verdedig</h2><span>Hier word je uitvinder</span></div><div class="step-b">
+   ${CM.pick.length?`<ul class="list" style="background:var(--bg)">${CM.pick.map(i=>`<li class="row"><span class="nm">${esc(CM.routes[i].titel)}</span><span class="why">${esc(CM.routes[i].idee)}</span></li>`).join('')}</ul>`:'<p class="hint">Zet eerst routes op je shortlist.</p>'}
+   <label class="f" style="margin-top:16px"><span>Jouw concept</span><small>Eén route, of een combinatie. In je eigen woorden.</small><textarea data-cmx="concept">${esc(CM.concept)}</textarea></label>
+   <label class="f"><span>Waarom dit, en niet de rest?</span><textarea data-cmx="waarom">${esc(CM.waarom)}</textarea></label>
+   <label class="f"><span>Wat heb je zelf toegevoegd?</span><small>Wat stond er niet in de routes, en komt van jou?</small><textarea data-cmx="eigen">${esc(CM.eigen)}</textarea></label>
+   <div class="btns"><button class="btn" data-act="cmronde">Maak er een ronde van</button></div>
+  </div></section>`:''}
+  </main>`+foot();
+}
+
+
+/* ---------- markt: trends per doelgroep plus de zetten van Thijs ---------- */
+const SECTOREN=['Horeca','Retail','Zorg','Mobiliteit','Food','Bouw en installatie','B2B-diensten','Consument algemeen'];
+const MOVES=[
+ {id:'m1',type:'Gestart',titel:'Zorgkosten 2027',wat:'Een tool die laat zien wat je zorg in 2027 kost, zodat je kunt kiezen of je overstapt.',waarom:'De premies voor 2027 zijn bekend en iedereen heeft dezelfde vraag: wat betekent dit voor mij?',link:'https://zorgkosten-2027.netlify.app',trend:'t1'},
+ {id:'m2',type:'Gestart',titel:'Wat kost 2027',wat:'Eén overzicht van alle huishoudkosten die in 2027 veranderen door besluiten van de overheid.',waarom:'Per 1 januari verandert van alles tegelijk. Niemand ziet wat het bij elkaar opgeteld betekent.',link:'',trend:'t2'},
+ {id:'m3',type:'Doorgebouwd',titel:'vanavond.',wat:'Nieuwe series en films op Nederlandse streamingdiensten, gefilterd op je abonnementen en je stemming.',waarom:'Het is weer vroeg donker. Mensen blijven thuis en zoeken wat ze vanavond kijken.',link:'https://vanavond-app.netlify.app',trend:'t3'},
+ {id:'m4',type:'Gestart',titel:'Weet wat je eet',wat:'Supermarktproducten naast zelfgemaakt: wat zit erin, en wat kost het.',waarom:'Boodschappen blijven duur en mensen willen weten waar ze voor betalen.',link:'https://weet-wat-je-eet.netlify.app',trend:'t9'}];
+const TRENDS=[
+ {id:'t1',titel:'Zorgpremies 2027 bekend, overstappen kan tot en met 31 december',bron:'Kalender en nieuws',mom:'Piek nu',sect:['Zorg','Consument algemeen','B2B-diensten'],uitleg:'Elk jaar dezelfde vraag in november en december: wordt het duurder, en moet ik overstappen?',doen:'Een rekentool of check die de vraag voor je doelgroep beantwoordt.'},
+ {id:'t2',titel:'Wat verandert er per 1 januari 2027?',bron:'Kalender',mom:'Stijgend',sect:SECTOREN,uitleg:'Nieuwe regels, tarieven en toeslagen. Mensen en ondernemers zoeken wat het voor hen betekent.',doen:'Een overzicht voor je sector: wat verandert er voor jouw klanten?'},
+ {id:'t3',titel:'Wintertijd: om half zes is het donker',bron:'Kalender',mom:'Blijvend tot maart',sect:['Mobiliteit','Retail','Horeca','Consument algemeen'],uitleg:'Donkere ochtenden en avonden. Zichtbaarheid in het verkeer, meer thuisblijven, ander koopgedrag.',doen:'Een check op verlichting, of een tip voor de avond thuis.'},
+ {id:'t4',titel:'Black Friday op 27 november',bron:'Kalender',mom:'Stijgend',sect:['Retail','Food','Consument algemeen'],uitleg:'Kortingen overal. Wie niet meedoet, kan juist opvallen door iets anders te bieden.',doen:'Een eerlijke vergelijking of een alternatief zonder korting.'},
+ {id:'t5',titel:'December: Sinterklaas, kerst en de bestelpiek',bron:'Kalender',mom:'Stijgend',sect:['Retail','Food','Horeca'],uitleg:'Cadeaus, bestellingen en reserveringen pieken. Klanten bellen, mailen en wachten.',doen:'Online reserveren of bestellen zonder telefoon.'},
+ {id:'t6',titel:'Eerste nachtvorst in de weersverwachting',bron:'Weer (KNMI)',mom:'Nieuw',sect:['Mobiliteit','Bouw en installatie','Horeca'],uitleg:'Gladde wegen, bevroren ruiten, cv-ketels die het zwaar krijgen.',doen:'Een winterklaar-check voor fiets, auto of huis.'},
+ {id:'t7',titel:'Eindejaarsbudgetten bij bedrijven',bron:'Kalender',mom:'Stijgend',sect:['B2B-diensten','Bouw en installatie'],uitleg:'Budgetten die voor 31 december op moeten. Beslissers zoeken snel iets nuttigs.',doen:'Een korte check die laat zien waar het budget het meest oplevert.'},
+ {id:'t8',titel:'Kerstreserveringen en bedrijfsborrels',bron:'Kalender',mom:'Stijgend',sect:['Horeca','Food'],uitleg:'Groepen, dieetwensen, aanbetalingen. Veel heen-en-weer per reservering.',doen:'Een groepsreservering waarin alles in één keer geregeld wordt.'},
+ {id:'t9',titel:'Boodschappen blijven duur',bron:'Nieuws en CBS',mom:'Blijvend',sect:['Food','Retail','Consument algemeen'],uitleg:'Een onderwerp dat al lang speelt. Is het van nu, of eigenlijk altijd waar?',doen:'Een vergelijking die mensen zelf niet kunnen maken.'}];
+function marktPage(){
+  S.watch=S.watch||[];const W=S.watch;
+  const lijst=TRENDS.filter(t=>!W.length||t.sect.some(x=>W.includes(x)));
+  const toets=t=>{const nu=/Piek|Nieuw|Stijgend/.test(t.mom),recht=!W.length?null:t.sect.some(x=>W.includes(x));
+    return `<div class="toets3"><div class="${nu?'ja':'tw'}"><b>${nu?'Van nu':'Twijfel'}</b>${nu?'Speelt deze weken':'Is het van nu, of altijd waar?'}</div><div class="${recht===false?'tw':recht?'ja':''}"><b>${recht===null?'Kies je sector':recht?'Past bij je sector':'Twijfel'}</b>${recht===null?'Om te zien of je merk er iets over mag zeggen':'Heeft jouw klant er recht van spreken?'}</div><div class="ja"><b>Iets doen</b>${esc(t.doen)}</div></div>`};
+  return topBar('markt')+`<main class="wrap wide">
+  <div class="ph"><div class="lbl">Markt, week ${Math.min(weekNr(),12)}</div><h1>Wat er speelt, en wat ik ermee doe.</h1>
+  <p>Links de trends van deze weken, gefilterd op de sectoren die jij volgt. Rechts wat ik er zelf mee bouw, met mijn reden erbij. Jij beslist of het voor jouw klant een signaal is.</p></div>
+  <div class="grp"><span>Jouw watchlist</span><span>${W.length?W.length+' gevolgd':'Alles'}</span></div>
+  <div class="seg" style="margin-top:12px">${SECTOREN.map(x=>`<button data-act="watch" data-v="${x}" aria-pressed="${W.includes(x)}">${x}</button>`).join('')}</div>
+  <div class="mkt">
+   <div>${lijst.map(t=>{const m=MOVES.find(x=>x.trend===t.id);return `<article class="trend">
+     <div class="meta-l"><span class="mom">${t.mom}</span><span class="tag ov">${t.bron}</span>${t.sect.length<SECTOREN.length?t.sect.map(x=>`<span class="tag ${W.includes(x)?'ui':''}">${x}</span>`).join(''):'<span class="tag">Alle sectoren</span>'}</div>
+     <h3>${esc(t.titel)}</h3><p>${esc(t.uitleg)}</p>
+     <span class="hint">Eerste inschatting met de drievragentoets. Jij beslist.</span>${toets(t)}
+     ${m?`<div class="link-thijs"><span class="av-s">TM</span><span>Ik deed hier iets mee: <b>${esc(m.titel)}</b></span></div>`:''}
+     <div class="btns"><button class="btn sm" data-act="trendsig" data-id="${t.id}">Maak er een signaal van</button>${m?`<button class="btn ghost sm" data-act="moveremix" data-id="${m.id}">Remix mijn zet</button>`:''}</div>
+    </article>`}).join('')||'<div class="empty">Geen trends voor deze sectoren. Volg er meer, of kijk volgende week.</div>'}
+    <p class="hint">Voorbeeldtrends uit de kalender van november 2026. In de echte versie scant de AI elke ochtend nieuws, KNMI, CBS en de kalender, en koppelt ze aan sectoren.</p></div>
+   <aside class="side"><div class="grp" style="margin:0"><span>Mijn zetten</span><span>Thijs Mensink</span></div>
+    ${MOVES.map(m=>`<div class="mv"><span class="tag tp ${m.type==='Gestart'?'go':m.type==='Doorgebouwd'?'up':'st'}">${m.type}</span><b>${esc(m.titel)}</b><p>${esc(m.wat)}</p><p><span style="color:var(--ink);font-weight:600">Waarom:</span> ${esc(m.waarom)}</p><p class="hint">Uitkomst: volgt</p>
+     <div class="btns">${m.link?`<a class="btn ghost sm" href="${m.link}" target="_blank" rel="noopener">Bekijk</a>`:''}<button class="btn sm" data-act="moveremix" data-id="${m.id}">Remix</button></div></div>`).join('')}
+    <p class="hint">Wat ik bouw, waarom, en wat het opleverde, ook als het tegenvalt. Zo leer je van hoe een uitvinder kiest.</p></aside>
+  </div></main>`+foot();
+}
+
+
+/* ---------- cockpit: regiedashboard ---------- */
+const KLANTEN=[{id:'velo',naam:'Fietsmerk Velo',sector:'Mobiliteit',merk:'Fietsen en onderdelen voor forensen, met eigen dealers',doelgroep:'Forensen die het hele jaar willen fietsen',kanalen:['Instagram','Meta Ads','Website','Nieuwsbrief']},{id:'terhorst',naam:'Bakkerij Ter Horst',sector:'Food',merk:'Ambachtelijke dorpsbakker met drie winkels',doelgroep:'Vaste klanten uit het dorp en de regio',kanalen:['Facebook','Instagram','Winkel']},{id:'leeuw',naam:'Restaurant De Gouden Leeuw',sector:'Horeca',merk:'Familierestaurant met zaal voor groepen',doelgroep:'Gezinnen en bedrijven voor borrels en diners',kanalen:['Instagram','Google-profiel','Website']}];
+const AGENTS=[['Concept','#ff8a5c'],['Design','#a98bff'],['Tekst','#7fcfb0'],['Campagnes','#8ab8ff'],['Rapportage','#f59ac0'],['Planning','#f2c14e']];
+const TOOLNAMEN=['Figma','Canva','Meta Ads','Google Ads','GA4','Meta Business Suite','Simplicate'];
+function seedCockpit(){return{klant:'alle',kies:{},tekst:{},
+ kop:{velo:{Figma:true,Canva:true,'Meta Ads':true,GA4:true},terhorst:{Canva:true,'Meta Business Suite':true},leeuw:{Figma:true,'Meta Business Suite':true}},
+ taken:[
+  {id:'k1',klant:'velo',agent:'Design',tool:'Canva',titel:'Instagram-post Winterklaar-check, drie varianten',aanleiding:'De eerste nachtvorst staat in de weersverwachting.',opties:['Helder en nuchter: "Is jouw fiets winterklaar?"','Urgent: "Vannacht vriest het."','Warm en menselijk: "Gewoon blijven fietsen."'],uren:3,status:'klaar'},
+  {id:'k2',klant:'velo',agent:'Campagnes',tool:'Meta Ads',titel:'Budget verschuiven naar de carrousel?',aanleiding:'Carrousel verlichting kost € 2,28 per resultaat, 72% onder de mediaan, met 6% van het budget.',opties:['20% van het budget naar de carrousel','Eerst een kleine stap: 5% voor een week','Niets veranderen'],uren:1,status:'klaar'},
+  {id:'k3',klant:'velo',agent:'Rapportage',tool:'Meta Ads, GA4',titel:'Weekrapport week 44',aanleiding:'Opvallend: Story nachtvorst kostte € 249 en leverde nul resultaten op.',opties:['Rapport zoals de agent het maakte','Rapport met mijn duiding en voorstel erbij'],uren:2,status:'klaar'},
+  {id:'k4',klant:'terhorst',agent:'Tekst',tool:'Docs',titel:'Uitleg broodprijs 2027, drie toonsoorten',aanleiding:'Brood wordt volgend jaar duurder door hogere graanprijzen.',opties:['Feitelijk, met de opbouw van de prijs','Persoonlijk, in de woorden van de bakker','Licht, met een knipoog'],uren:1.5,status:'klaar'},
+  {id:'k5',klant:'leeuw',agent:'Planning',tool:'Meta Business Suite',titel:'Contentkalender december',aanleiding:'Kerstreserveringen en bedrijfsborrels.',opties:[],uren:2,status:'bezig'},
+  {id:'k6',klant:'leeuw',agent:'Design',tool:'Figma',titel:'Menukaart met allergenenfilter, alle formaten',aanleiding:'Gasten vragen vaker naar allergenen.',opties:[],uren:2.5,status:'bezig'},
+  {id:'k7',klant:'terhorst',agent:'Concept',tool:'Concept-machine',titel:'Dertig routes voor kerstbestellingen',aanleiding:'Vorig jaar liep de telefoon vast in december.',opties:[],uren:2,status:'goedgekeurd',besluit:'Gekozen: online reserveren per ophaaldag. Waarom: haalt de druk van de telefoon.'}]}}
+
+function klantPage(id){
+  const k=KLANTEN.find(x=>x.id===id);if(!k)return topBar('cockpit')+`<main class="wrap"><div class="ph"><h1>Deze klant bestaat niet.</h1></div></main>`;
+  S.cockpit=S.cockpit||seedCockpit();const C=S.cockpit,taken=C.taken.filter(t=>t.klant===id),kop=C.kop[id]||{};
+  const same=e=>(e.klant||'').trim().toLowerCase()===k.naam.toLowerCase();
+  const exps=[...S.exps.filter(same),...TEAM.cards.filter(same)],tr=TRENDS.filter(t=>t.sect.includes(k.sector));
+  return topBar('cockpit')+`<main class="wrap wide">
+  <section class="dash-h">${cover('klant'+id,1200,520,'lg')}<div class="lbl">Klantdossier, ${esc(k.sector)}</div><h1>${esc(k.naam)}</h1>
+   <div class="kpi"><div><span>Klaar voor jou</span><b>${taken.filter(t=>t.status==='klaar').length}</b></div><div><span>Experimenten</span><b>${exps.length}</b></div><div><span>Trends voor deze klant</span><b>${tr.length}</b></div></div></section>
+  <div class="dash">
+   <div>
+    <div class="grp"><span>Het merk</span></div>
+    <div class="exp" style="margin-top:10px"><dl><div><dt>Merk</dt><dd>${esc(k.merk)}</dd></div><div><dt>Doelgroep</dt><dd>${esc(k.doelgroep)}</dd></div><div><dt>Kanalen</dt><dd>${k.kanalen.map(x=>esc(x)).join(', ')}</dd></div><div><dt>Sector</dt><dd>${esc(k.sector)}</dd></div></dl></div>
+    <div class="grp"><span>Lopend werk</span><a href="#/cockpit" class="hint" data-act="ckklantlink" data-v="${id}">Naar de cockpit</a></div>
+    ${taken.length?taken.map(t=>`<div class="tmini"><span class="tag ${t.status==='klaar'?'ui':t.status==='goedgekeurd'?'on':'off'}" style="justify-self:start">${t.status==='klaar'?'Klaar voor jou':t.status==='bezig'?'Agent bezig':t.status==='goedgekeurd'?'Goedgekeurd':'Gestopt'}</span><b>${esc(t.titel)}</b><span class="hint">${t.agent}, in ${esc(t.tool)}</span></div>`).join(''):'<div class="empty" style="margin-top:10px">Geen lopend werk.</div>'}
+    <div class="grp"><span>Experimenten voor deze klant</span><span>${exps.length}</span></div>
+    ${exps.length?`<div style="margin-top:10px">${exps.map(e=>kaart(e,S.exps.includes(e))).join('')}</div>`:'<div class="empty" style="margin-top:10px">Nog geen experimenten.</div>'}
+   </div>
+   <div>
+    <div class="grp"><span>Trends voor ${esc(k.sector.toLowerCase())}</span><a href="#/markt" class="hint">Markt</a></div>
+    ${tr.slice(0,4).map(t=>`<div class="tmini"><span class="mom" style="justify-self:start">${t.mom}</span><b>${esc(t.titel)}</b><span class="hint">${esc(t.doen)}</span><div class="btns"><button class="btn ghost sm" data-act="trendsig" data-id="${t.id}" data-klant="${esc(k.naam)}">Maak er een signaal van</button></div></div>`).join('')||'<p class="hint">Geen trends voor deze sector.</p>'}
+    <div class="grp"><span>Koppelingen</span></div>
+    <div class="kop">${TOOLNAMEN.map(n=>`<div><span>${n}</span><span class="tag ${kop[n]?'on':'off'}">${kop[n]?'Gekoppeld':'Niet gekoppeld'}</span></div>`).join('')}</div>
+   </div>
+  </div></main>`+foot();
+}
+
+function cockpitPage(){
+  S.cockpit=S.cockpit||seedCockpit();const C=S.cockpit,K=C.klant;
+  const inK=t=>K==='alle'||t.klant===K,naam=id=>KLANTEN.find(k=>k.id===id)?.naam||id;
+  const taken=C.taken.filter(inK),klaar=taken.filter(t=>t.status==='klaar'),bezig=taken.filter(t=>t.status==='bezig');
+  const uren=C.taken.filter(t=>inK(t)&&t.status==='goedgekeurd').reduce((a,t)=>a+t.uren,0);
+  const kops=K==='alle'?KLANTEN.map(k=>k.id):[K],aantalKop=kops.reduce((a,id)=>a+Object.values(C.kop[id]||{}).filter(Boolean).length,0);
+  const kaartAp=t=>`<article class="ap"><div class="meta-l"><a class="tag" href="#/klant/${t.klant}" style="text-decoration:none">${esc(naam(t.klant))}</a><span class="tag ui">${t.agent}</span><span class="tag ov">${esc(t.tool)}</span><span class="hint">${String(t.uren).replace('.',',')} uur uitvoering</span></div>
+   <h3>${esc(t.titel)}</h3><p class="why">${esc(t.aanleiding)}</p>
+   ${t.opties.length?`<div class="opt" role="radiogroup">${t.opties.map((o,i)=>`<label><input type="radio" name="o-${t.id}" data-act="ckkies" data-id="${t.id}" data-i="${i}" ${C.kies[t.id]===i?'checked':''}><span>${esc(o)}</span></label>`).join('')}</div>`:''}
+   <label class="f" style="margin:0"><span>Je reden of instructie</span><textarea data-ck="${t.id}" style="min-height:70px" placeholder="Waarom deze keuze, of wat moet de agent anders doen?">${esc(C.tekst[t.id]||'')}</textarea></label>
+   <div class="btns"><button class="btn sm" data-act="ckgo" data-id="${t.id}">Goedkeuren</button><button class="btn ghost sm" data-act="ckbij" data-id="${t.id}">Bijsturen</button><button class="btn stop sm" data-act="ckstop" data-id="${t.id}">Stoppen</button></div>
+   ${t.hist?`<div class="hist">${t.hist.map(h=>`<span>${esc(h)}</span>`).join('')}</div>`:''}</article>`;
+  return topBar('cockpit')+`<main class="wrap wide">
+  <section class="ck-h">${cover('cockpit-9',1200,520,'lg')}
+   <div class="lbl" style="color:rgba(255,255,255,.7)">Cockpit</div><h1>Jij stuurt. De agents voeren uit.</h1>
+   <p>Alles wat de agents klaarzetten in Figma, Canva, Meta en de rest, op één plek. Niets gaat naar buiten zonder jouw akkoord, en elke keuze wordt een experimentkaart.</p>
+   <div class="kpi"><div><span>Klaar voor jou</span><b>${klaar.length}</b></div><div><span>Agents bezig</span><b>${bezig.length}</b></div><div><span>Uren terug</span><b>${String(uren).replace('.',',')}</b></div><div><span>Koppelingen</span><b>${aantalKop}</b></div></div>
+  </section>
+  <div class="seg" style="margin-top:20px">${[['alle','Alle klanten'],...KLANTEN.map(k=>[k.id,k.naam])].map(([id,n])=>`<button data-act="ckklant" data-v="${id}" aria-pressed="${K===id}">${esc(n)}</button>`).join('')}</div>
+  ${K!=='alle'?`<div class="btns" style="margin-top:12px"><a class="btn ghost sm" href="#/klant/${K}">Open het klantdossier</a></div>`:''}
+  <div class="ck">
+   <div>
+    <div class="grp"><span>Klaar voor jou</span><span>${klaar.length}</span></div>
+    ${klaar.length?klaar.map(kaartAp).join(''):'<div class="empty" style="margin-top:12px">Niets wacht op je. Tijd voor een signaal of een klantgesprek.</div>'}
+    ${uren?`<div class="tmini" style="margin-top:16px"><b>${String(uren).replace('.',',')} uur uitvoering terug.</b><span class="hint">Besteed die aan wat geen agent kan: een signaal zoeken, een experiment bedenken, met de klant praten.</span><div class="btns"><a class="btn sm" href="#/exp/nieuw">Start een ronde</a><a class="btn ghost sm" href="#/markt">Naar de markt</a></div></div>`:''}
+   </div>
+   <aside>
+    <div class="grp"><span>Wat de agents doen</span></div>
+    <div class="agents">${AGENTS.map(([a,c])=>{const t=taken.filter(x=>x.agent===a),b=t.filter(x=>x.status==='bezig').length,k=t.filter(x=>x.status==='klaar').length,last=t[0];
+      return `<div class="ag"><span class="dot" style="background:${c}"></span><b>${a}</b><span class="hint">${b?b+' bezig':''}${b&&k?', ':''}${k?k+' klaar':''}${!b&&!k?'rustig':''}</span><small>${last?esc(last.titel):'Geen werk voor deze selectie'}</small></div>`}).join('')}</div>
+    <div class="grp"><span>Koppelingen</span><span>${K==='alle'?'Kies een klant':esc(naam(K))}</span></div>
+    ${K==='alle'?'<p class="hint" style="margin-top:10px">Kies hierboven een klant om zijn koppelingen te zien.</p>':`<div class="kop">${TOOLNAMEN.map(n=>{const on=!!(C.kop[K]||{})[n];return `<div><span>${n}</span><button class="tag ${on?'on':'off'}" style="border:0;cursor:pointer" data-act="ckkop" data-v="${n}">${on?'Gekoppeld':'Koppel'}</button></div>`}).join('')}</div><p class="hint" style="margin-top:8px">In het prototype nagebootst. Echt koppelen kan in de versie die in Code gebouwd wordt.</p>`}
+    <div class="grp"><span>Eerder besloten</span></div>
+    ${C.taken.filter(t=>inK(t)&&(t.status==='goedgekeurd'||t.status==='gestopt')).map(t=>`<div class="tmini"><span class="tag ${t.status==='goedgekeurd'?'on':'off'}" style="justify-self:start">${t.status==='goedgekeurd'?'Goedgekeurd':'Gestopt'}</span><b>${esc(t.titel)}</b><span class="hint">${esc(t.besluit||'')}</span></div>`).join('')||'<p class="hint" style="margin-top:10px">Nog niets besloten.</p>'}
+   </aside>
+  </div></main>`+foot();
+}
+
+/* ---------- vandaag ---------- */
+function vandaag(){
+  const n=nul(),l=laatste(),open=curExp(),wk=Math.min(weekNr(),12),af=afgerond().length;
+  let next;
+  const mNodig=MW.filter(w=>w<=weekNr()&&!S.metingen.some(m=>m.week===w));
+  if(mNodig.length) next={k:`Week ${wk}`,h:`Doe je ${mNodig[0]===1?'start':mNodig[0]===6?'tussen':'eind'}meting.`,p:'Twaalf uitspraken en een nieuwe Rolscan. Zo zie je straks hoe je verschoven bent.',a:`#/meting/${mNodig[0]}`,b:'Naar de meting'};
+  else if(weekNr()>=12&&!S.eind.ingediend) next={k:'Week 12',h:'Je eindopdracht.',p:'Kies je drie sterkste kaarten, maak je pitch en schrijf je reflectie.',a:'#/portfolio',b:'Naar je portfolio'};
+  else if(!S.inv.zin) next={k:'Fundament, stap 2',h:'Bepaal je invalshoek.',p:'Wat combineer jij dat schaars is? Zonder invalshoek wordt elk experiment een losse gok.',a:'#/invalshoek',b:'Naar je invalshoek'};
+  else if(open) next={k:`Week ${wk}, lopende ronde`,h:esc(expTitel(open)),p:'Maak de ronde af: bouwen, meten en vastleggen wat je leerde.',a:`#/exp/${open.id}`,b:'Verder met deze ronde'};
+  else next={k:`Week ${wk}`,h:'Start de ronde van deze week.',p:'Zoek een signaal voor het merk van een klant, bouw iets en meet het.',a:'#/exp/nieuw',b:'Start een nieuwe ronde'};
+  const W=S.watch||[],tr=TRENDS.filter(t=>!W.length||t.sect.some(x=>W.includes(x)));
+  const uur=new Date().getHours(),groet=uur<12?'Goedemorgen':uur<18?'Goedemiddag':'Goedenavond';
+  const mine=[...S.exps].reverse().slice(0,3);
+  return topBar('vandaag')+`<main class="wrap wide">
+  <section class="dash-h">${cover('dash'+(S.user?.naam||''),1200,520,'lg')}
+   <div class="lbl">Week ${wk} van 12</div><h1>${groet}, ${esc((S.user?.naam||'').split(' ')[0])}.</h1>
+   <div class="wkbar" aria-label="Week ${wk} van 12">${Array.from({length:12},(_,i)=>`<i class="${i+1<wk?'d':i+1===wk?'n':''}"></i>`).join('')}</div>
+   <div class="kpi"><div><span>Uitvinder nu</span><b>${l?Math.round(l.uitvindend):'–'}%</b></div><div><span>Rondes af</span><b>${af}/10</b></div><div><span>Trends voor jou</span><b>${tr.length}</b></div></div>
+  </section>
+  <div class="dash">
+   <div>
+    <section class="next">${cover('next'+(open?open.id:'x'),800,360,'lg')}<span class="k">${next.k}</span><h2>${next.h}</h2><p>${next.p}</p><div class="btns"><a class="btn" href="${next.a}">${next.b}</a></div></section>
+    <div class="grp"><span>Je laatste kaarten</span><a href="#/library" class="hint">Alles</a></div>
+    ${mine.length?`<div style="margin-top:10px">${mine.map(e=>kaart(e,true)).join('')}</div>`:`<div class="empty" style="margin-top:10px">Nog geen kaarten. Elke ronde levert er een op.</div>`}
+   </div>
+   <div>
+    ${(()=>{const C=S.cockpit||seedCockpit(),k=C.taken.filter(t=>t.status==='klaar').length;return `<div class="grp"><span>Cockpit</span><a href="#/cockpit" class="hint">Naar de cockpit</a></div><a class="row" href="#/cockpit" style="text-decoration:none"><span class="nm">${k} ${k===1?'ding wacht':'dingen wachten'} op je akkoord</span><span class="tag ui">${k}</span><span class="why">De agents zetten klaar, jij keurt.</span></a>`})()}
+    <div class="grp"><span>Deze week in de markt</span><a href="#/markt" class="hint">Naar de markt</a></div>
+    ${tr.slice(0,3).map(t=>{const m=MOVES.find(x=>x.trend===t.id);return `<div class="tmini"><span class="mom" style="justify-self:start">${t.mom}</span><b>${esc(t.titel)}</b>${m?`<span class="hint">Thijs deed hier iets mee: ${esc(m.titel)}</span>`:''}<div class="btns"><button class="btn ghost sm" data-act="trendsig" data-id="${t.id}">Maak er een signaal van</button></div></div>`}).join('')}
+    <div class="grp"><span>Je verschuiving</span><a href="#/reis" class="hint">Metingen</a></div>
+    <div class="cmp" style="margin-top:10px"><div><span>Nulmeting</span><b>${n?Math.round(n.uitvindend):'–'}%</b><span>uitvinder</span></div><div><span>Laatste meting</span><b>${l?Math.round(l.uitvindend):'–'}%</b><span>uitvinder</span></div></div>
+    <p class="hint" style="margin-top:10px">Je scant opnieuw bij de metingen in week 6 en 12.</p>
+   </div>
+  </div>
+  </main>`+foot();
+}
+
+/* ---------- reis ---------- */
+function reis(){
+  const n=nul();
+  return topBar('reis')+`<main class="wrap wide">
+  <div class="ph"><div class="lbl">Reis, week ${Math.min(weekNr(),12)} van 12</div><h1>Van uitvoerder naar uitvinder.</h1>
+  <p>Week 1 het fundament, week 2 tot en met 11 tien rondes, week 12 je eindopdracht. Metingen in week 1, 6 en 12.</p></div>
+  <div class="weeks">${Array.from({length:12},(_,i)=>{const w=i+1,af=afgerond().length,done=w===1?!!(nul()&&S.inv.zin):w===12?!!S.eind.ingediend:af>=w-1;
+   return `<div class="wk ${done?'done':''} ${w===Math.min(weekNr(),12)?'now':''}"><strong>${w}</strong><span>${w===1?'Basis':w===12?'Eind':'Ronde'}</span>${MW.includes(w)?'<i title="Meting"></i>':'<span style="height:7px"></span>'}</div>`}).join('')}</div>
+  <div class="wkl"><span>Meting</span><span class="nd">${afgerond().length} van 10 rondes afgerond</span></div>
+  <div class="grp"><span>Metingen</span></div>
+  <div class="btns" style="margin-top:12px">${MW.map(w=>`<a class="btn ${S.metingen.some(m=>m.week===w)?'ghost':''} sm" href="#/meting/${w}">${S.metingen.some(m=>m.week===w)?'✓ ':''}Meting week ${w}</a>`).join('')}</div>
+  <div class="grp"><span>Fundament</span><span>Eenmalig</span></div>
+  <section class="step ${n?'done':''}"><div class="step-h"><b>${n?'✓':'1'}</b><h2>Rolscan</h2><span>${n?fmtD(S.scans[0].datum):''}</span></div><div class="step-b">
+    ${n?`<p>Nulmeting: <b>${Math.round(n.uitvindend)}% uitvinder</b>. ${S.scans.length>1?`Laatste meting: <b>${Math.round(laatste().uitvindend)}%</b>.`:''}</p><div class="btns" style="margin-top:14px"><a class="btn ghost sm" href="#/scan">Scan opnieuw</a></div>`:`<a class="btn" href="#/scan">Doe de Rolscan</a>`}
+  </div></section>
+  <section class="step ${S.inv.zin?'done':''}"><div class="step-h"><b>${S.inv.zin?'✓':'2'}</b><h2>Jouw invalshoek</h2></div><div class="step-b">
+    ${S.inv.zin?`<p style="font-size:1.15rem;font-weight:600;line-height:1.35">${esc(S.inv.zin)}</p><div class="btns" style="margin-top:14px"><a class="btn ghost sm" href="#/invalshoek">Aanscherpen</a></div>`:`<p>Wat combineer jij dat schaars is?</p><div class="btns" style="margin-top:14px"><a class="btn" href="#/invalshoek">Bepaal je invalshoek</a></div>`}
+  </div></section>
+  <div class="grp"><span>Cyclus</span><span>${S.exps.length} ${S.exps.length===1?'ronde':'rondes'}</span></div>
+  ${S.exps.length?S.exps.slice().reverse().map(e=>`<a class="row" href="#/exp/${e.id}" style="text-decoration:none"><span class="nm">${esc(expTitel(e))}</span><span class="tag ${e.status==='af'?'dk':'ov'}">${e.status==='af'?'Afgerond':'Bezig'}</span><span class="why">${esc(e.klant||'Geen klant')} · ${fmtD(e.datum)}</span></a>`).join(''):`<div class="empty" style="margin-top:14px">Nog geen rondes.</div>`}
+  <div class="btns" style="margin-top:20px"><a class="btn" href="#/exp/nieuw">Start een nieuwe ronde</a></div>
+  </main>`+foot();
+}
+
+/* ---------- invalshoek ---------- */
+function invalshoek(){
+  const i=S.inv;
+  return topBar('invalshoek')+`<main class="wrap">
+  <div class="ph"><div class="lbl">Fundament, stap 2</div><h1>Jouw invalshoek.</h1>
+  <p>Iedereen kan met AI een post maken. Wat niemand kan namaken, is de combinatie die alleen jij hebt: je vak plus iets van daarbuiten.</p></div>
+  <section class="step"><div class="step-h"><b>2</b><h2>Wat combineer jij?</h2></div><div class="step-b">
+    ${lesBox(2)}${oefBox(2)}
+    <label class="f"><span>Je vak</span><input type="text" data-i="vak" value="${esc(i.vak)}" placeholder="Bijvoorbeeld: brand designer, 8 jaar agency"></label>
+    <label class="f"><span>Iets van buiten je vak</span><small>Een vorige baan, een hobby die uit de hand liep, een wereld die je van binnen kent.</small><input type="text" data-i="buiten" value="${esc(i.buiten)}" placeholder="Bijvoorbeeld: ik heb vier jaar in de horeca gewerkt"></label>
+    <label class="f"><span>Voor wie wil je relevant zijn?</span><input type="text" data-i="voorwie" value="${esc(i.voorwie)}" placeholder="Bijvoorbeeld: familiebedrijven in de regio"></label>
+    <label class="f"><span>Je invalshoek in één zin</span><textarea data-i="zin" placeholder="Ik ... omdat ...">${esc(i.zin)}</textarea></label>
+    ${coachBox('invalshoek','inv')}
+    <div class="btns" style="margin-top:18px"><button class="btn" data-act="inv-klaar">Leg vast</button></div>
+  </div></section>
+  ${(i.versies||[]).length?`<div class="grp"><span>Eerdere versies</span><span>Bewijs voor je reflectie</span></div><ul class="list">${i.versies.slice().reverse().map(v=>`<li class="row"><span class="nm">${esc(v.zin)}</span><span class="hint">Week ${v.week}</span></li>`).join('')}</ul>`:''}
+  </main>`+foot();
+}
+
+/* ---------- experiment (rondes 3-5) ---------- */
+function expPage(id){
+  if(id==='nieuw'){const e=nieuwExp();location.replace('#/exp/'+e.id);return ''}
+  const e=S.exps.find(x=>x.id===id);
+  if(!e) return topBar('exp')+`<main class="wrap"><div class="ph"><h1>Deze ronde bestaat niet.</h1></div><div class="btns" style="margin-top:20px"><a class="btn" href="#/reis">Naar je reis</a></div></main>`;
+  CUR=e.id;
+  const v=k=>esc(e[k]||'');
+  return topBar('exp')+`<main class="wrap">
+  <div class="ph"><div class="lbl">Ronde, week ${e.week||weekNr()}</div><h1>${esc(expTitel(e))}</h1>
+  ${e.remixVan?`<p class="hint">Remix van ‘${esc(e.remixVan.titel)}’ van ${esc(e.remixVan.auteur)}</p>`:''}
+  <div class="excv">${cover(e.id+(e.titel||''),640,240)}</div></div>
+
+  <section class="step"><div class="step-h"><b>3</b><h2>Relevantie zoeken</h2><span>Waarom nu?</span></div><div class="step-b">
+    ${lesBox(3)}${oefBox(3)}
+    <label class="f"><span>Voor welke klant of welk merk?</span><input type="text" data-e="klant" value="${v('klant')}" placeholder="Klantnaam"></label>
+    <label class="f"><span>Het signaal</span><small>Nieuws, een vraag van de doelgroep, een moment in de markt. Iets van deze week.</small><textarea data-e="signaal" placeholder="Wat zag je?">${v('signaal')}</textarea></label>
+    <label class="f"><span>Waarom heeft dit merk er iets over te zeggen?</span><textarea data-e="waarom">${v('waarom')}</textarea></label>
+    ${coachBox('signaal','s3')}
+  </div></section>
+
+  <section class="step"><div class="step-h"><b>4</b><h2>Uitvinden</h2><span>Bouwen in een middag</span></div><div class="step-b">
+    ${lesBox(4)}${oefBox(4)}
+    <label class="f"><span>Naam van je experiment</span><input type="text" data-e="titel" value="${v('titel')}" placeholder="Kort en concreet"></label>
+    <label class="f"><span>Hypothese</span><textarea data-e="hypothese" placeholder="Als ik ..., dan verwacht ik ..., omdat ...">${v('hypothese')}</textarea></label>
+    <label class="f"><span>Waarom deze keuze?</span><small>Wat maakt dit belangrijker dan de andere opties die je had?</small><textarea data-e="keuze">${v('keuze')}</textarea></label>
+    <label class="f"><span>Wat bouw je?</span><textarea data-e="bouw" placeholder="Eén zin: wat het is en wat het doet">${v('bouw')}</textarea></label>
+    <label class="f"><span>Met welke tools?</span><input type="text" data-e="tool" value="${v('tool')}" placeholder="Bijvoorbeeld: Claude, Netlify"></label>
+    <label class="f"><span>De spec of prompt waarmee je het bouwde</span><small>Hiermee kan een collega je experiment remixen.</small><textarea data-e="spec" placeholder="Plak hier je spec">${v('spec')}</textarea></label>
+    <label class="f"><span>Link naar wat je bouwde</span><input type="url" data-e="link" value="${v('link')}" placeholder="https://"></label>
+    <label class="f"><span>Hoe meet je?</span><input type="text" data-e="meting" value="${v('meting')}" placeholder="Eén getal of één reactie"></label>
+    <div class="btns"><a class="btn ghost sm" href="#/bouwen">Hulp bij bouwen</a></div>
+    ${coachBox('experiment','s4')}
+  </div></section>
+
+  <section class="step ${e.status==='af'?'done':''}"><div class="step-h"><b>5</b><h2>Zichtbaar maken</h2><span>Wat leverde het op?</span></div><div class="step-b">
+    ${lesBox(5)}${oefBox(5)}
+    <label class="f"><span>Uitkomst</span><textarea data-e="uitkomst" placeholder="Wat zeggen de cijfers of reacties?">${v('uitkomst')}</textarea></label>
+    <label class="f"><span>Wat leerde je?</span><small>Los van of het werkte.</small><textarea data-e="geleerd">${v('geleerd')}</textarea></label>
+    <div class="f"><span>Wie ziet deze kaart?</span><div class="seg" role="group" aria-label="Zichtbaarheid">${[['prive','Alleen ik'],['team','Mijn team'],['publiek','Iedereen']].map(([k,t])=>`<button data-act="zicht" data-v="${k}" aria-pressed="${(e.zicht||'prive')===k}">${t}</button>`).join('')}</div></div>
+    ${coachBox('zichtbaar','s5')}
+    <div class="btns" style="margin-top:18px">${e.status==='af'?`<span class="tag dk">Afgerond</span><button class="btn ghost sm" data-act="heropen">Heropen</button>`:`<button class="btn" data-act="rondaf">Rond af en zet in je library</button>`}<button class="btn ghost sm" data-act="verwijder">Verwijder ronde</button></div>
+  </div></section></main>`+foot();
+}
+let CUR=null;
+function nieuwExp(pre){const e=Object.assign({id:uid(),datum:today(),week:weekNr(),status:'bezig',zicht:'prive',auteur:S.user?.naam||''},pre||{});S.exps.push(e);save();return e}
+
+/* ---------- bouwen ---------- */
+const BOUW=[
+ ['De vraag scherp','Een tool beantwoordt één vraag die veel mensen hebben. Schrijf de vraag op zoals de doelgroep hem zou typen in Google. Lukt dat niet in één zin, dan is het nog geen tool.',['De vraag past in één zin','Je kent iemand die deze vraag deze week had']],
+ ['De spec','Voordat je iets bouwt, schrijf je op wat het moet doen en wat niet. Hoe scherper de spec, hoe beter de AI bouwt. Gebruik de spec-maker hieronder, en lees hem daarna kritisch: klopt dit met wat je bedoelt?',['Doel, voor wie, stappen, grenzen en klaar-als staan erin','Hij past op één scherm']],
+ ['Bouwen','Plak je spec in Claude en vraag om één HTML-bestand dat alles bevat. Klopt iets niet, beschrijf dan wat je ziet en wat je verwachtte, één ding tegelijk.',['Het werkt op je telefoon','Je hebt elke verandering zelf gecontroleerd']],
+ ['Testen','Laat drie mensen uit de doelgroep het gebruiken zonder uitleg. Kijk mee en schrijf op waar ze vastlopen. Dat zijn je verbeteringen.',['Drie mensen hebben het gebruikt','Je weet waar ze vastliepen, en hebt het verbeterd']],
+ ['Live zetten','Sleep je bestand naar Netlify Drop en je hebt een link. Deel hem met je klant of je team. Pas dan weet je of het werkt.',['Er is een link','Je weet hoe je gaat meten of het werkt']]];
+const SPECW=[
+ {s:'Maak een mooie tool voor onze klanten over energie.',opt:['Voor wie, en welke vraag','Een kleurenpalet','Niets'],ok:0,uit:'Zonder doelgroep en één concrete vraag bouwt de AI iets algemeens, en dat gebruikt niemand.'},
+ {s:'Doel: forensen laten zien wat hun auto per maand kost. Wat het doet: invullen en een uitkomst tonen.',opt:['Wat het niet doet, en wanneer het klaar is','Meer bijvoeglijke naamwoorden','Een langere titel'],ok:0,uit:'Zonder grenzen bouwt de AI te veel. Zonder klaar-als weet je niet wanneer je moet stoppen.'},
+ {s:'Doel: laten zien of je subsidie krijgt. Voor wie: huiseigenaren. Wat het doet: 1. drie vragen, 2. een uitkomst met uitleg. Wat het niet doet: geen account, geen opslag. Klaar als: werkt op mobiel en laadt snel.',opt:['Niets wezenlijks, deze is bruikbaar','Een logo','Een database'],ok:0,uit:'Kort, maar compleet: doel, doelgroep, stappen, grenzen en klaar-als.'}];
+PT.sb={q:[null,null,null]};
+function oefB(){return SPECW.map((w,j)=>`<div class="case" style="margin-top:8px"><div class="cm">Spec ${j+1} van ${SPECW.length}: wat mist er?</div><div class="cs" style="font-size:1.02rem">${w.s}</div><div class="minis" style="flex-wrap:wrap">${w.opt.map((o,k)=>`<button data-act="ptbq" data-j="${j}" data-k="${k}" aria-pressed="${PT.sb.q[j]===k}">${o}</button>`).join('')}</div>${PT.sb.q[j]!==null?`<div class="fb ${PT.sb.q[j]===w.ok?'ok':'no'}"><b>${PT.sb.q[j]===w.ok?'Goed.':'Niet helemaal.'}</b> ${w.uit}</div>`:''}</div>`).join('')}
+function bouwen(){
+  const b=S.bouw,f=b.f||{};
+  return topBar('bouwen')+`<main class="wrap">
+  <div class="ph"><div class="lbl">Bouwmodule</div><h1>Je eerste tool in een middag.</h1>
+  <p>Je leert geen tool. Tools veranderen elke maand. Je leert het patroon dat blijft: vraag, spec, bouwen, testen, live.</p>
+  </div>
+  <div style="margin-top:20px">${lesBox('bouw')}${oefBox('bouw')}</div>
+  ${BOUW.map(([h,t,g],i)=>`<section class="step ${b.done.includes(i)?'done':''}"><div class="step-h"><b>${b.done.includes(i)?'✓':i+1}</b><h2>${h}</h2></div><div class="step-b">
+    <p style="font-weight:400;line-height:1.55">${t}</p>
+    <div class="chks" style="margin-top:12px">${g.map(x=>`<span class="${b.done.includes(i)?'y':''}">${x}</span>`).join('')}</div>
+    ${i===1?`<div style="margin-top:18px">
+      <label class="f"><span>De vraag</span><input type="text" data-b="vraag" value="${esc(f.vraag||'')}" placeholder="Wat kost mijn auto me per maand echt?"></label>
+      <label class="f"><span>Voor wie</span><input type="text" data-b="wie" value="${esc(f.wie||'')}" placeholder="Forensen met een auto van de zaak"></label>
+      <label class="f"><span>Wat moet het doen?</span><textarea data-b="doen" placeholder="Wat vult iemand in, wat krijgt hij terug?">${esc(f.doen||'')}</textarea></label>
+      <label class="f"><span>Wat doet het niet?</span><input type="text" data-b="niet" value="${esc(f.niet||'')}" placeholder="Geen account, geen opslag"></label>
+      <div class="btns"><button class="btn" data-act="spec">Maak mijn spec</button></div>
+      ${b.spec?`<div class="f" style="margin-top:18px"><span>Je spec</span><textarea class="big" data-b2="spec">${esc(b.spec)}</textarea></div><div class="btns"><button class="btn ghost sm" data-act="kopieer">Kopieer spec</button></div>`:''}
+    </div>`:''}
+    <label class="chk" style="margin-top:16px"><input type="checkbox" data-act="bdone" data-i="${i}" ${b.done.includes(i)?'checked':''}><span>Gedaan</span></label>
+  </div></section>`).join('')}
+  ${b.done.length===BOUW.length?`<section class="next">${cover('bouwklaar',800,360,'lg')}<span class="k">Klaar</span><h2>Maak er een experimentkaart van.</h2><p>Dan staat je eerste tool in je library, met de spec erbij.</p><div class="btns"><button class="btn" data-act="bouw-kaart">Maak kaart</button></div></section>`:''}
+  </main>`+foot();
+}
+
+/* ---------- library ---------- */
+let LIBTAB='mijn';
+function kaart(e,eigen){
+  const m=[e.auteur&&!eigen?esc(e.auteur):'',e.klant?esc(e.klant):'',e.datum?fmtD(e.datum):''].filter(Boolean).join(', ');
+  return `<details class="card"><summary><span class="th">${cover(e.id+(e.titel||''))}</span><span class="t">${esc(expTitel(e))}</span><span class="tag ${e.status==='af'?'dk':'ov'}">${e.status==='af'?'Afgerond':'Bezig'}</span>
+  <span class="m">${m}${eigen?` <span class="tag ov">${{prive:'Alleen ik',team:'Team',publiek:'Iedereen'}[e.zicht||'prive']}</span>`:''}${e.remixVan?' <span class="tag ov">Remix</span>':''}</span></summary>
+  <div class="body">
+    ${e.signaal?`<div><span>Signaal</span><p>${esc(e.signaal)}</p></div>`:''}
+    ${e.hypothese?`<div><span>Hypothese</span><p>${esc(e.hypothese)}</p></div>`:''}
+    ${e.keuze?`<div><span>Waarom deze keuze</span><p>${esc(e.keuze)}</p></div>`:''}
+    ${e.bouw?`<div><span>Gebouwd</span><p>${esc(e.bouw)}${e.tool?` <span class="hint">(${esc(e.tool)})</span>`:''}</p></div>`:''}
+    ${e.link?`<div><span>Link</span><p><a href="${esc(e.link)}" target="_blank" rel="noopener">${esc(e.link)}</a></p></div>`:''}
+    ${e.spec?`<div><span>Spec</span><pre>${esc(e.spec)}</pre></div>`:''}
+    ${e.uitkomst?`<div><span>Uitkomst</span><p>${esc(e.uitkomst)}</p></div>`:''}
+    ${e.geleerd?`<div><span>Geleerd</span><p>${esc(e.geleerd)}</p></div>`:''}
+    <div class="btns">${eigen?`<a class="btn ghost sm" href="#/exp/${e.id}">Open</a>`:''}<button class="btn sm" data-act="remix" data-id="${e.id}">Remix</button></div>
+  </div></details>`;
+}
+function library(){
+  const team=[...TEAM.cards,...S.exps.filter(e=>e.zicht==='team'||e.zicht==='publiek')];
+  const lijst=LIBTAB==='mijn'?S.exps.slice().reverse():team;
+  return topBar('library')+`<main class="wrap wide">
+  <div class="ph"><div class="lbl">Library</div><h1>Wat er gemaakt is.</h1><p>Elke kaart heeft de spec erbij. Remix een kaart en je begint niet bij nul.</p></div>
+  <div class="grp"><span>Tools en tutorials</span><span>Doen het uitvoerende werk, jij het oordeel</span></div>
+  <div class="tools">${TOOLS.map(toolKaart).join('')}</div>
+  <div class="grp"><span>Experimentkaarten</span></div>
+  <div class="seg tabs" role="group" aria-label="Weergave"><button data-act="libtab" data-v="mijn" aria-pressed="${LIBTAB==='mijn'}">Mijn kaarten (${S.exps.length})</button><button data-act="libtab" data-v="team" aria-pressed="${LIBTAB==='team'}">${esc(S.user?.agency||TEAM.naam)} (${team.length})</button></div>
+  <div style="margin-top:14px">${lijst.length?lijst.map(e=>kaart(e,LIBTAB==='mijn')).join(''):`<div class="empty">Nog geen kaarten. Rond een ronde af en hij komt hier.<div class="btns"><a class="btn sm" href="#/exp/nieuw">Start een ronde</a></div></div>`}</div>
+  ${LIBTAB==='team'?'<p class="hint" style="margin-top:14px">Voorbeeldteam met fictieve collega’s en klanten.</p>':''}
+  </main>`+foot();
+}
+
+/* ---------- profiel ---------- */
+function spark(scans){
+  if(!scans.length) return '';
+  const w=600,h=230,p=40,vals=scans.map(s=>Math.round(s.res.uitvindend));
+  const x=i=>scans.length===1?w/2:p+i*(w-2*p)/(scans.length-1),y=v=>h-p-(v/100)*(h-2*p);
+  const pts=vals.map((v,i)=>`${x(i)},${y(v)}`).join(' ');
+  return `<svg class="spark" viewBox="0 0 ${w} ${h}" role="img" aria-label="Verschuiving: ${vals.join(', ')} procent uitvinder">
+   <line x1="${p}" x2="${w-p}" y1="${y(50)}" y2="${y(50)}" stroke="currentColor" stroke-opacity=".25" stroke-dasharray="4 5"/>
+   <polyline points="${pts}" fill="none" stroke="currentColor" stroke-width="3"/>
+   ${vals.map((v,i)=>`<circle cx="${x(i)}" cy="${y(v)}" r="12" fill="var(--acc)" stroke="currentColor" stroke-width="2.5"/><text x="${x(i)}" y="${y(v)-24}" text-anchor="${i===0&&scans.length>1?'start':i===scans.length-1&&scans.length>1?'end':'middle'}" fill="currentColor" font-family="Inter, sans-serif" font-weight="600" font-size="26">${v}%</text>`).join('')}
+  </svg>`;
+}
+function profielView(u,o){
+  return `<div class="pcv">${cover('profiel'+u.naam,960,300)}</div><div class="prof"><div class="av">${esc(initials(u.naam))}</div><div><h1>${esc(u.naam)}</h1><p>${esc(u.rol||'')}${u.agency?', '+esc(u.agency):''}</p></div></div>
+  ${o.inv?`<div class="quote"><small>Invalshoek</small>${esc(o.inv)}</div>`:''}
+  ${o.shift?`<div class="grp"><span>Verschuiving</span><span>% uitvinder</span></div>${o.shift}`:''}
+  ${o.cards!==undefined?`<div class="grp"><span>Wat ik uitvond</span><span>${o.cards.length}</span></div>${o.cards.length?o.cards.map(e=>kaart(e,false)).join(''):'<div class="empty" style="margin-top:14px">Nog geen openbare kaarten.</div>'}`:''}`;
+}
+function profiel(){
+  const u=S.user,t=S.prof.toon,pub=S.exps.filter(e=>e.zicht==='publiek'&&e.status==='af');
+  return topBar('profiel')+`<main class="wrap">
+  ${profielView(u,{inv:S.inv.zin,shift:spark(S.scans),cards:pub})}
+  <div class="grp"><span>Gegevens</span></div>
+  <div style="margin-top:16px">
+    <label class="f"><span>Naam</span><input type="text" data-u="naam" value="${esc(u.naam)}"></label>
+    <div class="f"><span>Rol</span><div class="seg">${ROLES.map(x=>`<button data-act="urol" data-v="${x}" aria-pressed="${u.rol===x}">${x}</button>`).join('')}</div></div>
+    <label class="f"><span>Agency of team</span><input type="text" data-u="agency" value="${esc(u.agency||'')}"></label>
+  </div>
+  <div class="grp"><span>Openbaar profiel</span><span>${S.prof.publiek?'Aan':'Uit'}</span></div>
+  <div style="display:grid;gap:12px;margin-top:16px">
+    <label class="chk"><input type="checkbox" data-act="pub" ${S.prof.publiek?'checked':''}><span>Maak mijn profiel openbaar</span></label>
+    <label class="chk"><input type="checkbox" data-act="toon" data-k="inv" ${t.inv?'checked':''}><span>Toon mijn invalshoek</span></label>
+    <label class="chk"><input type="checkbox" data-act="toon" data-k="shift" ${t.shift?'checked':''}><span>Toon mijn verschuiving</span></label>
+    <label class="chk"><input type="checkbox" data-act="toon" data-k="exps" ${t.exps?'checked':''}><span>Toon kaarten die ik op ‘Iedereen’ zet</span></label>
+  </div>
+  <p class="hint" style="margin-top:12px">Je link: thijsmensink.nl/uitvinder/${esc(u.slug)}. In het prototype werkt hij alleen op dit apparaat.</p>
+  <div class="btns" style="margin-top:14px"><a class="btn ghost sm" href="#/p/${esc(u.slug)}">Bekijk zoals anderen het zien</a><button class="btn ghost sm" data-act="reset">Wis al mijn gegevens</button></div>
+  </main>`+foot();
+}
+function pub(slug){
+  const m=TEAM.members.find(x=>x.slug===slug);
+  let body;
+  if(S.user&&S.user.slug===slug){
+    if(!S.prof.publiek) body=`<div class="ph"><h1>Dit profiel is niet openbaar.</h1><p>Zet het aan bij je profiel.</p></div>`;
+    else{const t=S.prof.toon;body=profielView(S.user,{inv:t.inv?S.inv.zin:'',shift:t.shift?spark(S.scans):'',cards:t.exps?S.exps.filter(e=>e.zicht==='publiek'&&e.status==='af'):undefined})}
+  } else if(m){
+    body=profielView({naam:m.naam,rol:m.rol,agency:TEAM.naam},{inv:m.inv,shift:spark([{res:{uitvindend:m.nul}},{res:{uitvindend:m.nu}}]),cards:TEAM.cards.filter(c=>c.auteur===m.naam&&c.status==='af')})+'<p class="hint" style="margin-top:14px">Fictief voorbeeldprofiel.</p>';
+  } else body=`<div class="ph"><h1>Dit profiel bestaat niet.</h1></div>`;
+  return topBar('p')+`<main class="wrap">${body}</main>`+foot();
+}
+
+/* ---------- team ---------- */
+function team(){
+  const ik=S.user&&nul()?{naam:S.user.naam+' (jij)',rol:S.user.rol,nul:Math.round(nul().uitvindend),nu:Math.round(laatste().uitvindend),slug:S.user.slug,ik:true}:null;
+  const leden=[...TEAM.members,...(ik?[ik]:[])];
+  const gem=k=>Math.round(leden.reduce((a,m)=>a+m[k],0)/leden.length);
+  const gedeeld=TEAM.cards.length+S.exps.filter(e=>e.zicht!=='prive').length;
+  return topBar('team')+`<main class="wrap wide">
+  <div class="ph"><div class="lbl">Team, weergave voor de eigenaar</div><h1>${esc(S.user?.agency||TEAM.naam)}</h1>
+  <p>Zo verschuift je team van uitvoerend naar uitvindend. Je ziet geen rolscan-antwoorden, invalshoek-twijfels of privékaarten. Alleen de verhouding en wat met het team is gedeeld.</p></div>
+  <div class="cmp"><div><span>Team bij de start</span><b>${gem('nul')}%</b><span>uitvinder</span></div><div><span>Team nu</span><b>${gem('nu')}%</b><span>uitvinder</span></div></div>
+  <div class="grp"><span>Per persoon</span><span>Start → nu</span></div>
+  <div class="tmw">${leden.map(m=>`<div class="tm"><span class="nm"><span class="dot" style="background:${palOf(m.naam)[0]}"></span>${m.ik?esc(m.naam):`<a href="#/p/${m.slug}">${esc(m.naam)}</a>`}<small>${esc(m.rol)}</small></span>
+    <span class="shift" aria-label="Van ${m.nul} naar ${m.nu} procent"><i style="width:${m.nu}%"></i><u style="left:${m.nul}%"></u></span>
+    <span class="pc">${m.nul}% → ${m.nu}%</span></div>`).join('')}</div>
+  <p class="hint" style="margin-top:10px">Het streepje is de nulmeting, de balk de laatste meting.</p>
+  <div class="grp"><span>Gedeelde kaarten</span><span>${gedeeld}</span></div>
+  <div class="btns" style="margin-top:14px"><a class="btn ghost sm" href="#/library" data-act="libtab-team">Bekijk de gedeelde library</a></div>
+  <p class="hint" style="margin-top:20px">Voorbeeldteam met fictieve collega’s en klanten.</p>
+  </main>`+foot();
+}
+
+/* ---------- coach ---------- */
+function coachBox(stap,id){
+  return `<div class="coach" data-coach="${id}"><div class="hd"><span>Coach</span><button class="btn ghost sm" data-act="coach" data-stap="${stap}" data-id="${id}">Vraag de coach</button></div>
+  <div class="ask"><input type="text" id="cq-${id}" placeholder="Optioneel: je eigen vraag"></div><div class="out" id="co-${id}"></div></div>`;
+}
+function ctx(stap){
+  const u=S.user||{};
+  if(stap==='invalshoek'){const i=S.inv;return `Rol: ${u.rol||''}\nVak: ${i.vak}\nVan buiten het vak: ${i.buiten}\nVoor wie relevant: ${i.voorwie}\nHuidige zin: ${i.zin||'(nog leeg)'}`}
+  const e=S.exps.find(x=>x.id===CUR)||{};
+  return `Rol: ${u.rol||''}\nInvalshoek: ${S.inv.zin||''}\nKlant: ${e.klant||''}\nSignaal: ${e.signaal||''}\nWaarom dit merk: ${e.waarom||''}\nHypothese: ${e.hypothese||''}\nWat ik bouw: ${e.bouw||''}\nTools: ${e.tool||''}\nMeting: ${e.meting||''}\nUitkomst: ${e.uitkomst||''}\nGeleerd: ${e.geleerd||''}`;
+}
+async function api(path,body){
+  const r=await fetch(path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+  const d=await r.json().catch(()=>({error:'Onverwacht antwoord.'}));
+  if(!r.ok||d.error) throw new Error(d.error||'Er ging iets mis.');
+  return d;
+}
+
+/* ---------- deelbeeld ---------- */
+function wrap(c,t,x,y,max,lh){const w=String(t).split(' ');let l='';for(const word of w){const test=l?l+' '+word:word;if(c.measureText(test).width>max&&l){c.fillText(l,x,y);l=word;y+=lh}else l=test}if(l)c.fillText(l,x,y);return y}
+async function deelbeeld(r){
+  await document.fonts.ready;
+  const c=document.createElement('canvas');c.width=1080;c.height=1350;const g=c.getContext('2d');
+  g.fillStyle='#f6e6da';g.fillRect(0,0,1080,1350);
+  g.filter='blur(140px)';
+  [['#ff8a5c',180,1250,520],['#a98bff',930,300,440],['#f59ac0',560,700,300],['#ffffff',540,-60,420]].forEach(([col,x,y,rad])=>{g.fillStyle=col;g.beginPath();g.arc(x,y,rad,0,Math.PI*2);g.fill()});
+  g.filter='none';
+  g.fillStyle='#141413';g.font='500 34px "Inter", sans-serif';g.fillText('Mijn nulmeting',90,150);
+  g.font='500 260px "Inter Tight", "Inter", sans-serif';g.fillText(Math.round(r.uitvindend)+'%',72,400);
+  g.font='500 104px "Inter Tight", "Inter", sans-serif';g.fillText('uitvinder.',90,520);
+  g.fillStyle='rgba(255,255,255,.6)';g.beginPath();g.roundRect(90,590,900,16,8);g.fill();
+  g.fillStyle='#141413';g.beginPath();g.roundRect(90,590,Math.max(16,900*Math.round(r.uitvindend)/100),16,8);g.fill();
+  g.font='500 34px "Inter", sans-serif';g.fillText('Volgende week test ik',90,730);
+  g.font='500 60px "Inter Tight", "Inter", sans-serif';wrap(g,r.kort||r.experiment?.bouw||'',90,810,900,72);
+  g.font='600 44px "Inter Tight", "Inter", sans-serif';g.fillText('Uitvinder',90,1210);
+  g.font='400 30px "Inter", sans-serif';g.fillStyle='#3d3a36';g.fillText('Van uitvoerder naar uitvinder, door Thijs Mensink',90,1260);
+  c.toBlob(b=>{const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='mijn-nulmeting.png';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000)},'image/png');
+}
+
+/* ---------- demo ---------- */
+function demoData(){
+  const d=n=>new Date(Date.now()-n*864e5).toISOString().slice(0,10);
+  const st=fresh();
+  st.user={naam:'Noor Jansen',rol:'designer',agency:TEAM.naam,slug:'noor-jansen'};
+  st.scans=[{datum:d(42),rol:'designer',res:VOORBEELD,demo:true},{datum:d(6),rol:'designer',res:Object.assign({},VOORBEELD,{uitvoerend:69,uitvindend:31}),demo:true}];
+  st.inv={vak:'Brand designer, 7 jaar agency',buiten:'Vier jaar in de horeca gewerkt',voorwie:'Familiebedrijven in de regio',zin:'Ik ontwerp voor familiebedrijven zoals een goede gastvrouw ontvangt: ik zie wat de gast nodig heeft voordat hij het vraagt.',versies:[{zin:'Ik ben een designer met oog voor gastvrijheid.',datum:d(41),week:1},{zin:'Ik ontwerp voor familiebedrijven zoals een goede gastvrouw ontvangt: ik zie wat de gast nodig heeft voordat hij het vraagt.',datum:d(7),week:6}]};
+  st.exps=[
+   {id:'d1',datum:d(38),week:1,status:'af',zicht:'publiek',auteur:'Noor Jansen',klant:'Fietsmerk Velo',titel:'Wintercheck als tool in plaats van een post',signaal:'Eerste koude week; forensen twijfelen of ze blijven fietsen.',waarom:'Velo verkoopt winterbanden en wil forensen het hele jaar op de fiets.',hypothese:'Als ik de winterchecklist als kleine tool bouw, dan delen meer volgers hem dan een gewone post.',bouw:'Eén pagina: fietstype kiezen, checklist eruit, deelknop.',tool:'Claude, Netlify',spec:'Doel: forensen in één minuut klaar voor de winter.\nVoor wie: woon-werkfietsers.\nWat het doet: 1. Fietstype kiezen. 2. Checklist op maat. 3. Deelknop.\nWat het niet doet: geen account, geen opslag.\nKlaar als: werkt op mobiel.',link:'',meting:'Aantal keer gedeeld in vijf dagen',uitkomst:'412 keer gedeeld, tegen 37 voor de best gedeelde post van de maand.',geleerd:'Mensen delen iets wat ze kunnen gebruiken, niet iets wat ze moeten lezen.'},
+   {id:'d2',datum:d(24),week:3,status:'af',zicht:'team',auteur:'Noor Jansen',klant:'Restaurant De Gouden Leeuw',titel:'Allergenencheck bij de menukaart',signaal:'Gasten vragen steeds vaker vooraf naar allergenen.',waarom:'Het restaurant wil gastvrij zijn zonder dat de bediening alles uit het hoofd moet weten.',hypothese:'Als gasten via een QR-code zelf kunnen filteren, dan dalen de vragen aan tafel met de helft.',bouw:'Menukaart met filter op allergenen.',tool:'Claude',spec:'',meting:'Vragen aan tafel per avond, geteld door de bediening',uitkomst:'Van gemiddeld 11 naar 4 vragen per avond.',geleerd:'De bediening was de echte klant: zij hadden er het meeste aan.'},
+   {id:'d3',datum:d(4),week:7,status:'bezig',zicht:'prive',auteur:'Noor Jansen',klant:'Bakkerij Ter Horst',titel:'Kerstbestellingen zonder telefoon',signaal:'Vorig jaar liep de telefoon vast in december.',waarom:'',hypothese:'Als klanten online hun kerstbrood reserveren, dan neemt de bakker de helft minder telefoontjes aan.',bouw:'',tool:'',spec:'',meting:'',uitkomst:'',geleerd:''}];
+  st.metingen=[{week:1,datum:d(42),gen:2.3,prom:2.0,real:1.7,cse:2.7,rol:18},{week:6,datum:d(7),gen:3.3,prom:2.7,real:3.0,cse:3.3,rol:31}];
+  st.watch=['Mobiliteit','Horeca'];
+  st.cockpit=seedCockpit();
+  st.prof={publiek:true,toon:{inv:true,shift:true,exps:true}};
+  st.bouw={done:[0,1,2],f:{vraag:'Welk kerstbrood moet ik reserveren?',wie:'Vaste klanten van een dorpsbakker',doen:'Kies brood, aantal en ophaaldag. Je krijgt een bevestiging.',niet:'Geen betalen, geen account'},spec:''};
+  return st;
+}
+
+/* ---------- acties ---------- */
+const ACT={
+  ptbq:a=>{PT.sb.q[+a.dataset.j]=+a.dataset.k;render(true)},
+  ckklantlink:a=>{S.cockpit.klant=a.dataset.v;save()},
+  ckklant:a=>{S.cockpit.klant=a.dataset.v;save();render(true)},
+  ckkies:a=>{S.cockpit.kies[a.dataset.id]=+a.dataset.i;save()},
+  ckkop:a=>{const k=S.cockpit.klant,n=a.dataset.v;S.cockpit.kop[k]=S.cockpit.kop[k]||{};S.cockpit.kop[k][n]=!S.cockpit.kop[k][n];save();toast(S.cockpit.kop[k][n]?n+' gekoppeld (nagebootst)':n+' ontkoppeld');render(true)},
+  ckgo:a=>{const C=S.cockpit,t=C.taken.find(x=>x.id===a.dataset.id),r=(C.tekst[t.id]||'').trim();
+    if(t.opties.length&&C.kies[t.id]===undefined){toast('Kies eerst een optie');return}if(!r){toast('Schrijf op waarom je dit kiest');return}
+    const keus=t.opties.length?t.opties[C.kies[t.id]]:'';t.status='goedgekeurd';t.besluit=`${keus?'Gekozen: '+keus+'. ':''}Waarom: ${r}`;
+    nieuwExp({klant:KLANTEN.find(k=>k.id===t.klant)?.naam||'',titel:t.titel,signaal:t.aanleiding,bouw:keus||t.titel,keuze:r+(t.opties.length?`\nGekozen uit: ${t.opties.join(' | ')}`:''),tool:`Cockpit, agent ${t.agent} in ${t.tool}`});
+    save();toast('Goedgekeurd. Er staat een experimentkaart in je reis');render(true)},
+  ckbij:a=>{const C=S.cockpit,t=C.taken.find(x=>x.id===a.dataset.id),r=(C.tekst[t.id]||'').trim();if(!r){toast('Schrijf op wat de agent anders moet doen');return}
+    t.status='bezig';t.hist=[...(t.hist||[]),'Bijgestuurd: '+r];C.tekst[t.id]='';save();toast('Teruggestuurd naar de agent');render(true)},
+  ckstop:a=>{const C=S.cockpit,t=C.taken.find(x=>x.id===a.dataset.id),r=(C.tekst[t.id]||'').trim();if(!r){toast('Schrijf op waarom je stopt');return}
+    t.status='gestopt';t.besluit='Waarom gestopt: '+r;save();toast('Gestopt');render(true)},
+  demotool:a=>{const id=a.dataset.id;if(!S.user){S=demoData();save();toast('Demo geladen')}location.hash='#/tool/'+id},
+  demomarkt(){if(!S.user){S=demoData();save();toast('Demo geladen')}location.hash='#/markt'},
+  watch:a=>{S.watch=S.watch||[];const v=a.dataset.v;S.watch=S.watch.includes(v)?S.watch.filter(x=>x!==v):[...S.watch,v];save();render(true)},
+  trendsig:a=>{const t=TRENDS.find(x=>x.id===a.dataset.id);const e=nieuwExp({signaal:`${t.titel}. ${t.uitleg}`,titel:'',klant:a.dataset.klant||''});toast('Signaal in een nieuwe ronde gezet');location.hash='#/exp/'+e.id},
+  moveremix:a=>{const m=MOVES.find(x=>x.id===a.dataset.id),t=TRENDS.find(x=>x.id===m.trend);const e=nieuwExp({signaal:t?`${t.titel}. ${t.uitleg}`:'',bouw:m.wat,link:'',remixVan:{titel:m.titel,auteur:'Thijs Mensink'}});toast('Remix gestart');location.hash='#/exp/'+e.id},
+  cmlopend(){const e=curExp();if(!e)return;CM.f.klant=e.klant||CM.f.klant;CM.f.vraag=e.signaal||'';render(true)},
+  cmvb(){CM.routes=CM_VB;CM.demo=true;CM.pick=[];CM.err='';if(!CM.f.klant)CM.f.klant='Fietsmerk Velo';render(true)},
+  async cmgo(){const f=CM.f;if(!f.merk||!f.vraag){toast('Vul minstens het merk en de vraag in');return}
+    CM.busy=true;CM.err='';render(true);
+    try{const d=await api('/api/coach',{mode:'concept',context:`Klant: ${f.klant||''}\nMerk: ${f.merk}\nVoor wie: ${f.wie||''}\nVraag of signaal: ${f.vraag}\nRandvoorwaarden: ${f.rand||'geen'}\nInvalshoek van de gebruiker: ${f.inv||'geen'}`});
+      if(!d.routes||!d.routes.length)throw new Error('Er kwamen geen routes terug.');CM.routes=d.routes;CM.demo=false;CM.pick=[];CM.type='alle'}
+    catch(e){CM.err=e.message+' Je kunt de voorbeeldroutes bekijken.'}
+    CM.busy=false;render(true)},
+  cmtype:a=>{CM.type=a.dataset.v;render(true)},
+  cmpick:a=>{const i=+a.dataset.i;if(a.checked){if(CM.pick.length>=3){a.checked=false;toast('Maximaal drie op je shortlist');return}CM.pick.push(i)}else CM.pick=CM.pick.filter(x=>x!==i);render(true)},
+  cmronde(){if(!CM.pick.length){toast('Kies eerst routes');return}if(!CM.concept.trim()||!CM.waarom.trim()||!CM.eigen.trim()){toast('Vul je concept in, waarom, en wat je zelf toevoegde');return}
+    const e=nieuwExp({klant:CM.f.klant||'',titel:CM.concept.split(/[.\n]/)[0].slice(0,70),signaal:CM.f.vraag||'',bouw:CM.concept,keuze:`${CM.waarom}\nZelf toegevoegd: ${CM.eigen}\nGekozen uit: ${CM.pick.map(i=>CM.routes[i].titel).join(', ')}`,tool:'Concept-machine'});
+    toast('Ronde gestart');location.hash='#/exp/'+e.id},
+  pt2:a=>{PT.s2.ant[PT.s2.i]=a.dataset.v;render(true)},
+  pt2next(){PT.s2.i++;render(true)},
+  pt2reset(){PT.s2.i=0;PT.s2.ant=[];render(true)},
+  pt2neem(){const f=PT.s2.f;if(!(f.zin||'').trim()){toast('Schrijf eerst je zin');return}
+    S.inv.zin=f.zin.trim();if(f.wie)S.inv.voorwie=f.wie;const b=[f.werk,f.diep,f.advies].filter(Boolean).join('; ');if(b)S.inv.buiten=b;save();toast('Overgenomen, leg hem vast onderaan');render(true)},
+  mset:a=>{MA2[a.dataset.k]=+a.dataset.v;render(true)},
+  msave:a=>{const w=+a.dataset.w,r={};for(const k of Object.keys(MEET)){const v=[0,1,2].map(i=>MA2[k+i]);if(v.some(x=>!x)){toast('Beantwoord alle twaalf uitspraken');return}r[k]=gem(v)}
+    const l=laatste();S.metingen=S.metingen.filter(m=>m.week!==w);S.metingen.push(Object.assign({week:w,datum:today(),rol:l?Math.round(l.uitvindend):NaN},r));S.metingen.sort((x,y)=>x.week-y.week);MA2={};save();toast('Meting opgeslagen');location.hash='#/scan'},
+  mredo:a=>{S.metingen=S.metingen.filter(m=>m.week!==+a.dataset.w);save();render(true)},
+  pfpick:a=>{const id=a.dataset.id;if(a.checked){if(S.portfolio.length>=3){a.checked=false;toast('Kies er maximaal drie');return}S.portfolio.push(id)}else S.portfolio=S.portfolio.filter(x=>x!==id);save();render(true)},
+  indienen(){S.eind.ingediend=today();save();toast('Ingediend');render(true)},
+  beset:a=>{BE[a.dataset.k]=+a.dataset.v;render(true)},
+  ctcopy(){navigator.clipboard?.writeText(CHROME_PROMPT).then(()=>toast('Prompt gekopieerd'),()=>toast('Kopiëren lukte niet'))},
+  ctronde(){if(!CT.keuze.trim()||!CT.waarom.trim()){toast('Vul in wat je kiest en waarom');return}
+    const e=nieuwExp({klant:CT.klant,signaal:CT.keuze,keuze:CT.waarom,hypothese:CT.hyp.includes('...')?'':CT.hyp,tool:'Claude in Chrome, Meta Ads'});toast('Ronde gestart');location.hash='#/exp/'+e.id},
+  mavb(){setTable(voorbeeldMeta(),'Voorbeelddata: fietsmerk, 21 dagen');if(!MA.klant)MA.klant='Fietsmerk Velo';render(true)},
+  mapick:a=>{MA.pick=+a.dataset.i;const R=metaCalc();if(R&&R.I[MA.pick]&&!MA.hyp)MA.hyp='Als ik ..., dan verwacht ik ..., omdat ...';render(true)},
+  async maai(){const R=metaCalc();if(!R)return;MA.aiBusy=true;render(true);
+    const sam=`Klant: ${MA.klant||'onbekend'}\nTotaal besteed: ${eur(R.T.spend)}, CTR ${pct(R.T.clicks/R.T.impr)}, ${R.kn} ${eur(R.useRes?R.T.spend/R.T.results:R.T.spend/R.T.clicks)}\nPer advertentie (budgetaandeel, CTR, ${R.kn}, frequentie):\n${R.ads.slice(0,10).map(a=>`- ${a.naam}: ${pct(a.share)}, ${pct(a.ctr)}, ${R.useRes?(isFinite(a.cpr)?eur(a.cpr):'geen resultaten'):eur(a.cpc)}, ${isFinite(a.freq)?a.freq.toFixed(1):'onbekend'}`).join('\n')}\nWat de tool opviel:\n${R.I.map(x=>`- ${x.t}: ${x.b}`).join('\n')||'- niets bijzonders'}`;
+    try{const d=await api('/api/coach',{mode:'meta',context:sam});MA.ai=d.text}catch(e){MA.ai=e.message}MA.aiBusy=false;render(true)},
+  maronde(){const R=metaCalc();if(!R||MA.pick===null||!R.I[MA.pick]){toast('Kies eerst wat je wilt testen');return}
+    if(!MA.waarom.trim()){toast('Schrijf op waarom je dit kiest');return}
+    const x=R.I[MA.pick],e=nieuwExp({klant:MA.klant,titel:x.t,signaal:`${x.t}. ${x.b}`,keuze:MA.waarom,hypothese:MA.hyp.includes('...')?'':MA.hyp,tool:'Meta Ads-analyse, Meta Ads',bouw:'Test in Meta Ads'});
+    toast('Ronde gestart');location.hash='#/exp/'+e.id},
+  pt3:a=>{PT.s3.ant[PT.s3.i]=a.dataset.v;render(true)},
+  pt3next(){PT.s3.i++;render(true)},
+  pt3reset(){PT.s3.i=0;PT.s3.ant=[];render(true)},
+  pt3eig:a=>{PT.s3.eig[+a.dataset.j]=a.dataset.v;render(true)},
+  pt4q:a=>{PT.s4.q[+a.dataset.j]=+a.dataset.k;render(true)},
+  pt4lad:a=>{PT.s4.lad=+a.dataset.k;render(true)},
+  pt4neem(){const f=PT.s4.f,e=S.exps.find(x=>x.id===CUR);if(!f.maak||!f.getal){toast('Vul minstens wat je maakt en een getal in');return}
+    e.hypothese=zin4();e.meting=`${f.getal} ${f.gedrag&&f.gedrag!=='anders'?f.gedrag:(f.gedrag2||'')}`.trim();if(!e.bouw)e.bouw=(PT.s4.lad!==null?LADDER[PT.s4.lad]+': ':'')+f.maak;save();toast('Overgenomen in je ronde');render(true)},
+  pt5kopie(){navigator.clipboard?.writeText(post5()).then(()=>toast('Post gekopieerd'),()=>toast('Kopiëren lukte niet'))},
+  pt5neem(){const f=PT.s5.f,e=S.exps.find(x=>x.id===CUR);if(!f.getal){toast('Vul eerst de uitkomst in');return}
+    e.uitkomst=f.getal+(f.vergelijk?'. '+f.vergelijk:'')+'.';if(f.dacht&&f.bleek)e.geleerd=`Ik dacht ${f.dacht}, het bleek ${f.bleek}.`;save();toast('Overgenomen in je ronde');render(true)},
+  demo(){if(S.user&&!confirm('De demo vervangt je gegevens op dit apparaat. Doorgaan?'))return;S=demoData();save();LIBTAB='team';location.hash='#/team';toast('Demo geladen')},
+  rol:a=>{SC.rol=a.dataset.v;SC.week=document.getElementById('week')?.value||SC.week;render(true)},
+  async scan(){
+    SC.week=document.getElementById('week').value;SC.err='';SC.demo=false;
+    if(SC.week.trim().length<20){SC.err='Beschrijf je week iets uitgebreider: wat deed je, hoeveel tijd ging erin en voor wie?';return render(true)}
+    SC.busy=true;render(true);
+    try{SC.res=await api('/api/scan',{rol:SC.rol,week:SC.week})}catch(e){SC.err=e.message+' Je kunt ook de voorbeelduitkomst bekijken.'}
+    SC.busy=false;render(true);if(SC.res&&!SC.res.vraag)document.getElementById('uitkomst')?.scrollIntoView({behavior:'smooth'});
+  },
+  voorbeeld(){SC.week=document.getElementById('week')?.value||SC.week;SC.res=VOORBEELD;SC.demo=true;SC.err='';render(true);document.getElementById('uitkomst')?.scrollIntoView({behavior:'smooth'})},
+  deel(){deelbeeld(SC.res)},
+  bewaar(){
+    if(!S.user){const n=document.getElementById('nw-naam').value.trim();if(!n){toast('Vul je naam in');document.getElementById('nw-naam').focus();return}
+      S.user={naam:n,agency:document.getElementById('nw-agency').value.trim(),rol:SC.rol,slug:slugify(n)}}
+    S.scans.push({datum:today(),rol:SC.rol,res:SC.res,demo:SC.demo});
+    const mt=S.metingen.find(m=>m.datum===today());if(mt)mt.rol=Math.round(SC.res.uitvindend);
+    const x=SC.res.experiment||{};
+    if(!curExp()) nieuwExp({signaal:x.signaal||'',hypothese:x.hypothese||'',bouw:x.bouw||'',meting:x.meten||'',titel:SC.res.kort||''});
+    save();SC.res=null;SC.week='';location.hash='#/vandaag';toast('Opgeslagen');
+  },
+  'inv-klaar'(){if(!S.inv.zin.trim()){toast('Schrijf eerst je zin');return}S.inv.versies=S.inv.versies||[];const lv=S.inv.versies[S.inv.versies.length-1];if(!lv||lv.zin!==S.inv.zin.trim())S.inv.versies.push({zin:S.inv.zin.trim(),datum:today(),week:Math.min(weekNr(),12)});save();toast('Invalshoek vastgelegd');location.hash='#/vandaag'},
+  zicht:a=>{const e=S.exps.find(x=>x.id===CUR);e.zicht=a.dataset.v;save();render(true)},
+  rondaf(){const e=S.exps.find(x=>x.id===CUR);if(!e.hypothese||!e.uitkomst){toast('Vul minstens hypothese en uitkomst in');return}e.status='af';save();toast('In je library gezet');location.hash='#/library'},
+  heropen(){const e=S.exps.find(x=>x.id===CUR);e.status='bezig';save();render(true)},
+  verwijder(){if(!confirm('Deze ronde verwijderen?'))return;S.exps=S.exps.filter(x=>x.id!==CUR);save();location.hash='#/reis'},
+  async coach(a){
+    const id=a.dataset.id,out=document.getElementById('co-'+id),q=document.getElementById('cq-'+id).value;
+    a.disabled=true;a.innerHTML='<span class="busy"></span> Denkt mee';out.textContent='';
+    try{const d=await api('/api/coach',{stap:a.dataset.stap,context:ctx(a.dataset.stap),vraag:q});out.textContent=d.text}catch(e){out.textContent=e.message}
+    a.disabled=false;a.textContent='Vraag opnieuw';
+  },
+  async spec(a){
+    const f=S.bouw.f||{};if(!f.vraag||!f.doen){toast('Vul minstens de vraag en wat het moet doen in');return}
+    a.disabled=true;a.innerHTML='<span class="busy"></span> Spec wordt gemaakt';
+    try{const d=await api('/api/coach',{mode:'spec',context:`Vraag: ${f.vraag}\nVoor wie: ${f.wie||''}\nWat het moet doen: ${f.doen}\nWat het niet doet: ${f.niet||''}\nStijl: eenvoudig, mobiel eerst`});S.bouw.spec=d.text;save();render(true)}
+    catch(e){toast(e.message);a.disabled=false;a.textContent='Maak mijn spec'}
+  },
+  kopieer(){navigator.clipboard?.writeText(S.bouw.spec).then(()=>toast('Spec gekopieerd'),()=>toast('Kopiëren lukte niet'))},
+  bdone:a=>{const i=+a.dataset.i;S.bouw.done=a.checked?[...new Set([...S.bouw.done,i])]:S.bouw.done.filter(x=>x!==i);save();render(true)},
+  'bouw-kaart'(){const f=S.bouw.f||{};const e=nieuwExp({titel:f.vraag||'Mijn eerste tool',bouw:f.doen||'',spec:S.bouw.spec||''});location.hash='#/exp/'+e.id},
+  libtab:a=>{LIBTAB=a.dataset.v;render(true)},
+  'libtab-team'(){LIBTAB='team'},
+  remix:a=>{
+    const src=[...TEAM.cards,...S.exps].find(x=>x.id===a.dataset.id);if(!src)return;
+    const e=nieuwExp({bouw:src.bouw,tool:src.tool,spec:src.spec,remixVan:{titel:expTitel(src),auteur:src.auteur||S.user.naam}});
+    toast('Remix gestart');location.hash='#/exp/'+e.id;
+  },
+  urol:a=>{S.user.rol=a.dataset.v;save();render(true)},
+  pub:a=>{S.prof.publiek=a.checked;save();render(true)},
+  toon:a=>{S.prof.toon[a.dataset.k]=a.checked;save()},
+  reset(){if(!confirm('Alles wissen? Dit kan niet ongedaan worden.'))return;localStorage.removeItem(K);S=fresh();location.hash='#/';render()},
+  async wl(){
+    const m=document.getElementById('wl-mail'),v=m.value.trim();
+    if(!/^\S+@\S+\.\S+$/.test(v)){toast('Vul een geldig e-mailadres in');m.focus();return}
+    try{await fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({'form-name':'wachtlijst',email:v}).toString()});m.value='';toast('Je staat op de lijst')}
+    catch{toast('Aanmelden lukte niet, probeer het opnieuw')}
+  }
+};
+
+document.addEventListener('click',e=>{
+  const a=e.target.closest('[data-act]');if(!a)return;
+  const fn=ACT[a.dataset.act];if(!fn)return;
+  if(a.tagName!=='INPUT'&&a.tagName!=='A'&&a.tagName!=='LABEL')e.preventDefault();
+  if(a.dataset.act==='mafile')return;
+  fn(a,e);
+});
+document.addEventListener('input',e=>{
+  const t=e.target,d=t.dataset;
+  if(d.i!==undefined){S.inv[d.i]=t.value;save()}
+  else if(d.e){const x=S.exps.find(y=>y.id===CUR);if(x){x[d.e]=t.value;save()}}
+  else if(d.b){S.bouw.f=S.bouw.f||{};S.bouw.f[d.b]=t.value;save()}
+  else if(d.b2){S.bouw.spec=t.value;save()}
+  else if(d.u){S.user[d.u]=t.value;if(d.u==='naam')S.user.slug=slugify(t.value);save()}
+  else if(t.id==='week'){SC.week=t.value}
+  else if(d.mf){MA[d.mf]=t.value}
+  else if(d.ct){CT[d.ct]=t.value}
+  else if(d.cm){CM.f[d.cm]=t.value}
+  else if(d.ck){S.cockpit.tekst[d.ck]=t.value;save()}
+  else if(d.cmx){CM[d.cmx]=t.value}
+  else if(d.pf){S.eind[d.pf]=t.value;save();if(d.pf==='reflectie'){const w=document.getElementById('wc');if(w)w.textContent=words(t.value)+' woorden'}}
+  else if(d.pt){const [k,f]=d.pt.split('.');PT[k].f[f]=t.value;
+    if(k==='s4'){if(f==='gedrag'){render(true);return}const a=document.getElementById('p4prev'),b=document.getElementById('p4chk');if(a)a.textContent=zin4();if(b)b.innerHTML=chk4()}
+    if(k==='s2'){const b=document.getElementById('p2chk');if(b)b.innerHTML=chk2()}
+    if(k==='s5'){const a=document.getElementById('p5prev'),b=document.getElementById('p5chk');if(a)a.textContent=post5();if(b)b.innerHTML=chk5()}}
+});
+document.addEventListener('change',e=>{const t=e.target;
+  if(t.dataset&&t.dataset.act==='mafile'&&t.files[0]){const f=t.files[0],rd=new FileReader();
+    if(/\.xlsx?$/i.test(f.name)){rd.onload=()=>{try{const wb=XLSX.read(rd.result,{type:'array'}),ws=wb.Sheets[wb.SheetNames[0]];setTable(XLSX.utils.sheet_to_json(ws,{header:1,raw:true,defval:''}),f.name)}catch{toast('Dit bestand kon ik niet lezen')}render(true)};rd.readAsArrayBuffer(f)}
+    else{rd.onload=()=>{const rows=parseCSV(String(rd.result).replace(/^\uFEFF/,''));if(rows.length<2){toast('Dit bestand is leeg');return}setTable(rows,f.name);render(true)};rd.readAsText(f)}return}
+  if(t.dataset&&t.dataset.ma!==undefined){MA.map[t.dataset.ma]=t.value||undefined;if(!t.value)delete MA.map[t.dataset.ma];MA.pick=null;render(true);return}if(t.tagName==='SELECT'&&t.dataset.pt){const [k,f]=t.dataset.pt.split('.');PT[k].f[f]=t.value;render(true)}});
+document.addEventListener('toggle',e=>{const d=e.target;if(d.dataset&&d.dataset.k){d.open?OPEN.add(d.dataset.k):OPEN.delete(d.dataset.k)}},true);
+
+/* ---------- router ---------- */
+const ROUTES={klant:klantPage,cockpit:cockpitPage,markt:marktPage,tool:a=>a==='meta'?metaPage():a==='chrome'?chromePage():a==='concept'?conceptPage():library(),meting:metingPage,portfolio,beoordeling,'':landing,scan,vandaag,reis,invalshoek,exp:expPage,bouwen,library,profiel,team,p:pub};
+const NEEDS_USER=['klant','cockpit','markt','meting','portfolio','beoordeling','tool','vandaag','reis','invalshoek','exp','bouwen','library','profiel','team'];
+function render(keepScroll){
+  const [r,arg]=location.hash.replace(/^#\/?/,'').split('/');
+  const route=ROUTES[r]?r:'';
+  if(NEEDS_USER.includes(route)&&!S.user){location.replace('#/scan');return}
+  const y=window.scrollY;
+  let html=ROUTES[route](arg?decodeURIComponent(arg):undefined);
+  if(html==='')return;
+  html=html.replace(/(<div class="step-h">)<b>([1-5✓?])<\/b>/g,'$1<i class="shp" data-s="$2">$2</i>').replace(/<i>([1-5])<\/i>/g,'<i class="shp" data-s="$1">$1</i>');
+  document.getElementById('app').innerHTML=html;
+  document.title=(route&&route!=='p'?({klant:'Klantdossier',cockpit:'Cockpit',markt:'Markt',meting:'Meting',portfolio:'Portfolio',beoordeling:'Beoordeling',tool:'Library',scan:'Rolscan',vandaag:'Vandaag',reis:'Reis',invalshoek:'Invalshoek',exp:'Ronde',bouwen:'Bouwen',library:'Library',profiel:'Profiel',team:'Team'}[route]+' — '):'')+'Van uitvoerder naar uitvinder';
+  window.scrollTo(0,keepScroll===true?y:0);
+}
+window.addEventListener('hashchange',()=>render());
+render();
+</script>
+</body>
+</html>
