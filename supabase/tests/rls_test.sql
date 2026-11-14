@@ -38,7 +38,7 @@ select tst.verwacht((select rol from memberships where user_id = :eva) = 'eigena
 
 -- Anna vult haar eigen gegevens.
 set request.jwt.claim.sub = :anna;
-insert into profiles (id, naam, rol) values (:anna, 'Anna Lid', 'designer');
+insert into profiles (id, naam, rol, ondernemer) values (:anna, 'Anna Lid', 'designer', true);
 insert into scans (uitkomst, pct_uitvindend, datum) values
   ('{"taken":[{"taak":"geheim"}]}', 18, '2026-09-01'),
   ('{"taken":[{"taak":"geheim 2"}]}', 31, '2026-10-15');

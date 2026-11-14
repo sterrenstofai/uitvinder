@@ -53,6 +53,12 @@ export default function Vandaag() {
           <div className="empty" style={{ marginTop: 10 }}>De cockpit is nog niet overgezet.</div>
           <div className="grp"><span>Deze week in de markt</span><Link href="/volgt/markt" className="hint">Naar de markt</Link></div>
           <div className="empty" style={{ marginTop: 10 }}>De markt is nog niet overgezet.</div>
+          {data.profile?.ondernemer && (
+            <>
+              <div className="grp"><span>Je administratie</span></div>
+              <div className="empty" style={{ marginTop: 10 }}>Hulp bij je boekhouding, je potjes voor de belasting en je facturen volgt.</div>
+            </>
+          )}
           <div className="grp"><span>Je verschuiving</span><Link href="/reis" className="hint">Metingen</Link></div>
           <div className="cmp" style={{ marginTop: 10 }}>
             <div><span>Nulmeting</span><b>{n ? Math.round(n.pct_uitvindend) : "–"}%</b><span>uitvinder</span></div>

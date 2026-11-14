@@ -13,7 +13,7 @@ type App = {
   login(email: string): Promise<{ direct: boolean }>;
   logout(): Promise<void>;
   herlaad(): Promise<void>;
-  bewaarProfiel(naam: string, rol: Rol): Promise<void>;
+  bewaarProfiel(naam: string, rol: Rol, ondernemer: boolean): Promise<void>;
   setInv(veld: keyof Invalshoek, waarde: string): void;
   legInvalshoekVast(): Promise<boolean>;
   nieuwExp(pre?: Partial<Exp>): Promise<Exp>;
@@ -122,9 +122,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
       setSessie(null);
       setData(leegData());
     },
-    async bewaarProfiel(naam, rol) {
+    async bewaarProfiel(naam, rol, ondernemer) {
       if (!sessie) return;
-      const p: Profile = { id: sessie.id, naam: naam.trim(), rol, agency: data.profile?.agency ?? null, slug: slugify(naam) + "-" + sessie.id.slice(0, 4) };
+      const p: Profile = { id: sessie.id, naam: naam.trim(), rol, agency: data.profile?.agency ?? null, ondernemer, slug: slugify(naam) + "-" + sessie.id.slice(0, 4) };
       await store!.bewaarProfiel(p);
       setData((d) => ({ ...d, profile: p }));
     },

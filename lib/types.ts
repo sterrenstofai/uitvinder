@@ -2,7 +2,7 @@ export const ROLLEN = ["designer", "copywriter", "marketeer", "strateeg", "ander
 export type Rol = (typeof ROLLEN)[number];
 export type Zichtbaarheid = "prive" | "team" | "publiek";
 
-export type Profile = { id: string; naam: string; rol: Rol; agency: string | null; slug: string | null };
+export type Profile = { id: string; naam: string; rol: Rol; agency: string | null; ondernemer: boolean; slug: string | null };
 
 export type Scan = { id: string; datum: string; rol: string | null; uitkomst: unknown; pct_uitvindend: number };
 

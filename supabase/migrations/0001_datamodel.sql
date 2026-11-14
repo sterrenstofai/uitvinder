@@ -17,6 +17,8 @@ create table public.profiles (
   rol text not null default 'anders'
     check (rol in ('designer', 'copywriter', 'marketeer', 'strateeg', 'anders')),
   agency text,
+  -- Gekozen bij de start. Ondernemers krijgen deels andere inhoud (administratie, ontzorging).
+  ondernemer boolean not null default false,
   slug text unique,
   publiek boolean not null default false,
   -- zichtbaarheid per onderdeel van het openbare profiel

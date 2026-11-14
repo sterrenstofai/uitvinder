@@ -176,4 +176,5 @@ Gelijk aan thijsmensink.nl:
 
 - Stap 1 van de bouwvolgorde staat: zie README.md.
 - Inzicht uit de feedbackronde bij de doelgroep (Thijs): het idee kan werken, maar de meesten zitten ermee dat iedereen tegenwoordig ondernemer wordt zonder de kennis. Ze hebben baat bij volledige ontzorging: een boekhoudprogramma (Moneybird) aanmaken, weten welke potjes je aanmaakt om de belasting te kunnen betalen, hulp bij facturen opmaken en versturen. Alles wat administratie is, simpel geregeld, zodat je zorgeloos kunt uitvinden als ondernemer.
-- Nog niet gebouwd en nog niet door de doeltoets. Open vragen voor Thijs staan in README.md onder "Ontzorging voor ondernemers".
+- Besluit (Thijs, 14 november 2026): ondernemers komen erbij als tweede groep. Bij de start kies je je rol en of je in een team werkt of als ondernemer. Die keuze verandert een deel van de inhoud. De keuze staat op het profiel (`ondernemer`); de inhoud voor ondernemers is nog niet gebouwd en komt van Thijs in `content/`.
+- Besluit (Thijs, 14 november 2026): een team-eigenaar mag ook beoordelaar zijn.

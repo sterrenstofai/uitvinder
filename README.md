@@ -42,13 +42,13 @@ Gevolgen in wat er nu staat:
 - **Lettertype.** Neue Montreal laadt niet: thijsmensink.nl stuurt geen CORS-header mee, dus de browser valt terug op Inter. Oplossing: één header op thijsmensink.nl, of de fontbestanden in deze repo (let op de licentie).
 - **Rate limit en login op de AI-functies.** `/api/coach` en `/api/scan` zijn nog open voor iedereen die het adres kent, net als in het prototype.
 - **Oefenmateriaal van de proeftuinen** staat in `lib/proeftuin.ts`, overgenomen uit het prototype. Hoort in stap 2 naar `content/`.
-- **Beoordelaar.** Een team-eigenaar wijst de beoordelaar aan en kan dat ook zichzelf zijn. Een beoordelaar ziet de drie portfoliokaarten en de metingen van een deelnemer, ook als die kaarten privé zijn. Rolscan-antwoorden en invalshoek blijven ook dan dicht. Te beslissen: mag eigenaar en beoordelaar dezelfde persoon zijn?
+- **Beoordelaar.** Besloten: een team-eigenaar mag ook beoordelaar zijn. Een beoordelaar ziet de drie portfoliokaarten en de metingen van een deelnemer, ook als die kaarten privé zijn. Rolscan-antwoorden en invalshoek blijven ook dan dicht.
 
 ## Ontzorging voor ondernemers (inzicht van 14 november 2026)
 
-Het inzicht staat in `spec.md`. Er is nog niets van gebouwd. Wat het raakt en wat eerst beslist moet worden:
+Het inzicht staat in `spec.md`. De keuze bij de start is gebouwd, de ontzorging zelf nog niet. Wat het raakt:
 
-- **Doelgroep.** `spec.md` gaat uit van mensen die in hun team blijven. Dit inzicht gaat over mensen die ondernemer worden. Komt die groep erbij, of verschuift de doelgroep? Dat bepaalt de voorkant, de prijzen en het teamdeel.
+- **Doelgroep.** Besloten: ondernemers komen erbij. Bij de start kies je of je in een team werkt of als ondernemer; dat staat op het profiel en verandert een deel van de inhoud. Welke inhoud precies, moet Thijs nog aanleveren.
 - **Doeltoets.** Administratie draagt niet zelf bij aan de mindsetswitch (vraag 1) en hangt aan geen van de vijf leeruitkomsten (vraag 2). Het neemt wel een drempel weg. Voorstel: bouw het als dienst naast de reis, buiten de 56 uur en buiten de toetsing, en niet als les.
 - **Past bij regel 3.** De tool doet het uitvoerende werk, de mens het oordeel: een administratie-agent in de cockpit zet facturen klaar in Moneybird, jij keurt goed met een reden. Versturen en betalen gebeurt nooit zonder akkoord. De tabellen `koppelingen` en `taken` zijn daar al op ingericht.
 - **Grens.** Potjes voor btw en inkomstenbelasting uitrekenen is een rekenhulp, geen belastingadvies. Dat moet er zichtbaar bij staan, en de bedragen en percentages moeten uit een bron komen die elk jaar wordt bijgewerkt.

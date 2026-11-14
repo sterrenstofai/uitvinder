@@ -52,7 +52,7 @@ function supabaseStore(sb: SupabaseClient): Store {
     },
     async laad(uid) {
       const [p, s, i, v, e, m] = await Promise.all([
-        sb.from("profiles").select("id,naam,rol,agency,slug").eq("id", uid).maybeSingle(),
+        sb.from("profiles").select("id,naam,rol,agency,ondernemer,slug").eq("id", uid).maybeSingle(),
         sb.from("scans").select("id,datum,rol,uitkomst,pct_uitvindend").eq("user_id", uid).order("datum").order("aangemaakt_op"),
         sb.from("invalshoeken").select("vak,buiten,voorwie,zin").eq("user_id", uid).maybeSingle(),
         sb.from("invalshoek_versies").select("id,zin,datum,week").eq("user_id", uid).order("datum"),

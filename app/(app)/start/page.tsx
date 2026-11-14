@@ -7,6 +7,7 @@ export default function Start() {
   const { bewaarProfiel, neemPrototypeOver, toast } = useApp();
   const [naam, setNaam] = useState("");
   const [rol, setRol] = useState<Rol>("designer");
+  const [ondernemer, setOndernemer] = useState<boolean | null>(null);
   const [oud, setOud] = useState(false);
   const [neemOver, setNeemOver] = useState(true);
   const [bezig, setBezig] = useState(false);
@@ -22,13 +23,14 @@ export default function Start() {
   async function verder(e: React.FormEvent) {
     e.preventDefault();
     if (!naam.trim()) return;
+    if (ondernemer === null) return toast("Kies of je in een team werkt of als ondernemer");
     setBezig(true);
     try {
       if (oud && neemOver) {
         const n = await neemPrototypeOver();
         toast(`${n} ${n === 1 ? "ronde" : "rondes"} overgenomen uit het prototype`);
       }
-      await bewaarProfiel(naam, rol);
+      await bewaarProfiel(naam, rol, ondernemer);
     } catch {
       toast("Opslaan lukte niet. Probeer het opnieuw.");
       setBezig(false);
@@ -52,6 +54,14 @@ export default function Start() {
             {ROLLEN.map((r) => (
               <button type="button" key={r} aria-pressed={rol === r} onClick={() => setRol(r)}>{r}</button>
             ))}
+          </div>
+        </div>
+        <div className="f">
+          <span>Hoe werk je?</span>
+          <small>Als ondernemer krijg je er hulp bij je administratie bij. Je kunt dit later aanpassen.</small>
+          <div className="seg" role="group" aria-label="Hoe werk je?">
+            <button type="button" aria-pressed={ondernemer === false} onClick={() => setOndernemer(false)}>In een team</button>
+            <button type="button" aria-pressed={ondernemer === true} onClick={() => setOndernemer(true)}>Als ondernemer</button>
           </div>
         </div>
         {oud && (
