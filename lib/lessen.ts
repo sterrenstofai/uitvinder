@@ -50,24 +50,34 @@ export function leesLes(stap: number): Les {
 }
 
 // Inhoud van het scherm Administratie (voor ondernemers), uit content/administratie.md.
-export type AdmInhoud = { inleiding: string; stappen: { titel: string; html: string }[]; potjes: string };
+// Een placeholder ([INHOUD VOLGT]) wordt niet getoond: dan staat alleen de titel er.
+export type AdmInhoud = {
+  inleiding: string | null;
+  potjes: string | null;
+  groepen: { kop: string; items: { id: string; titel: string; html: string | null }[] }[];
+};
+
+const gevuld = (md: string) => (md.trim() && !/\[INHOUD VOLGT\]/.test(md) ? html(md) : null);
+const sleutel = (t: string) =>
+  t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
 export function leesAdministratie(): AdmInhoud {
-  const leeg: AdmInhoud = { inleiding: "<p>[INHOUD VOLGT]</p>", stappen: [], potjes: "<p>[INHOUD VOLGT]</p>" };
   let md: string;
   try {
     md = readFileSync(join(process.cwd(), "content", "administratie.md"), "utf8");
   } catch {
-    return leeg;
+    return { inleiding: null, potjes: null, groepen: [] };
   }
   const deel = (naam: string) => md.split(/^## /m).find((d) => d.toLowerCase().startsWith(naam))?.replace(/^.*\n/, "") ?? "";
-  const stappen = [...deel("opzetlijst").matchAll(/^- \*\*(.+?)\*\*\s*(.*)$/gm)].map((m) => ({
-    titel: m[1].replace(/\.$/, ""),
-    html: html(m[2] || "[INHOUD VOLGT]"),
-  }));
-  return {
-    inleiding: deel("inleiding").trim() ? html(deel("inleiding")) : leeg.inleiding,
-    stappen,
-    potjes: deel("bij de potjes").trim() ? html(deel("bij de potjes")) : leeg.potjes,
-  };
+  const groepen = deel("checklist")
+    .split(/^### /m)
+    .slice(1)
+    .map((g) => ({
+      kop: g.slice(0, g.indexOf("\n")).trim(),
+      items: [...g.matchAll(/^- \*\*(.+?)\*\*\s*(.*)$/gm)].map((m) => {
+        const titel = m[1].replace(/\.$/, "");
+        return { id: sleutel(titel), titel, html: gevuld(m[2]) };
+      }),
+    }));
+  return { inleiding: gevuld(deel("inleiding")), potjes: gevuld(deel("bij de potjes")), groepen };
 }

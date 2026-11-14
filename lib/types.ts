@@ -37,7 +37,7 @@ export type Exp = {
 export type ExpVeld = keyof Omit<Exp, "id">;
 
 export type Bedrijf = { naam?: string; adres?: string; kvk?: string; btwid?: string; iban?: string };
-export type Administratie = { btw_tarief: number; belasting_pct: number | null; stappen_af: number[]; bedrijf: Bedrijf };
+export type Administratie = { btw_tarief: number; belasting_pct: number | null; stappen_af: string[]; bedrijf: Bedrijf };
 export const leegAdm = (): Administratie => ({ btw_tarief: 21, belasting_pct: null, stappen_af: [], bedrijf: {} });
 
 export type Data = {

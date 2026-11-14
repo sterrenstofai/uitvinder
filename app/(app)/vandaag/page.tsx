@@ -57,8 +57,8 @@ export default function Vandaag() {
             <>
               <div className="grp"><span>Je administratie</span><Link href="/administratie" className="hint">Naar je administratie</Link></div>
               <Link className="row" href="/administratie" style={{ textDecoration: "none" }}>
-                <span className="nm">{data.adm.stappen_af.length} van 3 stappen ingericht</span>
-                <span className="why">Opzetlijst, potjes voor de belasting en hulp bij je factuur.</span>
+                <span className="nm">Potjes, factuur en checklist</span>
+                <span className="why">{data.adm.stappen_af.length ? `${data.adm.stappen_af.length} onderwerpen geregeld.` : "Zie wat je opzij zet en wat erbij komt kijken."}</span>
               </Link>
             </>
           )}

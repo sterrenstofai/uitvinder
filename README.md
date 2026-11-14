@@ -15,7 +15,7 @@ Live: https://uitvinder-platform.netlify.app (Netlify-project `uitvinder-platfor
 | Schermen Vandaag, Reis, Invalshoek, Ronde (stap 3 tot en met 5) | Overgezet, met de proeftuinen en de coach. In de browser doorlopen in voorbeeldmodus. |
 | Lessen | Komen uit `content/*.md`. Het `LES`-object uit het prototype is niet overgenomen. |
 | Gegevens uit het prototype overnemen | Bij de eerste keer inloggen, als er prototype-gegevens op het apparaat staan. |
-| Administratie voor ondernemers (eerste versie) | Opzetlijst, potjes-rekenhulp en factuurhulp op `/administratie`. Teksten in `content/administratie.md` zijn nog placeholders. |
+| Administratie voor ondernemers (eerste versie) | Potjes, factuur en checklist op `/administratie`. De uitleg in `content/administratie.md` moet Thijs nog schrijven. |
 | AI-functies `scan` en `coach` | Ongewijzigd in `netlify/functions`. |
 
 Zonder Supabase-sleutels draait het platform in **voorbeeldmodus**: je gaat zonder mail verder en de gegevens blijven op het apparaat, zoals in het prototype. Zo is elke deploy te bekijken.
@@ -52,9 +52,11 @@ Gevolgen in wat er nu staat:
 
 Het inzicht staat in `spec.md`. Gebouwd: de keuze bij de start en een eerste versie op `/administratie`, alleen zichtbaar voor ondernemers.
 
-- **Opzetlijst.** Drie stappen, afvinkbaar. De uitleg per stap komt uit `content/administratie.md` en is nu `[INHOUD VOLGT]`.
-- **Potjes-rekenhulp.** Factuurbedrag in, btw-potje en belastingpotje uit. Het percentage voor het belastingpotje kiest de ondernemer zelf; er is bewust geen startwaarde.
-- **Factuurhulp.** Eigen gegevens (bewaard), klant en regels invullen, voorbeeld met totalen, controle of alle onderdelen erop staan, kopiëren of printen. De factuur zelf wordt niet bewaard en niet verstuurd.
+Het scherm heeft drie tabbladen:
+
+- **Potjes.** Eén bedrag in, drie bedragen uit: btw-potje, belastingpotje en wat voor jou is. Het percentage voor het belastingpotje kiest de ondernemer zelf; er is bewust geen startwaarde.
+- **Factuur.** Eigen gegevens (één keer invullen, bewaard), klant en regels, een voorbeeld met totalen en een melding van wat nog mist. Kopiëren of als pdf bewaren. De factuur zelf wordt niet bewaard en niet verstuurd.
+- **Checklist.** Wat er bij ondernemen komt kijken, in vier groepen, afvinkbaar. De onderwerpen staan in `content/administratie.md` en zijn een voorstel: Thijs schrapt of vult aan. Uitleg per onderwerp komt achter de titel; zolang daar `[INHOUD VOLGT]` staat, toont het scherm alleen de titel.
 
 Nog niet gebouwd: de koppeling met Moneybird, waarbij een agent de factuur klaarzet in de cockpit en de ondernemer goedkeurt. Dat vraagt Supabase, om de toegang veilig te bewaren.
 

@@ -88,7 +88,7 @@ create table public.administratie (
   btw_tarief numeric(4, 1) not null default 21 check (btw_tarief in (0, 9, 21)),
   -- Door de gebruiker zelf gekozen. Het platform geeft geen belastingadvies.
   belasting_pct numeric(4, 1) check (belasting_pct between 0 and 100),
-  stappen_af int[] not null default '{}',
+  stappen_af text[] not null default '{}',   -- afgevinkte onderwerpen van de checklist
   bedrijf jsonb not null default '{}'::jsonb,
   bijgewerkt_op timestamptz not null default now()
 );

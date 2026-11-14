@@ -54,7 +54,7 @@ insert into experiments (id, titel, zichtbaarheid) values
   ('e0000000-0000-0000-0000-000000000004', 'Privé, maar in portfolio', 'prive');
 insert into portfolio (experiment_ids) values ('{e0000000-0000-0000-0000-000000000004}');
 insert into metingen (week, scores) values (1, '{"gen": 2.3}');
-insert into administratie (belasting_pct, bedrijf) values (35, '{"iban": "NL00TEST"}');
+insert into administratie (belasting_pct, stappen_af, bedrijf) values (35, '{inschrijven-bij-de-kvk}', '{"iban": "NL00TEST"}');
 select tst.verwacht((select count(*) from experiments) = 4, 'Anna ziet haar vier kaarten');
 
 -- De eigenaar: nooit antwoorden, invalshoek of privékaarten. Wel percentages en teamkaarten.

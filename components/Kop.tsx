@@ -30,7 +30,8 @@ export function Kop({ nav = true }: { nav?: boolean }) {
       </div>
       {nav && naam && (
         <nav className="wrap wide nav" aria-label="Platform">
-          {[...APPNAV, ...(data.profile?.ondernemer ? ([["administratie", "Administratie", true]] as typeof APPNAV) : [])].map(([r, t, staat]) => (
+          {/* Voor ondernemers staat Administratie vooraan, direct na Vandaag. */}
+          {[APPNAV[0], ...(data.profile?.ondernemer ? ([["administratie", "Administratie", true]] as typeof APPNAV) : []), ...APPNAV.slice(1)].map(([r, t, staat]) => (
             <Link key={r} href={staat ? `/${r}` : `/volgt/${r}`} aria-current={r === actief ? "page" : undefined}>{t}</Link>
           ))}
         </nav>

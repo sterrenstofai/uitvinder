@@ -147,7 +147,10 @@ function lokaalStore(): Store {
     },
     async laad() {
       const d = lees().data;
-      return { ...leegData(), ...d, adm: { ...leegAdm(), ...d.adm } };
+      const adm = { ...leegAdm(), ...d.adm };
+      // Eerdere versie bewaarde nummers in plaats van onderwerpen.
+      adm.stappen_af = (adm.stappen_af as unknown[]).filter((x): x is string => typeof x === "string");
+      return { ...leegData(), ...d, adm };
     },
     async bewaarProfiel(p) {
       muteer((d) => void (d.profile = p));
