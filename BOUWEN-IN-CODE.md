@@ -12,7 +12,7 @@ Dit document zet het prototype om naar een echt platform. Lees het samen met `CL
 
 | Onderdeel | Prototype | Echt platform |
 | --- | --- | --- |
-| Frontend | Eén bestand `public/index.html`, vanilla JS, hash-routing | Framework, componenten per pagina |
+| Frontend | Eén bestand `public/prototype/index.html`, vanilla JS, hash-routing | Framework, componenten per pagina |
 | Opslag | `localStorage` in de browser | Supabase (EU), Postgres met row level security |
 | Accounts | Naam invullen, geen login | Supabase Auth, e-mail met magic link |
 | AI | Netlify functions `scan` en `coach` via de Netlify AI Gateway, model `claude-sonnet-5-5` | Zelfde functies, met rate limit per gebruiker |
@@ -83,7 +83,7 @@ Elke tool en tutorial in de library implementeert dezelfde vorm. In het prototyp
 
 ## Schermen in het prototype
 
-Voorkant, Rolscan, Vandaag, Cockpit, Klantdossier, Markt, Reis (twaalf weken), Invalshoek, Ronde (stap 3 tot en met 5), Bouwen, Library met drie tools, Portfolio, Beoordeling, Metingen, Profiel, openbaar profiel en Team. Elk scherm staat als functie in `public/index.html`; de routes staan in het object `ROUTES`.
+Voorkant, Rolscan, Vandaag, Cockpit, Klantdossier, Markt, Reis (twaalf weken), Invalshoek, Ronde (stap 3 tot en met 5), Bouwen, Library met drie tools, Portfolio, Beoordeling, Metingen, Profiel, openbaar profiel en Team. Elk scherm staat als functie in `public/prototype/index.html`; de routes staan in het object `ROUTES`.
 
 ## Vaste regel voor de cockpit
 

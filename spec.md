@@ -171,3 +171,9 @@ Gelijk aan thijsmensink.nl:
 - Markt: trends per sector met de drievragentoets als eerste inschatting, plus de zetten van Thijs (wat hij bouwt en waarom). Elke trend kan direct een signaal worden.
 - Bouwmodule op niveau: les met video, proeftuin "Wat mist er in deze spec?", en per stap waaraan je ziet dat het goed is.
 - Stijl: Sana-richting, Neue Montreal, altijd licht.
+
+## Aanvullingen (14 november 2026)
+
+- Stap 1 van de bouwvolgorde staat: zie README.md.
+- Inzicht uit de feedbackronde bij de doelgroep (Thijs): het idee kan werken, maar de meesten zitten ermee dat iedereen tegenwoordig ondernemer wordt zonder de kennis. Ze hebben baat bij volledige ontzorging: een boekhoudprogramma (Moneybird) aanmaken, weten welke potjes je aanmaakt om de belasting te kunnen betalen, hulp bij facturen opmaken en versturen. Alles wat administratie is, simpel geregeld, zodat je zorgeloos kunt uitvinden als ondernemer.
+- Nog niet gebouwd en nog niet door de doeltoets. Open vragen voor Thijs staan in README.md onder "Ontzorging voor ondernemers".

@@ -4,7 +4,7 @@ Lees dit aan het begin van elke sessie. Daarna: `BOUWEN-IN-CODE.md`, `spec.md`, 
 
 ## Wat dit is
 
-Een platform dat designers, copywriters, marketeers en strategen in agencies van uitvoerder naar uitvinder brengt. Werktitel: Uitvinder, door Thijs Mensink. Het prototype in `public/index.html` (op te halen volgens `public/LEES-MIJ.md`) is de functionele referentie: elk scherm, elke tool en elke regel die daar werkt, moet in de echte versie hetzelfde werken.
+Een platform dat designers, copywriters, marketeers en strategen in agencies van uitvoerder naar uitvinder brengt. Werktitel: Uitvinder, door Thijs Mensink. Het prototype in `public/prototype/index.html` (op te halen volgens `public/LEES-MIJ.md`, live te bekijken op `/prototype/index.html`) is de functionele referentie: elk scherm, elke tool en elke regel die daar werkt, moet in de echte versie hetzelfde werken.
 
 ## Drie regels bij elke wijziging
 
@@ -30,3 +30,7 @@ Een platform dat designers, copywriters, marketeers en strategen in agencies van
 ## Privacy
 
 De team-eigenaar ziet nooit rolscan-antwoorden, invalshoek-versies of privékaarten van teamleden. Alleen percentages en wat met het team is gedeeld. Data in de EU.
+
+## Stand van de bouw
+
+Zie `README.md` voor wat er staat, hoe je het koppelt en wat nog niet is overgezet. Het datamodel staat in `supabase/migrations/`, de privacytests in `supabase/tests/`. Draai die tests na elke wijziging aan tabellen of policies.

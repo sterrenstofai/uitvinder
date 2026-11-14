@@ -1,0 +1,216 @@
+"use client";
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { getStore, type Store } from "@/lib/store";
+import { leegData, leegExp, ROLLEN, type Data, type Exp, type Invalshoek, type Profile, type Rol, type Sessie } from "@/lib/types";
+import { slugify, vandaagISO, weekNr } from "@/lib/afgeleid";
+
+type App = {
+  klaar: boolean;
+  modus: Store["modus"];
+  sessie: Sessie | null;
+  data: Data;
+  toast(t: string): void;
+  login(email: string): Promise<{ direct: boolean }>;
+  logout(): Promise<void>;
+  herlaad(): Promise<void>;
+  bewaarProfiel(naam: string, rol: Rol): Promise<void>;
+  setInv(veld: keyof Invalshoek, waarde: string): void;
+  legInvalshoekVast(): Promise<boolean>;
+  nieuwExp(pre?: Partial<Exp>): Promise<Exp>;
+  setExp(id: string, patch: Partial<Exp>): void;
+  verwijderExp(id: string): Promise<void>;
+  neemPrototypeOver(): Promise<number>;
+};
+
+const Ctx = createContext<App | null>(null);
+export const useApp = () => {
+  const a = useContext(Ctx);
+  if (!a) throw new Error("useApp buiten AppProvider");
+  return a;
+};
+
+const PROTOTYPE_KEY = "uitvinder-v1";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export function leesPrototype(): any | null {
+  try {
+    const s = JSON.parse(localStorage.getItem(PROTOTYPE_KEY) || "null");
+    return s && s.user ? s : null;
+  } catch {
+    return null;
+  }
+}
+
+export function AppProvider({ children }: { children: ReactNode }) {
+  const store = useMemo(() => (typeof window === "undefined" ? null : getStore()), []);
+  const [klaar, setKlaar] = useState(false);
+  const [sessie, setSessie] = useState<Sessie | null>(null);
+  const [data, setData] = useState<Data>(leegData);
+  const dataRef = useRef(data);
+  dataRef.current = data;
+  const [toastTekst, setToastTekst] = useState("");
+  const [toastAan, setToastAan] = useState(false);
+  const toastTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
+
+  const toast = useCallback((t: string) => {
+    setToastTekst(t);
+    setToastAan(true);
+    clearTimeout(toastTimer.current);
+    toastTimer.current = setTimeout(() => setToastAan(false), 2200);
+  }, []);
+
+  const herlaad = useCallback(async () => {
+    if (!store) return;
+    try {
+      const s = await store.sessie();
+      setSessie(s);
+      setData(s ? await store.laad(s.id) : leegData());
+    } catch {
+      toast("Laden lukte niet. Probeer het opnieuw.");
+    }
+    setKlaar(true);
+  }, [store, toast]);
+
+  useEffect(() => {
+    herlaad();
+  }, [herlaad]);
+
+  // Tekstvelden worden per sleutel gebundeld weggeschreven, zoals het prototype bij elke toets opslaat.
+  const wachtrij = useRef(new Map<string, { timer: ReturnType<typeof setTimeout>; run: () => Promise<void> }>());
+  const plan = useCallback(
+    (sleutel: string, run: () => Promise<void>) => {
+      const q = wachtrij.current;
+      const oud = q.get(sleutel);
+      if (oud) clearTimeout(oud.timer);
+      const uitvoeren = () => {
+        q.delete(sleutel);
+        run().catch(() => toast("Opslaan lukte niet. Controleer je verbinding."));
+      };
+      q.set(sleutel, { timer: setTimeout(uitvoeren, 500), run: async () => uitvoeren() });
+    },
+    [toast],
+  );
+  useEffect(() => {
+    const spoel = () => {
+      for (const [, v] of wachtrij.current) {
+        clearTimeout(v.timer);
+        v.run();
+      }
+    };
+    window.addEventListener("pagehide", spoel);
+    document.addEventListener("visibilitychange", spoel);
+    return () => {
+      window.removeEventListener("pagehide", spoel);
+      document.removeEventListener("visibilitychange", spoel);
+    };
+  }, []);
+  const expPatches = useRef(new Map<string, Partial<Exp>>());
+
+  const app: App = {
+    klaar,
+    modus: store?.modus ?? "lokaal",
+    sessie,
+    data,
+    toast,
+    herlaad,
+    async login(email) {
+      const r = await store!.login(email);
+      if (r.direct) await herlaad();
+      return r;
+    },
+    async logout() {
+      await store!.logout();
+      setSessie(null);
+      setData(leegData());
+    },
+    async bewaarProfiel(naam, rol) {
+      if (!sessie) return;
+      const p: Profile = { id: sessie.id, naam: naam.trim(), rol, agency: data.profile?.agency ?? null, slug: slugify(naam) + "-" + sessie.id.slice(0, 4) };
+      await store!.bewaarProfiel(p);
+      setData((d) => ({ ...d, profile: p }));
+    },
+    setInv(veld, waarde) {
+      setData((d) => ({ ...d, inv: { ...d.inv, [veld]: waarde } }));
+      if (sessie) plan("inv", () => store!.bewaarInvalshoek(sessie.id, dataRef.current.inv));
+    },
+    async legInvalshoekVast() {
+      const zin = data.inv.zin.trim();
+      if (!zin || !sessie) return false;
+      await store!.bewaarInvalshoek(sessie.id, { ...data.inv, zin });
+      const lv = data.versies[data.versies.length - 1];
+      if (!lv || lv.zin !== zin) {
+        const v = await store!.nieuweVersie({ zin, datum: vandaagISO(), week: Math.min(weekNr(data), 12) });
+        setData((d) => ({ ...d, versies: [...d.versies, v] }));
+      }
+      return true;
+    },
+    async nieuwExp(pre) {
+      const e = await store!.nieuwExp({
+        ...leegExp(),
+        week: Math.min(weekNr(data), 12),
+        auteur: data.profile?.naam || "",
+        ...pre,
+      });
+      setData((d) => ({ ...d, exps: [...d.exps, e] }));
+      return e;
+    },
+    setExp(id, patch) {
+      setData((d) => ({ ...d, exps: d.exps.map((e) => (e.id === id ? { ...e, ...patch } : e)) }));
+      const m = expPatches.current;
+      m.set(id, { ...m.get(id), ...patch });
+      plan("exp-" + id, async () => {
+        const p = m.get(id);
+        m.delete(id);
+        if (p) await store!.wijzigExp(id, p);
+      });
+    },
+    async verwijderExp(id) {
+      expPatches.current.delete(id);
+      await store!.verwijderExp(id);
+      setData((d) => ({ ...d, exps: d.exps.filter((e) => e.id !== id) }));
+    },
+    // De localStorage-structuur van het prototype overzetten naar het account.
+    async neemPrototypeOver() {
+      const S = leesPrototype();
+      if (!S || !sessie) return 0;
+      for (const s of S.scans || []) {
+        if (!s?.res || typeof s.res.uitvindend !== "number") continue;
+        await store!.nieuweScan({ datum: s.datum || vandaagISO(), rol: s.rol || null, uitkomst: s.res, pct_uitvindend: s.res.uitvindend });
+      }
+      const i = S.inv || {};
+      if (i.zin || i.vak || i.buiten || i.voorwie)
+        await store!.bewaarInvalshoek(sessie.id, { vak: i.vak || "", buiten: i.buiten || "", voorwie: i.voorwie || "", zin: i.zin || "" });
+      for (const v of i.versies || [])
+        if (v?.zin) await store!.nieuweVersie({ zin: v.zin, datum: v.datum || vandaagISO(), week: Math.min(Math.max(v.week || 1, 1), 12) });
+      let n = 0;
+      for (const e of S.exps || []) {
+        const t = (k: string) => String(e[k] || "");
+        const af = e.status === "af" && t("hypothese").trim() && t("uitkomst").trim();
+        await store!.nieuwExp({
+          ...leegExp(),
+          auteur: t("auteur"), klant: t("klant"), titel: t("titel"), signaal: t("signaal"), waarom: t("waarom"),
+          hypothese: t("hypothese"), keuze: t("keuze"), bouw: t("bouw"), tool: t("tool"), spec: t("spec"), link: t("link"),
+          meting: t("meting"), uitkomst: t("uitkomst"), geleerd: t("geleerd"),
+          // Teamkaarten worden privé: het voorbeeldteam uit het prototype bestaat hier niet.
+          zichtbaarheid: e.zicht === "publiek" ? "publiek" : "prive",
+          status: af ? "af" : "bezig",
+          remix_titel: e.remixVan?.titel || null, remix_auteur: e.remixVan?.auteur || null,
+          week: Math.max(Number(e.week) || 1, 1), datum: e.datum || vandaagISO(),
+        });
+        n++;
+      }
+      await herlaad();
+      return n;
+    },
+  };
+
+  return (
+    <Ctx.Provider value={app}>
+      {children}
+      <div className={"toast" + (toastAan ? " on" : "")} role="status" aria-live="polite">
+        {toastTekst}
+      </div>
+    </Ctx.Provider>
+  );
+}
+
+export const isRol = (r: unknown): r is Rol => (ROLLEN as readonly string[]).includes(r as string);
