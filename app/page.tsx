@@ -85,7 +85,7 @@ export default function Voorkant() {
         <section className="sec">
           <span className="eyebrow">De reis</span>
           <h2>Eén keer het fundament. Daarna elke week een ronde.</h2>
-          <img className="beeld breed" src="/beeld/klant.jpg" alt="Een copywriter laat de eigenaar van een bloemenwinkel iets zien op haar telefoon" width={1800} height={1018} loading="lazy" />
+          <img className="beeld breed" src="/beeld/klant.jpg" alt="Een fotoshoot in een studio: twee vrouwen kijken samen naar een telefoon op een lila set" width={1800} height={1011} loading="lazy" />
           <div className="feat">
             {STAPPEN.map(([n, kop, tekst]) => (
               <div key={n}><i className="shp" data-s={n === "AI" ? "?" : n}>{n}</i><p><b>{kop}</b> {tekst}</p></div>
@@ -138,13 +138,13 @@ export default function Voorkant() {
 
         <section className="sec duo">
           <div>
-            <img className="beeld" src="/beeld/team.jpg" alt="Drie jonge collega's kijken ontspannen samen naar één laptop" width={1800} height={1195} loading="lazy" />
+            <img className="beeld" src="/beeld/team.jpg" alt="Een fotoshoot in een studio: drie collega's kijken samen naar één laptop op een blauwe set" width={1800} height={1011} loading="lazy" />
             <span className="eyebrow">Voor agencies</span>
             <h2>Zie je team verschuiven.</h2>
             <p className="lead">Eén overzicht van hoe je team beweegt van uitvoerend naar uitvindend, en een gedeelde library met geteste ideeën per klant. Reflecties blijven privé. Jij ziet alleen wat je mensen delen.</p>
           </div>
           <div>
-            <img className="beeld" src="/beeld/ondernemer.jpg" alt="Een jonge zelfstandige ligt ontspannen op de grond met zijn laptop, zijn bonnetjes netjes naast hem" width={1800} height={1195} loading="lazy" />
+            <img className="beeld" src="/beeld/ondernemer.jpg" alt="Een fotoshoot in een studio: een zelfstandige ligt lachend op een groene set met zijn laptop" width={1800} height={1011} loading="lazy" />
             <span className="eyebrow">Voor ondernemers</span>
             <h2>Je administratie erbij geregeld.</h2>
             <p className="lead">Werk je voor jezelf, dan zie je per factuur wat je opzij zet voor btw en belasting, zet je een factuur op die klopt, en loop je na wat er bij ondernemen komt kijken.</p>

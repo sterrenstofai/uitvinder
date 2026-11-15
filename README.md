@@ -15,7 +15,7 @@ Live: https://uitvinder-platform.netlify.app (Netlify-project `uitvinder-platfor
 | Schermen Vandaag, Reis, Invalshoek, Ronde (stap 3 tot en met 5) | Overgezet, met de proeftuinen en de coach. In de browser doorlopen in voorbeeldmodus. |
 | Welkom en kaart als pdf | "Zo werkt het" bij de eerste keer op Vandaag en op Reis; elke ronde is als experimentkaart af te drukken. |
 | Voorkant | Overgezet uit het prototype, met een blok voor ondernemers erbij. Prijzen staan in `lib/prijzen.ts`. De wachtlijst schrijft naar de tabel `waitlist`. De knoppen naar de Rolscan en de tools openen nog het prototype. |
-| Beeld op de voorkant | Vier foto's en een korte video in `public/beeld/`, gegenereerd met Higgsfield (AI, geen echte deelnemers). Vervang ze door echte foto's zodra de testgroep loopt. |
+| Beeld op de voorkant | Vier foto's in `public/beeld/`: opnames van een fotoshoot met ton-sur-ton sets in perzik, lila, blauw en groen (de kleuren per stap), met fotograaf en crew in beeld. Gegenereerd met Higgsfield, model FLUX 3 (AI, geen echte shoot en geen echte deelnemers). Thijs koos deze richting na GPT Image 2.6 te hebben afgewezen als te glad. |
 | Lessen | Komen uit `content/*.md`. Het `LES`-object uit het prototype is niet overgenomen. |
 | Gegevens uit het prototype overnemen | Bij de eerste keer inloggen, als er prototype-gegevens op het apparaat staan. |
 | Administratie voor ondernemers (eerste versie) | Potjes, factuur en checklist op `/administratie`. De uitleg in `content/administratie.md` moet Thijs nog schrijven. |

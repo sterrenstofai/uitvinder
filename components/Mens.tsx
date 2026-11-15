@@ -15,7 +15,7 @@ export function Mens() {
   }, []);
   return (
     <div className="mens">
-      <video ref={ref} muted loop playsInline preload="metadata" poster="/beeld/maker.jpg" aria-label="Een jonge maker zit ontspannen op de grond tegen een bank, met een laptop op schoot">
+      <video ref={ref} muted loop playsInline preload="metadata" poster="/beeld/maker.jpg" aria-label="Een fotoshoot in een studio: een maker lacht op een perzikkleurige set, met de fotograaf en crew eromheen">
         {HEEFT_VIDEO && <source src="/beeld/maker.mp4" type="video/mp4" />}
       </video>
     </div>
