@@ -1,16 +1,33 @@
 # Stap 3 — Relevantie zoeken
 
-Concept, ter goedkeuring door Thijs.
+Concept, geschreven door Claude op verzoek van Thijs (15 november 2026), ter goedkeuring door Thijs. Hoort bij LU2 (oordeelsvorming).
 
-## De les (2 minuten)
+## De les
 
 Een uitvoerder wacht tot de klant zegt wat er moet gebeuren. Een uitvinder ziet het eerder.
 
-Relevantie is geen gevoel. Het is een moment waarop mensen een vraag hebben en een merk het antwoord kan geven. Het Ehrenberg-Bass Institute noemt die momenten category entry points: situaties waarin iemand aan een categorie gaat denken. De eerste hittegolf voor Coolblue, de drukte voor Sinterklaas bij Bol, het kerstdiner voor Albert Heijn. Wie daar op dat moment iets nuttigs neerzet, wordt onthouden.
+Relevantie is geen gevoel. Het is een moment waarop mensen een vraag hebben en een merk het antwoord kan geven. Onderzoekers van het Ehrenberg-Bass Institute noemen die momenten category entry points: de situaties, behoeften en aanleidingen waardoor iemand aan een productcategorie gaat denken (Romaniuk & Sharp, 2016). De eerste hittegolf voor Coolblue, de drukte voor Sinterklaas bij Bol, het kerstdiner voor Albert Heijn. Hun onderzoek laat zien dat merken groeien door op zo veel mogelijk van die momenten in gedachten te komen bij zo veel mogelijk kopers, en niet door een kleine groep trouwe klanten nog trouwer te maken (Sharp, 2010). Wie op zo'n moment iets nuttigs neerzet, wordt onthouden.
 
-Je zoekt dus niet naar iets om over te posten. Je zoekt naar een vraag die deze week ontstaat, bij mensen die de klant wil bereiken.
+Een tweede manier om hetzelfde te zien komt van Clayton Christensen. Mensen kopen geen producten, zij huren ze in voor een klus: een job to be done (Christensen e.a., 2016). Niemand wil een airco. Iemand wil slapen terwijl het buiten dertig graden is. Een signaal is het moment waarop zo'n klus voor veel mensen tegelijk dringend wordt. Daarom is de eerste hittegolf een signaal en "tips voor de zomer" niet.
 
-Elke week neem je twintig minuten om signalen te verzamelen. Daaruit kies je er één.
+Je zoekt dus niet naar iets om over te posten. Je zoekt naar een vraag die deze week ontstaat, bij mensen die de klant wil bereiken, waarop het merk iets kan doen. Dat laatste is waar AI het werk verandert. Vroeger kon een merk op zo'n moment alleen iets zeggen, want iets bouwen kostte weken. Nu kost het een middag.
+
+Hier ligt ook de grens van wat je aan AI kunt overlaten. Een taalmodel kan signalen voor je verzamelen en ordenen. Of dit merk er recht van spreken heeft, of de klant het aandurft, of het moment goed voelt: dat is oordeel, en dat is van jou. Elke week neem je twintig minuten om signalen te verzamelen. Daaruit kies je er één, en je schrijft op waarom.
+
+## Wat je na deze stap kunt
+
+- Je vindt zelfstandig signalen voor een merk, zonder dat iemand erom vraagt.
+- Je beoordeelt een signaal met de drievragentoets en legt je oordeel uit.
+- Je onderscheidt een signaal van ruis en van iets wat altijd waar is.
+
+## Kernbegrippen
+
+- **Signaal.** Een gebeurtenis of verandering van nu, waardoor mensen een vraag krijgen waarop het merk iets kan doen.
+- **Ruis.** Nieuws of een moment zonder verband met het merk, of zonder iets wat het merk kan doen.
+- **Evergreen.** Iets wat altijd waar is. Bruikbaar, maar geen signaal.
+- **Category entry point.** Een situatie of behoefte waardoor mensen aan een categorie gaan denken (Romaniuk & Sharp).
+- **Job to be done.** De klus waarvoor iemand een product inhuurt (Christensen).
+- **Recht van spreken.** Het merk maakt, weet of doet al jaren iets wat met het signaal te maken heeft.
 
 ## Waar je signalen vindt
 
@@ -41,6 +58,19 @@ De merken zijn voorbeelden, de situaties zijn bedacht.
 
 **Strateeg** bij Bol. Signaal: de weken voor Sinterklaas beginnen. De klantenservice krijgt steeds dezelfde vraag: komt mijn bestelling nog op tijd? Bol kan in drie vragen laten zien wat je uiterlijk wanneer bestelt.
 
+## Opdracht
+
+Verzamel deze week in twintig minuten minstens vijf signalen voor één klant. Leg ze alle vijf langs de drie vragen. Kies er één, en schrijf op de kaart: het signaal met datum of bron, en waarom juist dit merk er iets over mag zeggen. Noteer ook welk signaal je liet liggen en waarom; dat is net zo goed bewijs van oordeel.
+
+## Zo wordt het beoordeeld
+
+Dit is criterium 1 van de rubric, "Signaal".
+
+- **Onvoldoende.** Geen signaal, of iets wat altijd waar is. Het verband met het merk ontbreekt.
+- **Voldoende.** Een signaal met bron of datum. Het verband met het merk is benoemd.
+- **Goed.** Het signaal is getoetst op de drie vragen en de keuze tussen meerdere signalen is uitgelegd.
+- **Excellent.** Een signaal dat de klant zelf nog niet zag, met een concreet aanknopingspunt om te bouwen.
+
 ## Goed als
 
 - Je kunt het signaal in één zin opschrijven, met een datum of een bron erbij.
@@ -53,6 +83,19 @@ De merken zijn voorbeelden, de situaties zijn bedacht.
 - **Groot nieuws zonder verband.** Elk merk dat iets roept over het nieuws van de dag, roept vooral ruis.
 - **Evergreen vermomd als signaal.** Tips voor de winter is geen signaal. De eerste nachtvorst van dit jaar wel.
 - **Te lang zoeken.** Twintig minuten is genoeg. Een goed signaal dat je deze week gebruikt, is beter dan een perfect signaal volgende maand.
+- **De AI laten kiezen.** Een model kan honderd signalen opsommen. Welke bij dit merk en deze klant past, weet het niet.
+
+## Om over na te denken
+
+- Welke vraag stellen klanten van jouw klant elk jaar opnieuw, en wie beantwoordt die nu?
+- Wanneer heeft een merk geen recht van spreken, ook al is de aandacht groot? Ken je een voorbeeld waar het misging?
+- Welk signaal liet je deze week liggen, en zou je dat over een maand nog steeds doen?
+
+## Literatuur
+
+- Christensen, C. M., Hall, T., Dillon, K., & Duncan, D. S. (2016). Know your customers' "jobs to be done". *Harvard Business Review, 94*(9), 54–62.
+- Romaniuk, J., & Sharp, B. (2016). *How brands grow: Part 2.* Oxford University Press.
+- Sharp, B. (2010). *How brands grow: What marketers don't know.* Oxford University Press.
 
 ## Wat de coach controleert
 

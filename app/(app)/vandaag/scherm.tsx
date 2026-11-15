@@ -50,6 +50,7 @@ export function Vandaag({ zoWerktHet }: { zoWerktHet: string | null }) {
           <div className="md" dangerouslySetInnerHTML={{ __html: zoWerktHet }} />
           <div className="btns" style={{ marginTop: 16 }}>
             <button className="btn" onClick={begrepen}>Begrepen</button>
+            <Link className="btn ghost" href="/studiewijzer">Lees de studiewijzer</Link>
             <span className="hint">Je vindt dit terug op Reis.</span>
           </div>
         </section>

@@ -578,3 +578,18 @@ input[type=date]{width:100%;font:400 1rem/1.45 var(--f);color:var(--ink);backgro
 .beeld{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:var(--r);display:block;margin-bottom:24px}
 .beeld.breed{aspect-ratio:16/9;margin:28px 0 0}
 @media (max-width:760px){.beeld.breed{aspect-ratio:16/9}}
+.gids{margin-top:28px;line-height:1.6}
+.gids h2{margin:44px 0 10px;font:500 clamp(1.5rem,3.4vw,2rem)/1.15 var(--fd);letter-spacing:-.035em}
+.gids p{margin:0 0 12px}
+.gids ul,.gids ol{margin:0 0 14px;padding-left:22px;display:grid;gap:6px}
+.gids table,.les .md table{width:100%;border-collapse:collapse;margin:12px 0 18px;background:var(--card);border-radius:16px;overflow:hidden;font-size:.94rem;line-height:1.45}
+.gids th,.gids td,.les .md th,.les .md td{text-align:left;vertical-align:top;padding:12px 14px;border-top:1px solid var(--line)}
+.gids thead th,.les .md thead th{border-top:0;font-weight:600}
+.gids td:first-child{font-weight:500}
+.gids em,.les .md em{font-style:normal;font-weight:500}
+.gids blockquote,.les .md blockquote{margin:10px 0;padding:12px 16px;background:var(--card);border-radius:14px}
+.les .md blockquote{background:#fff}
+.les .md blockquote p{margin:0}
+.les .md ol{margin:0;padding-left:20px;display:grid;gap:4px;line-height:1.5}
+.gids-tabel{overflow-x:auto}
+@media (max-width:760px){.gids table{display:block;overflow-x:auto;white-space:normal}.gids th,.gids td{min-width:150px}}

@@ -18,7 +18,7 @@ Een platform dat designers, copywriters, marketeers en strategen in agencies van
 - Communicatie in het Nederlands, direct en kort. Geen goeroetoon. Eerlijke tegenspraak waar nodig.
 - Thijs is visueel: laat bij elke fase zien hoe het eruitziet (live link of screenshot), niet alleen wat er technisch staat.
 - Werk in fasen volgens de bouwvolgorde in `BOUWEN-IN-CODE.md`. Stop na elke fase en laat zien wat er staat.
-- Schrijf geen lesstof zelf. Lesstof komt uit `content/`. Ontbreekt iets, zet een duidelijk gemarkeerde placeholder.
+- Lesstof staat in `content/` en nergens anders. Sinds 15 november 2026 schrijft Claude de lesstof op verzoek van Thijs, op hbo-niveau. Elke tekst blijft concept tot Thijs hem goedkeurt en vermeldt dat bovenaan. Gebruik alleen bronnen die echt bestaan en die je kunt verantwoorden; verzin geen citaten, cijfers of feiten over merken. Fiscale uitleg is uitleg en geen advies, zonder percentages, en moet door een boekhouder worden nagelezen.
 
 ## Stijl
 

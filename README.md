@@ -16,7 +16,8 @@ Live: https://uitvinder-platform.netlify.app (Netlify-project `uitvinder-platfor
 | Welkom en kaart als pdf | "Zo werkt het" bij de eerste keer op Vandaag en op Reis; elke ronde is als experimentkaart af te drukken. |
 | Voorkant | Overgezet uit het prototype, met een blok voor ondernemers erbij. Prijzen staan in `lib/prijzen.ts`. De wachtlijst schrijft naar de tabel `waitlist`. De knoppen naar de Rolscan en de tools openen nog het prototype. |
 | Beeld op de voorkant | Vier foto's in `public/beeld/`: opnames van een fotoshoot met ton-sur-ton sets in perzik, lila, blauw en groen (de kleuren per stap), met fotograaf en crew in beeld. Gegenereerd met Higgsfield, model FLUX 3 (AI, geen echte shoot en geen echte deelnemers). Thijs koos deze richting na GPT Image 2.6 te hebben afgewezen als te glad. |
-| Lessen | Komen uit `content/*.md`. Het `LES`-object uit het prototype is niet overgenomen. |
+| Lessen | Komen uit `content/*.md`. Sinds 15 november 2026 uitgeschreven op hbo-niveau voor stap 1 tot en met 5: leeruitkomst, theorie met bronnen, kernbegrippen, opdracht, beoordeling per rubricniveau, reflectievragen en literatuur. Concept, door Claude geschreven, ter goedkeuring door Thijs. |
+| Studiewijzer | Openbaar op `/studiewijzer`, uit `content/studiewijzer.md`: leeruitkomsten, weekprogramma, toetsing, twee rubrics met vier niveaus, eindopdracht, regels voor AI en bronnen, literatuurlijst. |
 | Gegevens uit het prototype overnemen | Bij de eerste keer inloggen, als er prototype-gegevens op het apparaat staan. |
 | Administratie voor ondernemers (eerste versie) | Potjes, factuur en checklist op `/administratie`. De uitleg in `content/administratie.md` moet Thijs nog schrijven. |
 | AI-functies `scan` en `coach` | Ongewijzigd in `netlify/functions`. |
@@ -47,6 +48,14 @@ Gevolgen in wat er nu staat:
 - Een kaart delen met je team werkt in de database, maar er is nog geen scherm om een team te maken of leden uit te nodigen.
 
 ## Open punten uit deze stap
+
+- **Inhoud is concept.** Alle lessen, de studiewijzer en de teksten bij de administratie zijn door Claude geschreven en nog niet door Thijs goedgekeurd. Na te lopen:
+  - de bronnen (auteur, jaar, titel) vóór publicatie nog één keer controleren tegen de originele publicaties;
+  - in de studiewijzer zijn de slaaggrens (5,5, geen onderdeel onder de 5) en de herkansing (één keer, binnen vier weken) nieuw bedacht; het onderwijskundig kader zegt daar niets over;
+  - de rubrics hadden in het prototype twee niveaus per criterium en hebben er nu vier;
+  - de fiscale uitleg moet door een boekhouder worden nagelezen;
+  - "hbo-niveau" is een ontwerpkeuze, geen erkenning. Laat een onderwijskundige meelezen voordat het zo naar buiten gaat.
+- **Bouwmodule** (`content/bouwmodule.md`) is nog de korte versie; het scherm is nog niet overgezet.
 
 - **Lettertype.** Neue Montreal laadt niet: thijsmensink.nl stuurt geen CORS-header mee, dus de browser valt terug op Inter. Oplossing: één header op thijsmensink.nl, of de fontbestanden in deze repo (let op de licentie).
 - **Rate limit en login op de AI-functies.** `/api/coach` en `/api/scan` zijn nog open voor iedereen die het adres kent, net als in het prototype.

@@ -1,9 +1,11 @@
 "use client";
 import Link from "next/link";
 import { useApp } from "@/components/app";
+import { LesBox } from "@/components/Les";
+import type { Les } from "@/lib/lessen";
 import { afgerond, expTitel, fmtD, laatste, METINGWEKEN, nul, weekNr } from "@/lib/afgeleid";
 
-export function Reis({ zoWerktHet }: { zoWerktHet: string | null }) {
+export function Reis({ zoWerktHet, lesRolscan }: { zoWerktHet: string | null; lesRolscan: Les }) {
   const { data } = useApp();
   const n = nul(data), af = afgerond(data).length, wk = Math.min(weekNr(data), 12), zin = data.inv.zin;
   return (
@@ -16,7 +18,7 @@ export function Reis({ zoWerktHet }: { zoWerktHet: string | null }) {
       {zoWerktHet && (
         <details className="les" style={{ marginTop: 20, background: "var(--card)" }}>
           <summary><span>Zo werkt het<small>Twaalf weken, de beoordeling en de metingen</small></span></summary>
-          <div className="lb"><div className="md" dangerouslySetInnerHTML={{ __html: zoWerktHet }} /></div>
+          <div className="lb"><div className="md" dangerouslySetInnerHTML={{ __html: zoWerktHet }} /><div className="btns"><Link className="btn ghost sm" href="/studiewijzer">Lees de hele studiewijzer</Link></div></div>
         </details>
       )}
       <div className="weeks">
@@ -42,6 +44,7 @@ export function Reis({ zoWerktHet }: { zoWerktHet: string | null }) {
       <section className={`step ${n ? "done" : ""}`}>
         <div className="step-h"><b>{n ? "✓" : "1"}</b><h2>Rolscan</h2><span>{n ? fmtD(n.datum) : ""}</span></div>
         <div className="step-b">
+          <LesBox les={lesRolscan} />
           {n ? (
             <>
               <p>

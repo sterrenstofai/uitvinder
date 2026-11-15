@@ -35,7 +35,8 @@ const FAQ: [string, string][] = [
   ["Moet ik kunnen programmeren?", "Nee. Je leert bouwen met AI-tools zoals Claude. Jij schrijft op wat het moet doen, de AI schrijft de code."],
   ["Hoeveel tijd kost het?", "Reken op een middag per week voor een ronde. Het fundament kost eenmalig een uur of twee."],
   ["Wat ziet mijn werkgever?", "Alleen je verhouding uitvoerend en uitvindend, en de kaarten die jij met je team deelt. Je rolscan-antwoorden, je invalshoek en je privékaarten niet."],
-  ["Is dit een cursus?", "Nee. Je maakt elke week iets voor een echte klant, en de coach helpt je scherp te blijven."],
+  ["Is dit een cursus?", "Het is een leertraject van twaalf weken waarin je elke week iets maakt voor een echte klant. Elke stap heeft een les met theorie en literatuur, en aan het eind beoordeelt een mens je portfolio en je eindopdracht."],
+  ["Krijg ik een diploma?", "Nog niet. De reis is ontworpen op hbo-niveau, maar is nog niet formeel erkend."],
   ["Wat als de AI-tools veranderen?", "Dan verandert je gereedschap, niet je methode. Je leert het patroon dat blijft: vraag, spec, bouwen, testen, live."],
   ["Voor wie is het?", "Voor designers, copywriters, marketeers en strategen in agencies en marketingteams, en voor wie voor zichzelf werkt. Junior of senior."],
 ];
@@ -86,6 +87,8 @@ export default function Voorkant() {
           <span className="eyebrow">De reis</span>
           <h2>Eén keer het fundament. Daarna elke week een ronde.</h2>
           <img className="beeld breed" src="/beeld/klant.jpg" alt="Een fotoshoot in een studio: twee vrouwen kijken samen naar een telefoon op een lila set" width={1800} height={1011} loading="lazy" />
+          <p className="lead">Twaalf weken, ongeveer 56 uur, ontworpen op hbo-niveau. Met leeruitkomsten, een rubric en een beoordeling door een mens.</p>
+          <div className="btns" style={{ marginTop: 16 }}><Link className="btn ghost" href="/studiewijzer">Bekijk de studiewijzer</Link></div>
           <div className="feat">
             {STAPPEN.map(([n, kop, tekst]) => (
               <div key={n}><i className="shp" data-s={n === "AI" ? "?" : n}>{n}</i><p><b>{kop}</b> {tekst}</p></div>

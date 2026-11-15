@@ -8,11 +8,20 @@ import type { Les } from "@/lib/lessen";
 export function LesBox({ les }: { les: Les }) {
   const { data } = useApp();
   const rol = data.profile && les.rol[data.profile.rol] ? data.profile.rol : "designer";
+  const voorbeeld = les.rol[rol] ? (
+    <div className="rolx" style={{ marginBottom: 14 }}>
+      <b>Voorbeeld voor een {rol}</b>
+      <div dangerouslySetInnerHTML={{ __html: les.rol[rol] }} />
+      {/Coolblue|Albert Heijn|HEMA|\bBol\b/.test(les.rol[rol]) && (
+        <span className="hint" style={{ display: "block", marginTop: 6 }}>Het merk is een voorbeeld, de situatie is bedacht.</span>
+      )}
+    </div>
+  ) : null;
   return (
     <details className="les">
       <summary>
         <span className="pl" aria-hidden="true"></span>
-        <span>Les: {les.titel}<small>Video en 2 minuten lezen</small></span>
+        <span>Les: {les.titel}<small>Video en {les.leestijd} minuten lezen</small></span>
       </summary>
       <div className="lb">
         <div className="vid">
@@ -22,19 +31,13 @@ export function LesBox({ les }: { les: Les }) {
         <div className="md" dangerouslySetInnerHTML={{ __html: les.inleiding }} />
         {les.secties.map((s) => (
           <div key={s.kop}>
+            {/* Het voorbeeld voor jouw rol staat direct voor de opdracht. */}
+            {s.kop === "Opdracht" && voorbeeld}
             <h4>{s.kop}</h4>
             <div className="md" dangerouslySetInnerHTML={{ __html: s.html }} />
           </div>
         ))}
-        {les.rol[rol] && (
-          <div className="rolx">
-            <b>Voorbeeld voor een {rol}</b>
-            <div dangerouslySetInnerHTML={{ __html: les.rol[rol] }} />
-            {/Coolblue|Albert Heijn|HEMA|\bBol\b/.test(les.rol[rol]) && (
-              <span className="hint" style={{ display: "block", marginTop: 6 }}>Het merk is een voorbeeld, de situatie is bedacht.</span>
-            )}
-          </div>
-        )}
+        {!les.secties.some((s) => s.kop === "Opdracht") && voorbeeld}
       </div>
     </details>
   );

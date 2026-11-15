@@ -7,11 +7,13 @@ import { marked } from "marked";
 export type Les = {
   titel: string;
   inleiding: string; // html
+  leestijd: number; // minuten, geschat op 200 woorden per minuut
   secties: { kop: string; html: string }[];
   rol: Record<string, string>; // html per rol
 };
 
 const BESTAND: Record<number, string> = {
+  1: "stap-1-rolscan.md",
   2: "stap-2-invalshoek.md",
   3: "stap-3-relevantie.md",
   4: "stap-4-uitvinden.md",
@@ -28,16 +30,18 @@ export function leesLes(stap: number): Les {
   try {
     md = readFileSync(join(process.cwd(), "content", bestand), "utf8");
   } catch {
-    return { titel: `Stap ${stap}`, inleiding: "<p>[INHOUD VOLGT]</p>", secties: [], rol: {} };
+    return { titel: `Stap ${stap}`, inleiding: "<p>[INHOUD VOLGT]</p>", leestijd: 1, secties: [], rol: {} };
   }
   const [kop, ...delen] = md.split(/^## /m);
   const titel = (kop.match(/^# (.+)$/m)?.[1] || "").replace(/^Stap \d+\s*[—-]\s*/, "").trim();
-  const les: Les = { titel, inleiding: "", secties: [], rol: {} };
+  const les: Les = { titel, inleiding: "", leestijd: 1, secties: [], rol: {} };
+  let woorden = 0;
   for (const deel of delen) {
     const nl = deel.indexOf("\n");
     const naam = deel.slice(0, nl).trim();
     const tekst = deel.slice(nl + 1);
     if (OVERSLAAN.test(naam)) continue;
+    if (!/^literatuur/i.test(naam)) woorden += tekst.split(/\s+/).filter(Boolean).length;
     if (/^de les/i.test(naam)) les.inleiding = html(tekst);
     else if (/^voorbeeld per rol/i.test(naam)) {
       for (const alinea of tekst.split(/\n\s*\n/)) {
@@ -46,6 +50,7 @@ export function leesLes(stap: number): Les {
       }
     } else les.secties.push({ kop: naam, html: html(tekst) });
   }
+  les.leestijd = Math.max(1, Math.round(woorden / 200));
   return les;
 }
 
@@ -88,6 +93,17 @@ export function leesZoWerktHet(): string | null {
     const md = readFileSync(join(process.cwd(), "content", "zo-werkt-het.md"), "utf8");
     const vanaf = md.search(/^## /m);
     return vanaf < 0 ? null : html(md.slice(vanaf).replace(/^## /gm, "#### "));
+  } catch {
+    return null;
+  }
+}
+
+// De studiewijzer: leeruitkomsten, programma, toetsing, rubrics en literatuur.
+export function leesStudiewijzer(): string | null {
+  try {
+    const md = readFileSync(join(process.cwd(), "content", "studiewijzer.md"), "utf8");
+    const vanaf = md.search(/^## /m);
+    return vanaf < 0 ? null : html(md.slice(vanaf));
   } catch {
     return null;
   }
