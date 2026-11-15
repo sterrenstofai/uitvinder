@@ -30,6 +30,9 @@ export function LesBox({ les }: { les: Les }) {
           <div className="rolx">
             <b>Voorbeeld voor een {rol}</b>
             <div dangerouslySetInnerHTML={{ __html: les.rol[rol] }} />
+            {/Coolblue|Albert Heijn|HEMA|\bBol\b/.test(les.rol[rol]) && (
+              <span className="hint" style={{ display: "block", marginTop: 6 }}>Het merk is een voorbeeld, de situatie is bedacht.</span>
+            )}
           </div>
         )}
       </div>

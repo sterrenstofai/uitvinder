@@ -33,7 +33,7 @@ export function Proeftuin3({ e }: { e: Exp }) {
       {i < CASES.length ? (
         <div className="case">
           <div className="prog">{CASES.map((_, j) => <i key={j} className={j <= i ? "on" : ""}></i>)}</div>
-          <div className="cm">{c.merk}, voorbeeld {i + 1} van {CASES.length}</div>
+          <div className="cm">{c.merk}, voorbeeld {i + 1} van {CASES.length} (bedachte situatie)</div>
           <div className="cs">{c.sig}</div>
           {a ? (
             <>
@@ -110,8 +110,8 @@ export function Proeftuin4({ e, neem }: { e: Exp; neem: Neem }) {
         </div>
       ))}
       <h4>Bouw je hypothese</h4>
-      <label className="f"><span>Wat maak je?</span><input type="text" value={f.maak || ""} onChange={zet("maak")} placeholder="een wintercheck" /></label>
-      <label className="f"><span>Voor wie?</span><input type="text" value={f.wie || ""} onChange={zet("wie")} placeholder="forensen die twijfelen of ze blijven fietsen" /></label>
+      <label className="f"><span>Wat maak je?</span><input type="text" value={f.maak || ""} onChange={zet("maak")} placeholder="een koelcheck" /></label>
+      <label className="f"><span>Voor wie?</span><input type="text" value={f.wie || ""} onChange={zet("wie")} placeholder="mensen die tijdens een hittegolf een airco zoeken" /></label>
       <div className="f">
         <span>Wat doen mensen, en hoeveel?</span>
         <div style={{ display: "grid", gridTemplateColumns: "110px 1fr", gap: 8 }}>
@@ -161,7 +161,7 @@ export function Proeftuin5({ e, neem }: { e: Exp; neem: Neem }) {
       <p className="hint">Een post in vier stappen: begin met het getal, vertel wat je zag en bouwde, wat je leerde, en de link.</p>
       <label className="f"><span>De uitkomst, als getal</span><input type="text" value={f.getal || ""} onChange={zet("getal")} placeholder="412 keer gedeeld in vijf dagen" /></label>
       <label className="f"><span>Vergelijk het met</span><input type="text" value={f.vergelijk || ""} onChange={zet("vergelijk")} placeholder="Onze best gedeelde post van de maand kwam op 37" /></label>
-      <label className="f"><span>Wat je zag en bouwde</span><input type="text" value={bouw} onChange={zet("bouw")} placeholder="Bij de eerste nachtvorst bouwde ik een wintercheck voor forensen" /></label>
+      <label className="f"><span>Wat je zag en bouwde</span><input type="text" value={bouw} onChange={zet("bouw")} placeholder="Bij de eerste hittegolf bouwde ik een koelcheck" /></label>
       <label className="f"><span>Ik dacht</span><input type="text" value={f.dacht || ""} onChange={zet("dacht")} placeholder="dat mensen hem zouden lezen" /></label>
       <label className="f"><span>Het bleek</span><input type="text" value={f.bleek || ""} onChange={zet("bleek")} placeholder="dat ze hem vooral doorstuurden" /></label>
       <label className="f"><span>Link (optioneel)</span><input type="url" value={link} onChange={zet("link")} placeholder="https://" /></label>

@@ -6,7 +6,7 @@ Concept, ter goedkeuring door Thijs.
 
 Een uitvoerder wacht tot de klant zegt wat er moet gebeuren. Een uitvinder ziet het eerder.
 
-Relevantie is geen gevoel. Het is een moment waarop mensen een vraag hebben en een merk het antwoord kan geven. Het Ehrenberg-Bass Institute noemt die momenten category entry points: situaties waarin iemand aan een categorie gaat denken. De eerste koude week voor een fietsmerk, de nieuwe subsidieregels voor een installateur, de decembervraag voor een bakker. Wie daar op dat moment iets nuttigs neerzet, wordt onthouden.
+Relevantie is geen gevoel. Het is een moment waarop mensen een vraag hebben en een merk het antwoord kan geven. Het Ehrenberg-Bass Institute noemt die momenten category entry points: situaties waarin iemand aan een categorie gaat denken. De eerste hittegolf voor Coolblue, de drukte voor Sinterklaas bij Bol, het kerstdiner voor Albert Heijn. Wie daar op dat moment iets nuttigs neerzet, wordt onthouden.
 
 Je zoekt dus niet naar iets om over te posten. Je zoekt naar een vraag die deze week ontstaat, bij mensen die de klant wil bereiken.
 
@@ -31,13 +31,15 @@ Drie keer ja: dit is je signaal.
 
 ## Voorbeeld per rol
 
-**Designer** bij een fietsmerk. Signaal: de eerste nachtvorst staat in de weersverwachting. Forensen twijfelen of ze blijven fietsen. Het merk verkoopt winterbanden en verlichting, dus het heeft recht van spreken. Het kan helpen met een check: is jouw fiets klaar voor de winter?
+De merken zijn voorbeelden, de situaties zijn bedacht.
 
-**Copywriter** bij een bakkerij. Signaal: in het nieuws staat dat graan duurder wordt en brood volgend jaar meer kost. Klanten gaan het merken. De bakker kan uitleggen waar de prijs van één brood heen gaat, eerlijker dan de supermarkt kan.
+**Designer** bij Coolblue. Signaal: de eerste hittegolf staat in de weersverwachting. Mensen twijfelen welke airco of ventilator bij hun kamer past. Coolblue verkoopt ze, dus het heeft recht van spreken. Het kan helpen met een check: welke koeling past bij jouw kamer?
 
-**Marketeer** bij een hotel. Signaal: het zoekvolume op weekendje weg in de winter loopt in oktober op. Het hotel heeft nog geen winterarrangement. Het kan testen of er vraag is voordat het er een maakt.
+**Copywriter** bij Albert Heijn. Signaal: in het nieuws staat dat graan duurder wordt en brood volgend jaar meer kost. Klanten gaan het merken bij de kassa. Albert Heijn verkoopt elke dag brood, dus het kan uitleggen waar de prijs van één brood heen gaat.
 
-**Strateeg** bij een installateur. Signaal: per 1 januari veranderen de subsidieregels voor warmtepompen. De telefoon staat roodgloeiend. Het bedrijf kan in drie vragen laten zien of iemand in aanmerking komt.
+**Marketeer** bij HEMA. Signaal: het zoekvolume op pyjama's voor het hele gezin loopt in oktober op. Stel dat HEMA die nog niet heeft. Dan kan het testen of er vraag is voordat het ze maakt.
+
+**Strateeg** bij Bol. Signaal: de weken voor Sinterklaas beginnen. De klantenservice krijgt steeds dezelfde vraag: komt mijn bestelling nog op tijd? Bol kan in drie vragen laten zien wat je uiterlijk wanneer bestelt.
 
 ## Goed als
 

@@ -16,7 +16,7 @@ Gebruik deze vorm:
 
 > Als ik **[wat je maakt]** voor **[wie]**, dan verwacht ik **[wat mensen doen, in een getal]**, omdat **[je aanname]**.
 
-Voorbeeld: Als ik een wintercheck maak voor forensen, dan verwacht ik dat hij in vijf dagen vaker gedeeld wordt dan onze best gedeelde post van de maand, omdat mensen iets bruikbaars eerder delen dan iets om te lezen.
+Voorbeeld: Als ik een koelcheck maak voor mensen die een airco zoeken, dan verwacht ik dat hij in vijf dagen vaker gedeeld wordt dan onze best gedeelde post van de maand, omdat mensen iets bruikbaars eerder delen dan iets om te lezen.
 
 ## Wat past in een middag
 
@@ -36,13 +36,13 @@ Je werkt voor echte merken. Een experiment dat naar buiten gaat in naam van een 
 
 ## Voorbeeld per rol
 
-**Designer.** Bouwt de wintercheck als één pagina: fietstype kiezen, checklist eruit, deelknop. Meet het aantal keer gedeeld.
+**Designer.** Bouwt de koelcheck voor Coolblue als één pagina: kamergrootte kiezen, advies eruit, deelknop. Meet het aantal keer gedeeld.
 
-**Copywriter.** Schrijft de uitleg over de broodprijs en maakt er één visual bij die de opbouw van de prijs laat zien. Meet reacties en de toon ervan, vergeleken met een gemiddelde post.
+**Copywriter.** Schrijft voor Albert Heijn de uitleg over de broodprijs en maakt er één visual bij die de opbouw van de prijs laat zien. Meet reacties en de toon ervan, vergeleken met een gemiddelde post.
 
-**Marketeer.** Zet een wachtlijstpagina live voor een winterarrangement dat nog niet bestaat. Meet het aantal aanmeldingen in een week.
+**Marketeer.** Zet voor HEMA een wachtlijstpagina live voor gezinspyjama's die nog niet bestaan. Meet het aantal aanmeldingen in een week.
 
-**Strateeg.** Bouwt een subsidiecheck van drie vragen. Meet of het aantal telefoontjes over subsidie daalt.
+**Strateeg.** Bouwt voor Bol een op-tijd-check van drie vragen. Meet of het aantal vragen aan de klantenservice daalt.
 
 ## Goed als
 

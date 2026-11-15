@@ -1,13 +1,14 @@
 // Oefenmateriaal van de proeftuinen bij stap 3, 4 en 5. Overgenomen uit het
 // prototype (public/prototype/index.html). Hoort in stap 2 van de bouwvolgorde
 // naar content/ te verhuizen, net als de lessen.
+// De merken zijn voorbeelden, de situaties zijn bedacht.
 export const CASES = [
-  { merk: "Fietsmerk", sig: "De eerste nachtvorst staat in de weersverwachting voor volgende week.", ok: "signaal", uit: "Van nu, het merk verkoopt winterbanden en verlichting, en het kan forensen helpen met een check." },
-  { merk: "Bakkerij", sig: "Tips voor een gezond ontbijt.", ok: "ruis", uit: "Niet van nu. Dit is altijd waar, dus het is evergreen en geen signaal." },
-  { merk: "Installateur", sig: "Per 1 januari veranderen de subsidieregels voor warmtepompen.", ok: "signaal", uit: "Van nu, raakt precies aan wat het bedrijf doet, en het kan iets doen: een check van drie vragen." },
-  { merk: "Kledingmerk", sig: "De uitslag van de verkiezingen is bekend.", ok: "ruis", uit: "Van nu, maar het merk heeft er geen recht van spreken. Groot nieuws zonder verband is ruis." },
-  { merk: "Hotel", sig: "Het zoekvolume op weekendje weg in de winter verdubbelt deze maand.", ok: "signaal", uit: "Van nu, past bij het hotel, en het kan testen met een wachtlijst voor een arrangement." },
-  { merk: "Accountantskantoor", sig: "Vandaag is het de Dag van de Koffie.", ok: "ruis", uit: "Van nu, maar zonder verband met het kantoor en zonder iets wat het kan doen. Alleen iets zeggen is geen experiment." },
+  { merk: "Coolblue", sig: "De eerste hittegolf van het jaar staat in de weersverwachting voor volgende week.", ok: "signaal", uit: "Van nu, Coolblue verkoopt airco's en ventilatoren, en het kan mensen helpen met een keuzehulp." },
+  { merk: "Albert Heijn", sig: "Tips voor een gezond ontbijt.", ok: "ruis", uit: "Niet van nu. Dit is altijd waar, dus het is evergreen en geen signaal." },
+  { merk: "Bol", sig: "Over drie weken begint het nieuwe schooljaar.", ok: "signaal", uit: "Van nu, Bol verkoopt schoolspullen, en het kan iets doen: een lijst per leerjaar." },
+  { merk: "HEMA", sig: "De uitslag van de verkiezingen is bekend.", ok: "ruis", uit: "Van nu, maar het merk heeft er geen recht van spreken. Groot nieuws zonder verband is ruis." },
+  { merk: "HEMA", sig: "Sinterklaas komt over twee weken aan in Nederland.", ok: "signaal", uit: "Van nu, HEMA verkoopt cadeautjes en chocoladeletters, en het kan helpen met een surprisehulp." },
+  { merk: "Coolblue", sig: "Vandaag is het Nationale Tulpendag.", ok: "ruis", uit: "Van nu, maar zonder verband met Coolblue en zonder iets wat het kan doen. Alleen iets zeggen is geen experiment." },
 ] as const;
 export const TOETS = ["Is het van nu?", "Heeft dit merk er recht van spreken?", "Kan het merk iets doen in plaats van alleen iets zeggen?"];
 export const TOETS_NEE = [

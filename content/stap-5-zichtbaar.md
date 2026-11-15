@@ -17,7 +17,7 @@ Twee dingen schrijf je altijd op:
 1. **De uitkomst, in een getal.** Zo dicht mogelijk bij de meting die je vooraf koos.
 2. **Wat je leerde, in één zin.** Gebruik deze vorm: Ik dacht ..., het bleek ...
 
-Voorbeeld: Ik dacht dat mensen een wintercheck zouden lezen, het bleek dat ze hem vooral doorstuurden naar collega's.
+Voorbeeld: Ik dacht dat mensen een koelcheck zouden lezen, het bleek dat ze hem vooral doorstuurden naar collega's.
 
 ## Drie ringen van delen
 
@@ -43,7 +43,7 @@ Een post over je experiment volgt vier stappen:
 Voorbeeld:
 
 > 412 keer gedeeld in vijf dagen. Onze best gedeelde post van de maand kwam op 37.
-> Bij de eerste nachtvorst bouwde ik een wintercheck voor forensen: fietstype kiezen, checklist eruit. Kostte een middag.
+> Bij de eerste hittegolf bouwde ik een koelcheck: kamergrootte kiezen, advies eruit. Kostte een middag.
 > Wat ik leerde: mensen delen iets wat ze kunnen gebruiken, niet iets wat ze moeten lezen.
 
 ## Goed als
