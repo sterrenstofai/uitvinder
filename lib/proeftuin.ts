@@ -24,3 +24,11 @@ export const WAT = [
 export const LADDER = ["Eén vraag, één antwoord", "Een check of quiz", "Een rekentool", "Een wachtlijst", "Een klikbaar prototype"];
 export const GEDRAG = ["keer gedeeld", "aanmeldingen", "keer ingevuld", "minder telefoontjes", "aanvragen of contactmomenten", "anders"];
 export const GEHEIM = /omzet|marge|winst|€|euro|intern|vertrouwelijk|budget/i;
+export const ZINNEN = [
+  { z: "Ik ben een creatieve designer met passie voor merken.", ok: "inwisselbaar", uit: "Functietitel en bijvoeglijke naamwoorden. Elke designer kan deze zin gebruiken." },
+  { z: "Ik schrijf voor zorgmerken alsof ik nog aan het bed sta, omdat ik zes jaar verpleegkundige was.", ok: "eigen", uit: "Concreet, waar en te bewijzen. Weinig copywriters kunnen dit zeggen." },
+  { z: "Ik help bedrijven groeien met slimme marketing.", ok: "inwisselbaar", uit: "Te breed: voor wie, en wat is slim? Niets van buiten het vak." },
+  { z: "Ik maak campagnes voor bouwbedrijven die vakmensen serieus nemen, omdat ik zelf vijf jaar timmerman was.", ok: "eigen", uit: "Duidelijke doelgroep en een geschiedenis die anderen niet hebben." },
+  { z: "Ik ben een verbinder die out of the box denkt.", ok: "inwisselbaar", uit: "Alleen vage woorden. Niemand kan controleren of het klopt." },
+] as const;
+export const VAAG = /\b(creatie\w*|passie\w*|gepassioneerd\w*|innovatie\w*|uniek\w*|verbinder|out of the box|enthousiast\w*|holistisch\w*|gedreven|slim\w*)\b/i;

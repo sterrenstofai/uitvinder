@@ -49,7 +49,7 @@ export default function Certificaat() {
           <div><span>Beoordelaar</span><b>{b.beoordelaar_naam || "–"}</b></div>
           <div><span>Certificaatnummer</span><b>{b.id.slice(0, 8).toUpperCase()}</b></div>
         </div>
-        <p className="cert-n">Dit is een certificaat van de aanbieder. Het is geen erkend diploma en geeft geen studiepunten.</p>
+        <p className="cert-n">Dit is een certificaat van de aanbieder. Het is geen erkend diploma en geeft geen studiepunten. Te controleren op uitvinder-platform.netlify.app/controle/{b.id.slice(0, 8).toUpperCase()}.</p>
       </article>
     </main>
   );

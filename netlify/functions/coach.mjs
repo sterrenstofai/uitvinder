@@ -83,4 +83,5 @@ export default async (req) => {
   }
 };
 
-export const config = { path: "/api/coach" };
+// Hooguit dertig vragen per minuut per bezoeker, om misbruik van de AI te beperken.
+export const config = { path: "/api/coach", rateLimit: { windowLimit: 30, windowSize: 60, aggregateBy: ["ip", "domain"] } };

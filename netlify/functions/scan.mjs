@@ -63,4 +63,5 @@ export default async (req) => {
   }
 };
 
-export const config = { path: "/api/scan" };
+// Hooguit tien scans per minuut per bezoeker, om misbruik van de AI te beperken.
+export const config = { path: "/api/scan", rateLimit: { windowLimit: 10, windowSize: 60, aggregateBy: ["ip", "domain"] } };

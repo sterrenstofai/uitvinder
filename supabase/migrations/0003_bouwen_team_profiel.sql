@@ -47,6 +47,19 @@ language sql stable security definer set search_path = uitvinder as $$
   order by sc.datum, sc.aangemaakt_op;
 $$;
 
+-- Een certificaat controleren op nummer. Geeft alleen de naam, de datum en de
+-- beoordelaar terug, en alleen van een vastgestelde, voldoende beoordeling.
+create function uitvinder.controleer_certificaat(nr text)
+returns table (naam text, vastgesteld_op date, beoordelaar text)
+language sql stable security definer set search_path = uitvinder as $$
+  select p.naam, b.vastgesteld_op::date, b.beoordelaar_naam
+  from beoordelingen b join profiles p on p.id = b.deelnemer_id
+  where length(btrim(nr)) = 8 and upper(left(b.id::text, 8)) = upper(btrim(nr))
+    and b.vastgesteld_op is not null and b.cijfer >= 5.5;
+$$;
+revoke execute on function uitvinder.controleer_certificaat(text) from public;
+grant execute on function uitvinder.controleer_certificaat(text) to anon, authenticated, service_role;
+
 revoke execute on function uitvinder.voeg_lid_toe(uuid, text, text) from public, anon;
 grant execute on function uitvinder.voeg_lid_toe(uuid, text, text) to authenticated, service_role;
 revoke execute on function uitvinder.publieke_verschuiving(text) from public;

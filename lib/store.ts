@@ -36,6 +36,7 @@ export interface Store {
   voegLidToe(teamId: string, email: string, rol: "lid" | "beoordelaar"): Promise<string>;
   verwijderLid(teamId: string, userId: string): Promise<void>;
   teamKaarten(teamId: string): Promise<Exp[]>;
+  controleerCertificaat(nummer: string): Promise<{ naam: string; vastgesteld_op: string; beoordelaar: string | null } | null>;
   /** Zonder account te lezen, als het profiel openbaar is. */
   publiekProfiel(slug: string): Promise<PubliekProfiel | null>;
   nieuweKlant(k: Omit<Klant, "id">): Promise<Klant>;
@@ -246,6 +247,11 @@ function supabaseStore(sb: SupabaseClient<any, any, any>): Store {
       fout(r.error);
       return (r.data as unknown as Exp[]) ?? [];
     },
+    async controleerCertificaat(nummer) {
+      const r = await sb.rpc("controleer_certificaat", { nr: nummer });
+      fout(r.error);
+      return ((r.data as { naam: string; vastgesteld_op: string; beoordelaar: string | null }[] | null) ?? [])[0] ?? null;
+    },
     async publiekProfiel(slug) {
       const p = await sb.from("profiles").select("id,naam,rol,agency,publiek,toon").eq("slug", slug).eq("publiek", true).maybeSingle();
       if (p.error || !p.data) return null;
@@ -450,6 +456,12 @@ function lokaalStore(): Store {
     async voegLidToe() { throw new Error("In voorbeeldmodus is er geen team."); },
     async verwijderLid() {},
     async teamKaarten() { return []; },
+    async controleerCertificaat(nummer) {
+      const d = { ...leegData(), ...lees().data };
+      const b = d.beoordeling;
+      if (!b || !b.vastgesteld_op || (b.cijfer ?? 0) < 5.5 || b.id.slice(0, 8).toUpperCase() !== nummer.trim().toUpperCase()) return null;
+      return { naam: d.profile?.naam || "", vastgesteld_op: b.vastgesteld_op.slice(0, 10), beoordelaar: b.beoordelaar_naam };
+    },
     async publiekProfiel(slug) {
       const d = { ...leegData(), ...lees().data };
       const p = d.profile;

@@ -2,7 +2,7 @@
 // Proeftuinen bij stap 3, 4 en 5. Oefenstaat, niet bewaard: zelfde werking als het prototype.
 import { useState, type ReactNode } from "react";
 import { useApp } from "./app";
-import { CASES, GEDRAG, GEHEIM, LADDER, TOETS, TOETS_NEE, WAT } from "@/lib/proeftuin";
+import { CASES, GEDRAG, GEHEIM, LADDER, TOETS, TOETS_NEE, VAAG, WAT, ZINNEN } from "@/lib/proeftuin";
 import type { Exp } from "@/lib/types";
 
 function Oef({ titel, sub, children }: { titel: string; sub: string; children: ReactNode }) {
@@ -176,6 +176,67 @@ export function Proeftuin5({ e, neem }: { e: Exp; neem: Neem }) {
         <button className="btn ghost sm" onClick={() => navigator.clipboard.writeText(post).then(() => toast("Post gekopieerd"), () => toast("Kopiëren lukte niet"))}>Kopieer post</button>
         <button className="btn sm" onClick={neemOver}>Neem over in je ronde</button>
       </div>
+    </Oef>
+  );
+}
+
+// Proeftuin bij stap 2: herken een eigen invalshoek, schrijf daarna de jouwe.
+export function Proeftuin2({ start, neem }: { start: { zin: string; voorwie: string }; neem: (v: { zin: string; voorwie?: string; buiten?: string }) => void }) {
+  const { toast } = useApp();
+  const [i, setI] = useState(0);
+  const [ant, setAnt] = useState<string[]>([]);
+  const [f, setF] = useState<Record<string, string>>({ zin: start.zin, wie: start.voorwie });
+  const zet = (k: string) => (ev: { target: { value: string } }) => setF({ ...f, [k]: ev.target.value });
+  const c = ZINNEN[i], a = ant[i];
+  const sc = ZINNEN.filter((x, j) => ant[j] === x.ok).length;
+  const z = (f.zin || "").trim(), w = (z.match(/\S+/g) || []).length;
+  function neemOver() {
+    if (!z) return toast("Schrijf eerst je zin");
+    const buiten = [f.werk, f.diep, f.advies].filter(Boolean).join("; ");
+    neem({ zin: z, ...(f.wie ? { voorwie: f.wie } : {}), ...(buiten ? { buiten } : {}) });
+    toast("Overgenomen, leg hem vast onderaan");
+  }
+  return (
+    <Oef titel="Eigen of inwisselbaar?" sub="Herken een eigen invalshoek, schrijf daarna de jouwe">
+      {i < ZINNEN.length ? (
+        <div className="case">
+          <div className="prog">{ZINNEN.map((_, j) => <i key={j} className={j <= i ? "on" : ""}></i>)}</div>
+          <div className="cm">Voorbeeld {i + 1} van {ZINNEN.length}: eigen of inwisselbaar?</div>
+          <div className="cs">{c.z}</div>
+          {a ? (
+            <>
+              <div className={`fb ${a === c.ok ? "ok" : "no"}`}><b>{a === c.ok ? "Goed." : "Niet helemaal."}</b> Deze is {c.ok}. {c.uit}</div>
+              <div className="btns" style={{ marginTop: 12 }}><button className="btn sm" onClick={() => setI(i + 1)}>{i + 1 < ZINNEN.length ? "Volgende" : "Bekijk je score"}</button></div>
+            </>
+          ) : (
+            <div className="btns">
+              <button className="btn sm" onClick={() => setAnt(Object.assign([...ant], { [i]: "eigen" }))}>Eigen</button>
+              <button className="btn ghost sm" onClick={() => setAnt(Object.assign([...ant], { [i]: "inwisselbaar" }))}>Inwisselbaar</button>
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className="case">
+          <div className="cs">{sc} van {ZINNEN.length} goed.</div>
+          <p className="hint">Een eigen zin is concreet, waar en niet door een collega over te nemen.</p>
+          <div className="btns" style={{ marginTop: 12 }}><button className="btn ghost sm" onClick={() => { setI(0); setAnt([]); }}>Opnieuw</button></div>
+        </div>
+      )}
+      <h4>Zoek je combinatie</h4>
+      <label className="f"><span>Waar heb je gewerkt buiten dit vak?</span><small>Ook bijbaantjes en zijpaden tellen.</small><input type="text" value={f.werk || ""} onChange={zet("werk")} placeholder="vier jaar in de horeca" /></label>
+      <label className="f"><span>Waar zit je diep in buiten je werk?</span><input type="text" value={f.diep || ""} onChange={zet("diep")} placeholder="wielrennen, ik rijd al tien jaar competitie" /></label>
+      <label className="f"><span>Waar vragen mensen jou om advies, los van je werk?</span><input type="text" value={f.advies || ""} onChange={zet("advies")} placeholder="hoe je een verbouwing plant" /></label>
+      <label className="f"><span>Voor wie wil je relevant zijn?</span><input type="text" value={f.wie || ""} onChange={zet("wie")} placeholder="familiebedrijven in de regio" /></label>
+      <p className="hint">Kies één van je antwoorden en schrijf je zin in deze vorm: Ik [wat je doet] voor [wie], omdat ik [iets van buiten je vak].</p>
+      <label className="f" style={{ marginTop: 12 }}><span>Jouw zin</span><textarea value={f.zin || ""} onChange={zet("zin")} placeholder="Ik ... voor ..., omdat ik ..." /></label>
+      <Chks items={[
+        [!!z && w <= 25, `Hooguit 25 woorden (nu ${w})`],
+        [/\bvoor\b/i.test(z), "Er staat in voor wie"],
+        [/\bomdat\b/i.test(z), "Er staat in wat je van buiten je vak meeneemt"],
+        [!!z && !VAAG.test(z), "Geen vage woorden zoals creatief, passie of innovatief"],
+        [!!z && !/^\s*ik ben (een )?/i.test(z), "Begint niet met een functietitel"],
+      ]} />
+      <div className="btns"><button className="btn sm" onClick={neemOver}>Neem over als je invalshoek</button></div>
     </Oef>
   );
 }

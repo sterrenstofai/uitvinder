@@ -8,8 +8,8 @@ import { Wachtlijst } from "@/components/Wachtlijst";
 import { PRIJZEN } from "@/lib/prijzen";
 
 const PROTO = "/prototype/index.html";
-// De Rolscan staat in het platform; wie nog geen account heeft, logt eerst in.
-const SCAN = "/rolscan";
+// De gratis Rolscan werkt zonder account.
+const SCAN = "/scan";
 
 const STAPPEN: [string, string, string][] = [
   ["1", "Rolscan.", "Zie in vijf minuten hoeveel van je werk uitvoerend is. Dat is je nulmeting."],

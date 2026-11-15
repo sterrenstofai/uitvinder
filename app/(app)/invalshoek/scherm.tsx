@@ -2,6 +2,7 @@
 import { useRouter } from "next/navigation";
 import { useApp } from "@/components/app";
 import { CoachBox, LesBox } from "@/components/Les";
+import { Proeftuin2 } from "@/components/Proeftuin";
 import type { Les } from "@/lib/lessen";
 
 export function InvalshoekScherm({ les }: { les: Les }) {
@@ -31,6 +32,7 @@ export function InvalshoekScherm({ les }: { les: Les }) {
         <div className="step-h"><b>2</b><h2>Wat combineer jij?</h2></div>
         <div className="step-b">
           <LesBox les={les} />
+          <Proeftuin2 start={{ zin: i.zin, voorwie: i.voorwie }} neem={(v) => { setInv("zin", v.zin); if (v.voorwie) setInv("voorwie", v.voorwie); if (v.buiten) setInv("buiten", v.buiten); }} />
           <label className="f"><span>Je vak</span><input type="text" value={i.vak} onChange={(e) => setInv("vak", e.target.value)} placeholder="Bijvoorbeeld: brand designer, 8 jaar agency" /></label>
           <label className="f"><span>Iets van buiten je vak</span><small>Een vorige baan, een hobby die uit de hand liep, een wereld die je van binnen kent.</small><input type="text" value={i.buiten} onChange={(e) => setInv("buiten", e.target.value)} placeholder="Bijvoorbeeld: ik heb vier jaar in de horeca gewerkt" /></label>
           <label className="f"><span>Voor wie wil je relevant zijn?</span><input type="text" value={i.voorwie} onChange={(e) => setInv("voorwie", e.target.value)} placeholder="Bijvoorbeeld: familiebedrijven in de regio" /></label>

@@ -4,25 +4,33 @@ Het platform van Thijs Mensink. Lees eerst `CLAUDE.md`, dan `BOUWEN-IN-CODE.md` 
 
 Live: https://uitvinder-platform.netlify.app (Netlify-project `uitvinder-platform`, sinds 15 november 2026 gekoppeld aan het Supabase-project van Merkkit, schema `uitvinder`). Het project is nog niet aan deze repo gekoppeld: de eerste deploy is geüpload. Koppel de repo in Netlify bij Project configuration, Build & deploy, zodat elke push naar `main` vanzelf live gaat.
 
-## Wat er staat (stap 1 van de bouwvolgorde)
+## Wat er staat
 
 | Onderdeel | Stand |
 | --- | --- |
 | Next.js met TypeScript, klaar voor Netlify | Staat. `npm run build` slaagt. |
 | Datamodel met row level security | Staat in `supabase/migrations/0001_datamodel.sql`, in een eigen schema `uitvinder`. Alle tabellen uit `BOUWEN-IN-CODE.md`. |
-| Privacyregel | Getest met 61 tests in `supabase/tests/rls_test.sql`, tegen een lokale Postgres 16. |
-| Login met magic link | Gebouwd, nog niet getest tegen een echt Supabase-project (dat bestaat nog niet). |
+| Privacyregel | Getest met 79 tests in `supabase/tests/rls_test.sql`, tegen een lokale Postgres 16. |
+| Login met magic link | Werkt tegen het gedeelde Supabase-project: Thijs logde in op 15 november 2026. |
 | Schermen Vandaag, Reis, Invalshoek, Ronde (stap 3 tot en met 5) | Overgezet, met de proeftuinen en de coach. In de browser doorlopen in voorbeeldmodus. |
-| De hele leerroute | Rolscan, metingen (week 1, 6, 12), Library, Portfolio met eindopdracht, Beoordelen en Certificaat staan in het platform. In voorbeeldmodus van begin tot eind doorlopen in de browser, met een nagebootst antwoord van de AI-scan. Tegen de echte database nog niet getest, omdat dat een ingelogde gebruiker vraagt. |
+| De hele leerroute | Rolscan, metingen (week 1, 6, 12), Library, Portfolio met eindopdracht, Beoordelen en Certificaat staan in het platform. In voorbeeldmodus van begin tot eind doorlopen in de browser, met een nagebootst antwoord van de AI-scan. Tegen de echte database alleen van buitenaf gecontroleerd (tabellen dicht zonder account); het opslaan met een ingelogd account moet Thijs nog bevestigen. |
 | Welkom en kaart als pdf | "Zo werkt het" bij de eerste keer op Vandaag en op Reis; elke ronde is als experimentkaart af te drukken. |
 | Cockpit en klantdossier | Op `/cockpit` en `/klant/[id]`. Klanten zijn echt (eigen klanten toevoegen, dossier, experimenten per klant). De agents, hun taken en de koppelingen zijn nagebootst met de voorbeeldgegevens uit het prototype; die laad je met één knop en verwijder je weer. Goedkeuren, bijsturen en stoppen vragen een reden, en een goedkeuring maakt een experimentkaart. |
-| Voorkant | Overgezet uit het prototype, met een blok voor ondernemers erbij. Prijzen staan in `lib/prijzen.ts`. De wachtlijst schrijft naar de tabel `waitlist`. De knoppen naar de Rolscan en de tools openen nog het prototype. |
+| Voorkant | Overgezet uit het prototype, met een blok voor ondernemers erbij. Prijzen staan in `lib/prijzen.ts`. De wachtlijst schrijft naar de tabel `waitlist`. De knop Doe de Rolscan opent de gratis scan op `/scan`. |
 | Beeld op de voorkant | Vier foto's in `public/beeld/`: opnames van een fotoshoot met ton-sur-ton sets in perzik, lila, blauw en groen (de kleuren per stap), met fotograaf en crew in beeld. Gegenereerd met Higgsfield, model FLUX 3 (AI, geen echte shoot en geen echte deelnemers). Thijs koos deze richting na GPT Image 2.6 te hebben afgewezen als te glad. |
 | Lessen | Komen uit `content/*.md`. Sinds 15 november 2026 uitgeschreven op hbo-niveau voor stap 1 tot en met 5: leeruitkomst, theorie met bronnen, kernbegrippen, opdracht, beoordeling per rubricniveau, reflectievragen en literatuur. Concept, door Claude geschreven, ter goedkeuring door Thijs. |
 | Studiewijzer | Openbaar op `/studiewijzer`, uit `content/studiewijzer.md`: leeruitkomsten, weekprogramma, toetsing, twee rubrics met vier niveaus, eindopdracht, regels voor AI en bronnen, literatuurlijst. |
 | Gegevens uit het prototype overnemen | Bij de eerste keer inloggen, als er prototype-gegevens op het apparaat staan. |
 | Administratie voor ondernemers (eerste versie) | Potjes, factuur en checklist op `/administratie`. De uitleg in `content/administratie.md` moet Thijs nog schrijven. |
-| AI-functies `scan` en `coach` | Ongewijzigd in `netlify/functions`. |
+| AI-functies `scan` en `coach` | In `netlify/functions`, met een limiet per bezoeker (scan 10 per minuut, coach 30 per minuut). Er is geen login op de functies: de gratis scan moet zonder account werken. |
+| Gratis Rolscan zonder account | Op `/scan`. De uitkomst wacht in de browser en staat na het inloggen klaar bij de Rolscan. Met deelbeeld van 1080 bij 1350 als download. |
+| Proeftuin bij de invalshoek | "Eigen of inwisselbaar?": vijf voorbeelden beoordelen, je combinatie zoeken, je zin toetsen en overnemen. |
+| Bouwen | Op `/bouwen`: de bouwmodule met de spec-bouwer, uit `content/bouwmodule.md`. Bewaart in de tabel `bouwmodule` (derde migratie). |
+| Markt | Op `/markt`, met volglijst en "maak er een ronde van". De trends en zetten zijn de voorbeeldgegevens uit het prototype (`lib/markt.ts`); er draait nog geen dagelijkse scan. Verzonnen voorbeelden, geen marktonderzoek. |
+| De drie tools | `/tool/meta` (advertentie-export lezen, csv of voorbeelddata), `/tool/chrome` (werkwijze met Claude in Chrome) en `/tool/concept` (dertig routes via de AI). Geen van de drie maakt een ronde zonder keuze en reden. |
+| Profiel en openbaar profiel | `/profiel` en `/p/[slug]`. Openbaar pas als je het zelf aanzet, per onderdeel uit te zetten. Vraagt de derde migratie. |
+| Team | `/team`: team maken, leden toevoegen op e-mailadres (het lid moet al een account hebben), percentages en gedeelde kaarten. Alleen tegen de testdatabase getest, niet in de browser: het werkt niet in voorbeeldmodus. Vraagt de derde migratie. |
+| Certificaat controleren | `/controle`: een werkgever vult het nummer in en ziet naam, datum en beoordelaar, verder niets. Vraagt de derde migratie. |
 
 Zonder Supabase-sleutels draait het platform in **voorbeeldmodus**: je gaat zonder mail verder en de gegevens blijven op het apparaat, zoals in het prototype. Zo is elke deploy te bekijken.
 
@@ -34,27 +42,22 @@ Besluit van Thijs (15 november 2026): voor de testfase deelt Uitvinder het Supab
 2. **Supabase, Project Settings, Data API.** Voeg `uitvinder` toe bij Exposed schemas. Zonder dit kan de app de tabellen niet bereiken.
 3. **Supabase, Authentication, URL Configuration.** Voeg `https://uitvinder-platform.netlify.app/auth/callback` toe bij Redirect URLs. Laat de Site URL staan zoals Merkkit hem nodig heeft.
 4. **Netlify.** Zet in het project `uitvinder-platform` bij Environment variables `NEXT_PUBLIC_SUPABASE_URL` en `NEXT_PUBLIC_SUPABASE_ANON_KEY` (Supabase, Project Settings, API: de Project URL en de anon- of publishable key, nooit de service role- of secret key) en deploy opnieuw.
-5. **Tweede migratie.** Plak `supabase/migrations/0002_beoordelen_en_certificaat.sql` in de SQL Editor en voer het één keer uit. Zonder deze stap werkt beoordelen niet; de rest van het platform wel.
+5. **Tweede en derde migratie.** Voer daarna `0002_beoordelen_en_certificaat.sql` en `0003_bouwen_team_profiel.sql` uit, in die volgorde, elk één keer. Zonder 0002 werkt beoordelen niet; zonder 0003 werken Bouwen, Team, het openbare profiel en de certificaatcontrole niet.
 6. **Beheer.** Log één keer in en voeg jezelf dan toe als beheerder in de SQL-editor: `insert into uitvinder.beheerders (user_id) select id from auth.users where email = '<jouw adres>';` Een beheerder ziet het menu Beoordelen en mag ingediende portfolio's beoordelen. Rolscan-antwoorden, invalshoeken en kaarten buiten het portfolio blijven ook voor de beheerder dicht.
 
 De magic links van Supabase zijn zonder eigen mailserver beperkt tot een paar per uur. Voor de lancering is een eigen SMTP-dienst nodig.
 
-## Nog niet overgezet
+## Nog niet gebouwd
 
-Deze schermen wijzen in het platform naar het prototype (`/prototype/index.html`): Markt, Bouwen, de drie tools in de Library, Profiel en Team.
+Alle schermen uit het prototype staan nu in het platform; niets wijst meer naar het prototype. Wat ontbreekt of nagebootst is:
 
-Gevolgen in wat er nu staat:
-
-- De Rolscan vraagt nu een account. De gratis scan zonder account uit fase 1 staat alleen nog in het prototype.
-- Het deelbeeld van de Rolscan (1080x1350 voor LinkedIn) is niet overgezet.
-- Vandaag toont de markt als leeg vak.
-- In de cockpit werkt nog geen echte agent. Volgens de bouwvolgorde is Figma via de MCP-server de eerste echte koppeling.
-- Het klantdossier toont nog geen trends per sector; die komen met de Markt.
-- De proeftuin bij de invalshoek (Eigen of inwisselbaar?) is nog niet overgezet.
-- Een kaart delen met je team werkt in de database, maar er is nog geen scherm om een team te maken of leden uit te nodigen. Daarom beoordeelt in de testfase de beheerder.
-- De tweede beoordelaar (bij een cijfer tussen 5 en 6, en bij één op de tien) wordt gemeld maar niet afgedwongen.
-- Herkansen is beschreven in de studiewijzer, maar er is nog geen knop voor: na vaststelling ligt de inzending vast.
-- Het certificaat is te bewaren als pdf. Er is nog geen openbare pagina waarop een werkgever het nummer kan controleren.
+- **Betalen.** Er is geen betaalmuur en geen koppeling met een betaaldienst. De tabel `subscriptions` bestaat, maar wordt niet gebruikt. Hiervoor moet Thijs een betaaldienst kiezen en sleutels aanleveren.
+- **Echte agents en koppelingen in de cockpit.** De agents, taken en koppelingen zijn voorbeeldgegevens. Volgens de bouwvolgorde is Figma via de MCP-server de eerste echte koppeling.
+- **Dagelijkse marktscan.** De Markt toont vaste voorbeelden. Een echte scan vraagt een geplande functie en een bron voor nieuws en zoekgedrag.
+- **Tweede beoordelaar** (bij een cijfer tussen 5 en 6, en bij één op de tien) wordt gemeld maar niet afgedwongen.
+- **Herkansen** is beschreven in de studiewijzer, maar er is geen knop voor: na vaststelling ligt de inzending vast.
+- **Uitnodigen per mail.** Een teamlid toevoegen kan alleen als die persoon al een account heeft.
+- **Video per stap.** De plek staat in elke les; de video's maakt Thijs nog.
 
 ## Open punten uit deze stap
 
@@ -64,10 +67,9 @@ Gevolgen in wat er nu staat:
   - de rubrics hadden in het prototype twee niveaus per criterium en hebben er nu vier;
   - de fiscale uitleg moet door een boekhouder worden nagelezen;
   - "hbo-niveau" is een ontwerpkeuze, geen erkenning. Laat een onderwijskundige meelezen voordat het zo naar buiten gaat.
-- **Bouwmodule** (`content/bouwmodule.md`) is nog de korte versie; het scherm is nog niet overgezet.
 
 - **Lettertype.** Neue Montreal laadt niet: thijsmensink.nl stuurt geen CORS-header mee, dus de browser valt terug op Inter. Oplossing: één header op thijsmensink.nl, of de fontbestanden in deze repo (let op de licentie).
-- **Rate limit en login op de AI-functies.** `/api/coach` en `/api/scan` zijn nog open voor iedereen die het adres kent, net als in het prototype.
+- **Login op de AI-functies.** `/api/coach` en `/api/scan` hebben een limiet per bezoeker, maar geen login. De limiet is ingesteld volgens de documentatie van Netlify en is niet onder belasting getest.
 - **Regio van de functies.** De Netlify-functies (coach en scan) draaien nu in de VS. Voor "data in de EU" moet de regio in Netlify op Frankfurt.
 - **Oefenmateriaal van de proeftuinen** staat in `lib/proeftuin.ts`, overgenomen uit het prototype. Hoort in stap 2 naar `content/`.
 - **Beoordelaar.** Besloten: een team-eigenaar mag ook beoordelaar zijn. Een beoordelaar ziet de drie portfoliokaarten en de metingen van een deelnemer, ook als die kaarten privé zijn. Rolscan-antwoorden en invalshoek blijven ook dan dicht.
@@ -132,5 +134,7 @@ De privacytests draaien tegen een lege Postgres met het nagebootste auth-schema 
 ```
 psql -d test -f supabase/tests/00_auth_stub.sql
 psql -d test -f supabase/migrations/0001_datamodel.sql
+psql -d test -f supabase/migrations/0002_beoordelen_en_certificaat.sql
+psql -d test -f supabase/migrations/0003_bouwen_team_profiel.sql
 psql -d test -v ON_ERROR_STOP=1 -f supabase/tests/rls_test.sql
 ```

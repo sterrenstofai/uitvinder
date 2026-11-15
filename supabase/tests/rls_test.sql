@@ -241,6 +241,17 @@ reset request.jwt.claim.sub;
 set role anon;
 select tst.verwacht((select count(*) from publieke_verschuiving('daan-deelnemer-7777')) = 0, 'de verschuiving is per onderdeel uit te zetten');
 
+-- Certificaat controleren (0003): alleen naam, datum en beoordelaar van een voldoende, vastgestelde beoordeling.
+reset request.jwt.claim.sub;
+set role anon;
+select tst.verwacht((select naam from controleer_certificaat((select upper(left(id::text, 8)) from (select 1) x, lateral (select '00000000'::text as id) y))) is null, 'een onbekend certificaatnummer geeft niets');
+reset role;
+select set_config('tst.nr', (select upper(left(id::text, 8)) from uitvinder.beoordelingen where deelnemer_id = '77777777-7777-7777-7777-777777777777'), false);
+set role anon;
+select tst.verwacht((select naam from controleer_certificaat(current_setting('tst.nr'))) = 'Daan Deelnemer', 'een geldig certificaatnummer geeft de naam, zonder account');
+select tst.verwacht((select beoordelaar from controleer_certificaat(lower(current_setting('tst.nr')))) = 'Thijs Mensink', 'het nummer mag ook in kleine letters');
+select tst.faalt($q$select cijfer from beoordelingen$q$, 'zonder account zijn de beoordelingen zelf niet te lezen');
+
 -- Het gedeelde project: de tabellen van het andere product in public blijven onaangeroerd.
 set role authenticated;
 set request.jwt.claim.sub = :anna;
