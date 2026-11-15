@@ -9,8 +9,8 @@ Live: https://uitvinder-platform.netlify.app (Netlify-project `uitvinder-platfor
 | Onderdeel | Stand |
 | --- | --- |
 | Next.js met TypeScript, klaar voor Netlify | Staat. `npm run build` slaagt. |
-| Datamodel met row level security | Staat in `supabase/migrations/0001_datamodel.sql`. Alle tabellen uit `BOUWEN-IN-CODE.md`. |
-| Privacyregel | Getest met 39 tests in `supabase/tests/rls_test.sql`, tegen een lokale Postgres 16. |
+| Datamodel met row level security | Staat in `supabase/migrations/0001_datamodel.sql`, in een eigen schema `uitvinder`. Alle tabellen uit `BOUWEN-IN-CODE.md`. |
+| Privacyregel | Getest met 43 tests in `supabase/tests/rls_test.sql`, tegen een lokale Postgres 16. |
 | Login met magic link | Gebouwd, nog niet getest tegen een echt Supabase-project (dat bestaat nog niet). |
 | Schermen Vandaag, Reis, Invalshoek, Ronde (stap 3 tot en met 5) | Overgezet, met de proeftuinen en de coach. In de browser doorlopen in voorbeeldmodus. |
 | Welkom en kaart als pdf | "Zo werkt het" bij de eerste keer op Vandaag en op Reis; elke ronde is als experimentkaart af te drukken. |
@@ -23,10 +23,13 @@ Zonder Supabase-sleutels draait het platform in **voorbeeldmodus**: je gaat zond
 
 ## Koppelen (eenmalig, in de browser)
 
-1. **Supabase.** Maak een project in de regio Frankfurt (EU). Open de SQL-editor, plak `supabase/migrations/0001_datamodel.sql` en voer uit.
-2. **Supabase, Authentication, URL Configuration.** Zet de Site URL op het adres van de Netlify-site en voeg `https://<site>/auth/callback` toe bij Redirect URLs.
-3. **Netlify.** Zet in het project `uitvinder-platform` bij Environment variables `NEXT_PUBLIC_SUPABASE_URL` en `NEXT_PUBLIC_SUPABASE_ANON_KEY` (Supabase, Project Settings, API) en deploy opnieuw. De AI Gateway van Netlify regelt de sleutel voor de AI-functies.
-4. **Beheer.** Log één keer in en voeg jezelf dan toe als beheerder in de SQL-editor: `insert into beheerders (user_id) select id from auth.users where email = '<jouw adres>';`
+Besluit van Thijs (15 november 2026): voor de testfase deelt Uitvinder het Supabase-project van Merkkit (regio eu-west-1, Ierland), omdat het gratis abonnement twee projecten toestaat. Alle tabellen staan daarom in een eigen schema `uitvinder`; het SQL-bestand raakt niets aan in `public`. De login is gedeeld: een account bij Merkkit is hetzelfde account bij Uitvinder, en de inlogmail en de instellingen gelden voor beide. Vóór de lancering krijgt Uitvinder een eigen project; verhuizen kan met een export van het schema.
+
+1. **Supabase, SQL Editor.** Plak `supabase/migrations/0001_datamodel.sql` en voer het één keer uit. Het draait als één geheel: bij een fout wordt er niets aangemaakt.
+2. **Supabase, Project Settings, Data API.** Voeg `uitvinder` toe bij Exposed schemas. Zonder dit kan de app de tabellen niet bereiken.
+3. **Supabase, Authentication, URL Configuration.** Voeg `https://uitvinder-platform.netlify.app/auth/callback` toe bij Redirect URLs. Laat de Site URL staan zoals Merkkit hem nodig heeft.
+4. **Netlify.** Zet in het project `uitvinder-platform` bij Environment variables `NEXT_PUBLIC_SUPABASE_URL` en `NEXT_PUBLIC_SUPABASE_ANON_KEY` (Supabase, Project Settings, API: de Project URL en de anon- of publishable key, nooit de service role- of secret key) en deploy opnieuw.
+5. **Beheer.** Log één keer in en voeg jezelf dan toe als beheerder in de SQL-editor: `insert into uitvinder.beheerders (user_id) select id from auth.users where email = '<jouw adres>';`
 
 De magic links van Supabase zijn zonder eigen mailserver beperkt tot een paar per uur. Voor de lancering is een eigen SMTP-dienst nodig.
 

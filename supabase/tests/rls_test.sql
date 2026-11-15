@@ -1,6 +1,7 @@
 -- Test van de privacyregel en de acceptatietests. Draai na de migratie.
 -- Elke "verwacht" regel geeft een fout als het niet klopt.
 \set ON_ERROR_STOP on
+set search_path = uitvinder;
 \set anna  '''11111111-1111-1111-1111-111111111111'''
 \set bram  '''22222222-2222-2222-2222-222222222222'''
 \set eva   '''33333333-3333-3333-3333-333333333333'''
@@ -152,6 +153,14 @@ select tst.faalt($q$update taken set status = 'goedgekeurd'$q$, 'cockpit: goedke
 update taken set status = 'goedgekeurd', besluit = 'Past bij het signaal van deze week.';
 set request.jwt.claim.sub = :bram;
 select tst.verwacht((select count(*) from taken) = 0, 'taken van een klant buiten je team zie je niet');
+
+-- Het gedeelde project: de tabellen van het andere product in public blijven onaangeroerd.
+set role authenticated;
+set request.jwt.claim.sub = :anna;
+select tst.verwacht((select merkkit_veld from public.profiles) = 'van Merkkit',
+  'public.profiles van het andere product bestaat nog en is leesbaar');
+select tst.verwacht((select count(*) from information_schema.columns where table_schema = 'public' and table_name = 'profiles' and column_name = 'ondernemer') = 0,
+  'er is niets toegevoegd aan tabellen in public');
 
 reset role;
 select 'ALLE TESTS GESLAAGD' as resultaat;

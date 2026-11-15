@@ -24,6 +24,8 @@ export interface Store {
 
 const URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+// Het platform heeft een eigen schema, zodat het een Supabase-project kan delen met een ander product.
+const SCHEMA = process.env.NEXT_PUBLIC_SUPABASE_SCHEMA || "uitvinder";
 
 function fout(error: { message: string } | null) {
   if (error) throw new Error(error.message);
@@ -32,7 +34,8 @@ function fout(error: { message: string } | null) {
 const EXP_KOLOMMEN =
   "id,team_id,auteur,klant,titel,signaal,waarom,hypothese,keuze,bouw,tool,spec,link,meting,uitkomst,geleerd,zichtbaarheid,status,remix_titel,remix_auteur,bron_tool,week,datum";
 
-function supabaseStore(sb: SupabaseClient): Store {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function supabaseStore(sb: SupabaseClient<any, any, any>): Store {
   return {
     modus: "supabase",
     async sessie() {
@@ -193,7 +196,7 @@ export function getStore(): Store {
   if (store) return store;
   store =
     URL && KEY
-      ? supabaseStore(createClient(URL, KEY, { auth: { flowType: "pkce", detectSessionInUrl: true, persistSession: true } }))
+      ? supabaseStore(createClient(URL, KEY, { db: { schema: SCHEMA }, auth: { flowType: "pkce", detectSessionInUrl: true, persistSession: true } }))
       : lokaalStore();
   return store;
 }
