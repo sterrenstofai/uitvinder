@@ -68,6 +68,22 @@ Wat het raakt:
 - **Grens.** Potjes voor btw en inkomstenbelasting uitrekenen is een rekenhulp, geen belastingadvies. Dat moet er zichtbaar bij staan, en de bedragen en percentages moeten uit een bron komen die elk jaar wordt bijgewerkt.
 - **Inhoud.** Uitleg over ondernemen is lesstof en komt dus van Thijs, in `content/`.
 
+## Volgende verbeteringen (vastgelegd op verzoek van Thijs, 15 november 2026)
+
+Uit de vergelijking met Future London Academy. Thijs noemde deze waardevol om te doen; pak ze in deze volgorde op.
+
+1. **De hele reis echt te doorlopen.** Supabase koppelen en de Rolscan en de Library overzetten, zodat één persoon van nulmeting tot afgeronde rondes kan zonder het prototype.
+2. **Per stap een korte video van Thijs.** De plek staat al in elke les ("Uitlegvideo volgt"). Zonder gezicht en stem voelt het platform als software en niet als opleiding.
+3. **Bewijs op de voorkant.** De eerste testgroep bij Sterrenstof laten starten en hun kaarten en hun verschuiving (met toestemming) tonen.
+
+Wat hun lesmodule laat zien en wij nog niet hebben (Mini-MBA, 72 onderdelen, 10,5 uur video, op Thinkific):
+
+- **Vaste opbouw per hoofdstuk:** korte video's, een oefening, een nabespreking van die oefening op video, en één pdf met het kader of de samenvatting om te bewaren.
+- **Een docent per hoofdstuk** met naam en functie, en echte casussen (Uber, Oatly, Amex).
+- **Een begin en een eind:** welkom met uitleg hoe de cursus werkt en kennismaken met medecursisten; afsluiting met wat je nu gaat doen, een feedbackvraag en een certificaat voor LinkedIn.
+
+Wat wij hebben en zij niet: een rubric met menselijke beoordeling, metingen in week 1, 6 en 12, en tools die het werk doen. Dat blijft het onderscheid; neem hun opbouw over, niet hun model.
+
 ## Lokaal draaien en testen
 
 ```
