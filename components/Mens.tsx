@@ -14,8 +14,8 @@ export function Mens() {
     v.play().catch(() => {});
   }, []);
   return (
-    <div className="mens" style={{ aspectRatio: "3 / 2" }}>
-      <video ref={ref} muted loop playsInline preload="metadata" poster="/beeld/maker.jpg" aria-label="Een jonge ontwerper overlegt aan een werktafel in een studio aan de gracht">
+    <div className="mens">
+      <video ref={ref} muted loop playsInline preload="metadata" poster="/beeld/maker.jpg" aria-label="Een jonge maker zit ontspannen op de grond tegen een bank, met een laptop op schoot">
         {HEEFT_VIDEO && <source src="/beeld/maker.mp4" type="video/mp4" />}
       </video>
     </div>
