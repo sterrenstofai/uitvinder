@@ -9,7 +9,7 @@ export function Kop({ nav = true }: { nav?: boolean }) {
   const { data, sessie, modus } = useApp();
   const pad = usePathname();
   const route = pad.split("/")[1] || "";
-  const actief = route === "volgt" ? pad.split("/")[2] : ["ronde", "invalshoek", "rolscan", "meting"].includes(route) ? "reis" : route === "certificaat" ? "portfolio" : route === "klant" ? "cockpit" : route;
+  const actief = route === "volgt" ? pad.split("/")[2] : ["ronde", "invalshoek", "rolscan", "meting"].includes(route) ? "reis" : route === "certificaat" ? "portfolio" : route === "klant" ? "cockpit" : route === "tool" ? "library" : route;
   const naam = data.profile?.naam;
   return (
     <header className="top">
@@ -22,7 +22,7 @@ export function Kop({ nav = true }: { nav?: boolean }) {
         <span className="who">
           {modus === "lokaal" && <span className="proto">Voorbeeldmodus</span>}
           {naam ? (
-            <Link href="/volgt/profiel" className="av-s" aria-label={`Profiel van ${naam}`}>{initials(naam)}</Link>
+            <Link href="/profiel" className="av-s" aria-label={`Profiel van ${naam}`}>{initials(naam)}</Link>
           ) : (
             !sessie && <Link className="btn sm" href="/login">Log in</Link>
           )}

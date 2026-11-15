@@ -109,7 +109,7 @@ export function AdministratieScherm({ inhoud }: { inhoud: AdmInhoud }) {
         {inhoud.inleiding && <div className="md" dangerouslySetInnerHTML={{ __html: inhoud.inleiding }} />}
       </div>
 
-      <div className="tabs" role="tablist" aria-label="Administratie">
+      <div className="admtabs" role="tablist" aria-label="Administratie">
         {TABS.map(([k, t]) => (
           <button key={k} role="tab" aria-selected={tab === k} onClick={() => setTab(k)}>{t}</button>
         ))}

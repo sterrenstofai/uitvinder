@@ -2,5 +2,5 @@
 export const APPNAV: [string, string, boolean][] = [
   ["vandaag", "Vandaag", true], ["cockpit", "Cockpit", true], ["markt", "Markt", true], ["reis", "Reis", true],
   ["bouwen", "Bouwen", true], ["library", "Library", true], ["portfolio", "Portfolio", true],
-  ["profiel", "Profiel", false], ["team", "Team", false],
+  ["profiel", "Profiel", true], ["team", "Team", true],
 ];
