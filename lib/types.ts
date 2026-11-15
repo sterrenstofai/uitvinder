@@ -2,7 +2,9 @@ export const ROLLEN = ["designer", "copywriter", "marketeer", "strateeg", "ander
 export type Rol = (typeof ROLLEN)[number];
 export type Zichtbaarheid = "prive" | "team" | "publiek";
 
-export type Profile = { id: string; naam: string; rol: Rol; agency: string | null; ondernemer: boolean; slug: string | null };
+export type Toon = { inv: boolean; shift: boolean; exps: boolean };
+export type Profile = { id: string; naam: string; rol: Rol; agency: string | null; ondernemer: boolean; slug: string | null; publiek: boolean; toon: Toon };
+export const TOON_STANDAARD: Toon = { inv: true, shift: true, exps: true };
 
 export type Scan = { id: string; datum: string; rol: string | null; uitkomst: unknown; pct_uitvindend: number };
 
@@ -61,6 +63,13 @@ export type Taak = {
 };
 export type Koppeling = { klant_id: string; tool: string; status: string };
 
+export type Bouw = { gedaan: number[]; velden: Record<string, string>; spec: string };
+export type Trend = { id: string; titel: string; bron: string | null; momentum: string | null; sectoren: string[]; uitleg: string; wat_je_kunt_doen: string };
+export type Zet = { id: string; type: string; titel: string; wat: string; waarom: string; uitkomst: string; link: string; trend_id: string | null };
+export type Team = { id: string; naam: string; mijnRol: string };
+export type Lid = { user_id: string; naam: string; rol: string; teamrol: string; nul: number | null; nu: number | null };
+export type PubliekProfiel = { profiel: Pick<Profile, "naam" | "rol" | "agency" | "toon">; zin: string; verschuiving: number[]; kaarten: Exp[] };
+
 export type Data = {
   profile: Profile | null;
   scans: Scan[];
@@ -77,6 +86,12 @@ export type Data = {
   klanten: Klant[];
   taken: Taak[];
   koppelingen: Koppeling[];
+  bouw: Bouw;
+  watch: string[];
+  trends: Trend[];
+  zetten: Zet[];
+  team: Team | null;
+  isBeheer: boolean;
 };
 
 export type Sessie = { id: string; email: string };
@@ -90,4 +105,5 @@ export const leegExp = (): Omit<Exp, "id"> => ({
 export const leegData = (): Data => ({
   profile: null, scans: [], inv: { vak: "", buiten: "", voorwie: "", zin: "" }, versies: [], exps: [], teamIds: [], adm: leegAdm(),
   metingen: [], portfolio: [], eind: { pitch_link: "", reflectie: "", ingediend_op: null }, beoordeling: null, magBeoordelen: false, klanten: [], taken: [], koppelingen: [],
+  bouw: { gedaan: [], velden: {}, spec: "" }, watch: [], trends: [], zetten: [], team: null, isBeheer: false,
 });

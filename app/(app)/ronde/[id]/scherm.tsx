@@ -96,7 +96,7 @@ export function Ronde({ id, lessen }: { id: string; lessen: Record<3 | 4 | 5, Le
           <label className="f"><span>De spec of prompt waarmee je het bouwde</span><small>Hiermee kan een collega je experiment remixen.</small><textarea {...veld("spec")} placeholder="Plak hier je spec" /></label>
           <label className="f"><span>Link naar wat je bouwde</span><input type="url" {...veld("link")} placeholder="https://" /></label>
           <label className="f"><span>Hoe meet je?</span><input type="text" {...veld("meting")} placeholder="Eén getal of één reactie" /></label>
-          <div className="btns"><Link className="btn ghost sm" href="/volgt/bouwen">Hulp bij bouwen</Link></div>
+          <div className="btns"><Link className="btn ghost sm" href="/bouwen">Hulp bij bouwen</Link></div>
           <CoachBox stap="experiment" context={ctx} />
         </div>
       </section>

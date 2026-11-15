@@ -12,7 +12,8 @@ export type Les = {
   rol: Record<string, string>; // html per rol
 };
 
-const BESTAND: Record<number, string> = {
+const BESTAND: Record<number | string, string> = {
+  bouw: "bouwmodule.md",
   1: "stap-1-rolscan.md",
   2: "stap-2-invalshoek.md",
   3: "stap-3-relevantie.md",
@@ -24,7 +25,7 @@ const OVERSLAAN = /^(wat de coach controleert|proeftuin)/i;
 
 const html = (md: string) => marked.parse(md.trim(), { async: false }) as string;
 
-export function leesLes(stap: number): Les {
+export function leesLes(stap: number | string): Les {
   const bestand = BESTAND[stap];
   let md: string;
   try {
@@ -33,7 +34,7 @@ export function leesLes(stap: number): Les {
     return { titel: `Stap ${stap}`, inleiding: "<p>[INHOUD VOLGT]</p>", leestijd: 1, secties: [], rol: {} };
   }
   const [kop, ...delen] = md.split(/^## /m);
-  const titel = (kop.match(/^# (.+)$/m)?.[1] || "").replace(/^Stap \d+\s*[—-]\s*/, "").trim();
+  const titel = (kop.match(/^# (.+)$/m)?.[1] || "").replace(/^(Stap \d+|Bouwmodule)\s*[—-]\s*/, "").trim();
   const les: Les = { titel, inleiding: "", leestijd: 1, secties: [], rol: {} };
   let woorden = 0;
   for (const deel of delen) {
@@ -43,6 +44,7 @@ export function leesLes(stap: number): Les {
     if (OVERSLAAN.test(naam)) continue;
     if (!/^literatuur/i.test(naam)) woorden += tekst.split(/\s+/).filter(Boolean).length;
     if (/^de les/i.test(naam)) les.inleiding = html(tekst);
+    else if (/^de vijf stappen/i.test(naam)) continue; // staan als stappen op het scherm zelf
     else if (/^voorbeeld per rol/i.test(naam)) {
       for (const alinea of tekst.split(/\n\s*\n/)) {
         const m = alinea.trim().match(/^\*\*([^*]+)\*\*\s*([\s\S]+)$/);

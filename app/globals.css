@@ -606,3 +606,5 @@ input[type=date]{width:100%;font:400 1rem/1.45 var(--f);color:var(--ink);backgro
 .cert-n{margin:24px 0 0;color:var(--mid);font-size:.88rem}
 @media (max-width:640px){.cert-v{grid-template-columns:1fr}}
 @media print{@page{size:A4 landscape;margin:12mm}.cert{padding:4mm 6mm;font-size:10.5pt;break-inside:avoid}.cert-l{margin-top:8mm}.cert h2{font-size:34pt}.cert-t{margin-top:4mm;font-size:13pt}.cert-lu{margin-top:6mm}.cert-v{margin-top:7mm;padding-top:4mm}.cert-n{margin-top:5mm}}
+.afvink{display:flex;gap:10px;align-items:center;margin-top:16px;font-weight:500;cursor:pointer}
+.afvink input{width:20px;height:20px;accent-color:var(--ink);flex:none}

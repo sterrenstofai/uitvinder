@@ -3,7 +3,7 @@
 // - Lokaal: voorbeeldmodus zolang er geen Supabase-project gekoppeld is.
 //   Gegevens blijven dan op dit apparaat, net als in het prototype.
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
-import { leegAdm, leegData, leegExp, type Administratie, type Beoordeling, type BeoordelingScores, type Data, type Eind, type Inzending, type Klant, type Koppeling, type Meting, type Taak, type Exp, type Invalshoek, type Profile, type Scan, type Sessie, type Versie } from "./types";
+import { leegAdm, leegData, leegExp, TOON_STANDAARD, type Administratie, type Beoordeling, type BeoordelingScores, type Bouw, type Data, type Lid, type PubliekProfiel, type Team, type Trend, type Zet, type Eind, type Inzending, type Klant, type Koppeling, type Meting, type Taak, type Exp, type Invalshoek, type Profile, type Scan, type Sessie, type Versie } from "./types";
 
 export interface Store {
   modus: "supabase" | "lokaal";
@@ -24,6 +24,20 @@ export interface Store {
   verwijderMeting(week: number): Promise<void>;
   bewaarPortfolio(ids: string[]): Promise<void>;
   bewaarEind(e: Eind): Promise<void>;
+  bewaarBouw(b: Bouw): Promise<void>;
+  bewaarWatch(sectoren: string[]): Promise<void>;
+  nieuweTrend(t: Omit<Trend, "id">): Promise<Trend>;
+  verwijderTrend(id: string): Promise<void>;
+  nieuweZet(z: Omit<Zet, "id">): Promise<Zet>;
+  verwijderZet(id: string): Promise<void>;
+  maakTeam(naam: string): Promise<Team>;
+  teamLeden(team: Team): Promise<Lid[]>;
+  /** Geeft "ok", "geen_account" of "al_lid". */
+  voegLidToe(teamId: string, email: string, rol: "lid" | "beoordelaar"): Promise<string>;
+  verwijderLid(teamId: string, userId: string): Promise<void>;
+  teamKaarten(teamId: string): Promise<Exp[]>;
+  /** Zonder account te lezen, als het profiel openbaar is. */
+  publiekProfiel(slug: string): Promise<PubliekProfiel | null>;
   nieuweKlant(k: Omit<Klant, "id">): Promise<Klant>;
   verwijderKlant(id: string): Promise<void>;
   nieuweTaken(t: Omit<Taak, "id">[]): Promise<Taak[]>;
@@ -69,8 +83,8 @@ function supabaseStore(sb: SupabaseClient<any, any, any>): Store {
       await sb.auth.signOut();
     },
     async laad(uid) {
-      const [p, s, i, v, e, m, a, mt, pf, ei, bo, bh, kl, tk, kp] = await Promise.all([
-        sb.from("profiles").select("id,naam,rol,agency,ondernemer,slug").eq("id", uid).maybeSingle(),
+      const [p, s, i, v, e, m, a, mt, pf, ei, bo, bh, kl, tk, kp, bw, wl, tr, zt] = await Promise.all([
+        sb.from("profiles").select(PROFIEL_KOLOMMEN).eq("id", uid).maybeSingle(),
         sb.from("scans").select("id,datum,rol,uitkomst,pct_uitvindend").eq("user_id", uid).order("datum").order("aangemaakt_op"),
         sb.from("invalshoeken").select("vak,buiten,voorwie,zin").eq("user_id", uid).maybeSingle(),
         sb.from("invalshoek_versies").select("id,zin,datum,week").eq("user_id", uid).order("datum"),
@@ -85,12 +99,23 @@ function supabaseStore(sb: SupabaseClient<any, any, any>): Store {
         sb.from("klanten").select(KLANT_KOLOMMEN).order("aangemaakt_op"),
         sb.from("taken").select(TAAK_KOLOMMEN).order("aangemaakt_op"),
         sb.from("koppelingen").select("klant_id,tool,status"),
+        sb.from("bouwmodule").select("gedaan,velden,spec").eq("user_id", uid).maybeSingle(),
+        sb.from("watchlist").select("sectoren").eq("user_id", uid).maybeSingle(),
+        sb.from("trends").select(TREND_KOLOMMEN).order("datum", { ascending: false }),
+        sb.from("zetten").select(ZET_KOLOMMEN).order("datum", { ascending: false }),
       ]);
       // De tabellen voor beoordelen komen uit de tweede migratie. Is die nog niet
       // uitgevoerd, dan werkt de rest van het platform gewoon door.
-      [p, s, i, v, e, m, a, mt, pf, ei, kl, tk, kp].forEach((r) => fout(r.error));
+      [p, s, i, v, e, m, a, mt, pf, ei, kl, tk, kp, wl, tr, zt].forEach((r) => fout(r.error));
+      // Het team van de gebruiker: het eerste lidmaatschap.
+      let team: Team | null = null;
+      const lidVan = (m.data ?? [])[0];
+      if (lidVan) {
+        const t = await sb.from("teams").select("id,naam").eq("id", lidVan.team_id).maybeSingle();
+        if (t.data) team = { id: t.data.id as string, naam: t.data.naam as string, mijnRol: lidVan.rol as string };
+      }
       return {
-        profile: (p.data as Profile) ?? null,
+        profile: p.data ? { ...(p.data as Profile), toon: { ...TOON_STANDAARD, ...((p.data as Profile).toon || {}) } } : null,
         scans: ((s.data as Scan[]) ?? []).map((x) => ({ ...x, pct_uitvindend: Number(x.pct_uitvindend) })),
         inv: (i.data as Invalshoek) ?? leegData().inv,
         versies: (v.data as Versie[]) ?? [],
@@ -107,6 +132,13 @@ function supabaseStore(sb: SupabaseClient<any, any, any>): Store {
         klanten: (kl.data as Klant[]) ?? [],
         taken: ((tk.data as Taak[]) ?? []).map(taakUit),
         koppelingen: (kp.data as Koppeling[]) ?? [],
+        // De bouwmodule komt uit de derde migratie. Bestaat die tabel nog niet, dan begint hij leeg.
+        bouw: bw.error || !bw.data ? leegData().bouw : (bw.data as Bouw),
+        watch: (wl.data?.sectoren as string[]) ?? [],
+        trends: (tr.data as Trend[]) ?? [],
+        zetten: (zt.data as Zet[]) ?? [],
+        team,
+        isBeheer: bh.data === true,
       };
     },
     async bewaarProfiel(p) {
@@ -153,6 +185,82 @@ function supabaseStore(sb: SupabaseClient<any, any, any>): Store {
     async bewaarEind(e) {
       const uid = (await sb.auth.getUser()).data.user?.id;
       fout((await sb.from("eindopdrachten").upsert({ user_id: uid, ...e })).error);
+    },
+    async bewaarBouw(b) {
+      const uid = (await sb.auth.getUser()).data.user?.id;
+      fout((await sb.from("bouwmodule").upsert({ user_id: uid, ...b, bijgewerkt_op: new Date().toISOString() })).error);
+    },
+    async bewaarWatch(sectoren) {
+      const uid = (await sb.auth.getUser()).data.user?.id;
+      fout((await sb.from("watchlist").upsert({ user_id: uid, sectoren })).error);
+    },
+    async nieuweTrend(t) {
+      const r = await sb.from("trends").insert(t).select(TREND_KOLOMMEN).single();
+      fout(r.error);
+      return r.data as Trend;
+    },
+    async verwijderTrend(tid) {
+      fout((await sb.from("trends").delete().eq("id", tid)).error);
+    },
+    async nieuweZet(z) {
+      const r = await sb.from("zetten").insert(z).select(ZET_KOLOMMEN).single();
+      fout(r.error);
+      return r.data as Zet;
+    },
+    async verwijderZet(zid) {
+      fout((await sb.from("zetten").delete().eq("id", zid)).error);
+    },
+    async maakTeam(naam) {
+      const r = await sb.from("teams").insert({ naam }).select("id,naam").single();
+      fout(r.error);
+      return { id: r.data!.id as string, naam: r.data!.naam as string, mijnRol: "eigenaar" };
+    },
+    async teamLeden(team) {
+      const m = await sb.from("memberships").select("user_id,rol").eq("team_id", team.id);
+      fout(m.error);
+      const ids = (m.data ?? []).map((x) => x.user_id as string);
+      const pr = await sb.from("profiles").select("id,naam,rol").in("id", ids);
+      fout(pr.error);
+      // Alleen de eigenaar krijgt percentages, en nooit meer dan dat.
+      const pc = team.mijnRol === "eigenaar" ? await sb.rpc("team_percentages", { t: team.id }) : { data: [] as { user_id: string; nulmeting: number | null; laatste: number | null }[] };
+      return (m.data ?? []).map((x) => {
+        const p = (pr.data ?? []).find((y) => y.id === x.user_id);
+        const c = ((pc.data ?? []) as { user_id: string; nulmeting: number | null; laatste: number | null }[]).find((y) => y.user_id === x.user_id);
+        return {
+          user_id: x.user_id as string, naam: (p?.naam as string) || "Nog geen profiel", rol: (p?.rol as string) || "", teamrol: x.rol as string,
+          nul: c?.nulmeting == null ? null : Number(c.nulmeting), nu: c?.laatste == null ? null : Number(c.laatste),
+        };
+      });
+    },
+    async voegLidToe(teamId, email, rol) {
+      const r = await sb.rpc("voeg_lid_toe", { t: teamId, adres: email, r: rol });
+      fout(r.error);
+      return r.data as string;
+    },
+    async verwijderLid(teamId, userId) {
+      fout((await sb.from("memberships").delete().eq("team_id", teamId).eq("user_id", userId)).error);
+    },
+    async teamKaarten(teamId) {
+      const uid = (await sb.auth.getUser()).data.user?.id;
+      const r = await sb.from("experiments").select(EXP_KOLOMMEN).eq("team_id", teamId).eq("zichtbaarheid", "team").neq("user_id", uid).order("aangemaakt_op", { ascending: false });
+      fout(r.error);
+      return (r.data as unknown as Exp[]) ?? [];
+    },
+    async publiekProfiel(slug) {
+      const p = await sb.from("profiles").select("id,naam,rol,agency,publiek,toon").eq("slug", slug).eq("publiek", true).maybeSingle();
+      if (p.error || !p.data) return null;
+      const toon = { ...TOON_STANDAARD, ...((p.data.toon as object) || {}) };
+      const [iv, sh, ex] = await Promise.all([
+        toon.inv ? sb.from("invalshoeken").select("zin").eq("user_id", p.data.id).maybeSingle() : Promise.resolve({ data: null }),
+        toon.shift ? sb.rpc("publieke_verschuiving", { s: slug }) : Promise.resolve({ data: [] }),
+        toon.exps ? sb.from("experiments").select(EXP_KOLOMMEN).eq("user_id", p.data.id).eq("zichtbaarheid", "publiek").eq("status", "af").order("aangemaakt_op", { ascending: false }) : Promise.resolve({ data: [] }),
+      ]);
+      return {
+        profiel: { naam: p.data.naam as string, rol: p.data.rol as Profile["rol"], agency: p.data.agency as string | null, toon },
+        zin: ((iv.data as { zin?: string } | null)?.zin as string) || "",
+        verschuiving: (((sh.data as { pct: number }[] | null) ?? []) as { pct: number }[]).map((x) => Number(x.pct)),
+        kaarten: ((ex.data as unknown as Exp[]) ?? []),
+      };
     },
     async nieuweKlant(k) {
       const r = await sb.from("klanten").insert(k).select(KLANT_KOLOMMEN).single();
@@ -221,6 +329,9 @@ function supabaseStore(sb: SupabaseClient<any, any, any>): Store {
   };
 }
 
+const PROFIEL_KOLOMMEN = "id,naam,rol,agency,ondernemer,slug,publiek,toon";
+const TREND_KOLOMMEN = "id,titel,bron,momentum,sectoren,uitleg,wat_je_kunt_doen";
+const ZET_KOLOMMEN = "id,type,titel,wat,waarom,uitkomst,link,trend_id";
 const KLANT_KOLOMMEN = "id,naam,sector,merk,doelgroep,kanalen";
 const TAAK_KOLOMMEN = "id,klant_id,agent,tool,titel,aanleiding,opties,uren,status,besluit,historie";
 const taakUit = (t: Taak): Taak => ({ ...t, uren: t.uren === null ? null : Number(t.uren), opties: t.opties ?? [], historie: t.historie ?? [] });
@@ -322,6 +433,34 @@ function lokaalStore(): Store {
     },
     async bewaarEind(e) {
       muteer((d) => void (d.eind = e));
+    },
+    async bewaarBouw(b) {
+      muteer((d) => void (d.bouw = b));
+    },
+    async bewaarWatch(sectoren) {
+      muteer((d) => void (d.watch = sectoren));
+    },
+    // In voorbeeldmodus zijn er geen eigen trends, geen team en geen beheerder.
+    async nieuweTrend() { throw new Error("Niet beschikbaar in voorbeeldmodus."); },
+    async verwijderTrend() {},
+    async nieuweZet() { throw new Error("Niet beschikbaar in voorbeeldmodus."); },
+    async verwijderZet() {},
+    async maakTeam() { throw new Error("In voorbeeldmodus is er geen team."); },
+    async teamLeden() { return []; },
+    async voegLidToe() { throw new Error("In voorbeeldmodus is er geen team."); },
+    async verwijderLid() {},
+    async teamKaarten() { return []; },
+    async publiekProfiel(slug) {
+      const d = { ...leegData(), ...lees().data };
+      const p = d.profile;
+      if (!p || p.slug !== slug || !p.publiek) return null;
+      const toon = { ...TOON_STANDAARD, ...(p.toon || {}) };
+      return {
+        profiel: { naam: p.naam, rol: p.rol, agency: p.agency, toon },
+        zin: toon.inv ? d.inv.zin : "",
+        verschuiving: toon.shift ? d.scans.map((s) => s.pct_uitvindend) : [],
+        kaarten: toon.exps ? d.exps.filter((e) => e.zichtbaarheid === "publiek" && e.status === "af") : [],
+      };
     },
     async nieuweKlant(k) {
       const n = { ...k, id: id() };

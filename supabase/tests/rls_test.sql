@@ -201,6 +201,46 @@ select tst.verwacht((select beoordelaar_naam from beoordelingen) = 'Thijs Mensin
 update beoordelingen set cijfer = 10;
 select tst.verwacht((select cijfer from beoordelingen) = 7.2, 'inzender kan het eigen cijfer niet wijzigen');
 
+-- Teams, bouwmodule en openbaar profiel (0003).
+reset role;
+update auth.users set email = 'daan@example.com' where id = '77777777-7777-7777-7777-777777777777';
+update auth.users set email = 'bram@example.com' where id = '22222222-2222-2222-2222-222222222222';
+set role authenticated;
+set request.jwt.claim.sub = '22222222-2222-2222-2222-222222222222';
+select tst.faalt($q$select voeg_lid_toe('aaaaaaaa-0000-0000-0000-000000000000', 'daan@example.com')$q$, 'een gewoon lid kan niemand op e-mailadres toevoegen');
+set request.jwt.claim.sub = '33333333-3333-3333-3333-333333333333';
+select tst.verwacht(voeg_lid_toe('aaaaaaaa-0000-0000-0000-000000000000', 'niemand@example.com') = 'geen_account', 'een onbekend adres geeft geen_account');
+select tst.verwacht(voeg_lid_toe('aaaaaaaa-0000-0000-0000-000000000000', ' Daan@Example.com ') = 'ok', 'de eigenaar voegt een lid toe op e-mailadres');
+select tst.verwacht(voeg_lid_toe('aaaaaaaa-0000-0000-0000-000000000000', 'daan@example.com') = 'al_lid', 'twee keer toevoegen geeft al_lid');
+select tst.faalt($q$select voeg_lid_toe('aaaaaaaa-0000-0000-0000-000000000000', 'bram@example.com', 'eigenaar')$q$, 'via deze weg kan niemand eigenaar worden');
+select tst.verwacht((select count(*) from memberships where team_id = 'aaaaaaaa-0000-0000-0000-000000000000') = 5, 'het team heeft nu vijf leden');
+set request.jwt.claim.sub = '77777777-7777-7777-7777-777777777777';
+insert into bouwmodule (gedaan, spec) values ('{0,1}', 'Doel: ...');
+set request.jwt.claim.sub = '33333333-3333-3333-3333-333333333333';
+select tst.verwacht((select count(*) from bouwmodule) = 0, 'de eigenaar ziet de bouwmodule van een lid niet');
+select tst.verwacht((select count(*) from scans) = 0, 'de eigenaar ziet ook van het nieuwe lid geen rolscan-antwoorden');
+select tst.verwacht((select nulmeting from team_percentages('aaaaaaaa-0000-0000-0000-000000000000') where user_id = '77777777-7777-7777-7777-777777777777') = 20, 'de eigenaar ziet wel het percentage van het nieuwe lid');
+-- openbaar profiel
+set request.jwt.claim.sub = '77777777-7777-7777-7777-777777777777';
+update profiles set slug = 'daan-deelnemer-7777' where id = '77777777-7777-7777-7777-777777777777';
+reset request.jwt.claim.sub;
+set role anon;
+select tst.verwacht((select count(*) from publieke_verschuiving('daan-deelnemer-7777')) = 0, 'een besloten profiel toont geen verschuiving');
+set role authenticated;
+set request.jwt.claim.sub = '77777777-7777-7777-7777-777777777777';
+update profiles set publiek = true where id = '77777777-7777-7777-7777-777777777777';
+reset request.jwt.claim.sub;
+set role anon;
+select tst.verwacht((select pct from publieke_verschuiving('daan-deelnemer-7777')) = 20, 'een openbaar profiel toont de verschuiving als percentage');
+select tst.verwacht((select naam from profiles where slug = 'daan-deelnemer-7777') = 'Daan Deelnemer', 'een openbaar profiel is zonder account te lezen');
+select tst.faalt($q$select voeg_lid_toe('aaaaaaaa-0000-0000-0000-000000000000', 'bram@example.com')$q$, 'zonder account kan niemand leden toevoegen');
+set role authenticated;
+set request.jwt.claim.sub = '77777777-7777-7777-7777-777777777777';
+update profiles set toon = toon || '{"shift": false}' where id = '77777777-7777-7777-7777-777777777777';
+reset request.jwt.claim.sub;
+set role anon;
+select tst.verwacht((select count(*) from publieke_verschuiving('daan-deelnemer-7777')) = 0, 'de verschuiving is per onderdeel uit te zetten');
+
 -- Het gedeelde project: de tabellen van het andere product in public blijven onaangeroerd.
 set role authenticated;
 set request.jwt.claim.sub = :anna;

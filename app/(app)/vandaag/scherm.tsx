@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useApp } from "@/components/app";
+import { markt, voorMij } from "@/lib/markt";
 import { Cover } from "@/components/Cover";
 import { Kaart } from "@/components/Kaart";
 import { afgerond, curExp, expTitel, laatste, METINGWEKEN, nul, weekNr } from "@/lib/afgeleid";
@@ -35,6 +36,7 @@ export function Vandaag({ zoWerktHet }: { zoWerktHet: string | null }) {
   const mine = [...data.exps].reverse().slice(0, 3);
   const naam = data.profile?.naam || "";
   const wacht = data.taken.filter((t) => t.status === "klaar").length;
+  const mk = markt(data), tr = voorMij(mk.trends, data.watch);
   return (
     <main className="wrap wide">
       <section className="dash-h">
@@ -47,7 +49,7 @@ export function Vandaag({ zoWerktHet }: { zoWerktHet: string | null }) {
         <div className="kpi">
           <div><span>Uitvinder nu</span><b>{l ? Math.round(l.pct_uitvindend) : "–"}%</b></div>
           <div><span>Rondes af</span><b>{af}/10</b></div>
-          <div><span>Lopend</span><b>{data.exps.length - af}</b></div>
+          <div><span>Trends voor jou</span><b>{tr.length}</b></div>
         </div>
       </section>
       {welkom && zoWerktHet && (
@@ -93,8 +95,18 @@ export function Vandaag({ zoWerktHet }: { zoWerktHet: string | null }) {
               </>
             )}
           </Link>
-          <div className="grp"><span>Deze week in de markt</span><Link href="/volgt/markt" className="hint">Naar de markt</Link></div>
-          <div className="empty" style={{ marginTop: 10 }}>De markt is nog niet overgezet.</div>
+          <div className="grp"><span>Deze week in de markt</span><Link href="/markt" className="hint">Naar de markt</Link></div>
+          {tr.slice(0, 3).map((t) => {
+            const m = mk.zetten.find((x) => x.trend_id === t.id);
+            return (
+              <div key={t.id} className="tmini">
+                <span className="mom" style={{ justifySelf: "start" }}>{t.momentum}</span>
+                <b>{t.titel}</b>
+                {m && <span className="hint">Thijs deed hier iets mee: {m.titel}</span>}
+              </div>
+            );
+          })}
+          {!tr.length && <div className="empty" style={{ marginTop: 10 }}>Geen trends voor jouw sectoren.</div>}
           {data.profile?.ondernemer && (
             <>
               <div className="grp"><span>Je administratie</span><Link href="/administratie" className="hint">Naar je administratie</Link></div>

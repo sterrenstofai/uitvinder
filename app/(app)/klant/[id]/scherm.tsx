@@ -5,6 +5,7 @@ import { useApp } from "@/components/app";
 import { Cover } from "@/components/Cover";
 import { Kaart } from "@/components/Kaart";
 import { STATUSNAAM, TOOLNAMEN, VOORBEELDNAMEN } from "@/lib/cockpit";
+import { markt } from "@/lib/markt";
 
 export function Klantdossier({ id }: { id: string }) {
   const { data, nieuwExp, verwijderKlant, toast } = useApp();
@@ -20,6 +21,16 @@ export function Klantdossier({ id }: { id: string }) {
   const taken = data.taken.filter((t) => t.klant_id === id);
   const exps = data.exps.filter((e) => e.klant.trim().toLowerCase() === k.naam.toLowerCase());
   const actief = (tool: string) => data.koppelingen.some((x) => x.klant_id === id && x.tool === tool && x.status === "actief");
+  const tr = markt(data).trends.filter((t) => k.sector && t.sectoren.includes(k.sector));
+  async function signaal(tekst: string) {
+    try {
+      const e = await nieuwExp({ klant: k!.naam, signaal: tekst });
+      toast("Signaal in een nieuwe ronde gezet");
+      router.push(`/ronde/${e.id}`);
+    } catch {
+      toast("Dat lukte niet.");
+    }
+  }
   async function ronde() {
     try {
       const e = await nieuwExp({ klant: k!.naam });
@@ -75,6 +86,19 @@ export function Klantdossier({ id }: { id: string }) {
           </div>
         </div>
         <div>
+          {k.sector && (
+            <>
+              <div className="grp"><span>Trends voor {k.sector.toLowerCase()}</span><Link href="/markt" className="hint">Markt</Link></div>
+              {tr.slice(0, 4).map((t) => (
+                <div key={t.id} className="tmini">
+                  <span className="mom" style={{ justifySelf: "start" }}>{t.momentum}</span>
+                  <b>{t.titel}</b><span className="hint">{t.wat_je_kunt_doen}</span>
+                  <div className="btns"><button className="btn ghost sm" onClick={() => signaal(`${t.titel}. ${t.uitleg}`)}>Maak er een signaal van</button></div>
+                </div>
+              ))}
+              {!tr.length && <p className="hint">Geen trends voor deze sector.</p>}
+            </>
+          )}
           <div className="grp"><span>Koppelingen</span></div>
           <div className="kop">{TOOLNAMEN.map((n) => <div key={n}><span>{n}</span><span className={`tag ${actief(n) ? "on" : "off"}`}>{actief(n) ? "Gekoppeld" : "Niet gekoppeld"}</span></div>)}</div>
           <p className="hint" style={{ marginTop: 8 }}>Nagebootst: er wordt nog niets echt gekoppeld.</p>

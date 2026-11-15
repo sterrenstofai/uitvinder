@@ -1,7 +1,7 @@
 "use client";
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { getStore, heeftSupabase, type Store } from "@/lib/store";
-import { leegData, leegExp, ROLLEN, type Administratie, type BeoordelingScores, type Data, type Eind, type Inzending, type Klant, type Meting, type Scan, type Taak, type Exp, type Invalshoek, type Profile, type Rol, type Sessie } from "@/lib/types";
+import { leegData, leegExp, ROLLEN, TOON_STANDAARD, type Bouw, type Lid, type PubliekProfiel, type Team, type Trend, type Zet, type Administratie, type BeoordelingScores, type Data, type Eind, type Inzending, type Klant, type Meting, type Scan, type Taak, type Exp, type Invalshoek, type Profile, type Rol, type Sessie } from "@/lib/types";
 import { slugify, vandaagISO, weekNr } from "@/lib/afgeleid";
 import { VOORBEELDKLANTEN, VOORBEELDNAMEN, VOORBEELDTAKEN } from "@/lib/cockpit";
 
@@ -29,6 +29,19 @@ type App = {
   setPortfolio(ids: string[]): Promise<void>;
   setEind(patch: Partial<Eind>): void;
   dienIn(): Promise<void>;
+  setProfiel(patch: Partial<Profile>): Promise<void>;
+  setBouw(patch: Partial<Bouw>): void;
+  setWatch(sectoren: string[]): Promise<void>;
+  nieuweTrend(t: Omit<Trend, "id">): Promise<void>;
+  verwijderTrend(id: string): Promise<void>;
+  nieuweZet(z: Omit<Zet, "id">): Promise<void>;
+  verwijderZet(id: string): Promise<void>;
+  maakTeam(naam: string): Promise<void>;
+  teamLeden(): Promise<Lid[]>;
+  voegLidToe(email: string, rol: "lid" | "beoordelaar"): Promise<string>;
+  verwijderLid(userId: string): Promise<void>;
+  teamKaarten(): Promise<Exp[]>;
+  publiekProfiel(slug: string): Promise<PubliekProfiel | null>;
   laadVoorbeeldklanten(): Promise<void>;
   verwijderVoorbeeldklanten(): Promise<void>;
   nieuweKlant(k: Omit<Klant, "id">): Promise<Klant>;
@@ -143,7 +156,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
     },
     async bewaarProfiel(naam, rol, ondernemer) {
       if (!sessie) return;
-      const p: Profile = { id: sessie.id, naam: naam.trim(), rol, agency: data.profile?.agency ?? null, ondernemer, slug: slugify(naam) + "-" + sessie.id.slice(0, 4) };
+      const p: Profile = {
+        id: sessie.id, naam: naam.trim(), rol, agency: data.profile?.agency ?? null, ondernemer, slug: slugify(naam) + "-" + sessie.id.slice(0, 4),
+        publiek: data.profile?.publiek ?? false, toon: data.profile?.toon ?? TOON_STANDAARD,
+      };
       await store!.bewaarProfiel(p);
       setData((d) => ({ ...d, profile: p }));
     },
@@ -238,6 +254,46 @@ export function AppProvider({ children }: { children: ReactNode }) {
       await store!.bewaarEind(e);
       setData((d) => ({ ...d, eind: e }));
     },
+    async setProfiel(patch) {
+      if (!data.profile) return;
+      const p = { ...data.profile, ...patch };
+      if (patch.naam !== undefined) p.slug = slugify(p.naam) + "-" + p.id.slice(0, 4);
+      setData((d) => ({ ...d, profile: p }));
+      plan("profiel", () => store!.bewaarProfiel(dataRef.current.profile!));
+    },
+    setBouw(patch) {
+      setData((d) => ({ ...d, bouw: { ...d.bouw, ...patch } }));
+      plan("bouw", () => store!.bewaarBouw(dataRef.current.bouw));
+    },
+    async setWatch(sectoren) {
+      setData((d) => ({ ...d, watch: sectoren }));
+      await store!.bewaarWatch(sectoren);
+    },
+    async nieuweTrend(t) {
+      const n = await store!.nieuweTrend(t);
+      setData((d) => ({ ...d, trends: [n, ...d.trends] }));
+    },
+    async verwijderTrend(tid) {
+      await store!.verwijderTrend(tid);
+      setData((d) => ({ ...d, trends: d.trends.filter((x) => x.id !== tid) }));
+    },
+    async nieuweZet(z) {
+      const n = await store!.nieuweZet(z);
+      setData((d) => ({ ...d, zetten: [n, ...d.zetten] }));
+    },
+    async verwijderZet(zid) {
+      await store!.verwijderZet(zid);
+      setData((d) => ({ ...d, zetten: d.zetten.filter((x) => x.id !== zid) }));
+    },
+    async maakTeam(naam) {
+      const t = await store!.maakTeam(naam.trim());
+      setData((d) => ({ ...d, team: t, teamIds: [t.id, ...d.teamIds] }));
+    },
+    teamLeden: () => (data.team ? store!.teamLeden(data.team) : Promise.resolve([])),
+    voegLidToe: (email, rol) => store!.voegLidToe(data.team!.id, email.trim(), rol),
+    verwijderLid: (userId) => store!.verwijderLid(data.team!.id, userId),
+    teamKaarten: () => (data.team ? store!.teamKaarten(data.team.id) : Promise.resolve([])),
+    publiekProfiel: (slug) => store!.publiekProfiel(slug),
     async laadVoorbeeldklanten() {
       const nieuw: Klant[] = [];
       for (const v of VOORBEELDKLANTEN) {
