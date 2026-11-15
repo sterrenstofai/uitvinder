@@ -13,6 +13,11 @@ type Uitkomst = {
   experiment?: { signaal?: string; hypothese?: string; bouw?: string; meten?: string }; kort?: string; afsluiting?: string;
 };
 
+const vastLabel = (l: string) => {
+  const s = String(l || "").toLowerCase().trim();
+  return s.startsWith("uitvo") ? "uitvoerend" : s.startsWith("ov") ? "overig" : s.startsWith("ui") ? "uitvindend" : "overig";
+};
+
 export default function Rolscan() {
   const { data, nieuweScan, nieuwExp, toast } = useApp();
   const router = useRouter();
@@ -114,13 +119,16 @@ export default function Rolscan() {
           </div>
           <div className="grp"><span>Je week</span><span>{(r.taken || []).length} taken</span></div>
           <ul className="list">
-            {(r.taken || []).map((t, i) => (
+            {(r.taken || []).map((t0, i) => {
+              const t = { ...t0, label: vastLabel(t0.label) };
+              return (
               <li key={i} className="row">
                 <span className="nm">{t.taak}{t.uren ? <> <span className="hint">{t.uren} u</span></> : null}</span>
                 <span className={`tag ${t.label === "uitvindend" ? "ui" : t.label === "overig" ? "ov" : "uv"}`}>{t.label}</span>
                 <span className="why">{t.waarom}</span>
               </li>
-            ))}
+              );
+            })}
           </ul>
           <div className="exp">
             <span className="k">Je experiment voor volgende week</span>

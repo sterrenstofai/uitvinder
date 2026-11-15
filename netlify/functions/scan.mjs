@@ -28,6 +28,14 @@ Antwoord ALLEEN met geldige JSON, zonder uitleg of codeblok, in dit formaat:
 "kort":"één regel van max 70 tekens die samenvat wat je volgende week test",
 "afsluiting":"één zin"}`;
 
+const vastLabel = (l) => {
+  const s = String(l || "").toLowerCase().trim();
+  if (s.startsWith("uitvo")) return "uitvoerend";
+  if (s.startsWith("ov")) return "overig";
+  if (s.startsWith("ui")) return "uitvindend";
+  return "overig";
+};
+
 export default async (req) => {
   if (req.method !== "POST") return Response.json({ error: "Gebruik POST." }, { status: 405 });
   let body;
@@ -47,6 +55,8 @@ export default async (req) => {
     });
     const text = msg.content.filter(b => b.type === "text").map(b => b.text).join("").replace(/```json|```/g, "").trim();
     const data = JSON.parse(text.slice(text.indexOf("{"), text.lastIndexOf("}") + 1));
+    // De AI schrijft een label soms verkeerd ("uindend"). Alleen de drie vaste labels gaan door.
+    if (Array.isArray(data.taken)) for (const t of data.taken) t.label = vastLabel(t.label);
     return Response.json(data);
   } catch (e) {
     return Response.json({ error: "De scan lukte niet. Probeer het opnieuw." }, { status: 500 });
