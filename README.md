@@ -14,6 +14,7 @@ Live: https://uitvinder-platform.netlify.app (Netlify-project `uitvinder-platfor
 | Login met magic link | Gebouwd, nog niet getest tegen een echt Supabase-project (dat bestaat nog niet). |
 | Schermen Vandaag, Reis, Invalshoek, Ronde (stap 3 tot en met 5) | Overgezet, met de proeftuinen en de coach. In de browser doorlopen in voorbeeldmodus. |
 | Welkom en kaart als pdf | "Zo werkt het" bij de eerste keer op Vandaag en op Reis; elke ronde is als experimentkaart af te drukken. |
+| Voorkant | Overgezet uit het prototype, met een blok voor ondernemers erbij. Prijzen staan in `lib/prijzen.ts`. De wachtlijst schrijft naar de tabel `waitlist`. De knoppen naar de Rolscan en de tools openen nog het prototype. |
 | Lessen | Komen uit `content/*.md`. Het `LES`-object uit het prototype is niet overgenomen. |
 | Gegevens uit het prototype overnemen | Bij de eerste keer inloggen, als er prototype-gegevens op het apparaat staan. |
 | Administratie voor ondernemers (eerste versie) | Potjes, factuur en checklist op `/administratie`. De uitleg in `content/administratie.md` moet Thijs nog schrijven. |
@@ -35,7 +36,7 @@ De magic links van Supabase zijn zonder eigen mailserver beperkt tot een paar pe
 
 ## Nog niet overgezet
 
-Deze schermen wijzen in het platform naar het prototype (`/prototype/index.html`): voorkant, Rolscan, metingen, Cockpit, Klantdossier, Markt, Bouwen, Library met de drie tools, Portfolio, Beoordeling, Profiel en Team.
+Deze schermen wijzen in het platform naar het prototype (`/prototype/index.html`): Rolscan, metingen, Cockpit, Klantdossier, Markt, Bouwen, Library met de drie tools, Portfolio, Beoordeling, Profiel en Team.
 
 Gevolgen in wat er nu staat:
 

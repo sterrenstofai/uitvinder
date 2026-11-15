@@ -20,6 +20,8 @@ export interface Store {
   nieuwExp(e: Omit<Exp, "id">): Promise<Exp>;
   wijzigExp(id: string, patch: Partial<Exp>): Promise<void>;
   verwijderExp(id: string): Promise<void>;
+  /** Wachtlijst op de voorkant. Kan zonder account. */
+  wachtlijst(email: string): Promise<void>;
 }
 
 const URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -107,6 +109,11 @@ function supabaseStore(sb: SupabaseClient<any, any, any>): Store {
     async verwijderExp(id) {
       fout((await sb.from("experiments").delete().eq("id", id)).error);
     },
+    async wachtlijst(email) {
+      const { error } = await sb.from("waitlist").insert({ email });
+      // 23505: dit adres staat er al op. Voor de bezoeker is dat hetzelfde als gelukt.
+      if (error && error.code !== "23505") throw new Error(error.message);
+    },
   };
 }
 
@@ -187,6 +194,9 @@ function lokaalStore(): Store {
     },
     async verwijderExp(eid) {
       muteer((d) => void (d.exps = d.exps.filter((x) => x.id !== eid)));
+    },
+    async wachtlijst() {
+      throw new Error("In voorbeeldmodus is er geen wachtlijst.");
     },
   };
 }

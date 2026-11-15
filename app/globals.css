@@ -570,3 +570,6 @@ h1,h2,h3{font-weight:500}
   .afdruk{display:block;margin:0;border-radius:0;background:#fff!important}
 }
 input[type=date]{width:100%;font:400 1rem/1.45 var(--f);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:13px 15px}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,64px)}
+@media (max-width:760px){.duo{grid-template-columns:1fr}}
+.wl-ok{margin-top:18px;font-weight:500}
