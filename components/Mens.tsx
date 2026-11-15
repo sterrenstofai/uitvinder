@@ -3,8 +3,8 @@
 // beweging heeft uitgezet in het systeem, ziet het stilstaande beeld.
 import { useEffect, useRef } from "react";
 
-// Zet op false om alleen het stilstaande beeld te tonen.
-const HEEFT_VIDEO = true;
+// Zet op true zodra public/beeld/maker.mp4 bestaat. Tot dan staat het stilstaande beeld er.
+const HEEFT_VIDEO = false;
 
 export function Mens() {
   const ref = useRef<HTMLVideoElement>(null);
@@ -14,8 +14,8 @@ export function Mens() {
     v.play().catch(() => {});
   }, []);
   return (
-    <div className="mens">
-      <video ref={ref} muted loop playsInline preload="metadata" poster="/beeld/maker-poster.jpg" aria-label="Een ontwerper schetst een idee naast haar laptop">
+    <div className="mens" style={{ aspectRatio: "3 / 2" }}>
+      <video ref={ref} muted loop playsInline preload="metadata" poster="/beeld/maker.jpg" aria-label="Een jonge ontwerper overlegt aan een werktafel in een studio aan de gracht">
         {HEEFT_VIDEO && <source src="/beeld/maker.mp4" type="video/mp4" />}
       </video>
     </div>
