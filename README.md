@@ -2,7 +2,7 @@
 
 Het platform van Thijs Mensink. Lees eerst `CLAUDE.md`, dan `BOUWEN-IN-CODE.md` en `spec.md`.
 
-Live: https://uitvinder-platform.netlify.app (Netlify-project `uitvinder-platform`, nu in voorbeeldmodus). Het project is nog niet aan deze repo gekoppeld: de eerste deploy is geüpload. Koppel de repo in Netlify bij Project configuration, Build & deploy, zodat elke push naar `main` vanzelf live gaat.
+Live: https://uitvinder-platform.netlify.app (Netlify-project `uitvinder-platform`, sinds 15 november 2026 gekoppeld aan het Supabase-project van Merkkit, schema `uitvinder`). Het project is nog niet aan deze repo gekoppeld: de eerste deploy is geüpload. Koppel de repo in Netlify bij Project configuration, Build & deploy, zodat elke push naar `main` vanzelf live gaat.
 
 ## Wat er staat (stap 1 van de bouwvolgorde)
 

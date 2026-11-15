@@ -1,6 +1,6 @@
 "use client";
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { getStore, type Store } from "@/lib/store";
+import { getStore, heeftSupabase, type Store } from "@/lib/store";
 import { leegData, leegExp, ROLLEN, type Administratie, type Data, type Exp, type Invalshoek, type Profile, type Rol, type Sessie } from "@/lib/types";
 import { slugify, vandaagISO, weekNr } from "@/lib/afgeleid";
 
@@ -109,7 +109,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   const app: App = {
     klaar,
-    modus: store?.modus ?? "lokaal",
+    // Op de server is er geen opslag; de modus moet daar hetzelfde zijn als in de browser.
+    modus: store?.modus ?? (heeftSupabase ? "supabase" : "lokaal"),
     sessie,
     data,
     toast,
