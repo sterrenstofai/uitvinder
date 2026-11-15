@@ -172,7 +172,7 @@ export function AdministratieScherm({ inhoud }: { inhoud: AdmInhoud }) {
             </div>
           </details>
 
-          <div className="factuur" aria-label="Voorbeeld van je factuur" style={{ background: "var(--bg)" }}>
+          <div className="factuur afdruk" aria-label="Voorbeeld van je factuur" style={{ background: "var(--bg)" }}>
             <h3>Factuur <Leeg v={nummer} wat="nummer" /></h3>
             <div className="koppen">
               <div><span>Van</span><b><Leeg v={bd.naam} wat="bedrijfsnaam" /></b><br /><Leeg v={bd.adres} wat="adres" /><br />KvK <Leeg v={bd.kvk} wat="KvK-nummer" /><br />Btw-id <Leeg v={bd.btwid} wat="btw-nummer" /></div>

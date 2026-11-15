@@ -81,3 +81,14 @@ export function leesAdministratie(): AdmInhoud {
     }));
   return { inleiding: gevuld(deel("inleiding")), potjes: gevuld(deel("bij de potjes")), groepen };
 }
+
+// Uitleg van de reis, de toetsing en de metingen, uit content/zo-werkt-het.md.
+export function leesZoWerktHet(): string | null {
+  try {
+    const md = readFileSync(join(process.cwd(), "content", "zo-werkt-het.md"), "utf8");
+    const vanaf = md.search(/^## /m);
+    return vanaf < 0 ? null : html(md.slice(vanaf).replace(/^## /gm, "#### "));
+  } catch {
+    return null;
+  }
+}

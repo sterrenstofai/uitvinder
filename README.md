@@ -13,6 +13,7 @@ Live: https://uitvinder-platform.netlify.app (Netlify-project `uitvinder-platfor
 | Privacyregel | Getest met 39 tests in `supabase/tests/rls_test.sql`, tegen een lokale Postgres 16. |
 | Login met magic link | Gebouwd, nog niet getest tegen een echt Supabase-project (dat bestaat nog niet). |
 | Schermen Vandaag, Reis, Invalshoek, Ronde (stap 3 tot en met 5) | Overgezet, met de proeftuinen en de coach. In de browser doorlopen in voorbeeldmodus. |
+| Welkom en kaart als pdf | "Zo werkt het" bij de eerste keer op Vandaag en op Reis; elke ronde is als experimentkaart af te drukken. |
 | Lessen | Komen uit `content/*.md`. Het `LES`-object uit het prototype is niet overgenomen. |
 | Gegevens uit het prototype overnemen | Bij de eerste keer inloggen, als er prototype-gegevens op het apparaat staan. |
 | Administratie voor ondernemers (eerste versie) | Potjes, factuur en checklist op `/administratie`. De uitleg in `content/administratie.md` moet Thijs nog schrijven. |
@@ -81,6 +82,18 @@ Wat hun lesmodule laat zien en wij nog niet hebben (Mini-MBA, 72 onderdelen, 10,
 - **Vaste opbouw per hoofdstuk:** korte video's, een oefening, een nabespreking van die oefening op video, en één pdf met het kader of de samenvatting om te bewaren.
 - **Een docent per hoofdstuk** met naam en functie, en echte casussen (Uber, Oatly, Amex).
 - **Een begin en een eind:** welkom met uitleg hoe de cursus werkt en kennismaken met medecursisten; afsluiting met wat je nu gaat doen, een feedbackvraag en een certificaat voor LinkedIn.
+
+Overgenomen, omdat het platform er beter van wordt:
+
+- **Een begin.** Bij de eerste keer op Vandaag staat "Zo werkt het": de twaalf weken, de beoordeling en de metingen. Daarna terug te vinden op Reis. De tekst staat in `content/zo-werkt-het.md` en komt uit `spec.md` en het onderwijskundig kader.
+- **Iets om te bewaren.** Elke ronde heeft "Bewaar kaart als pdf": de experimentkaart op één blad, voor het portfolio of voor de klant.
+
+Bewust niet overgenomen:
+
+- **Nabespreking op video.** De proeftuinen geven al per antwoord directe terugkoppeling.
+- **Docent per hoofdstuk en bekende casussen.** Inhoud van Thijs; de lessen hebben al een voorbeeld per rol.
+- **Kennismaken met medecursisten.** Kan pas als het Team-scherm is overgezet.
+- **Certificaat en feedbackvraag aan het eind.** Hoort bij de toetsing (stap 4) en hangt af van de erkenningsroute.
 
 Wat wij hebben en zij niet: een rubric met menselijke beoordeling, metingen in week 1, 6 en 12, en tools die het werk doen. Dat blijft het onderscheid; neem hun opbouw over, niet hun model.
 

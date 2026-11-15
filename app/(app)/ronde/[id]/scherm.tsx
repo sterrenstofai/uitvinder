@@ -7,7 +7,7 @@ import { useApp } from "@/components/app";
 import { Cover } from "@/components/Cover";
 import { CoachBox, LesBox } from "@/components/Les";
 import { Proeftuin3, Proeftuin4, Proeftuin5 } from "@/components/Proeftuin";
-import { expTitel, weekNr } from "@/lib/afgeleid";
+import { expTitel, fmtD, weekNr } from "@/lib/afgeleid";
 import type { Les } from "@/lib/lessen";
 import type { Exp, Zichtbaarheid } from "@/lib/types";
 
@@ -126,10 +126,22 @@ export function Ronde({ id, lessen }: { id: string; lessen: Record<3 | 4 | 5, Le
             ) : (
               <button className="btn" onClick={rondAf}>Rond af en zet in je library</button>
             )}
+            <button className="btn ghost sm" onClick={() => window.print()}>Bewaar kaart als pdf</button>
             <button className="btn ghost sm" onClick={verwijder}>Verwijder ronde</button>
           </div>
         </div>
       </section>
+
+      {/* Alleen bij afdrukken: de experimentkaart op één blad, om te bewaren of aan de klant te geven. */}
+      <article className="afdruk alleen-print kaartblad">
+        <p className="kb-k">Experimentkaart{e.klant ? `, ${e.klant}` : ""}</p>
+        <h1>{expTitel(e)}</h1>
+        <p className="kb-m">{[e.auteur || data.profile?.naam, fmtD(e.datum), e.status === "af" ? "Afgerond" : "Loopt nog"].filter(Boolean).join(" · ")}</p>
+        {([["Signaal", e.signaal], ["Waarom dit merk", e.waarom], ["Hypothese", e.hypothese], ["Waarom deze keuze", e.keuze], ["Gebouwd", [e.bouw, e.tool && `(${e.tool})`].filter(Boolean).join(" ")], ["Link", e.link], ["Meting", e.meting], ["Uitkomst", e.uitkomst], ["Geleerd", e.geleerd], ["Spec", e.spec]] as [string, string][])
+          .filter(([, v]) => v.trim())
+          .map(([k, v]) => <div key={k} className="kb-r"><span>{k}</span><p>{v}</p></div>)}
+        <p className="kb-v">Van uitvoerder naar uitvinder · Thijs Mensink</p>
+      </article>
     </main>
   );
 }

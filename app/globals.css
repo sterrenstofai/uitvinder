@@ -548,5 +548,25 @@ h1,h2,h3{font-weight:500}
 .factuur tfoot tr:last-child td{font-weight:600;font-size:1.1rem;padding-top:10px}
 .factuur .leeg{color:var(--c1)}
 @media (max-width:560px){.regels{grid-template-columns:1fr 1fr}.regels>:first-child{grid-column:1/-1}.factuur{padding:16px;font-size:.9rem}.factuur .koppen{grid-template-columns:1fr}.factuur th:not(:first-child),.factuur td:not(:first-child){padding-left:8px}.factuur th:nth-child(3),.factuur td:nth-child(3){display:none}}
-@media print{body *{visibility:hidden}.factuur,.factuur *{visibility:visible}.factuur{position:absolute;inset:0 0 auto 0;margin:0;border-radius:0}.toast{display:none}}
+.welkom h2{margin:0 0 6px;font:500 1.5rem var(--fd);letter-spacing:-.03em}
+.welkom h4,.les .md h4{margin:14px 0 6px;font:600 .95rem var(--f)}
+.welkom ul,.les .md ul{margin:0;padding-left:20px;display:grid;gap:4px;line-height:1.5}
+.welkom p{margin:10px 0 0;line-height:1.55}
+.alleen-print{display:none}
+.kaartblad{color:#000;line-height:1.5}
+.kaartblad h1{margin:4px 0 6px;font:500 2rem/1.1 var(--fd);letter-spacing:-.04em}
+.kaartblad .kb-k,.kaartblad .kb-m,.kaartblad .kb-v{margin:0;color:#555;font-size:.9rem}
+.kaartblad .kb-r{display:grid;grid-template-columns:150px 1fr;gap:16px;padding:12px 0;border-top:1px solid #ddd;break-inside:avoid}
+.kaartblad .kb-r:first-of-type{margin-top:18px}
+.kaartblad .kb-r span{font-weight:600}
+.kaartblad .kb-r p{margin:0;white-space:pre-wrap}
+.kaartblad .kb-v{margin-top:24px;padding-top:12px;border-top:1px solid #ddd}
+/* Afdrukken: alleen het onderdeel met .afdruk komt op papier (factuur of experimentkaart). */
+@media print{
+  body{background:#fff}
+  body:has(main .afdruk) .top,body:has(main .afdruk) .foot,.toast{display:none}
+  main:has(.afdruk) *:not(:has(.afdruk)):not(.afdruk):not(.afdruk *){display:none}
+  main:has(.afdruk){padding:0;max-width:none}
+  .afdruk{display:block;margin:0;border-radius:0;background:#fff!important}
+}
 input[type=date]{width:100%;font:400 1rem/1.45 var(--f);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:13px 15px}
