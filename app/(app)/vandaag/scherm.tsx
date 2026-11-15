@@ -34,6 +34,7 @@ export function Vandaag({ zoWerktHet }: { zoWerktHet: string | null }) {
   const uur = new Date().getHours(), groet = uur < 12 ? "Goedemorgen" : uur < 18 ? "Goedemiddag" : "Goedenavond";
   const mine = [...data.exps].reverse().slice(0, 3);
   const naam = data.profile?.naam || "";
+  const wacht = data.taken.filter((t) => t.status === "klaar").length;
   return (
     <main className="wrap wide">
       <section className="dash-h">
@@ -77,8 +78,21 @@ export function Vandaag({ zoWerktHet }: { zoWerktHet: string | null }) {
           )}
         </div>
         <div>
-          <div className="grp"><span>Cockpit</span><Link href="/volgt/cockpit" className="hint">Naar de cockpit</Link></div>
-          <div className="empty" style={{ marginTop: 10 }}>De cockpit is nog niet overgezet.</div>
+          <div className="grp"><span>Cockpit</span><Link href="/cockpit" className="hint">Naar de cockpit</Link></div>
+          <Link className="row" href="/cockpit" style={{ textDecoration: "none" }}>
+            {data.klanten.length ? (
+              <>
+                <span className="nm">{wacht} {wacht === 1 ? "ding wacht" : "dingen wachten"} op je akkoord</span>
+                <span className="tag ui">{wacht}</span>
+                <span className="why">De agents zetten klaar, jij keurt.</span>
+              </>
+            ) : (
+              <>
+                <span className="nm">Nog geen klanten</span>
+                <span className="why">Voeg een klant toe of oefen met voorbeelden.</span>
+              </>
+            )}
+          </Link>
           <div className="grp"><span>Deze week in de markt</span><Link href="/volgt/markt" className="hint">Naar de markt</Link></div>
           <div className="empty" style={{ marginTop: 10 }}>De markt is nog niet overgezet.</div>
           {data.profile?.ondernemer && (

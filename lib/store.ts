@@ -3,7 +3,7 @@
 // - Lokaal: voorbeeldmodus zolang er geen Supabase-project gekoppeld is.
 //   Gegevens blijven dan op dit apparaat, net als in het prototype.
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
-import { leegAdm, leegData, leegExp, type Administratie, type Beoordeling, type BeoordelingScores, type Data, type Eind, type Inzending, type Meting, type Exp, type Invalshoek, type Profile, type Scan, type Sessie, type Versie } from "./types";
+import { leegAdm, leegData, leegExp, type Administratie, type Beoordeling, type BeoordelingScores, type Data, type Eind, type Inzending, type Klant, type Koppeling, type Meting, type Taak, type Exp, type Invalshoek, type Profile, type Scan, type Sessie, type Versie } from "./types";
 
 export interface Store {
   modus: "supabase" | "lokaal";
@@ -24,6 +24,11 @@ export interface Store {
   verwijderMeting(week: number): Promise<void>;
   bewaarPortfolio(ids: string[]): Promise<void>;
   bewaarEind(e: Eind): Promise<void>;
+  nieuweKlant(k: Omit<Klant, "id">): Promise<Klant>;
+  verwijderKlant(id: string): Promise<void>;
+  nieuweTaken(t: Omit<Taak, "id">[]): Promise<Taak[]>;
+  wijzigTaak(id: string, patch: Partial<Taak>): Promise<void>;
+  zetKoppeling(klantId: string, tool: string, aan: boolean): Promise<void>;
   /** Voor de beoordelaar: wat is ingediend en mag ik zien? */
   inzendingen(): Promise<Inzending[]>;
   bewaarBeoordeling(deelnemer: string, scores: BeoordelingScores, cijfer: number, stelVast: boolean, naam: string): Promise<void>;
@@ -64,7 +69,7 @@ function supabaseStore(sb: SupabaseClient<any, any, any>): Store {
       await sb.auth.signOut();
     },
     async laad(uid) {
-      const [p, s, i, v, e, m, a, mt, pf, ei, bo, bh] = await Promise.all([
+      const [p, s, i, v, e, m, a, mt, pf, ei, bo, bh, kl, tk, kp] = await Promise.all([
         sb.from("profiles").select("id,naam,rol,agency,ondernemer,slug").eq("id", uid).maybeSingle(),
         sb.from("scans").select("id,datum,rol,uitkomst,pct_uitvindend").eq("user_id", uid).order("datum").order("aangemaakt_op"),
         sb.from("invalshoeken").select("vak,buiten,voorwie,zin").eq("user_id", uid).maybeSingle(),
@@ -77,10 +82,13 @@ function supabaseStore(sb: SupabaseClient<any, any, any>): Store {
         sb.from("eindopdrachten").select("pitch_link,reflectie,ingediend_op").eq("user_id", uid).maybeSingle(),
         sb.from("beoordelingen").select(BEO_KOLOMMEN).eq("deelnemer_id", uid).not("vastgesteld_op", "is", null).order("vastgesteld_op", { ascending: false }).limit(1),
         sb.rpc("is_beheer"),
+        sb.from("klanten").select(KLANT_KOLOMMEN).order("aangemaakt_op"),
+        sb.from("taken").select(TAAK_KOLOMMEN).order("aangemaakt_op"),
+        sb.from("koppelingen").select("klant_id,tool,status"),
       ]);
       // De tabellen voor beoordelen komen uit de tweede migratie. Is die nog niet
       // uitgevoerd, dan werkt de rest van het platform gewoon door.
-      [p, s, i, v, e, m, a, mt, pf, ei].forEach((r) => fout(r.error));
+      [p, s, i, v, e, m, a, mt, pf, ei, kl, tk, kp].forEach((r) => fout(r.error));
       return {
         profile: (p.data as Profile) ?? null,
         scans: ((s.data as Scan[]) ?? []).map((x) => ({ ...x, pct_uitvindend: Number(x.pct_uitvindend) })),
@@ -96,6 +104,9 @@ function supabaseStore(sb: SupabaseClient<any, any, any>): Store {
         eind: (ei.data as Eind) ?? leegData().eind,
         beoordeling: bo.error ? null : beoordelingUit((bo.data ?? [])[0]),
         magBeoordelen: bh.data === true || (m.data ?? []).some((x) => x.rol === "beoordelaar"),
+        klanten: (kl.data as Klant[]) ?? [],
+        taken: ((tk.data as Taak[]) ?? []).map(taakUit),
+        koppelingen: (kp.data as Koppeling[]) ?? [],
       };
     },
     async bewaarProfiel(p) {
@@ -143,6 +154,27 @@ function supabaseStore(sb: SupabaseClient<any, any, any>): Store {
       const uid = (await sb.auth.getUser()).data.user?.id;
       fout((await sb.from("eindopdrachten").upsert({ user_id: uid, ...e })).error);
     },
+    async nieuweKlant(k) {
+      const r = await sb.from("klanten").insert(k).select(KLANT_KOLOMMEN).single();
+      fout(r.error);
+      return r.data as Klant;
+    },
+    async verwijderKlant(kid) {
+      fout((await sb.from("klanten").delete().eq("id", kid)).error);
+    },
+    async nieuweTaken(t) {
+      const r = await sb.from("taken").insert(t).select(TAAK_KOLOMMEN);
+      fout(r.error);
+      return ((r.data as Taak[]) ?? []).map(taakUit);
+    },
+    async wijzigTaak(tid, patch) {
+      const uid = (await sb.auth.getUser()).data.user?.id;
+      const besluit = patch.status === "goedgekeurd" || patch.status === "gestopt" ? { besloten_door: uid } : {};
+      fout((await sb.from("taken").update({ ...patch, ...besluit }).eq("id", tid)).error);
+    },
+    async zetKoppeling(klantId, tool, aan) {
+      fout((await sb.from("koppelingen").upsert({ klant_id: klantId, tool, status: aan ? "actief" : "uit" }, { onConflict: "klant_id,tool" })).error);
+    },
     async inzendingen() {
       const uid = (await sb.auth.getUser()).data.user?.id;
       const ei = await sb.from("eindopdrachten").select("user_id,pitch_link,reflectie,ingediend_op").not("ingediend_op", "is", null).neq("user_id", uid).order("ingediend_op");
@@ -189,6 +221,9 @@ function supabaseStore(sb: SupabaseClient<any, any, any>): Store {
   };
 }
 
+const KLANT_KOLOMMEN = "id,naam,sector,merk,doelgroep,kanalen";
+const TAAK_KOLOMMEN = "id,klant_id,agent,tool,titel,aanleiding,opties,uren,status,besluit,historie";
+const taakUit = (t: Taak): Taak => ({ ...t, uren: t.uren === null ? null : Number(t.uren), opties: t.opties ?? [], historie: t.historie ?? [] });
 const BEO_KOLOMMEN = "id,deelnemer_id,scores,cijfer,vastgesteld_op,beoordelaar_naam";
 const metingUit = (m: Meting): Meting => ({ ...m, pct_rolscan: m.pct_rolscan === null ? null : Number(m.pct_rolscan) });
 const beoordelingUit = (b: unknown): Beoordeling | null => {
@@ -287,6 +322,32 @@ function lokaalStore(): Store {
     },
     async bewaarEind(e) {
       muteer((d) => void (d.eind = e));
+    },
+    async nieuweKlant(k) {
+      const n = { ...k, id: id() };
+      muteer((d) => void (d.klanten = [...(d.klanten || []), n]));
+      return n;
+    },
+    async verwijderKlant(kid) {
+      muteer((d) => {
+        d.klanten = (d.klanten || []).filter((x) => x.id !== kid);
+        d.taken = (d.taken || []).filter((x) => x.klant_id !== kid);
+        d.koppelingen = (d.koppelingen || []).filter((x) => x.klant_id !== kid);
+      });
+    },
+    async nieuweTaken(t) {
+      const n = t.map((x) => ({ ...x, id: id() }));
+      muteer((d) => void (d.taken = [...(d.taken || []), ...n]));
+      return n;
+    },
+    async wijzigTaak(tid, patch) {
+      muteer((d) => {
+        const t = (d.taken || []).find((x) => x.id === tid);
+        if (t) Object.assign(t, patch);
+      });
+    },
+    async zetKoppeling(klantId, tool, aan) {
+      muteer((d) => void (d.koppelingen = [...(d.koppelingen || []).filter((x) => !(x.klant_id === klantId && x.tool === tool)), { klant_id: klantId, tool, status: aan ? "actief" : "uit" }]));
     },
     // In voorbeeldmodus is er geen tweede persoon. Je beoordeelt je eigen
     // inzending, om te zien hoe het voor een beoordelaar werkt.

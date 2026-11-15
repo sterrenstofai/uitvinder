@@ -9,7 +9,7 @@ export function Kop({ nav = true }: { nav?: boolean }) {
   const { data, sessie, modus } = useApp();
   const pad = usePathname();
   const route = pad.split("/")[1] || "";
-  const actief = route === "volgt" ? pad.split("/")[2] : ["ronde", "invalshoek", "rolscan", "meting"].includes(route) ? "reis" : route === "certificaat" ? "portfolio" : route;
+  const actief = route === "volgt" ? pad.split("/")[2] : ["ronde", "invalshoek", "rolscan", "meting"].includes(route) ? "reis" : route === "certificaat" ? "portfolio" : route === "klant" ? "cockpit" : route;
   const naam = data.profile?.naam;
   return (
     <header className="top">

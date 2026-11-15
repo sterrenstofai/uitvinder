@@ -15,6 +15,7 @@ Live: https://uitvinder-platform.netlify.app (Netlify-project `uitvinder-platfor
 | Schermen Vandaag, Reis, Invalshoek, Ronde (stap 3 tot en met 5) | Overgezet, met de proeftuinen en de coach. In de browser doorlopen in voorbeeldmodus. |
 | De hele leerroute | Rolscan, metingen (week 1, 6, 12), Library, Portfolio met eindopdracht, Beoordelen en Certificaat staan in het platform. In voorbeeldmodus van begin tot eind doorlopen in de browser, met een nagebootst antwoord van de AI-scan. Tegen de echte database nog niet getest, omdat dat een ingelogde gebruiker vraagt. |
 | Welkom en kaart als pdf | "Zo werkt het" bij de eerste keer op Vandaag en op Reis; elke ronde is als experimentkaart af te drukken. |
+| Cockpit en klantdossier | Op `/cockpit` en `/klant/[id]`. Klanten zijn echt (eigen klanten toevoegen, dossier, experimenten per klant). De agents, hun taken en de koppelingen zijn nagebootst met de voorbeeldgegevens uit het prototype; die laad je met één knop en verwijder je weer. Goedkeuren, bijsturen en stoppen vragen een reden, en een goedkeuring maakt een experimentkaart. |
 | Voorkant | Overgezet uit het prototype, met een blok voor ondernemers erbij. Prijzen staan in `lib/prijzen.ts`. De wachtlijst schrijft naar de tabel `waitlist`. De knoppen naar de Rolscan en de tools openen nog het prototype. |
 | Beeld op de voorkant | Vier foto's in `public/beeld/`: opnames van een fotoshoot met ton-sur-ton sets in perzik, lila, blauw en groen (de kleuren per stap), met fotograaf en crew in beeld. Gegenereerd met Higgsfield, model FLUX 3 (AI, geen echte shoot en geen echte deelnemers). Thijs koos deze richting na GPT Image 2.6 te hebben afgewezen als te glad. |
 | Lessen | Komen uit `content/*.md`. Sinds 15 november 2026 uitgeschreven op hbo-niveau voor stap 1 tot en met 5: leeruitkomst, theorie met bronnen, kernbegrippen, opdracht, beoordeling per rubricniveau, reflectievragen en literatuur. Concept, door Claude geschreven, ter goedkeuring door Thijs. |
@@ -40,13 +41,15 @@ De magic links van Supabase zijn zonder eigen mailserver beperkt tot een paar pe
 
 ## Nog niet overgezet
 
-Deze schermen wijzen in het platform naar het prototype (`/prototype/index.html`): Cockpit, Klantdossier, Markt, Bouwen, de drie tools in de Library, Profiel en Team.
+Deze schermen wijzen in het platform naar het prototype (`/prototype/index.html`): Markt, Bouwen, de drie tools in de Library, Profiel en Team.
 
 Gevolgen in wat er nu staat:
 
 - De Rolscan vraagt nu een account. De gratis scan zonder account uit fase 1 staat alleen nog in het prototype.
 - Het deelbeeld van de Rolscan (1080x1350 voor LinkedIn) is niet overgezet.
-- Vandaag toont de cockpit en de markt als leeg vak.
+- Vandaag toont de markt als leeg vak.
+- In de cockpit werkt nog geen echte agent. Volgens de bouwvolgorde is Figma via de MCP-server de eerste echte koppeling.
+- Het klantdossier toont nog geen trends per sector; die komen met de Markt.
 - De proeftuin bij de invalshoek (Eigen of inwisselbaar?) is nog niet overgezet.
 - Een kaart delen met je team werkt in de database, maar er is nog geen scherm om een team te maken of leden uit te nodigen. Daarom beoordeelt in de testfase de beheerder.
 - De tweede beoordelaar (bij een cijfer tussen 5 en 6, en bij één op de tien) wordt gemeld maar niet afgedwongen.

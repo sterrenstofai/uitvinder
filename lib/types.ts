@@ -54,6 +54,13 @@ export type Inzending = {
   eind: Eind; kaarten: Exp[]; metingen: Meting[]; beoordeling: Beoordeling | null;
 };
 
+export type Klant = { id: string; naam: string; sector: string | null; merk: string | null; doelgroep: string | null; kanalen: string[] };
+export type Taak = {
+  id: string; klant_id: string; agent: string; tool: string | null; titel: string; aanleiding: string;
+  opties: string[]; uren: number | null; status: "bezig" | "klaar" | "goedgekeurd" | "gestopt"; besluit: string; historie: string[];
+};
+export type Koppeling = { klant_id: string; tool: string; status: string };
+
 export type Data = {
   profile: Profile | null;
   scans: Scan[];
@@ -67,6 +74,9 @@ export type Data = {
   eind: Eind;
   beoordeling: Beoordeling | null; // alleen zichtbaar na vaststelling
   magBeoordelen: boolean;
+  klanten: Klant[];
+  taken: Taak[];
+  koppelingen: Koppeling[];
 };
 
 export type Sessie = { id: string; email: string };
@@ -79,5 +89,5 @@ export const leegExp = (): Omit<Exp, "id"> => ({
 });
 export const leegData = (): Data => ({
   profile: null, scans: [], inv: { vak: "", buiten: "", voorwie: "", zin: "" }, versies: [], exps: [], teamIds: [], adm: leegAdm(),
-  metingen: [], portfolio: [], eind: { pitch_link: "", reflectie: "", ingediend_op: null }, beoordeling: null, magBeoordelen: false,
+  metingen: [], portfolio: [], eind: { pitch_link: "", reflectie: "", ingediend_op: null }, beoordeling: null, magBeoordelen: false, klanten: [], taken: [], koppelingen: [],
 });

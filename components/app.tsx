@@ -1,8 +1,9 @@
 "use client";
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { getStore, heeftSupabase, type Store } from "@/lib/store";
-import { leegData, leegExp, ROLLEN, type Administratie, type BeoordelingScores, type Data, type Eind, type Inzending, type Meting, type Scan, type Exp, type Invalshoek, type Profile, type Rol, type Sessie } from "@/lib/types";
+import { leegData, leegExp, ROLLEN, type Administratie, type BeoordelingScores, type Data, type Eind, type Inzending, type Klant, type Meting, type Scan, type Taak, type Exp, type Invalshoek, type Profile, type Rol, type Sessie } from "@/lib/types";
 import { slugify, vandaagISO, weekNr } from "@/lib/afgeleid";
+import { VOORBEELDKLANTEN, VOORBEELDNAMEN, VOORBEELDTAKEN } from "@/lib/cockpit";
 
 type App = {
   klaar: boolean;
@@ -28,6 +29,13 @@ type App = {
   setPortfolio(ids: string[]): Promise<void>;
   setEind(patch: Partial<Eind>): void;
   dienIn(): Promise<void>;
+  laadVoorbeeldklanten(): Promise<void>;
+  verwijderVoorbeeldklanten(): Promise<void>;
+  nieuweKlant(k: Omit<Klant, "id">): Promise<Klant>;
+  verwijderKlant(id: string): Promise<void>;
+  /** Goedkeuren, bijsturen of stoppen. Zonder reden gebeurt er niets. Geeft de nieuwe kaart terug bij goedkeuren. */
+  besluitTaak(taak: Taak, soort: "goed" | "bij" | "stop", reden: string, keuze?: number): Promise<Exp | null>;
+  zetKoppeling(klantId: string, tool: string, aan: boolean): Promise<void>;
   inzendingen(): Promise<Inzending[]>;
   bewaarBeoordeling(deelnemer: string, scores: BeoordelingScores, cijfer: number, stelVast: boolean): Promise<void>;
 };
@@ -229,6 +237,62 @@ export function AppProvider({ children }: { children: ReactNode }) {
       await store!.bewaarEind({ ...dataRef.current.eind, ingediend_op: null });
       await store!.bewaarEind(e);
       setData((d) => ({ ...d, eind: e }));
+    },
+    async laadVoorbeeldklanten() {
+      const nieuw: Klant[] = [];
+      for (const v of VOORBEELDKLANTEN) {
+        const k = await store!.nieuweKlant({ naam: v.naam, sector: v.sector, merk: v.merk, doelgroep: v.doelgroep, kanalen: [...v.kanalen] });
+        nieuw.push(k);
+        for (const t of v.koppelingen) await store!.zetKoppeling(k.id, t, true);
+      }
+      await store!.nieuweTaken(VOORBEELDTAKEN.map((t) => ({
+        klant_id: nieuw[VOORBEELDKLANTEN.findIndex((v) => v.sleutel === t.klant)].id,
+        agent: t.agent, tool: t.tool, titel: t.titel, aanleiding: t.aanleiding, opties: [...t.opties], uren: t.uren, status: t.status, besluit: t.besluit, historie: [],
+      })));
+      await herlaad();
+    },
+    async verwijderVoorbeeldklanten() {
+      for (const k of data.klanten.filter((x) => VOORBEELDNAMEN.includes(x.naam))) await store!.verwijderKlant(k.id);
+      await herlaad();
+    },
+    async nieuweKlant(k) {
+      const n = await store!.nieuweKlant(k);
+      setData((d) => ({ ...d, klanten: [...d.klanten, n] }));
+      return n;
+    },
+    async verwijderKlant(kid) {
+      await store!.verwijderKlant(kid);
+      setData((d) => ({ ...d, klanten: d.klanten.filter((x) => x.id !== kid), taken: d.taken.filter((x) => x.klant_id !== kid), koppelingen: d.koppelingen.filter((x) => x.klant_id !== kid) }));
+    },
+    async besluitTaak(t, soort, reden, keuze) {
+      const r = reden.trim();
+      // Vaste regel van de cockpit: geen besluit zonder reden. De database dwingt dit ook af.
+      if (!r) throw new Error("Zonder reden kan dit niet.");
+      const zet = async (patch: Partial<Taak>) => {
+        await store!.wijzigTaak(t.id, patch);
+        setData((d) => ({ ...d, taken: d.taken.map((x) => (x.id === t.id ? { ...x, ...patch } : x)) }));
+      };
+      if (soort === "bij") {
+        await zet({ status: "bezig", historie: [...t.historie, "Bijgestuurd: " + r] });
+        return null;
+      }
+      if (soort === "stop") {
+        await zet({ status: "gestopt", besluit: "Waarom gestopt: " + r });
+        return null;
+      }
+      const keus = t.opties.length && keuze !== undefined ? t.opties[keuze] : "";
+      // Een goedkeuring wordt een experimentkaart, met de keuze en de reden erop.
+      // Eerst de kaart, dan de taak: zo is er nooit een goedkeuring zonder kaart.
+      const kaart = await app.nieuwExp({
+        klant: data.klanten.find((k) => k.id === t.klant_id)?.naam || "", titel: t.titel, signaal: t.aanleiding, bouw: keus || t.titel,
+        keuze: r + (t.opties.length ? `\nGekozen uit: ${t.opties.join(" | ")}` : ""), tool: `Cockpit, agent ${t.agent} in ${t.tool || ""}`, bron_tool: "cockpit",
+      });
+      await zet({ status: "goedgekeurd", besluit: `${keus ? "Gekozen: " + keus + ". " : ""}Waarom: ${r}` });
+      return kaart;
+    },
+    async zetKoppeling(klantId, tool, aan) {
+      await store!.zetKoppeling(klantId, tool, aan);
+      setData((d) => ({ ...d, koppelingen: [...d.koppelingen.filter((x) => !(x.klant_id === klantId && x.tool === tool)), { klant_id: klantId, tool, status: aan ? "actief" : "uit" }] }));
     },
     inzendingen: () => store!.inzendingen(),
     bewaarBeoordeling: (deelnemer, scores, cijfer, stelVast) =>
