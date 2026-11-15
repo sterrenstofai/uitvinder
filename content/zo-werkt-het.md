@@ -16,6 +16,7 @@ Reken op ongeveer 56 uur in twaalf weken.
 - Je portfolio telt voor 60%, je eindopdracht voor 40%.
 - Je rondt minimaal 8 van de 10 rondes af.
 - Een mens beoordeelt met een rubric. De AI beoordeelt nooit.
+- Ben je geslaagd, dan krijg je een certificaat. Het is geen erkend diploma.
 
 ## Zo zie je je verschuiving
 

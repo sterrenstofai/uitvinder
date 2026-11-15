@@ -40,6 +40,20 @@ export type Bedrijf = { naam?: string; adres?: string; kvk?: string; btwid?: str
 export type Administratie = { btw_tarief: number; belasting_pct: number | null; stappen_af: string[]; bedrijf: Bedrijf };
 export const leegAdm = (): Administratie => ({ btw_tarief: 21, belasting_pct: null, stappen_af: [], bedrijf: {} });
 
+export type MetingScores = { gen: number; prom: number; real: number; cse: number };
+export type Meting = { week: number; scores: MetingScores; pct_rolscan: number | null; datum: string };
+export type Eind = { pitch_link: string; reflectie: string; ingediend_op: string | null };
+// niveau per criterium: 0 onvoldoende, 1 voldoende, 2 goed, 3 excellent
+export type BeoordelingScores = { kaarten: Record<string, number[]>; eind: number[]; portfolio?: number; eindopdracht?: number };
+export type Beoordeling = {
+  id: string; deelnemer_id: string; scores: BeoordelingScores; cijfer: number | null;
+  vastgesteld_op: string | null; beoordelaar_naam: string | null;
+};
+export type Inzending = {
+  deelnemer: { id: string; naam: string; rol: string };
+  eind: Eind; kaarten: Exp[]; metingen: Meting[]; beoordeling: Beoordeling | null;
+};
+
 export type Data = {
   profile: Profile | null;
   scans: Scan[];
@@ -48,6 +62,11 @@ export type Data = {
   exps: Exp[];
   teamIds: string[];
   adm: Administratie;
+  metingen: Meting[];
+  portfolio: string[];
+  eind: Eind;
+  beoordeling: Beoordeling | null; // alleen zichtbaar na vaststelling
+  magBeoordelen: boolean;
 };
 
 export type Sessie = { id: string; email: string };
@@ -60,4 +79,5 @@ export const leegExp = (): Omit<Exp, "id"> => ({
 });
 export const leegData = (): Data => ({
   profile: null, scans: [], inv: { vak: "", buiten: "", voorwie: "", zin: "" }, versies: [], exps: [], teamIds: [], adm: leegAdm(),
+  metingen: [], portfolio: [], eind: { pitch_link: "", reflectie: "", ingediend_op: null }, beoordeling: null, magBeoordelen: false,
 });

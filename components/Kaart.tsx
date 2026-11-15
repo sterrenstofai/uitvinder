@@ -8,7 +8,7 @@ import type { Exp } from "@/lib/types";
 
 const ZICHT = { prive: "Alleen ik", team: "Team", publiek: "Iedereen" };
 
-export function Kaart({ e, eigen }: { e: Exp; eigen?: boolean }) {
+export function Kaart({ e, eigen, alleenLezen }: { e: Exp; eigen?: boolean; alleenLezen?: boolean }) {
   const { nieuwExp, toast, data } = useApp();
   const router = useRouter();
   const m = [e.auteur && !eigen ? e.auteur : "", e.klant, e.datum ? fmtD(e.datum) : ""].filter(Boolean).join(", ");
@@ -55,10 +55,12 @@ export function Kaart({ e, eigen }: { e: Exp; eigen?: boolean }) {
         )}
         {veld("Uitkomst", e.uitkomst)}
         {veld("Geleerd", e.geleerd)}
-        <div className="btns">
-          {eigen && <Link className="btn ghost sm" href={`/ronde/${e.id}`}>Open</Link>}
-          <button className="btn sm" onClick={remix}>Remix</button>
-        </div>
+        {!alleenLezen && (
+          <div className="btns">
+            {eigen && <Link className="btn ghost sm" href={`/ronde/${e.id}`}>Open</Link>}
+            <button className="btn sm" onClick={remix}>Remix</button>
+          </div>
+        )}
       </div>
     </details>
   );

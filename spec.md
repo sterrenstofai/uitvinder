@@ -179,3 +179,4 @@ Gelijk aan thijsmensink.nl:
 - Besluit (Thijs, 14 november 2026): ondernemers komen erbij als tweede groep. Bij de start kies je je rol en of je in een team werkt of als ondernemer. Die keuze verandert een deel van de inhoud. De keuze staat op het profiel (`ondernemer`); de inhoud voor ondernemers is nog niet gebouwd en komt van Thijs in `content/`.
 - Besluit (Thijs, 14 november 2026): een team-eigenaar mag ook beoordelaar zijn.
 - Eerste versie van de ontzorging staat op `/administratie`: opzetlijst, potjes-rekenhulp en factuurhulp. Een dienst naast de reis, geen les en geen toetsing. De rekenhulp geeft geen belastingadvies: de ondernemer kiest zelf het percentage. De koppeling met Moneybird volgt via de cockpit.
+- Besluit (Thijs, 15 november 2026): wie slaagt krijgt een certificaat, geen diploma. Het certificaat is van de aanbieder; het is geen erkend diploma en geeft geen studiepunten.

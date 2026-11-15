@@ -24,8 +24,7 @@ export function Reis({ zoWerktHet, lesRolscan }: { zoWerktHet: string | null; le
       <div className="weeks">
         {Array.from({ length: 12 }, (_, i) => {
           const w = i + 1;
-          // Week 12 (eindopdracht) telt mee zodra dat scherm is overgezet.
-          const done = w === 1 ? Boolean(n && zin) : w === 12 ? false : af >= w - 1;
+          const done = w === 1 ? Boolean(n && zin) : w === 12 ? Boolean(data.eind.ingediend_op) : af >= w - 1;
           return (
             <div key={w} className={`wk ${done ? "done" : ""} ${w === wk ? "now" : ""}`}>
               <strong>{w}</strong>
@@ -38,7 +37,10 @@ export function Reis({ zoWerktHet, lesRolscan }: { zoWerktHet: string | null; le
       <div className="wkl"><span>Meting</span><span className="nd">{af} van 10 rondes afgerond</span></div>
       <div className="grp"><span>Metingen</span></div>
       <div className="btns" style={{ marginTop: 12 }}>
-        {METINGWEKEN.map((w) => <Link key={w} className="btn sm" href="/volgt/metingen">Meting week {w}</Link>)}
+        {METINGWEKEN.map((w) => {
+          const gedaan = data.metingen.some((m) => m.week === w);
+          return <Link key={w} className={`btn sm ${gedaan ? "ghost" : ""}`} href={`/meting/${w}`}>{gedaan ? "✓ " : ""}Meting week {w}</Link>;
+        })}
       </div>
       <div className="grp"><span>Fundament</span><span>Eenmalig</span></div>
       <section className={`step ${n ? "done" : ""}`}>
@@ -51,10 +53,10 @@ export function Reis({ zoWerktHet, lesRolscan }: { zoWerktHet: string | null; le
                 Nulmeting: <b>{Math.round(n.pct_uitvindend)}% uitvinder</b>.{" "}
                 {data.scans.length > 1 && <>Laatste meting: <b>{Math.round(laatste(data).pct_uitvindend)}%</b>.</>}
               </p>
-              <div className="btns" style={{ marginTop: 14 }}><Link className="btn ghost sm" href="/volgt/rolscan">Scan opnieuw</Link></div>
+              <div className="btns" style={{ marginTop: 14 }}><Link className="btn ghost sm" href="/rolscan">Scan opnieuw</Link></div>
             </>
           ) : (
-            <Link className="btn" href="/volgt/rolscan">Doe de Rolscan</Link>
+            <Link className="btn" href="/rolscan">Doe de Rolscan</Link>
           )}
         </div>
       </section>

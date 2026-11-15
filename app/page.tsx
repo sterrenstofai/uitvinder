@@ -8,7 +8,8 @@ import { Wachtlijst } from "@/components/Wachtlijst";
 import { PRIJZEN } from "@/lib/prijzen";
 
 const PROTO = "/prototype/index.html";
-const SCAN = `${PROTO}#/scan`;
+// De Rolscan staat in het platform; wie nog geen account heeft, logt eerst in.
+const SCAN = "/rolscan";
 
 const STAPPEN: [string, string, string][] = [
   ["1", "Rolscan.", "Zie in vijf minuten hoeveel van je werk uitvoerend is. Dat is je nulmeting."],
@@ -36,7 +37,7 @@ const FAQ: [string, string][] = [
   ["Hoeveel tijd kost het?", "Reken op een middag per week voor een ronde. Het fundament kost eenmalig een uur of twee."],
   ["Wat ziet mijn werkgever?", "Alleen je verhouding uitvoerend en uitvindend, en de kaarten die jij met je team deelt. Je rolscan-antwoorden, je invalshoek en je privékaarten niet."],
   ["Is dit een cursus?", "Het is een leertraject van twaalf weken waarin je elke week iets maakt voor een echte klant. Elke stap heeft een les met theorie en literatuur, en aan het eind beoordeelt een mens je portfolio en je eindopdracht."],
-  ["Krijg ik een diploma?", "Nog niet. De reis is ontworpen op hbo-niveau, maar is nog niet formeel erkend."],
+  ["Krijg ik een diploma?", "Je krijgt een certificaat, geen diploma. Je ontvangt het als een beoordelaar je portfolio en je eindopdracht voldoende vindt. Het leertraject is ontworpen op hbo-niveau, maar is nog niet formeel erkend en geeft geen studiepunten."],
   ["Wat als de AI-tools veranderen?", "Dan verandert je gereedschap, niet je methode. Je leert het patroon dat blijft: vraag, spec, bouwen, testen, live."],
   ["Voor wie is het?", "Voor designers, copywriters, marketeers en strategen in agencies en marketingteams, en voor wie voor zichzelf werkt. Junior of senior."],
 ];
@@ -51,7 +52,7 @@ export default function Voorkant() {
           <h1>Van uitvoerder naar <span className="grad">uitvinder.</span></h1>
           <p className="q">Het platform voor designers, copywriters en marketeers die relevant willen blijven nu AI het uitvoerende werk overneemt. Niet door meer te leren, maar door te maken.</p>
           <div className="btns">
-            <a className="btn" href={SCAN}>Doe de gratis Rolscan</a>
+            <Link className="btn" href={SCAN}>Doe de Rolscan</Link>
             <Link className="btn ghost" href="/login">Log in</Link>
           </div>
         </section>
@@ -180,7 +181,7 @@ export default function Voorkant() {
           <span className="eyebrow">Doe je mee?</span>
           <h2>De toekomst van je vak begint met één week.</h2>
           <p>Doe de Rolscan of zet je op de lijst voor de lancering.</p>
-          <div className="btns"><a className="btn" href={SCAN}>Doe de gratis Rolscan</a></div>
+          <div className="btns"><Link className="btn" href={SCAN}>Doe de Rolscan</Link></div>
           <Wachtlijst />
         </section>
       </main>

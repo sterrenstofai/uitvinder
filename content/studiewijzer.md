@@ -22,7 +22,7 @@ De reis is ontworpen op NLQF-niveau 6, het niveau van een hbo-bachelor. De studi
 
 Een ronde kost ongeveer vierenhalf uur: twintig minuten signalen zoeken, een middag bouwen, en de rest voor meten, vastleggen en delen.
 
-Deze reis is nog niet formeel erkend. Het niveau en de studiepunten zijn een ontwerpkeuze, geen keurmerk.
+Je sluit af met een certificaat, geen diploma. Deze reis is nog niet formeel erkend: het niveau en de studiepunten zijn een ontwerpkeuze, geen keurmerk.
 
 ## Leeruitkomsten
 
@@ -81,6 +81,12 @@ Je eindcijfer bestaat uit twee delen.
 **Cijfer.** Elk criterium krijgt een niveau. Onvoldoende telt als 4, voldoende als 6, goed als 8, excellent als 10. Het cijfer per onderdeel is het gemiddelde van de criteria. Je bent geslaagd met een eindcijfer van 5,5 of hoger en geen onderdeel onder de 5.
 
 **Herkansing.** Is het portfolio of de eindopdracht onvoldoende, dan lever je dat onderdeel één keer opnieuw in, binnen vier weken na de beoordeling.
+
+## Certificaat
+
+Ben je geslaagd, dan krijg je een certificaat op naam. Je vindt het in het platform en kunt het als pdf bewaren. Erop staan je eindcijfer, de datum, de beoordelaar, de studielast en wat je hebt laten zien dat je kunt.
+
+Het is een certificaat van de aanbieder. Het is geen erkend diploma en geeft geen studiepunten bij een hogeschool of universiteit.
 
 ## Rubric voor het portfolio
 

@@ -3,7 +3,7 @@
 // - Lokaal: voorbeeldmodus zolang er geen Supabase-project gekoppeld is.
 //   Gegevens blijven dan op dit apparaat, net als in het prototype.
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
-import { leegAdm, leegData, leegExp, type Administratie, type Data, type Exp, type Invalshoek, type Profile, type Scan, type Sessie, type Versie } from "./types";
+import { leegAdm, leegData, leegExp, type Administratie, type Beoordeling, type BeoordelingScores, type Data, type Eind, type Inzending, type Meting, type Exp, type Invalshoek, type Profile, type Scan, type Sessie, type Versie } from "./types";
 
 export interface Store {
   modus: "supabase" | "lokaal";
@@ -20,6 +20,13 @@ export interface Store {
   nieuwExp(e: Omit<Exp, "id">): Promise<Exp>;
   wijzigExp(id: string, patch: Partial<Exp>): Promise<void>;
   verwijderExp(id: string): Promise<void>;
+  bewaarMeting(m: Meting): Promise<void>;
+  verwijderMeting(week: number): Promise<void>;
+  bewaarPortfolio(ids: string[]): Promise<void>;
+  bewaarEind(e: Eind): Promise<void>;
+  /** Voor de beoordelaar: wat is ingediend en mag ik zien? */
+  inzendingen(): Promise<Inzending[]>;
+  bewaarBeoordeling(deelnemer: string, scores: BeoordelingScores, cijfer: number, stelVast: boolean, naam: string): Promise<void>;
   /** Wachtlijst op de voorkant. Kan zonder account. */
   wachtlijst(email: string): Promise<void>;
 }
@@ -57,16 +64,23 @@ function supabaseStore(sb: SupabaseClient<any, any, any>): Store {
       await sb.auth.signOut();
     },
     async laad(uid) {
-      const [p, s, i, v, e, m, a] = await Promise.all([
+      const [p, s, i, v, e, m, a, mt, pf, ei, bo, bh] = await Promise.all([
         sb.from("profiles").select("id,naam,rol,agency,ondernemer,slug").eq("id", uid).maybeSingle(),
         sb.from("scans").select("id,datum,rol,uitkomst,pct_uitvindend").eq("user_id", uid).order("datum").order("aangemaakt_op"),
         sb.from("invalshoeken").select("vak,buiten,voorwie,zin").eq("user_id", uid).maybeSingle(),
         sb.from("invalshoek_versies").select("id,zin,datum,week").eq("user_id", uid).order("datum"),
         sb.from("experiments").select(EXP_KOLOMMEN).eq("user_id", uid).order("aangemaakt_op"),
-        sb.from("memberships").select("team_id").eq("user_id", uid),
+        sb.from("memberships").select("team_id,rol").eq("user_id", uid),
         sb.from("administratie").select("btw_tarief,belasting_pct,stappen_af,bedrijf").eq("user_id", uid).maybeSingle(),
+        sb.from("metingen").select("week,scores,pct_rolscan,datum").eq("user_id", uid).order("week"),
+        sb.from("portfolio").select("experiment_ids").eq("user_id", uid).maybeSingle(),
+        sb.from("eindopdrachten").select("pitch_link,reflectie,ingediend_op").eq("user_id", uid).maybeSingle(),
+        sb.from("beoordelingen").select(BEO_KOLOMMEN).eq("deelnemer_id", uid).not("vastgesteld_op", "is", null).order("vastgesteld_op", { ascending: false }).limit(1),
+        sb.rpc("is_beheer"),
       ]);
-      [p, s, i, v, e, m, a].forEach((r) => fout(r.error));
+      // De tabellen voor beoordelen komen uit de tweede migratie. Is die nog niet
+      // uitgevoerd, dan werkt de rest van het platform gewoon door.
+      [p, s, i, v, e, m, a, mt, pf, ei].forEach((r) => fout(r.error));
       return {
         profile: (p.data as Profile) ?? null,
         scans: ((s.data as Scan[]) ?? []).map((x) => ({ ...x, pct_uitvindend: Number(x.pct_uitvindend) })),
@@ -77,6 +91,11 @@ function supabaseStore(sb: SupabaseClient<any, any, any>): Store {
         adm: a.data
           ? { ...(a.data as Administratie), btw_tarief: Number(a.data.btw_tarief), belasting_pct: a.data.belasting_pct === null ? null : Number(a.data.belasting_pct) }
           : leegAdm(),
+        metingen: ((mt.data as Meting[]) ?? []).map(metingUit),
+        portfolio: (pf.data?.experiment_ids as string[]) ?? [],
+        eind: (ei.data as Eind) ?? leegData().eind,
+        beoordeling: bo.error ? null : beoordelingUit((bo.data ?? [])[0]),
+        magBeoordelen: bh.data === true || (m.data ?? []).some((x) => x.rol === "beoordelaar"),
       };
     },
     async bewaarProfiel(p) {
@@ -109,6 +128,59 @@ function supabaseStore(sb: SupabaseClient<any, any, any>): Store {
     async verwijderExp(id) {
       fout((await sb.from("experiments").delete().eq("id", id)).error);
     },
+    async bewaarMeting(mt) {
+      const uid = (await sb.auth.getUser()).data.user?.id;
+      fout((await sb.from("metingen").upsert({ user_id: uid, ...mt }, { onConflict: "user_id,week" })).error);
+    },
+    async verwijderMeting(week) {
+      fout((await sb.from("metingen").delete().eq("week", week)).error);
+    },
+    async bewaarPortfolio(ids) {
+      const uid = (await sb.auth.getUser()).data.user?.id;
+      fout((await sb.from("portfolio").upsert({ user_id: uid, experiment_ids: ids, bijgewerkt_op: new Date().toISOString() })).error);
+    },
+    async bewaarEind(e) {
+      const uid = (await sb.auth.getUser()).data.user?.id;
+      fout((await sb.from("eindopdrachten").upsert({ user_id: uid, ...e })).error);
+    },
+    async inzendingen() {
+      const uid = (await sb.auth.getUser()).data.user?.id;
+      const ei = await sb.from("eindopdrachten").select("user_id,pitch_link,reflectie,ingediend_op").not("ingediend_op", "is", null).neq("user_id", uid).order("ingediend_op");
+      fout(ei.error);
+      const ids = (ei.data ?? []).map((x) => x.user_id as string);
+      if (!ids.length) return [];
+      const [pr, pf, mt, bo] = await Promise.all([
+        sb.from("profiles").select("id,naam,rol").in("id", ids),
+        sb.from("portfolio").select("user_id,experiment_ids").in("user_id", ids),
+        sb.from("metingen").select("user_id,week,scores,pct_rolscan,datum").in("user_id", ids).order("week"),
+        sb.from("beoordelingen").select(BEO_KOLOMMEN).in("deelnemer_id", ids).eq("beoordelaar_id", uid),
+      ]);
+      [pr, pf, mt, bo].forEach((r) => fout(r.error));
+      const kaartIds = (pf.data ?? []).flatMap((x) => x.experiment_ids as string[]);
+      const ex = kaartIds.length ? await sb.from("experiments").select(EXP_KOLOMMEN + ",user_id").in("id", kaartIds) : { data: [], error: null };
+      fout(ex.error);
+      return (ei.data ?? []).map((e) => {
+        const id = e.user_id as string;
+        const volgorde = ((pf.data ?? []).find((x) => x.user_id === id)?.experiment_ids as string[]) ?? [];
+        const kaarten = ((ex.data ?? []) as unknown as (Exp & { user_id: string })[]).filter((k) => k.user_id === id);
+        const p = (pr.data ?? []).find((x) => x.id === id);
+        return {
+          deelnemer: { id, naam: (p?.naam as string) || "Onbekend", rol: (p?.rol as string) || "" },
+          eind: { pitch_link: e.pitch_link as string, reflectie: e.reflectie as string, ingediend_op: e.ingediend_op as string },
+          kaarten: volgorde.map((k) => kaarten.find((x) => x.id === k)).filter((x): x is Exp & { user_id: string } => Boolean(x)),
+          metingen: ((mt.data ?? []).filter((x) => x.user_id === id) as unknown as Meting[]).map(metingUit),
+          beoordeling: beoordelingUit((bo.data ?? []).find((x) => (x as unknown as Beoordeling).deelnemer_id === id)),
+        };
+      });
+    },
+    async bewaarBeoordeling(deelnemer, scores, cijfer, stelVast, naam) {
+      const uid = (await sb.auth.getUser()).data.user?.id;
+      const rij = {
+        deelnemer_id: deelnemer, beoordelaar_id: uid, scores, cijfer: Math.round(cijfer * 10) / 10, beoordelaar_naam: naam,
+        ...(stelVast ? { vastgesteld_op: new Date().toISOString() } : {}),
+      };
+      fout((await sb.from("beoordelingen").upsert(rij, { onConflict: "deelnemer_id,beoordelaar_id" })).error);
+    },
     async wachtlijst(email) {
       const { error } = await sb.from("waitlist").insert({ email });
       // 23505: dit adres staat er al op. Voor de bezoeker is dat hetzelfde als gelukt.
@@ -116,6 +188,14 @@ function supabaseStore(sb: SupabaseClient<any, any, any>): Store {
     },
   };
 }
+
+const BEO_KOLOMMEN = "id,deelnemer_id,scores,cijfer,vastgesteld_op,beoordelaar_naam";
+const metingUit = (m: Meting): Meting => ({ ...m, pct_rolscan: m.pct_rolscan === null ? null : Number(m.pct_rolscan) });
+const beoordelingUit = (b: unknown): Beoordeling | null => {
+  if (!b) return null;
+  const x = b as Beoordeling;
+  return { ...x, cijfer: x.cijfer === null ? null : Number(x.cijfer) };
+};
 
 const LK = "uitvinder-lokaal-v1";
 type Lokaal = { sessie: Sessie | null; data: Data };
@@ -160,7 +240,8 @@ function lokaalStore(): Store {
       const adm = { ...leegAdm(), ...d.adm };
       // Eerdere versie bewaarde nummers in plaats van onderwerpen.
       adm.stappen_af = (adm.stappen_af as unknown[]).filter((x): x is string => typeof x === "string");
-      return { ...leegData(), ...d, adm };
+      // Een concept-beoordeling ziet de deelnemer niet; pas na vaststelling.
+      return { ...leegData(), ...d, adm, beoordeling: d.beoordeling?.vastgesteld_op ? d.beoordeling : null, magBeoordelen: true };
     },
     async bewaarProfiel(p) {
       muteer((d) => void (d.profile = p));
@@ -194,6 +275,37 @@ function lokaalStore(): Store {
     },
     async verwijderExp(eid) {
       muteer((d) => void (d.exps = d.exps.filter((x) => x.id !== eid)));
+    },
+    async bewaarMeting(mt) {
+      muteer((d) => void (d.metingen = [...(d.metingen || []).filter((x) => x.week !== mt.week), mt].sort((a, b) => a.week - b.week)));
+    },
+    async verwijderMeting(week) {
+      muteer((d) => void (d.metingen = (d.metingen || []).filter((x) => x.week !== week)));
+    },
+    async bewaarPortfolio(ids) {
+      muteer((d) => void (d.portfolio = ids));
+    },
+    async bewaarEind(e) {
+      muteer((d) => void (d.eind = e));
+    },
+    // In voorbeeldmodus is er geen tweede persoon. Je beoordeelt je eigen
+    // inzending, om te zien hoe het voor een beoordelaar werkt.
+    async inzendingen() {
+      const d = { ...leegData(), ...lees().data };
+      if (!d.eind.ingediend_op) return [];
+      return [{
+        deelnemer: { id: "lokaal", naam: d.profile?.naam || "Jij", rol: d.profile?.rol || "" },
+        eind: d.eind,
+        kaarten: d.portfolio.map((id) => d.exps.find((e) => e.id === id)).filter((e): e is Exp => Boolean(e)),
+        metingen: d.metingen,
+        beoordeling: d.beoordeling,
+      }];
+    },
+    async bewaarBeoordeling(deelnemer, scores, cijfer, stelVast, naam) {
+      muteer((d) => void (d.beoordeling = {
+        id: d.beoordeling?.id || id(), deelnemer_id: deelnemer, scores, cijfer: Math.round(cijfer * 10) / 10,
+        vastgesteld_op: stelVast ? new Date().toISOString() : null, beoordelaar_naam: naam,
+      }));
     },
     async wachtlijst() {
       throw new Error("In voorbeeldmodus is er geen wachtlijst.");

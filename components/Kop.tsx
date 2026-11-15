@@ -9,7 +9,7 @@ export function Kop({ nav = true }: { nav?: boolean }) {
   const { data, sessie, modus } = useApp();
   const pad = usePathname();
   const route = pad.split("/")[1] || "";
-  const actief = route === "volgt" ? pad.split("/")[2] : route === "ronde" || route === "invalshoek" ? "reis" : route;
+  const actief = route === "volgt" ? pad.split("/")[2] : ["ronde", "invalshoek", "rolscan", "meting"].includes(route) ? "reis" : route === "certificaat" ? "portfolio" : route;
   const naam = data.profile?.naam;
   return (
     <header className="top">
@@ -31,7 +31,7 @@ export function Kop({ nav = true }: { nav?: boolean }) {
       {nav && naam && (
         <nav className="wrap wide nav" aria-label="Platform">
           {/* Voor ondernemers staat Administratie vooraan, direct na Vandaag. */}
-          {[APPNAV[0], ...(data.profile?.ondernemer ? ([["administratie", "Administratie", true]] as typeof APPNAV) : []), ...APPNAV.slice(1)].map(([r, t, staat]) => (
+          {[APPNAV[0], ...(data.profile?.ondernemer ? ([["administratie", "Administratie", true]] as typeof APPNAV) : []), ...APPNAV.slice(1), ...(data.magBeoordelen ? ([["beoordelen", "Beoordelen", true]] as typeof APPNAV) : [])].map(([r, t, staat]) => (
             <Link key={r} href={staat ? `/${r}` : `/volgt/${r}`} aria-current={r === actief ? "page" : undefined}>{t}</Link>
           ))}
         </nav>

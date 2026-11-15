@@ -593,3 +593,16 @@ input[type=date]{width:100%;font:400 1rem/1.45 var(--f);color:var(--ink);backgro
 .les .md ol{margin:0;padding-left:20px;display:grid;gap:4px;line-height:1.5}
 .gids-tabel{overflow-x:auto}
 @media (max-width:760px){.gids table{display:block;overflow-x:auto;white-space:normal}.gids th,.gids td{min-width:150px}}
+.cert{background:var(--card);border-radius:var(--r);padding:clamp(28px,6vw,72px);margin-top:24px;line-height:1.5}
+.cert-k{display:flex;align-items:center;gap:10px;font-weight:600}
+.cert-l{margin:clamp(28px,5vw,56px) 0 6px;color:var(--mid);font-weight:500}
+.cert h2{margin:0;font:500 clamp(2.2rem,6vw,4rem)/1.02 var(--fd);letter-spacing:-.05em}
+.cert-t{margin:18px 0 0;font-size:clamp(1.05rem,2vw,1.3rem);max-width:60ch}
+.cert-s{margin:10px 0 0;color:var(--mid);max-width:70ch}
+.cert-lu{margin-top:28px}
+.cert-lu span,.cert-v span{display:block;color:var(--mid);font-size:.9rem}
+.cert-lu ul{margin:6px 0 0;padding-left:20px;display:grid;gap:4px}
+.cert-v{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:32px;padding-top:20px;border-top:1px solid var(--line)}
+.cert-n{margin:24px 0 0;color:var(--mid);font-size:.88rem}
+@media (max-width:640px){.cert-v{grid-template-columns:1fr}}
+@media print{@page{size:A4 landscape;margin:12mm}.cert{padding:4mm 6mm;font-size:10.5pt;break-inside:avoid}.cert-l{margin-top:8mm}.cert h2{font-size:34pt}.cert-t{margin-top:4mm;font-size:13pt}.cert-lu{margin-top:6mm}.cert-v{margin-top:7mm;padding-top:4mm}.cert-n{margin-top:5mm}}

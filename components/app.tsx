@@ -1,7 +1,7 @@
 "use client";
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { getStore, heeftSupabase, type Store } from "@/lib/store";
-import { leegData, leegExp, ROLLEN, type Administratie, type Data, type Exp, type Invalshoek, type Profile, type Rol, type Sessie } from "@/lib/types";
+import { leegData, leegExp, ROLLEN, type Administratie, type BeoordelingScores, type Data, type Eind, type Inzending, type Meting, type Scan, type Exp, type Invalshoek, type Profile, type Rol, type Sessie } from "@/lib/types";
 import { slugify, vandaagISO, weekNr } from "@/lib/afgeleid";
 
 type App = {
@@ -22,6 +22,14 @@ type App = {
   setExp(id: string, patch: Partial<Exp>): void;
   verwijderExp(id: string): Promise<void>;
   neemPrototypeOver(): Promise<number>;
+  nieuweScan(rol: string, uitkomst: { uitvindend: number }): Promise<Scan>;
+  bewaarMeting(m: Meting): Promise<void>;
+  verwijderMeting(week: number): Promise<void>;
+  setPortfolio(ids: string[]): Promise<void>;
+  setEind(patch: Partial<Eind>): void;
+  dienIn(): Promise<void>;
+  inzendingen(): Promise<Inzending[]>;
+  bewaarBeoordeling(deelnemer: string, scores: BeoordelingScores, cijfer: number, stelVast: boolean): Promise<void>;
 };
 
 const Ctx = createContext<App | null>(null);
@@ -181,6 +189,50 @@ export function AppProvider({ children }: { children: ReactNode }) {
       await store!.verwijderExp(id);
       setData((d) => ({ ...d, exps: d.exps.filter((e) => e.id !== id) }));
     },
+    async nieuweScan(rol, uitkomst) {
+      const s = await store!.nieuweScan({ datum: vandaagISO(), rol, uitkomst, pct_uitvindend: Math.round(uitkomst.uitvindend * 100) / 100 });
+      setData((d) => ({ ...d, scans: [...d.scans, s] }));
+      // Hoort deze scan bij de meting van vandaag, dan komt het percentage daar ook te staan.
+      const mt = dataRef.current.metingen.find((m) => m.datum === vandaagISO());
+      if (mt) {
+        const m2 = { ...mt, pct_rolscan: Math.round(uitkomst.uitvindend) };
+        await store!.bewaarMeting(m2);
+        setData((d) => ({ ...d, metingen: d.metingen.map((m) => (m.week === m2.week ? m2 : m)) }));
+      }
+      return s;
+    },
+    async bewaarMeting(m) {
+      await store!.bewaarMeting(m);
+      setData((d) => ({ ...d, metingen: [...d.metingen.filter((x) => x.week !== m.week), m].sort((a, b) => a.week - b.week) }));
+    },
+    async verwijderMeting(week) {
+      await store!.verwijderMeting(week);
+      setData((d) => ({ ...d, metingen: d.metingen.filter((x) => x.week !== week) }));
+    },
+    async setPortfolio(ids) {
+      setData((d) => ({ ...d, portfolio: ids }));
+      await store!.bewaarPortfolio(ids);
+    },
+    setEind(patch) {
+      setData((d) => ({ ...d, eind: { ...d.eind, ...patch } }));
+      plan("eind", () => store!.bewaarEind(dataRef.current.eind));
+    },
+    async dienIn() {
+      // Een nog wachtende tussentijdse opslag mag de inzending niet overschrijven.
+      const w = wachtrij.current.get("eind");
+      if (w) {
+        clearTimeout(w.timer);
+        wachtrij.current.delete("eind");
+      }
+      const e = { ...dataRef.current.eind, ingediend_op: new Date().toISOString() };
+      await store!.bewaarPortfolio(dataRef.current.portfolio);
+      await store!.bewaarEind({ ...dataRef.current.eind, ingediend_op: null });
+      await store!.bewaarEind(e);
+      setData((d) => ({ ...d, eind: e }));
+    },
+    inzendingen: () => store!.inzendingen(),
+    bewaarBeoordeling: (deelnemer, scores, cijfer, stelVast) =>
+      store!.bewaarBeoordeling(deelnemer, scores, cijfer, stelVast, data.profile?.naam || ""),
     // De localStorage-structuur van het prototype overzetten naar het account.
     async neemPrototypeOver() {
       const S = leesPrototype();

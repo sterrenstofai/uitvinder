@@ -1,11 +1,11 @@
 import { APPNAV } from "@/lib/nav";
 
 // Schermen die nog niet zijn overgezet. Het prototype blijft de werkende referentie.
-const HASH: Record<string, string> = { rolscan: "scan" };
+const HASH: Record<string, string> = {};
 
 export default async function Volgt({ params }: { params: Promise<{ scherm: string }> }) {
   const { scherm } = await params;
-  const titel = APPNAV.find((n) => n[0] === scherm)?.[1] || (scherm === "rolscan" ? "Rolscan" : scherm === "metingen" ? "Metingen" : "Dit scherm");
+  const titel = APPNAV.find((n) => n[0] === scherm)?.[1] || "Dit scherm";
   return (
     <main className="wrap">
       <div className="ph">

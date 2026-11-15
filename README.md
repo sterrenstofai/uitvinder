@@ -10,9 +10,10 @@ Live: https://uitvinder-platform.netlify.app (Netlify-project `uitvinder-platfor
 | --- | --- |
 | Next.js met TypeScript, klaar voor Netlify | Staat. `npm run build` slaagt. |
 | Datamodel met row level security | Staat in `supabase/migrations/0001_datamodel.sql`, in een eigen schema `uitvinder`. Alle tabellen uit `BOUWEN-IN-CODE.md`. |
-| Privacyregel | Getest met 43 tests in `supabase/tests/rls_test.sql`, tegen een lokale Postgres 16. |
+| Privacyregel | Getest met 61 tests in `supabase/tests/rls_test.sql`, tegen een lokale Postgres 16. |
 | Login met magic link | Gebouwd, nog niet getest tegen een echt Supabase-project (dat bestaat nog niet). |
 | Schermen Vandaag, Reis, Invalshoek, Ronde (stap 3 tot en met 5) | Overgezet, met de proeftuinen en de coach. In de browser doorlopen in voorbeeldmodus. |
+| De hele leerroute | Rolscan, metingen (week 1, 6, 12), Library, Portfolio met eindopdracht, Beoordelen en Certificaat staan in het platform. In voorbeeldmodus van begin tot eind doorlopen in de browser, met een nagebootst antwoord van de AI-scan. Tegen de echte database nog niet getest, omdat dat een ingelogde gebruiker vraagt. |
 | Welkom en kaart als pdf | "Zo werkt het" bij de eerste keer op Vandaag en op Reis; elke ronde is als experimentkaart af te drukken. |
 | Voorkant | Overgezet uit het prototype, met een blok voor ondernemers erbij. Prijzen staan in `lib/prijzen.ts`. De wachtlijst schrijft naar de tabel `waitlist`. De knoppen naar de Rolscan en de tools openen nog het prototype. |
 | Beeld op de voorkant | Vier foto's in `public/beeld/`: opnames van een fotoshoot met ton-sur-ton sets in perzik, lila, blauw en groen (de kleuren per stap), met fotograaf en crew in beeld. Gegenereerd met Higgsfield, model FLUX 3 (AI, geen echte shoot en geen echte deelnemers). Thijs koos deze richting na GPT Image 2.6 te hebben afgewezen als te glad. |
@@ -32,20 +33,25 @@ Besluit van Thijs (15 november 2026): voor de testfase deelt Uitvinder het Supab
 2. **Supabase, Project Settings, Data API.** Voeg `uitvinder` toe bij Exposed schemas. Zonder dit kan de app de tabellen niet bereiken.
 3. **Supabase, Authentication, URL Configuration.** Voeg `https://uitvinder-platform.netlify.app/auth/callback` toe bij Redirect URLs. Laat de Site URL staan zoals Merkkit hem nodig heeft.
 4. **Netlify.** Zet in het project `uitvinder-platform` bij Environment variables `NEXT_PUBLIC_SUPABASE_URL` en `NEXT_PUBLIC_SUPABASE_ANON_KEY` (Supabase, Project Settings, API: de Project URL en de anon- of publishable key, nooit de service role- of secret key) en deploy opnieuw.
-5. **Beheer.** Log één keer in en voeg jezelf dan toe als beheerder in de SQL-editor: `insert into uitvinder.beheerders (user_id) select id from auth.users where email = '<jouw adres>';`
+5. **Tweede migratie.** Plak `supabase/migrations/0002_beoordelen_en_certificaat.sql` in de SQL Editor en voer het één keer uit. Zonder deze stap werkt beoordelen niet; de rest van het platform wel.
+6. **Beheer.** Log één keer in en voeg jezelf dan toe als beheerder in de SQL-editor: `insert into uitvinder.beheerders (user_id) select id from auth.users where email = '<jouw adres>';` Een beheerder ziet het menu Beoordelen en mag ingediende portfolio's beoordelen. Rolscan-antwoorden, invalshoeken en kaarten buiten het portfolio blijven ook voor de beheerder dicht.
 
 De magic links van Supabase zijn zonder eigen mailserver beperkt tot een paar per uur. Voor de lancering is een eigen SMTP-dienst nodig.
 
 ## Nog niet overgezet
 
-Deze schermen wijzen in het platform naar het prototype (`/prototype/index.html`): Rolscan, metingen, Cockpit, Klantdossier, Markt, Bouwen, Library met de drie tools, Portfolio, Beoordeling, Profiel en Team.
+Deze schermen wijzen in het platform naar het prototype (`/prototype/index.html`): Cockpit, Klantdossier, Markt, Bouwen, de drie tools in de Library, Profiel en Team.
 
 Gevolgen in wat er nu staat:
 
-- Zonder Rolscan is er geen nulmeting, tenzij je gegevens uit het prototype overneemt. Vandaag en Reis tonen dan een streepje.
-- Vandaag slaat de metingen en de eindopdracht over als volgende stap, en toont de cockpit en de markt als leeg vak.
+- De Rolscan vraagt nu een account. De gratis scan zonder account uit fase 1 staat alleen nog in het prototype.
+- Het deelbeeld van de Rolscan (1080x1350 voor LinkedIn) is niet overgezet.
+- Vandaag toont de cockpit en de markt als leeg vak.
 - De proeftuin bij de invalshoek (Eigen of inwisselbaar?) is nog niet overgezet.
-- Een kaart delen met je team werkt in de database, maar er is nog geen scherm om een team te maken of leden uit te nodigen.
+- Een kaart delen met je team werkt in de database, maar er is nog geen scherm om een team te maken of leden uit te nodigen. Daarom beoordeelt in de testfase de beheerder.
+- De tweede beoordelaar (bij een cijfer tussen 5 en 6, en bij één op de tien) wordt gemeld maar niet afgedwongen.
+- Herkansen is beschreven in de studiewijzer, maar er is nog geen knop voor: na vaststelling ligt de inzending vast.
+- Het certificaat is te bewaren als pdf. Er is nog geen openbare pagina waarop een werkgever het nummer kan controleren.
 
 ## Open punten uit deze stap
 

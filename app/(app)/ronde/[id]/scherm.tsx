@@ -50,7 +50,7 @@ export function Ronde({ id, lessen }: { id: string; lessen: Record<3 | 4 | 5, Le
     if (!e!.hypothese.trim() || !e!.uitkomst.trim()) return toast("Vul minstens hypothese en uitkomst in");
     zet({ status: "af" });
     toast("In je library gezet");
-    router.push("/reis");
+    router.push("/library");
   }
   async function verwijder() {
     if (!confirm("Deze ronde verwijderen?")) return;

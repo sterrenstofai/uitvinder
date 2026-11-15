@@ -154,6 +154,53 @@ update taken set status = 'goedgekeurd', besluit = 'Past bij het signaal van dez
 set request.jwt.claim.sub = :bram;
 select tst.verwacht((select count(*) from taken) = 0, 'taken van een klant buiten je team zie je niet');
 
+-- Beheerder als beoordelaar (0002): alleen wat is ingediend, en nooit de privégegevens.
+reset role;
+insert into auth.users (id) values ('66666666-6666-6666-6666-666666666666'), ('77777777-7777-7777-7777-777777777777');
+insert into uitvinder.beheerders (user_id) values ('66666666-6666-6666-6666-666666666666');
+set role authenticated;
+set request.jwt.claim.sub = '77777777-7777-7777-7777-777777777777';
+insert into profiles (id, naam, rol) values ('77777777-7777-7777-7777-777777777777', 'Daan Deelnemer', 'marketeer');
+insert into scans (uitkomst, pct_uitvindend) values ('{"taken":[{"taak":"geheim"}]}', 20);
+insert into invalshoeken (zin) values ('Ik maak campagnes voor bakkers, omdat ik bakker was.');
+insert into experiments (id, titel, hypothese, uitkomst, status) values
+  ('e0000000-0000-0000-0000-0000000000d1', 'Daan portfoliokaart', 'Als ik..., dan...', '12 aanmeldingen', 'af'),
+  ('e0000000-0000-0000-0000-0000000000d2', 'Daan privékaart', '', '', 'bezig');
+insert into portfolio (experiment_ids) values ('{e0000000-0000-0000-0000-0000000000d1}');
+insert into metingen (week, scores) values (12, '{"gen": 4}');
+insert into eindopdrachten (pitch_link, reflectie) values ('https://example.com/pitch', 'Mijn reflectie.');
+set request.jwt.claim.sub = '66666666-6666-6666-6666-666666666666';
+select tst.verwacht((select count(*) from eindopdrachten) = 0, 'beheerder ziet niets zolang er niet is ingediend');
+select tst.verwacht((select count(*) from portfolio where user_id = '77777777-7777-7777-7777-777777777777') = 0, 'beheerder ziet het portfolio nog niet');
+select tst.faalt($q$insert into beoordelingen (deelnemer_id, cijfer) values ('77777777-7777-7777-7777-777777777777', 8)$q$,
+  'beoordelen voordat er is ingediend mislukt');
+set request.jwt.claim.sub = '77777777-7777-7777-7777-777777777777';
+update eindopdrachten set ingediend_op = now();
+update eindopdrachten set reflectie = 'Stiekem aangepast';
+select tst.verwacht((select reflectie from eindopdrachten) = 'Mijn reflectie.', 'na het indienen kan de deelnemer de eindopdracht niet meer wijzigen');
+update portfolio set experiment_ids = '{}';
+select tst.verwacht((select array_length(experiment_ids, 1) from portfolio) = 1, 'na het indienen ligt ook het portfolio vast');
+set request.jwt.claim.sub = '66666666-6666-6666-6666-666666666666';
+select tst.verwacht((select reflectie from eindopdrachten where user_id = '77777777-7777-7777-7777-777777777777') = 'Mijn reflectie.', 'beheerder ziet de ingediende eindopdracht');
+select tst.verwacht((select count(*) from portfolio where user_id = '77777777-7777-7777-7777-777777777777') = 1, 'beheerder ziet het ingediende portfolio');
+select tst.verwacht((select count(*) from metingen where user_id = '77777777-7777-7777-7777-777777777777') = 1, 'beheerder ziet de metingen van de inzender');
+select tst.verwacht(exists (select 1 from experiments where titel = 'Daan portfoliokaart'), 'beheerder ziet de portfoliokaart');
+select tst.verwacht(not exists (select 1 from experiments where titel = 'Daan privékaart'), 'beheerder ziet de privékaart buiten het portfolio niet');
+select tst.verwacht((select naam from profiles where id = '77777777-7777-7777-7777-777777777777') = 'Daan Deelnemer', 'beheerder ziet de naam van de inzender');
+select tst.verwacht((select count(*) from scans) = 0, 'beheerder ziet geen rolscan-antwoorden');
+select tst.verwacht((select count(*) from invalshoeken) = 0, 'beheerder ziet geen invalshoek');
+select tst.verwacht((select count(*) from portfolio where user_id = '11111111-1111-1111-1111-111111111111') = 0, 'beheerder ziet geen portfolio dat niet is ingediend');
+insert into beoordelingen (deelnemer_id, scores, cijfer, beoordelaar_naam) values ('77777777-7777-7777-7777-777777777777', '{"eind": [1, 2, 2]}', 7.2, 'Thijs Mensink');
+set request.jwt.claim.sub = '77777777-7777-7777-7777-777777777777';
+select tst.verwacht((select count(*) from beoordelingen) = 0, 'inzender ziet de beoordeling niet voor vaststelling');
+set request.jwt.claim.sub = '66666666-6666-6666-6666-666666666666';
+update beoordelingen set vastgesteld_op = now() where deelnemer_id = '77777777-7777-7777-7777-777777777777';
+set request.jwt.claim.sub = '77777777-7777-7777-7777-777777777777';
+select tst.verwacht((select cijfer from beoordelingen) = 7.2, 'inzender ziet het cijfer na vaststelling');
+select tst.verwacht((select beoordelaar_naam from beoordelingen) = 'Thijs Mensink', 'de naam van de beoordelaar staat op de beoordeling');
+update beoordelingen set cijfer = 10;
+select tst.verwacht((select cijfer from beoordelingen) = 7.2, 'inzender kan het eigen cijfer niet wijzigen');
+
 -- Het gedeelde project: de tabellen van het andere product in public blijven onaangeroerd.
 set role authenticated;
 set request.jwt.claim.sub = :anna;

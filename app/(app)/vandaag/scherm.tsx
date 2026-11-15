@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useApp } from "@/components/app";
 import { Cover } from "@/components/Cover";
 import { Kaart } from "@/components/Kaart";
-import { afgerond, curExp, expTitel, laatste, nul, weekNr } from "@/lib/afgeleid";
+import { afgerond, curExp, expTitel, laatste, METINGWEKEN, nul, weekNr } from "@/lib/afgeleid";
 
 const WELKOM_GEZIEN = "uitvinder-welkom-gezien";
 
@@ -20,10 +20,15 @@ export function Vandaag({ zoWerktHet }: { zoWerktHet: string | null }) {
     setWelkom(false);
   };
   const n = nul(data), l = laatste(data), open = curExp(data), wk = Math.min(weekNr(data), 12), af = afgerond(data).length;
-  // Zelfde volgorde als het prototype. De metingen en de eindopdracht komen erbij
-  // zodra die schermen zijn overgezet (stap 4 van de bouwvolgorde).
+  // Zelfde volgorde als het prototype.
   let next: { k: string; h: string; p: string; a: string; b: string };
-  if (!data.inv.zin) next = { k: "Fundament, stap 2", h: "Bepaal je invalshoek.", p: "Wat combineer jij dat schaars is? Zonder invalshoek wordt elk experiment een losse gok.", a: "/invalshoek", b: "Naar je invalshoek" };
+  const weekNu = weekNr(data);
+  const mNodig = METINGWEKEN.filter((w) => w <= weekNu && !data.metingen.some((m) => m.week === w));
+  if (!n) next = { k: "Fundament, stap 1", h: "Doe de Rolscan.", p: "Beschrijf je werkweek en zie hoeveel van je werk uitvoerend is. Dat is je nulmeting.", a: "/rolscan", b: "Naar de Rolscan" };
+  else if (mNodig.length) next = { k: `Week ${wk}`, h: `Doe je ${mNodig[0] === 1 ? "start" : mNodig[0] === 6 ? "tussen" : "eind"}meting.`, p: "Twaalf uitspraken en een nieuwe Rolscan. Zo zie je straks hoe je verschoven bent.", a: `/meting/${mNodig[0]}`, b: "Naar de meting" };
+  else if (data.beoordeling && data.beoordeling.cijfer !== null && data.beoordeling.cijfer >= 5.5) next = { k: "Afgerond", h: "Je bent geslaagd.", p: "Je certificaat staat klaar.", a: "/certificaat", b: "Bekijk je certificaat" };
+  else if (weekNu >= 12 && !data.eind.ingediend_op) next = { k: "Week 12", h: "Je eindopdracht.", p: "Kies je drie sterkste kaarten, maak je pitch en schrijf je reflectie.", a: "/portfolio", b: "Naar je portfolio" };
+  else if (!data.inv.zin) next = { k: "Fundament, stap 2", h: "Bepaal je invalshoek.", p: "Wat combineer jij dat schaars is? Zonder invalshoek wordt elk experiment een losse gok.", a: "/invalshoek", b: "Naar je invalshoek" };
   else if (open) next = { k: `Week ${wk}, lopende ronde`, h: expTitel(open), p: "Maak de ronde af: bouwen, meten en vastleggen wat je leerde.", a: `/ronde/${open.id}`, b: "Verder met deze ronde" };
   else next = { k: `Week ${wk}`, h: "Start de ronde van deze week.", p: "Zoek een signaal voor het merk van een klant, bouw iets en meet het.", a: "/ronde/nieuw", b: "Start een nieuwe ronde" };
   const uur = new Date().getHours(), groet = uur < 12 ? "Goedemorgen" : uur < 18 ? "Goedemiddag" : "Goedenavond";
@@ -64,7 +69,7 @@ export function Vandaag({ zoWerktHet }: { zoWerktHet: string | null }) {
             <p>{next.p}</p>
             <div className="btns"><Link className="btn" href={next.a}>{next.b}</Link></div>
           </section>
-          <div className="grp"><span>Je laatste kaarten</span><Link href="/volgt/library" className="hint">Alles</Link></div>
+          <div className="grp"><span>Je laatste kaarten</span><Link href="/library" className="hint">Alles</Link></div>
           {mine.length ? (
             <div style={{ marginTop: 10 }}>{mine.map((e) => <Kaart key={e.id} e={e} eigen />)}</div>
           ) : (
